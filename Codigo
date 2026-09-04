@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERP Industrial - Controle de Produção</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<style>
+:root{
+--azul:#0756a3;
+--azul-escuro:#063b70;
+--azul-claro:#eaf3ff;
+--vermelho:#d71920;
+--verde:#159447;
+--amarelo:#e6a700;
+--branco:#fff;
+--cinza:#f4f6f8;
+--cinza2:#dfe4e8;
+--texto:#17202a;
+--sombra:0 8px 25px rgba(0,0,0,.10);
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:var(--cinza);
