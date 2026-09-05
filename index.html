@@ -1,8 +1,16 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ERP Industrial - Controle de Produção</title><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>ERP Industrial - Controle de Produção</title>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
 :root{
 --azul:#0756a3;
 --azul-escuro:#063b70;
@@ -24,14 +32,34 @@ padding:0;
 font-family:Arial,Helvetica,sans-serif;
 }
 
+html{
+width:100%;
+overflow-x:hidden;
+}
+
 body{
+width:100%;
+min-width:0;
 background:var(--cinza);
 color:var(--texto);
+overflow-x:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+font-family:inherit;
+}
+
+button{
+-webkit-tap-highlight-color:transparent;
 }
 
 .campo{
 margin-bottom:16px;
 text-align:left;
+min-width:0;
 }
 
 .campo label{
@@ -42,8 +70,10 @@ color:#333;
 }
 
 .campo input,
-.campo select{
+.campo select,
+.campo textarea{
 width:100%;
+max-width:100%;
 padding:13px;
 border:1px solid #ccd3da;
 border-radius:9px;
@@ -52,8 +82,14 @@ font-size:15px;
 background:white;
 }
 
+.campo textarea{
+resize:vertical;
+min-height:100px;
+}
+
 .campo input:focus,
-.campo select:focus{
+.campo select:focus,
+.campo textarea:focus{
 border-color:var(--azul);
 box-shadow:0 0 0 3px rgba(7,86,163,.12);
 }
@@ -61,10 +97,12 @@ box-shadow:0 0 0 3px rgba(7,86,163,.12);
 .btn{
 border:none;
 padding:12px 18px;
+min-height:44px;
 border-radius:9px;
 cursor:pointer;
 font-weight:bold;
 transition:.2s;
+touch-action:manipulation;
 }
 
 .btn:hover{
@@ -91,10 +129,11 @@ background:#e8edf1;
 color:#263238;
 }
 
-/* SISTEMA */
+/* TOPO */
 
 #app{
 min-height:100vh;
+width:100%;
 }
 
 .topbar{
@@ -115,11 +154,13 @@ box-shadow:0 3px 12px rgba(0,0,0,.15);
 display:flex;
 align-items:center;
 gap:12px;
+min-width:0;
 }
 
 .topbar-logo{
 width:40px;
 height:40px;
+min-width:40px;
 border-radius:8px;
 background:var(--vermelho);
 display:flex;
@@ -130,17 +171,22 @@ font-weight:bold;
 
 .topbar h2{
 font-size:19px;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
 }
 
 /* LAYOUT */
 
 .layout{
 display:flex;
+width:100%;
 min-height:calc(100vh - 65px);
 }
 
 .sidebar{
 width:230px;
+min-width:230px;
 background:white;
 border-right:1px solid var(--cinza2);
 padding:20px 12px;
@@ -166,6 +212,8 @@ cursor:pointer;
 font-size:14px;
 font-weight:bold;
 color:#39444e;
+white-space:nowrap;
+touch-action:manipulation;
 }
 
 .menu-btn:hover{
@@ -180,12 +228,14 @@ color:white;
 
 .conteudo{
 flex:1;
+min-width:0;
 padding:25px;
 overflow:hidden;
 }
 
 .pagina{
 display:none;
+width:100%;
 }
 
 .pagina.ativa{
@@ -199,17 +249,19 @@ margin-bottom:20px;
 .titulo-pagina h1{
 color:var(--azul-escuro);
 margin-bottom:5px;
+font-size:30px;
 }
 
 .titulo-pagina p{
 color:#6b737a;
+line-height:1.5;
 }
 
 /* CARDS */
 
 .cards{
 display:grid;
-grid-template-columns:repeat(4,1fr);
+grid-template-columns:repeat(4,minmax(0,1fr));
 gap:18px;
 margin-bottom:25px;
 }
@@ -220,6 +272,7 @@ padding:22px;
 border-radius:13px;
 box-shadow:var(--sombra);
 border-left:5px solid var(--azul);
+min-width:0;
 }
 
 .card.vermelho{
@@ -254,6 +307,8 @@ border-radius:13px;
 box-shadow:var(--sombra);
 padding:22px;
 margin-bottom:20px;
+width:100%;
+min-width:0;
 }
 
 .painel h2{
@@ -264,14 +319,8 @@ font-size:20px;
 
 .grid{
 display:grid;
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,minmax(0,1fr));
 gap:18px;
-}
-
-.grid-4{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
 }
 
 .acoes{
@@ -281,11 +330,47 @@ gap:10px;
 margin-top:10px;
 }
 
-/* TABELA */
+/* GRÁFICOS */
+
+.graficos-dashboard{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:20px;
+margin-bottom:20px;
+}
+
+.grafico-box{
+background:white;
+border-radius:13px;
+box-shadow:var(--sombra);
+padding:20px;
+min-width:0;
+}
+
+.grafico-box h2{
+color:var(--azul-escuro);
+font-size:18px;
+margin-bottom:15px;
+}
+
+.grafico-area{
+position:relative;
+height:320px;
+width:100%;
+}
+
+.grafico-area canvas{
+width:100%!important;
+height:100%!important;
+}
+
+/* TABELAS */
 
 .tabela-container{
 width:100%;
 overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+border-radius:8px;
 }
 
 table{
@@ -300,12 +385,14 @@ color:white;
 padding:12px;
 text-align:left;
 font-size:13px;
+white-space:nowrap;
 }
 
 td{
 padding:11px;
 border-bottom:1px solid #e5e8eb;
 font-size:13px;
+vertical-align:middle;
 }
 
 tr:hover td{
@@ -318,6 +405,7 @@ padding:5px 8px;
 border-radius:20px;
 font-size:11px;
 font-weight:bold;
+white-space:nowrap;
 }
 
 .badge-verde{
@@ -338,15 +426,18 @@ color:#8a6100;
 .acoes-tabela{
 display:flex;
 gap:5px;
+flex-wrap:wrap;
 }
 
 .btn-mini{
-padding:6px 8px;
+padding:7px 9px;
+min-height:32px;
 border:none;
 border-radius:6px;
 cursor:pointer;
 font-size:11px;
 font-weight:bold;
+touch-action:manipulation;
 }
 
 .btn-editar{
@@ -372,12 +463,14 @@ border:1px solid #dce2e7;
 border-radius:10px;
 padding:15px;
 background:#fafbfc;
+min-width:0;
 }
 
 .produto-header{
 display:flex;
 justify-content:space-between;
 align-items:center;
+gap:10px;
 margin-bottom:12px;
 }
 
@@ -387,7 +480,7 @@ color:var(--azul-escuro);
 
 .produto-grid{
 display:grid;
-grid-template-columns:1fr 1fr 1fr;
+grid-template-columns:repeat(3,minmax(0,1fr));
 gap:12px;
 align-items:end;
 }
@@ -431,6 +524,7 @@ border-radius:8px;
 background:var(--azul-claro);
 color:var(--azul-escuro);
 font-size:13px;
+line-height:1.5;
 }
 
 .pesquisa{
@@ -439,13 +533,83 @@ padding:12px;
 border:1px solid #ccd3da;
 border-radius:8px;
 margin-bottom:15px;
+font-size:15px;
+outline:none;
 }
 
-/* PADRÃO MÁQUINAS */
+.pesquisa:focus{
+border-color:var(--azul);
+}
+
+/* CALCULADORA */
+
+.calculadora{
+background:linear-gradient(135deg,#063b70,#0756a3);
+border-radius:14px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:var(--sombra);
+color:white;
+}
+
+.calculadora h2{
+color:white;
+margin-bottom:6px;
+font-size:20px;
+}
+
+.calculadora p{
+font-size:13px;
+opacity:.9;
+margin-bottom:16px;
+line-height:1.5;
+}
+
+.calculadora-grid{
+display:grid;
+grid-template-columns:minmax(0,1fr) 80px minmax(0,1fr);
+gap:10px;
+align-items:end;
+}
+
+.calculadora .campo label{
+color:white;
+}
+
+.calculadora .campo input{
+background:white;
+font-size:18px;
+font-weight:bold;
+}
+
+.operacao{
+height:46px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.resultado-calculadora{
+background:white;
+color:var(--azul-escuro);
+border-radius:9px;
+padding:12px;
+font-size:20px;
+font-weight:bold;
+text-align:center;
+min-height:46px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* MÁQUINAS */
 
 .lista-maquinas{
 display:grid;
-grid-template-columns:repeat(4,1fr);
+grid-template-columns:repeat(4,minmax(0,1fr));
 gap:12px;
 margin-top:15px;
 }
@@ -460,6 +624,7 @@ font-size:16px;
 font-weight:bold;
 color:var(--azul-escuro);
 transition:.2s;
+touch-action:manipulation;
 }
 
 .maquina-btn:hover{
@@ -509,27 +674,28 @@ color:#8a6100;
 
 /* RESPONSIVO */
 
-@media(max-width:1000px){
+@media(max-width:1200px){
+
+.sidebar{
+width:210px;
+min-width:210px;
+}
+
+.conteudo{
+padding:20px;
+}
 
 .cards{
-grid-template-columns:repeat(2,1fr);
-}
-
-.grid{
-grid-template-columns:1fr;
-}
-
-.grid-4{
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,minmax(0,1fr));
 }
 
 .lista-maquinas{
-grid-template-columns:repeat(3,1fr);
+grid-template-columns:repeat(3,minmax(0,1fr));
 }
 
 }
 
-@media(max-width:750px){
+@media(max-width:900px){
 
 .layout{
 display:block;
@@ -537,12 +703,15 @@ display:block;
 
 .sidebar{
 width:100%;
+min-width:0;
 border-right:none;
 border-bottom:1px solid var(--cinza2);
 display:flex;
+align-items:center;
 overflow-x:auto;
-gap:5px;
+gap:6px;
 padding:10px;
+-webkit-overflow-scrolling:touch;
 }
 
 .sidebar-title{
@@ -553,569 +722,1540 @@ display:none;
 min-width:max-content;
 width:auto;
 margin:0;
+padding:11px 13px;
 }
 
 .conteudo{
-padding:15px;
+padding:18px;
 }
 
-.topbar{
-padding:0 12px;
-}
-
-.topbar h2{
-font-size:15px;
-}
-
-.cards{
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.card{
-padding:15px;
-}
-
-.card strong{
-font-size:23px;
-}
-
-.produto-grid{
+.grid{
 grid-template-columns:1fr;
 }
 
 .lista-maquinas{
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.graficos-dashboard{
+grid-template-columns:1fr;
 }
 
 }
 
-@media(max-width:480px){
+@media(max-width:600px){
+
+.topbar{
+height:58px;
+padding:0 10px;
+}
+
+.topbar-logo{
+width:36px;
+height:36px;
+min-width:36px;
+font-size:12px;
+}
+
+.topbar-left{
+gap:8px;
+}
+
+.topbar h2{
+font-size:14px;
+}
+
+.layout{
+min-height:calc(100vh - 58px);
+}
+
+.sidebar{
+padding:8px;
+gap:5px;
+}
+
+.menu-btn{
+font-size:12px;
+padding:10px 11px;
+}
+
+.conteudo{
+padding:12px;
+}
+
+.titulo-pagina{
+margin-bottom:15px;
+}
+
+.titulo-pagina h1{
+font-size:24px;
+}
+
+.titulo-pagina p{
+font-size:13px;
+}
 
 .cards{
-grid-template-columns:1fr;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-bottom:15px;
 }
 
-.grid-4{
+.card{
+padding:14px;
+border-left-width:4px;
+}
+
+.card span{
+font-size:11px;
+line-height:1.3;
+}
+
+.card strong{
+font-size:22px;
+}
+
+.painel{
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.painel h2{
+font-size:17px;
+margin-bottom:14px;
+}
+
+.grafico-box{
+padding:15px;
+}
+
+.grafico-box h2{
+font-size:16px;
+}
+
+.grafico-area{
+height:280px;
+}
+
+.campo{
+margin-bottom:13px;
+}
+
+.campo label{
+font-size:13px;
+}
+
+.campo input,
+.campo select,
+.campo textarea{
+padding:12px;
+font-size:15px;
+}
+
+.produto{
+padding:12px;
+}
+
+.produto-grid{
 grid-template-columns:1fr;
+gap:4px;
+}
+
+.produto-header{
+margin-bottom:10px;
+}
+
+.produto-header strong{
+font-size:15px;
+}
+
+.status{
+min-height:42px;
+margin-bottom:8px;
+}
+
+.info-cor{
+font-size:12px;
 }
 
 .acoes{
-flex-direction:column;
+display:grid;
+grid-template-columns:1fr;
+gap:8px;
 }
 
 .acoes .btn{
 width:100%;
 }
 
+.calculadora{
+padding:15px;
+border-radius:11px;
+}
+
+.calculadora h2{
+font-size:17px;
+}
+
+.calculadora p{
+font-size:12px;
+}
+
+.calculadora-grid{
+grid-template-columns:1fr;
+gap:5px;
+}
+
+.operacao{
+height:25px;
+font-size:20px;
+}
+
+.resultado-calculadora{
+font-size:18px;
+}
+
+.lista-maquinas{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:8px;
+}
+
+.maquina-btn{
+padding:15px 8px;
+font-size:14px;
+}
+
+.pesquisa{
+font-size:14px;
+}
+
+.tabela-container{
+overflow-x:auto;
+}
+
+table{
+min-width:680px;
+}
+
+}
+
+@media(max-width:380px){
+
+.topbar h2{
+font-size:12px;
+}
+
+.topbar-logo{
+width:32px;
+height:32px;
+min-width:32px;
+}
+
+.conteudo{
+padding:9px;
+}
+
+.titulo-pagina h1{
+font-size:21px;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+.card{
+padding:13px;
+}
+
 .lista-maquinas{
 grid-template-columns:1fr 1fr;
 }
 
+.maquina-btn{
+font-size:13px;
+padding:14px 6px;
 }
-</style></head><body><div id="app"><header class="topbar"><div class="topbar-left"><div class="topbar-logo">
+
+.painel{
+padding:12px;
+}
+
+}
+
+@media print{
+
+.topbar,
+.sidebar,
+.acoes,
+.pesquisa{
+display:none!important;
+}
+
+.layout{
+display:block;
+}
+
+.conteudo{
+padding:0;
+}
+
+.painel{
+box-shadow:none;
+border:1px solid #ddd;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<header class="topbar">
+
+<div class="topbar-left">
+
+<div class="topbar-logo">
 ERP
-</div><h2>
+</div>
+
+<h2>
 Controle de Produção Industrial
-</h2></div></header><div class="layout"><!-- MENU --><aside class="sidebar"><div class="sidebar-title">
+</h2>
+
+</div>
+
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+
+<div class="sidebar-title">
 Menu Principal
-</div><button class="menu-btn ativo"
+</div>
+
+<button
+class="menu-btn ativo"
 onclick="abrirPagina('dashboard',this)">
 📊 Dashboard
 </button>
 
-<button class="menu-btn"
+<button
+class="menu-btn"
 onclick="abrirPagina('cadastro',this)">
 🧪 Cadastro de Químicos
 </button>
 
-<button class="menu-btn"
+<button
+class="menu-btn"
 onclick="abrirPagina('lancamento',this)">
 📝 Lançamento
 </button>
 
-<button class="menu-btn"
+<button
+class="menu-btn"
 onclick="abrirPagina('maquinas',this)">
 ⚙️ Padrão Máquinas
 </button>
 
-<button class="menu-btn"
+<button
+class="menu-btn"
 onclick="abrirPagina('historico',this)">
 📋 Histórico
 </button>
 
-</aside><main class="conteudo"><!-- DASHBOARD --><section id="dashboard" class="pagina ativa"><div class="titulo-pagina"><h1>
+</aside>
+
+<main class="conteudo">
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="pagina ativa">
+
+<div class="titulo-pagina">
+
+<h1>
 Dashboard
-</h1><p>
-Visão geral do controle de produção.
-</p></div><div class="cards"><div class="card"><span>
+</h1>
+
+<p>
+Visão geral do controle de produção industrial.
+</p>
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<span>
 Químicos cadastrados
-</span><strong id="totalQuimicos">
+</span>
+
+<strong id="totalQuimicos">
 0
-</strong></div><div class="card vermelho"><span>
+</strong>
+
+</div>
+
+<div class="card vermelho">
+
+<span>
 Total de lançamentos
-</span><strong id="totalLancamentos">
+</span>
+
+<strong id="totalLancamentos">
 0
-</strong></div><div class="card verde"><span>
-Resultados abaixo do padrão
-</span><strong id="totalAbaixo">
+</strong>
+
+</div>
+
+<div class="card verde">
+
+<span>
+Abaixo do padrão
+</span>
+
+<strong id="totalAbaixo">
 0
-</strong></div><div class="card amarelo"><span>
-Resultados iguais ao padrão
-</span><strong id="totalIgual">
+</strong>
+
+</div>
+
+<div class="card amarelo">
+
+<span>
+Dentro do padrão
+</span>
+
+<strong id="totalIgual">
 0
-</strong></div></div><div class="painel"><h2>
+</strong>
+
+</div>
+
+</div>
+
+<div class="cards">
+
+<div class="card vermelho">
+
+<span>
+Acima do padrão
+</span>
+
+<strong id="totalAcima">
+0
+</strong>
+
+</div>
+
+<div class="card">
+
+<span>
+Registros de máquinas
+</span>
+
+<strong id="totalRegistrosMaquinas">
+0
+</strong>
+
+</div>
+
+</div>
+
+<div class="graficos-dashboard">
+
+<div class="grafico-box">
+
+<h2>
+📊 Produtos - Situação por Produto
+</h2>
+
+<div class="grafico-area">
+
+<canvas id="graficoProdutos"></canvas>
+
+</div>
+
+</div>
+
+<div class="grafico-box">
+
+<h2>
+🏭 Máquinas - Situação por Máquina
+</h2>
+
+<div class="grafico-area">
+
+<canvas id="graficoMaquinas"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="graficos-dashboard">
+
+<div class="grafico-box">
+
+<h2>
+📈 Situação Geral dos Produtos
+</h2>
+
+<div class="grafico-area">
+
+<canvas id="graficoSituacao"></canvas>
+
+</div>
+
+</div>
+
+<div class="grafico-box">
+
+<h2>
+🏭 Quantidade de Registros por Máquina
+</h2>
+
+<div class="grafico-area">
+
+<canvas id="graficoQuantidadeMaquinas"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="painel">
+
+<h2>
 Resumo do sistema
-</h2><p>
-Utilize o menu lateral para cadastrar químicos,
-realizar lançamentos, controlar os padrões das máquinas
-e consultar o histórico.
-</p></div></section><!-- CADASTRO --><section id="cadastro" class="pagina"><div class="titulo-pagina"><h1>
+</h2>
+
+<p>
+O Dashboard apresenta automaticamente os resultados
+dos produtos e das máquinas cadastradas no sistema.
+</p>
+
+</div>
+
+</section>
+
+<!-- CADASTRO -->
+
+<section id="cadastro" class="pagina">
+
+<div class="titulo-pagina">
+
+<h1>
 Cadastro de Químicos
-</h1><p>
+</h1>
+
+<p>
 Cadastre o nome e o código dos produtos químicos.
-</p></div><div class="painel"><h2>
+</p>
+
+</div>
+
+<div class="painel">
+
+<h2>
 Novo químico
-</h2><div class="grid"><div class="campo"><label>
+</h2>
+
+<div class="grid">
+
+<div class="campo">
+
+<label>
 Nome do químico *
-</label><input
+</label>
+
+<input
 type="text"
 id="nomeQuimico"
-placeholder="Ex.: Resina Acrílica"
+placeholder="Ex.: Resina Acrílica">
 
-«»
+</div>
 
-</div><div class="campo"><label>
+<div class="campo">
+
+<label>
 Código do químico *
-</label><input
+</label>
+
+<input
 type="text"
 id="codigoQuimico"
 placeholder="000000-000"
 maxlength="10"
-oninput="formatarCodigo(this)"
+oninput="formatarCodigo(this)">
 
-«»
+</div>
 
-</div></div><div class="acoes"><button class="btn btn-primary"
+</div>
+
+<div class="acoes">
+
+<button
+class="btn btn-primary"
 onclick="salvarQuimico()">
+
 Salvar químico
+
 </button>
 
-<button class="btn btn-secondary"
+<button
+class="btn btn-secondary"
 onclick="limparCadastro()">
+
 Limpar
+
 </button>
 
-</div></div><div class="painel"><h2>
+</div>
+
+</div>
+
+<div class="painel">
+
+<h2>
 Químicos cadastrados
-</h2><input
+</h2>
+
+<input
 type="text"
 class="pesquisa"
 id="pesquisaQuimico"
 placeholder="Pesquisar químico ou código..."
-oninput="renderizarCadastro()"
+oninput="renderizarCadastro()">
 
-«»
+<div class="tabela-container">
 
-<div class="tabela-container"><table><thead><tr><th>Nome</th>
-<th>Código</th>
-<th>Ações</th></tr></thead><tbody id="tabelaQuimicos">
-</tbody></table></div></div></section><!-- LANÇAMENTO --><section id="lancamento" class="pagina"><div class="titulo-pagina"><h1>
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Nome
+</th>
+
+<th>
+Código
+</th>
+
+<th>
+Ações
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelaQuimicos">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LANÇAMENTO -->
+
+<section id="lancamento" class="pagina">
+
+<div class="titulo-pagina">
+
+<h1>
 Lançamento de Produção
-</h1><p>
+</h1>
+
+<p>
 Informe o responsável, a cor e os valores dos produtos.
-</p></div><div class="painel"><h2>
+</p>
+
+</div>
+
+<div class="calculadora">
+
+<h2>
+🧮 Mini Calculadora
+</h2>
+
+<p>
+Digite um valor e o sistema multiplicará automaticamente por 2.
+</p>
+
+<div class="calculadora-grid">
+
+<div class="campo">
+
+<label>
+Valor
+</label>
+
+<input
+type="number"
+id="calculadoraValor"
+placeholder="0,00"
+step="0.01"
+oninput="calcularDobro()">
+
+</div>
+
+<div class="operacao">
+× 2 =
+</div>
+
+<div class="campo">
+
+<label>
+Resultado
+</label>
+
+<div
+class="resultado-calculadora"
+id="resultadoCalculadora">
+0,00
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="painel">
+
+<h2>
 Identificação do lançamento
-</h2><div class="grid"><div class="campo"><label>
+</h2>
+
+<div class="grid">
+
+<div class="campo">
+
+<label>
 Responsável pelo lançamento *
-</label><select id="responsavelLancamento"><option value="">
+</label>
+
+<select id="responsavelLancamento">
+
+<option value="">
 Selecione o responsável
-</option><option value="Samuel">
+</option>
+
+<option value="Samuel">
 Samuel
-</option></select></div><div class="campo"><label>
+</option>
+
+<option value="Luana">
+Luana
+</option>
+
+</select>
+
+</div>
+
+<div class="campo">
+
+<label>
 Cor *
-</label><input
+</label>
+
+<input
 type="text"
 id="corLancamento"
 placeholder="Digite a cor..."
-autocomplete="off"
+autocomplete="off">
 
-«»
+</div>
 
-</div></div><div class="info-cor">A cor e o responsável serão registrados no lançamento
-e também aparecerão no histórico e na planilha Excel.
+</div>
 
-</div></div><div class="painel"><h2>
+<div class="info-cor">
+
+Selecione quem realizou o lançamento e informe a cor.
+Essas informações serão salvas no histórico e no Excel.
+
+</div>
+
+</div>
+
+<div class="painel">
+
+<h2>
 Valores dos produtos
-</h2><div class="produtos"><script>
-</script><div class="produto"><div class="produto-header"><strong>Massa</strong>
+</h2>
 
-<span class="badge badge-amarelo"
+<div class="produtos">
+
+<!-- MASSA -->
+
+<div class="produto">
+
+<div class="produto-header">
+
+<strong>
+Massa
+</strong>
+
+<span
+class="badge badge-amarelo"
 id="badgeMassa">
 Aguardando
 </span>
 
-</div><div class="produto-grid"><div class="campo"><label>Valor</label>
+</div>
+
+<div class="produto-grid">
+
+<div class="campo">
+
+<label>
+Valor
+</label>
 
 <input
 type="number"
 step="0.01"
 id="massaValor"
 placeholder="0,00"
-oninput="avaliarProduto('massa')"
+oninput="avaliarProduto('massa')">
 
-«»
+</div>
 
-</div><div class="campo"><label>Padrão</label>
+<div class="campo">
+
+<label>
+Padrão
+</label>
 
 <input
 type="number"
 step="0.01"
 id="massaPadrao"
 placeholder="0,00"
-oninput="avaliarProduto('massa')"
+oninput="avaliarProduto('massa')">
 
-«»
+</div>
 
-</div><div
+<div
 class="status status-neutro"
 id="massaStatus">
-Informe os valores
-</div></div></div><div class="produto"><div class="produto-header"><strong>Primer</strong>
 
-<span class="badge badge-amarelo"
+Informe os valores
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PRIMER -->
+
+<div class="produto">
+
+<div class="produto-header">
+
+<strong>
+Primer
+</strong>
+
+<span
+class="badge badge-amarelo"
 id="badgePrimer">
 Aguardando
 </span>
 
-</div><div class="produto-grid"><div class="campo"><label>Valor</label>
+</div>
+
+<div class="produto-grid">
+
+<div class="campo">
+
+<label>
+Valor
+</label>
 
 <input
 type="number"
 step="0.01"
 id="primerValor"
 placeholder="0,00"
-oninput="avaliarProduto('primer')"
+oninput="avaliarProduto('primer')">
 
-«»
+</div>
 
-</div><div class="campo"><label>Padrão</label>
+<div class="campo">
+
+<label>
+Padrão
+</label>
 
 <input
 type="number"
 step="0.01"
 id="primerPadrao"
 placeholder="0,00"
-oninput="avaliarProduto('primer')"
+oninput="avaliarProduto('primer')">
 
-«»
+</div>
 
-</div><div
+<div
 class="status status-neutro"
 id="primerStatus">
-Informe os valores
-</div></div></div><div class="produto"><div class="produto-header"><strong>Impressão</strong>
 
-<span class="badge badge-amarelo"
+Informe os valores
+
+</div>
+
+</div>
+
+</div>
+
+<!-- IMPRESSÃO -->
+
+<div class="produto">
+
+<div class="produto-header">
+
+<strong>
+Impressão
+</strong>
+
+<span
+class="badge badge-amarelo"
 id="badgeImpressao">
 Aguardando
 </span>
 
-</div><div class="produto-grid"><div class="campo"><label>Valor</label>
+</div>
+
+<div class="produto-grid">
+
+<div class="campo">
+
+<label>
+Valor
+</label>
 
 <input
 type="number"
 step="0.01"
 id="impressaoValor"
-oninput="avaliarProduto('impressao')"
+placeholder="0,00"
+oninput="avaliarProduto('impressao')">
 
-«»
+</div>
 
-</div><div class="campo"><label>Padrão</label>
+<div class="campo">
+
+<label>
+Padrão
+</label>
 
 <input
 type="number"
 step="0.01"
 id="impressaoPadrao"
-oninput="avaliarProduto('impressao')"
+placeholder="0,00"
+oninput="avaliarProduto('impressao')">
 
-«»
+</div>
 
-</div><div
+<div
 class="status status-neutro"
 id="impressaoStatus">
-Informe os valores
-</div></div></div><div class="produto"><div class="produto-header"><strong>Base</strong>
 
-<span class="badge badge-amarelo"
+Informe os valores
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BASE -->
+
+<div class="produto">
+
+<div class="produto-header">
+
+<strong>
+Base
+</strong>
+
+<span
+class="badge badge-amarelo"
 id="badgeBase">
 Aguardando
 </span>
 
-</div><div class="produto-grid"><div class="campo"><label>Valor</label>
+</div>
+
+<div class="produto-grid">
+
+<div class="campo">
+
+<label>
+Valor
+</label>
 
 <input
 type="number"
 step="0.01"
 id="baseValor"
-oninput="avaliarProduto('base')"
+placeholder="0,00"
+oninput="avaliarProduto('base')">
 
-«»
+</div>
 
-</div><div class="campo"><label>Padrão</label>
+<div class="campo">
+
+<label>
+Padrão
+</label>
 
 <input
 type="number"
 step="0.01"
 id="basePadrao"
-oninput="avaliarProduto('base')"
+placeholder="0,00"
+oninput="avaliarProduto('base')">
 
-«»
+</div>
 
-</div><div
+<div
 class="status status-neutro"
 id="baseStatus">
-Informe os valores
-</div></div></div><div class="produto"><div class="produto-header"><strong>Verniz</strong>
 
-<span class="badge badge-amarelo"
+Informe os valores
+
+</div>
+
+</div>
+
+</div>
+
+<!-- VERNIZ -->
+
+<div class="produto">
+
+<div class="produto-header">
+
+<strong>
+Verniz
+</strong>
+
+<span
+class="badge badge-amarelo"
 id="badgeVerniz">
 Aguardando
 </span>
 
-</div><div class="produto-grid"><div class="campo"><label>Valor</label>
+</div>
+
+<div class="produto-grid">
+
+<div class="campo">
+
+<label>
+Valor
+</label>
 
 <input
 type="number"
 step="0.01"
 id="vernizValor"
-oninput="avaliarProduto('verniz')"
+placeholder="0,00"
+oninput="avaliarProduto('verniz')">
 
-«»
+</div>
 
-</div><div class="campo"><label>Padrão</label>
+<div class="campo">
+
+<label>
+Padrão
+</label>
 
 <input
 type="number"
 step="0.01"
 id="vernizPadrao"
-oninput="avaliarProduto('verniz')"
+placeholder="0,00"
+oninput="avaliarProduto('verniz')">
 
-«»
+</div>
 
-</div><div
+<div
 class="status status-neutro"
 id="vernizStatus">
+
 Informe os valores
-</div></div></div></div><div class="acoes"><button class="btn btn-success"
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="acoes">
+
+<button
+class="btn btn-success"
 onclick="salvarLancamento()">
+
 Salvar lançamento
+
 </button>
 
-<button class="btn btn-secondary"
+<button
+class="btn btn-secondary"
 onclick="limparLancamento()">
+
 Limpar
+
 </button>
 
-</div></div></section><!-- PADRÃO MÁQUINAS --><section id="maquinas" class="pagina"><div class="titulo-pagina"><h1>
+</div>
+
+</div>
+
+</section>
+
+<!-- MÁQUINAS -->
+
+<section id="maquinas" class="pagina">
+
+<div class="titulo-pagina">
+
+<h1>
 Padrão Máquinas
-</h1><p>
+</h1>
+
+<p>
 Selecione uma máquina para registrar a produção.
-</p></div><div class="painel"><h2>
+</p>
+
+</div>
+
+<div class="painel">
+
+<h2>
 Lista de Máquinas
-</h2><button
+</h2>
+
+<button
 class="btn btn-primary"
 onclick="mostrarMaquinas()">
+
 ⚙️ Mostrar máquinas
+
 </button>
 
 <div
 id="listaMaquinas"
 class="lista-maquinas"
-style="display:none;"
-><button class="maquina-btn"
+style="display:none;">
+
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('701e',this)">
 701e
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('701i',this)">
 701i
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('703e',this)">
 703e
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('703i',this)">
 703i
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('705',this)">
 705
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('706',this)">
 706
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('707',this)">
 707
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('708',this)">
 708
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('710e',this)">
 710e
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('710i',this)">
 710i
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('712e',this)">
 712e
 </button>
 
-<button class="maquina-btn"
+<button
+class="maquina-btn"
 onclick="selecionarMaquina('712i',this)">
 712i
 </button>
 
-</div><div
+</div>
+
+<div
 id="maquinaSelecionada"
 class="maquina-selecionada">
-</div></div><div
+</div>
+
+</div>
+
+<div
 id="formularioMaquina"
 class="painel"
-style="display:none;"
-><h2>
+style="display:none;">
+
+<h2>
 Dados da Máquina
-</h2><div class="grid"><div class="campo"><label>
+</h2>
+
+<div class="grid">
+
+<div class="campo">
+
+<label>
 Cor *
-</label><input
+</label>
+
+<input
 type="text"
 id="maquinaCor"
-placeholder="Ex.: Azul"
+placeholder="Ex.: Azul">
 
-«»
+</div>
 
-</div><div class="campo"><label>
+<div class="campo">
+
+<label>
 Operador *
-</label><input
+</label>
+
+<input
 type="text"
 id="maquinaOperador"
-placeholder="Nome do operador"
+placeholder="Nome do operador">
 
-«»
+</div>
 
-</div><div class="campo"><label>
-Qtd. peças passado *
-</label><input
+<div class="campo">
+
+<label>
+Qtd. peças passando *
+</label>
+
+<input
 type="number"
-id="pecasPassado"
+id="pecasPassando"
 min="0"
 placeholder="0"
-oninput="avaliarMaquina()"
+oninput="avaliarMaquina()">
 
-«»
+</div>
 
-</div><div class="campo"><label>
+<div class="campo">
+
+<label>
 Padrão de peças *
-</label><input
+</label>
+
+<input
 type="number"
 id="padraoPecas"
 min="0"
 placeholder="0"
-oninput="avaliarMaquina()"
+oninput="avaliarMaquina()">
 
-«»
+</div>
 
-</div></div><div
+</div>
+
+<div class="campo">
+
+<label>
+💬 Comentário
+</label>
+
+<textarea
+id="maquinaComentario"
+placeholder="Digite uma observação ou comentário sobre a produção...">
+</textarea>
+
+</div>
+
+<div
 id="resultadoMaquina"
 class="resultado-maquina"
 style="display:none;">
-</div><div class="acoes"><button
+</div>
+
+<div class="acoes">
+
+<button
 class="btn btn-success"
 onclick="salvarPadraoMaquina()">
+
 💾 Salvar registro
+
 </button>
 
 <button
 class="btn btn-secondary"
 onclick="limparMaquina()">
+
 Limpar
+
 </button>
 
-</div></div><div class="painel"><h2>
+</div>
+
+</div>
+
+<div class="painel">
+
+<h2>
 Histórico das Máquinas
-</h2><input
+</h2>
+
+<input
 type="text"
 class="pesquisa"
 id="pesquisaMaquinas"
 placeholder="Pesquisar máquina, cor ou operador..."
-oninput="renderizarMaquinas()"
+oninput="renderizarMaquinas()">
 
-«»
+<div class="tabela-container">
 
-<div class="tabela-container"><table><thead><tr><th>Data</th>
-<th>Máquina</th>
-<th>Cor</th>
-<th>Operador</th>
-<th>Peças Passado</th>
-<th>Padrão</th>
-<th>Resultado</th>
-<th>Ações</th></tr></thead><tbody id="tabelaMaquinas">
-</tbody></table></div></div></section><!-- HISTÓRICO --><section id="historico" class="pagina"><div class="titulo-pagina"><h1>
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Data
+</th>
+
+<th>
+Máquina
+</th>
+
+<th>
+Cor
+</th>
+
+<th>
+Operador
+</th>
+
+<th>
+Peças Passando
+</th>
+
+<th>
+Padrão
+</th>
+
+<th>
+Resultado
+</th>
+
+<th>
+Comentário
+</th>
+
+<th>
+Ações
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelaMaquinas">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- HISTÓRICO -->
+
+<section id="historico" class="pagina">
+
+<div class="titulo-pagina">
+
+<h1>
 Histórico de Lançamentos
-</h1><p>
+</h1>
+
+<p>
 Consulte todos os lançamentos registrados.
-</p></div><div class="painel"><div class="acoes"><button class="btn btn-success"
+</p>
+
+</div>
+
+<div class="painel">
+
+<div class="acoes">
+
+<button
+class="btn btn-success"
 onclick="exportarExcel()">
+
 📊 Exportar Excel
+
 </button>
 
-<button class="btn btn-danger"
+<button
+class="btn btn-danger"
 onclick="limparHistorico()">
+
 🗑 Limpar histórico
+
 </button>
 
-</div><br><input
+</div>
+
+<br>
+
+<input
 type="text"
 class="pesquisa"
 id="pesquisaHistorico"
 placeholder="Pesquisar pela cor ou responsável..."
-oninput="renderizarHistorico()"
+oninput="renderizarHistorico()">
 
-«»
+<div class="tabela-container">
 
-<div class="tabela-container"><table><thead><tr><th>Data</th>
-<th>Responsável</th>
-<th>Cor</th>
-<th>Massa</th>
-<th>Primer</th>
-<th>Impressão</th>
-<th>Base</th>
-<th>Verniz</th>
-<th>Ações</th></tr></thead><tbody id="tabelaHistorico">
-</tbody></table></div></div></section></main></div></div><script>
+<table>
 
-/* BANCO DE DADOS */
+<thead>
+
+<tr>
+
+<th>
+Data
+</th>
+
+<th>
+Responsável
+</th>
+
+<th>
+Cor
+</th>
+
+<th>
+Massa
+</th>
+
+<th>
+Primer
+</th>
+
+<th>
+Impressão
+</th>
+
+<th>
+Base
+</th>
+
+<th>
+Verniz
+</th>
+
+<th>
+Ações
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelaHistorico">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================
+BANCO DE DADOS
+========================= */
 
 const STORAGE_QUIMICOS="erp_quimicos_v3";
 const STORAGE_LANCAMENTOS="erp_lancamentos_v3";
-const STORAGE_MAQUINAS="erp_maquinas_v1";
+const STORAGE_MAQUINAS="erp_maquinas_v3";
 
 let quimicos=JSON.parse(
 localStorage.getItem(STORAGE_QUIMICOS)||"[]"
@@ -1129,16 +2269,51 @@ let registrosMaquinas=JSON.parse(
 localStorage.getItem(STORAGE_MAQUINAS)||"[]"
 );
 
+/*
+Compatibilidade com registros antigos:
+se existirem registros que ainda usam "passado",
+o sistema transforma automaticamente para "passando".
+*/
+
+registrosMaquinas=registrosMaquinas.map(r=>({
+
+...r,
+
+passando:
+r.passando !== undefined
+? r.passando
+: (r.passado !== undefined
+? r.passado
+: 0)
+
+}));
+
 let maquinaAtual="";
 
+let graficoProdutos=null;
+let graficoMaquinas=null;
+let graficoSituacao=null;
+let graficoQuantidadeMaquinas=null;
 
-/* NAVEGAÇÃO */
+const produtos=[
+"massa",
+"primer",
+"impressao",
+"base",
+"verniz"
+];
+
+/* =========================
+NAVEGAÇÃO
+========================= */
 
 function abrirPagina(id,botao){
 
 document
 .querySelectorAll(".pagina")
-.forEach(p=>p.classList.remove("ativa"));
+.forEach(p=>
+p.classList.remove("ativa")
+);
 
 document
 .getElementById(id)
@@ -1146,7 +2321,9 @@ document
 
 document
 .querySelectorAll(".menu-btn")
-.forEach(b=>b.classList.remove("ativo"));
+.forEach(b=>
+b.classList.remove("ativo")
+);
 
 if(botao){
 botao.classList.add("ativo");
@@ -1168,10 +2345,53 @@ if(id==="maquinas"){
 renderizarMaquinas();
 }
 
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
 }
 
+/* =========================
+CALCULADORA
+========================= */
 
-/* CÓDIGO */
+function calcularDobro(){
+
+const campo=document.getElementById(
+"calculadoraValor"
+);
+
+const resultado=document.getElementById(
+"resultadoCalculadora"
+);
+
+const valor=parseFloat(campo.value);
+
+if(isNaN(valor)){
+
+resultado.textContent="0,00";
+
+return;
+
+}
+
+const dobro=valor*2;
+
+resultado.textContent=
+dobro.toLocaleString(
+"pt-BR",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+);
+
+}
+
+/* =========================
+FORMATAÇÃO CÓDIGO
+========================= */
 
 function formatarCodigo(input){
 
@@ -1194,8 +2414,9 @@ input.value=valor;
 
 }
 
-
-/* CADASTRO */
+/* =========================
+CADASTRO DE QUÍMICOS
+========================= */
 
 function salvarQuimico(){
 
@@ -1209,7 +2430,10 @@ const codigo=document
 
 if(!nome){
 
-alert("Digite o nome do químico.");
+alert(
+"Digite o nome do químico."
+);
+
 return;
 
 }
@@ -1241,8 +2465,11 @@ return;
 quimicos.push({
 
 id:Date.now(),
+
 nome:nome,
+
 codigo:codigo,
+
 data:new Date().toLocaleString("pt-BR")
 
 });
@@ -1250,7 +2477,9 @@ data:new Date().toLocaleString("pt-BR")
 salvarDados();
 
 limparCadastro();
+
 renderizarCadastro();
+
 atualizarDashboard();
 
 alert(
@@ -1258,7 +2487,6 @@ alert(
 );
 
 }
-
 
 function limparCadastro(){
 
@@ -1271,7 +2499,6 @@ document.getElementById(
 ).value="";
 
 }
-
 
 function renderizarCadastro(){
 
@@ -1287,6 +2514,7 @@ const pesquisa=document
 const lista=quimicos.filter(q=>
 
 q.nome.toLowerCase().includes(pesquisa)||
+
 q.codigo.toLowerCase().includes(pesquisa)
 
 );
@@ -1337,13 +2565,17 @@ ${escaparHTML(q.codigo)}
 <button
 class="btn-mini btn-editar"
 onclick="editarQuimico(${q.id})">
+
 Editar
+
 </button>
 
 <button
 class="btn-mini btn-excluir"
 onclick="excluirQuimico(${q.id})">
+
 Excluir
+
 </button>
 
 </div>
@@ -1357,7 +2589,6 @@ Excluir
 });
 
 }
-
 
 function editarQuimico(id){
 
@@ -1408,6 +2639,7 @@ return;
 }
 
 q.nome=novoNome.trim();
+
 q.codigo=novoCodigo;
 
 salvarDados();
@@ -1415,7 +2647,6 @@ salvarDados();
 renderizarCadastro();
 
 }
-
 
 function excluirQuimico(id){
 
@@ -1430,21 +2661,14 @@ q=>q.id!==id
 salvarDados();
 
 renderizarCadastro();
+
 atualizarDashboard();
 
 }
 
-
-/* PRODUTOS */
-
-const produtos=[
-"massa",
-"primer",
-"impressao",
-"base",
-"verniz"
-];
-
+/* =========================
+AVALIAÇÃO DOS PRODUTOS
+========================= */
 
 function avaliarProduto(produto){
 
@@ -1499,7 +2723,8 @@ status.textContent=
 badge.className=
 "badge badge-vermelho";
 
-badge.textContent="Acima";
+badge.textContent=
+"Acima";
 
 }else if(valor<padrao){
 
@@ -1512,7 +2737,8 @@ status.textContent=
 badge.className=
 "badge badge-verde";
 
-badge.textContent="Abaixo";
+badge.textContent=
+"Abaixo";
 
 }else{
 
@@ -1525,14 +2751,16 @@ status.textContent=
 badge.className=
 "badge badge-amarelo";
 
-badge.textContent="Igual";
+badge.textContent=
+"Igual";
 
 }
 
 }
 
-
-/* SALVAR LANÇAMENTO */
+/* =========================
+SALVAR LANÇAMENTO
+========================= */
 
 function salvarLancamento(){
 
@@ -1552,8 +2780,11 @@ return;
 }
 
 const cor=document
-.getElementById("corLancamento")
-.value.trim();
+.getElementById(
+"corLancamento"
+)
+.value
+.trim();
 
 if(!cor){
 
@@ -1620,7 +2851,9 @@ resultado="IGUAL AO PADRÃO";
 dados[produto]={
 
 valor:valor,
+
 padrao:padrao,
+
 resultado:resultado
 
 };
@@ -1638,14 +2871,20 @@ responsavel:responsavel,
 cor:cor,
 
 massa:dados.massa,
+
 primer:dados.primer,
+
 impressao:dados.impressao,
+
 base:dados.base,
+
 verniz:dados.verniz
 
 };
 
-lancamentos.unshift(lancamento);
+lancamentos.unshift(
+lancamento
+);
 
 salvarDados();
 
@@ -1654,6 +2893,8 @@ alert(
 );
 
 limparLancamento();
+
+renderizarHistorico();
 
 atualizarDashboard();
 
@@ -1664,8 +2905,9 @@ document.querySelectorAll(".menu-btn")[4]
 
 }
 
-
-/* LIMPAR LANÇAMENTO */
+/* =========================
+LIMPAR LANÇAMENTO
+========================= */
 
 function limparLancamento(){
 
@@ -1676,6 +2918,14 @@ document.getElementById(
 document.getElementById(
 "corLancamento"
 ).value="";
+
+document.getElementById(
+"calculadoraValor"
+).value="";
+
+document.getElementById(
+"resultadoCalculadora"
+).textContent="0,00";
 
 produtos.forEach(produto=>{
 
@@ -1713,17 +2963,22 @@ badge.textContent=
 
 }
 
-
-/* NOMES */
+/* =========================
+NOME DOS PRODUTOS
+========================= */
 
 function nomeProduto(produto){
 
 const nomes={
 
 massa:"Massa",
+
 primer:"Primer",
+
 impressao:"Impressão",
+
 base:"Base",
+
 verniz:"Verniz"
 
 };
@@ -1732,8 +2987,9 @@ return nomes[produto]||produto;
 
 }
 
-
-/* PADRÃO MÁQUINAS */
+/* =========================
+MÁQUINAS
+========================= */
 
 function mostrarMaquinas(){
 
@@ -1753,7 +3009,6 @@ lista.style.display="none";
 
 }
 
-
 function selecionarMaquina(nome,botao){
 
 maquinaAtual=nome;
@@ -1767,7 +3022,9 @@ b.classList.remove("selecionada")
 botao.classList.add("selecionada");
 
 const selecionada=document
-.getElementById("maquinaSelecionada");
+.getElementById(
+"maquinaSelecionada"
+);
 
 selecionada.style.display="block";
 
@@ -1775,32 +3032,41 @@ selecionada.textContent=
 "Máquina selecionada: "+nome;
 
 document
-.getElementById("formularioMaquina")
+.getElementById(
+"formularioMaquina"
+)
 .style.display="block";
 
 document
-.getElementById("maquinaCor")
+.getElementById(
+"maquinaCor"
+)
 .focus();
 
 avaliarMaquina();
 
 }
 
-
 function avaliarMaquina(){
 
-const passado=parseFloat(
-document.getElementById("pecasPassado").value
+const passando=parseFloat(
+document.getElementById(
+"pecasPassando"
+).value
 );
 
 const padrao=parseFloat(
-document.getElementById("padraoPecas").value
+document.getElementById(
+"padraoPecas"
+).value
 );
 
 const resultado=document
-.getElementById("resultadoMaquina");
+.getElementById(
+"resultadoMaquina"
+);
 
-if(isNaN(passado)||isNaN(padrao)){
+if(isNaN(passando)||isNaN(padrao)){
 
 resultado.style.display="none";
 
@@ -1810,7 +3076,7 @@ return;
 
 resultado.style.display="block";
 
-if(passado>padrao){
+if(passando>padrao){
 
 resultado.className=
 "resultado-maquina acima";
@@ -1818,7 +3084,7 @@ resultado.className=
 resultado.textContent=
 "ACIMA DO PADRÃO";
 
-}else if(passado<padrao){
+}else if(passando<padrao){
 
 resultado.className=
 "resultado-maquina abaixo";
@@ -1838,6 +3104,9 @@ resultado.textContent=
 
 }
 
+/* =========================
+SALVAR MÁQUINA
+========================= */
 
 function salvarPadraoMaquina(){
 
@@ -1852,19 +3121,36 @@ return;
 }
 
 const cor=document
-.getElementById("maquinaCor")
-.value.trim();
+.getElementById(
+"maquinaCor"
+)
+.value
+.trim();
 
 const operador=document
-.getElementById("maquinaOperador")
-.value.trim();
+.getElementById(
+"maquinaOperador"
+)
+.value
+.trim();
 
-const passado=parseFloat(
-document.getElementById("pecasPassado").value
+const comentario=document
+.getElementById(
+"maquinaComentario"
+)
+.value
+.trim();
+
+const passando=parseFloat(
+document.getElementById(
+"pecasPassando"
+).value
 );
 
 const padrao=parseFloat(
-document.getElementById("padraoPecas").value
+document.getElementById(
+"padraoPecas"
+).value
 );
 
 if(!cor){
@@ -1887,10 +3173,10 @@ return;
 
 }
 
-if(isNaN(passado)){
+if(isNaN(passando)){
 
 alert(
-"Informe a quantidade de peças passado."
+"Informe a quantidade de peças passando."
 );
 
 return;
@@ -1909,17 +3195,20 @@ return;
 
 let resultado="";
 
-if(passado>padrao){
+if(passando>padrao){
 
-resultado="ACIMA DO PADRÃO";
+resultado=
+"ACIMA DO PADRÃO";
 
-}else if(passado<padrao){
+}else if(passando<padrao){
 
-resultado="ABAIXO DO PADRÃO";
+resultado=
+"ABAIXO DO PADRÃO";
 
 }else{
 
-resultado="IGUAL AO PADRÃO";
+resultado=
+"IGUAL AO PADRÃO";
 
 }
 
@@ -1935,11 +3224,13 @@ cor:cor,
 
 operador:operador,
 
-passado:passado,
+passando:passando,
 
 padrao:padrao,
 
-resultado:resultado
+resultado:resultado,
+
+comentario:comentario
 
 });
 
@@ -1957,6 +3248,9 @@ limparMaquina();
 
 }
 
+/* =========================
+LIMPAR MÁQUINA
+========================= */
 
 function limparMaquina(){
 
@@ -1969,7 +3263,11 @@ document.getElementById(
 ).value="";
 
 document.getElementById(
-"pecasPassado"
+"maquinaComentario"
+).value="";
+
+document.getElementById(
+"pecasPassando"
 ).value="";
 
 document.getElementById(
@@ -1982,19 +3280,27 @@ document.getElementById(
 
 }
 
+/* =========================
+HISTÓRICO DAS MÁQUINAS
+========================= */
 
 function renderizarMaquinas(){
 
 const tabela=document
-.getElementById("tabelaMaquinas");
+.getElementById(
+"tabelaMaquinas"
+);
 
 const pesquisa=document
-.getElementById("pesquisaMaquinas")
+.getElementById(
+"pesquisaMaquinas"
+)
 ?.value
 .toLowerCase()
 .trim()||"";
 
-const lista=registrosMaquinas.filter(r=>
+const lista=
+registrosMaquinas.filter(r=>
 
 (r.maquina||"")
 .toLowerCase()
@@ -2005,6 +3311,10 @@ const lista=registrosMaquinas.filter(r=>
 .includes(pesquisa)||
 
 (r.operador||"")
+.toLowerCase()
+.includes(pesquisa)||
+
+(r.comentario||"")
 .toLowerCase()
 .includes(pesquisa)
 
@@ -2018,7 +3328,7 @@ tabela.innerHTML=`
 
 <tr>
 
-<td colspan="8"
+<td colspan="9"
 style="text-align:center">
 
 Nenhum registro de máquina encontrado.
@@ -2035,17 +3345,22 @@ return;
 
 lista.forEach(r=>{
 
-let classe="badge-amarelo";
+let classe=
+"badge-amarelo";
 
-if(r.resultado==="ACIMA DO PADRÃO"){
+if(r.resultado===
+"ACIMA DO PADRÃO"){
 
-classe="badge-vermelho";
+classe=
+"badge-vermelho";
 
 }else if(
-r.resultado==="ABAIXO DO PADRÃO"
+r.resultado===
+"ABAIXO DO PADRÃO"
 ){
 
-classe="badge-verde";
+classe=
+"badge-verde";
 
 }
 
@@ -2072,7 +3387,7 @@ ${escaparHTML(r.operador)}
 </td>
 
 <td>
-${r.passado}
+${r.passando}
 </td>
 
 <td>
@@ -2085,6 +3400,10 @@ ${r.padrao}
 ${escaparHTML(r.resultado)}
 </span>
 
+</td>
+
+<td>
+${escaparHTML(r.comentario||"-")}
 </td>
 
 <td>
@@ -2106,7 +3425,6 @@ Excluir
 });
 
 }
-
 
 function excluirRegistroMaquina(id){
 
@@ -2131,22 +3449,27 @@ atualizarDashboard();
 
 }
 
-
-/* HISTÓRICO */
+/* =========================
+HISTÓRICO DE LANÇAMENTOS
+========================= */
 
 function renderizarHistorico(){
 
-const tabela=document.getElementById(
+const tabela=document
+.getElementById(
 "tabelaHistorico"
 );
 
 const pesquisa=document
-.getElementById("pesquisaHistorico")
+.getElementById(
+"pesquisaHistorico"
+)
 ?.value
 .toLowerCase()
 .trim()||"";
 
-const lista=lancamentos.filter(l=>
+const lista=
+lancamentos.filter(l=>
 
 (l.cor||"")
 .toLowerCase()
@@ -2241,21 +3564,29 @@ Excluir
 
 }
 
-
 function celulaResultado(item){
 
 if(!item){
 return "-";
 }
 
-let classe="badge-amarelo";
+let classe=
+"badge-amarelo";
 
-if(item.resultado==="ACIMA DO PADRÃO"){
-classe="badge-vermelho";
+if(item.resultado===
+"ACIMA DO PADRÃO"){
+
+classe=
+"badge-vermelho";
+
 }else if(
-item.resultado==="ABAIXO DO PADRÃO"
+item.resultado===
+"ABAIXO DO PADRÃO"
 ){
-classe="badge-verde";
+
+classe=
+"badge-verde";
+
 }
 
 return `
@@ -2268,7 +3599,6 @@ ${item.valor}
 
 }
 
-
 function excluirLancamento(id){
 
 if(!confirm(
@@ -2279,17 +3609,18 @@ return;
 
 }
 
-lancamentos=lancamentos.filter(
+lancamentos=
+lancamentos.filter(
 l=>l.id!==id
 );
 
 salvarDados();
 
 renderizarHistorico();
+
 atualizarDashboard();
 
 }
-
 
 function limparHistorico(){
 
@@ -2316,6 +3647,7 @@ lancamentos=[];
 salvarDados();
 
 renderizarHistorico();
+
 atualizarDashboard();
 
 alert(
@@ -2324,8 +3656,9 @@ alert(
 
 }
 
-
-/* DASHBOARD */
+/* =========================
+DASHBOARD
+========================= */
 
 function atualizarDashboard(){
 
@@ -2339,15 +3672,24 @@ document.getElementById(
 ).textContent=
 lancamentos.length;
 
+document.getElementById(
+"totalRegistrosMaquinas"
+).textContent=
+registrosMaquinas.length;
+
 let abaixo=0;
 let igual=0;
+let acima=0;
 
 lancamentos.forEach(l=>{
 
 produtos.forEach(produto=>{
 
+if(!l[produto]){
+return;
+}
+
 if(
-l[produto]&&
 l[produto].resultado===
 "ABAIXO DO PADRÃO"
 ){
@@ -2357,12 +3699,20 @@ abaixo++;
 }
 
 if(
-l[produto]&&
 l[produto].resultado===
 "IGUAL AO PADRÃO"
 ){
 
 igual++;
+
+}
+
+if(
+l[produto].resultado===
+"ACIMA DO PADRÃO"
+){
+
+acima++;
 
 }
 
@@ -2380,10 +3730,594 @@ document.getElementById(
 ).textContent=
 igual;
 
+document.getElementById(
+"totalAcima"
+).textContent=
+acima;
+
+atualizarGraficos();
+
 }
 
+/* =========================
+DADOS DOS PRODUTOS
+========================= */
 
-/* EXCEL */
+function obterDadosProdutos(){
+
+const resultado={};
+
+produtos.forEach(produto=>{
+
+resultado[produto]={
+
+abaixo:0,
+
+igual:0,
+
+acima:0
+
+};
+
+});
+
+lancamentos.forEach(l=>{
+
+produtos.forEach(produto=>{
+
+const item=l[produto];
+
+if(!item){
+return;
+}
+
+if(
+item.resultado===
+"ABAIXO DO PADRÃO"
+){
+
+resultado[produto].abaixo++;
+
+}
+
+if(
+item.resultado===
+"IGUAL AO PADRÃO"
+){
+
+resultado[produto].igual++;
+
+}
+
+if(
+item.resultado===
+"ACIMA DO PADRÃO"
+){
+
+resultado[produto].acima++;
+
+}
+
+});
+
+});
+
+return resultado;
+
+}
+
+/* =========================
+DADOS DAS MÁQUINAS
+========================= */
+
+function obterDadosMaquinas(){
+
+const maquinas={};
+
+registrosMaquinas.forEach(r=>{
+
+if(!maquinas[r.maquina]){
+
+maquinas[r.maquina]={
+
+abaixo:0,
+
+igual:0,
+
+acima:0,
+
+total:0
+
+};
+
+}
+
+maquinas[r.maquina].total++;
+
+if(
+r.resultado===
+"ABAIXO DO PADRÃO"
+){
+
+maquinas[r.maquina].abaixo++;
+
+}
+
+if(
+r.resultado===
+"IGUAL AO PADRÃO"
+){
+
+maquinas[r.maquina].igual++;
+
+}
+
+if(
+r.resultado===
+"ACIMA DO PADRÃO"
+){
+
+maquinas[r.maquina].acima++;
+
+}
+
+});
+
+return maquinas;
+
+}
+
+/* =========================
+GRÁFICOS
+========================= */
+
+function atualizarGraficos(){
+
+if(typeof Chart==="undefined"){
+return;
+}
+
+const dadosProdutos=
+obterDadosProdutos();
+
+const nomesProdutos=[
+"Massa",
+"Primer",
+"Impressão",
+"Base",
+"Verniz"
+];
+
+const chavesProdutos=[
+"massa",
+"primer",
+"impressao",
+"base",
+"verniz"
+];
+
+const abaixoProdutos=
+chavesProdutos.map(
+p=>dadosProdutos[p].abaixo
+);
+
+const igualProdutos=
+chavesProdutos.map(
+p=>dadosProdutos[p].igual
+);
+
+const acimaProdutos=
+chavesProdutos.map(
+p=>dadosProdutos[p].acima
+);
+
+/* PRODUTOS */
+
+if(graficoProdutos){
+
+graficoProdutos.destroy();
+
+}
+
+const ctxProdutos=
+document.getElementById(
+"graficoProdutos"
+);
+
+graficoProdutos=
+new Chart(
+ctxProdutos,
+{
+
+type:"bar",
+
+data:{
+
+labels:nomesProdutos,
+
+datasets:[
+
+{
+
+label:"Abaixo do padrão",
+
+data:abaixoProdutos,
+
+backgroundColor:"#159447"
+
+},
+
+{
+
+label:"Igual ao padrão",
+
+data:igualProdutos,
+
+backgroundColor:"#e6a700"
+
+},
+
+{
+
+label:"Acima do padrão",
+
+data:acimaProdutos,
+
+backgroundColor:"#d71920"
+
+}
+
+]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+position:"bottom"
+
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+ticks:{
+
+precision:0
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+/* SITUAÇÃO GERAL */
+
+if(graficoSituacao){
+
+graficoSituacao.destroy();
+
+}
+
+const totalAbaixo=
+abaixoProdutos.reduce(
+(a,b)=>a+b,
+0
+);
+
+const totalIgual=
+igualProdutos.reduce(
+(a,b)=>a+b,
+0
+);
+
+const totalAcima=
+acimaProdutos.reduce(
+(a,b)=>a+b,
+0
+);
+
+const ctxSituacao=
+document.getElementById(
+"graficoSituacao"
+);
+
+graficoSituacao=
+new Chart(
+ctxSituacao,
+{
+
+type:"doughnut",
+
+data:{
+
+labels:[
+
+"Abaixo do padrão",
+
+"Igual ao padrão",
+
+"Acima do padrão"
+
+],
+
+datasets:[
+
+{
+
+data:[
+
+totalAbaixo,
+
+totalIgual,
+
+totalAcima
+
+],
+
+backgroundColor:[
+
+"#159447",
+
+"#e6a700",
+
+"#d71920"
+
+]
+
+}
+
+]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+position:"bottom"
+
+}
+
+}
+
+}
+
+}
+
+);
+
+/* MÁQUINAS */
+
+const dadosMaquinas=
+obterDadosMaquinas();
+
+const nomesMaquinas=
+Object.keys(dadosMaquinas);
+
+const maquinasAbaixo=
+nomesMaquinas.map(
+m=>dadosMaquinas[m].abaixo
+);
+
+const maquinasIgual=
+nomesMaquinas.map(
+m=>dadosMaquinas[m].igual
+);
+
+const maquinasAcima=
+nomesMaquinas.map(
+m=>dadosMaquinas[m].acima
+);
+
+const maquinasTotal=
+nomesMaquinas.map(
+m=>dadosMaquinas[m].total
+);
+
+if(graficoMaquinas){
+
+graficoMaquinas.destroy();
+
+}
+
+const ctxMaquinas=
+document.getElementById(
+"graficoMaquinas"
+);
+
+graficoMaquinas=
+new Chart(
+ctxMaquinas,
+{
+
+type:"bar",
+
+data:{
+
+labels:nomesMaquinas,
+
+datasets:[
+
+{
+
+label:"Abaixo do padrão",
+
+data:maquinasAbaixo,
+
+backgroundColor:"#159447"
+
+},
+
+{
+
+label:"Igual ao padrão",
+
+data:maquinasIgual,
+
+backgroundColor:"#e6a700"
+
+},
+
+{
+
+label:"Acima do padrão",
+
+data:maquinasAcima,
+
+backgroundColor:"#d71920"
+
+}
+
+]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+position:"bottom"
+
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+ticks:{
+
+precision:0
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+/* QUANTIDADE DE REGISTROS */
+
+if(graficoQuantidadeMaquinas){
+
+graficoQuantidadeMaquinas.destroy();
+
+}
+
+const ctxQuantidade=
+document.getElementById(
+"graficoQuantidadeMaquinas"
+);
+
+graficoQuantidadeMaquinas=
+new Chart(
+ctxQuantidade,
+{
+
+type:"bar",
+
+data:{
+
+labels:nomesMaquinas,
+
+datasets:[
+
+{
+
+label:"Total de registros",
+
+data:maquinasTotal,
+
+backgroundColor:"#0756a3"
+
+}
+
+]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+display:false
+
+}
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+ticks:{
+
+precision:0
+
+}
+
+}
+
+}
+
+}
+
+}
+
+);
+
+}
+
+/* =========================
+EXPORTAR PARA EXCEL
+========================= */
 
 function exportarExcel(){
 
@@ -2398,9 +4332,11 @@ return;
 }
 
 if(
+
 quimicos.length===0&&
 lancamentos.length===0&&
 registrosMaquinas.length===0
+
 ){
 
 alert(
@@ -2411,47 +4347,293 @@ return;
 
 }
 
+let totalAbaixo=0;
+let totalIgual=0;
+let totalAcima=0;
+
+lancamentos.forEach(l=>{
+
+produtos.forEach(produto=>{
+
+if(!l[produto]){
+return;
+}
+
+if(
+l[produto].resultado===
+"ABAIXO DO PADRÃO"
+){
+
+totalAbaixo++;
+
+}
+
+if(
+l[produto].resultado===
+"IGUAL AO PADRÃO"
+){
+
+totalIgual++;
+
+}
+
+if(
+l[produto].resultado===
+"ACIMA DO PADRÃO"
+){
+
+totalAcima++;
+
+}
+
+});
+
+});
+
+/* RESUMO */
+
 const resumo=[
 
 {
-Informação:
+
+"Informação":
 "Total de químicos cadastrados",
-Valor:quimicos.length
+
+"Valor":
+quimicos.length
+
 },
 
 {
-Informação:
+
+"Informação":
 "Total de lançamentos",
-Valor:lancamentos.length
+
+"Valor":
+lancamentos.length
+
 },
 
 {
-Informação:
+
+"Informação":
 "Total de registros de máquinas",
-Valor:registrosMaquinas.length
+
+"Valor":
+registrosMaquinas.length
+
 },
 
 {
-Informação:
+
+"Informação":
+"Produtos abaixo do padrão",
+
+"Valor":
+totalAbaixo
+
+},
+
+{
+
+"Informação":
+"Produtos dentro do padrão",
+
+"Valor":
+totalIgual
+
+},
+
+{
+
+"Informação":
+"Produtos acima do padrão",
+
+"Valor":
+totalAcima
+
+},
+
+{
+
+"Informação":
 "Data da exportação",
-Valor:new Date().toLocaleString("pt-BR")
+
+"Valor":
+new Date().toLocaleString("pt-BR")
+
 }
 
 ];
 
-const cadastroExcel=quimicos.map(q=>({
+/* DASHBOARD PRODUTOS */
 
-"Nome do Químico":q.nome,
-"Código":q.codigo,
-"Data do Cadastro":q.data
+const dadosProdutos=
+obterDadosProdutos();
+
+const dashboardProdutos=[
+
+{
+
+"Produto":
+"Massa",
+
+"Abaixo do padrão":
+dadosProdutos.massa.abaixo,
+
+"Dentro do padrão":
+dadosProdutos.massa.igual,
+
+"Acima do padrão":
+dadosProdutos.massa.acima,
+
+"Fora do padrão":
+dadosProdutos.massa.abaixo+
+dadosProdutos.massa.acima
+
+},
+
+{
+
+"Produto":
+"Primer",
+
+"Abaixo do padrão":
+dadosProdutos.primer.abaixo,
+
+"Dentro do padrão":
+dadosProdutos.primer.igual,
+
+"Acima do padrão":
+dadosProdutos.primer.acima,
+
+"Fora do padrão":
+dadosProdutos.primer.abaixo+
+dadosProdutos.primer.acima
+
+},
+
+{
+
+"Produto":
+"Impressão",
+
+"Abaixo do padrão":
+dadosProdutos.impressao.abaixo,
+
+"Dentro do padrão":
+dadosProdutos.impressao.igual,
+
+"Acima do padrão":
+dadosProdutos.impressao.acima,
+
+"Fora do padrão":
+dadosProdutos.impressao.abaixo+
+dadosProdutos.impressao.acima
+
+},
+
+{
+
+"Produto":
+"Base",
+
+"Abaixo do padrão":
+dadosProdutos.base.abaixo,
+
+"Dentro do padrão":
+dadosProdutos.base.igual,
+
+"Acima do padrão":
+dadosProdutos.base.acima,
+
+"Fora do padrão":
+dadosProdutos.base.abaixo+
+dadosProdutos.base.acima
+
+},
+
+{
+
+"Produto":
+"Verniz",
+
+"Abaixo do padrão":
+dadosProdutos.verniz.abaixo,
+
+"Dentro do padrão":
+dadosProdutos.verniz.igual,
+
+"Acima do padrão":
+dadosProdutos.verniz.acima,
+
+"Fora do padrão":
+dadosProdutos.verniz.abaixo+
+dadosProdutos.verniz.acima
+
+}
+
+];
+
+/* DASHBOARD MÁQUINAS */
+
+const dadosMaquinas=
+obterDadosMaquinas();
+
+const dashboardMaquinas=
+Object.keys(dadosMaquinas)
+.map(maquina=>({
+
+"Máquina":
+maquina,
+
+"Abaixo do padrão":
+dadosMaquinas[maquina].abaixo,
+
+"Dentro do padrão":
+dadosMaquinas[maquina].igual,
+
+"Acima do padrão":
+dadosMaquinas[maquina].acima,
+
+"Fora do padrão":
+dadosMaquinas[maquina].abaixo+
+dadosMaquinas[maquina].acima,
+
+"Total de registros":
+dadosMaquinas[maquina].total
 
 }));
 
-const lancamentosExcel=lancamentos.map(l=>({
+/* CADASTRO */
 
-"Data":l.data,
-"Responsável":l.responsavel,
-"Cor":l.cor,
+const cadastroExcel=
+quimicos.map(q=>({
+
+"Nome do Químico":
+q.nome,
+
+"Código":
+q.codigo,
+
+"Data do Cadastro":
+q.data
+
+}));
+
+/* LANÇAMENTOS */
+
+const lancamentosExcel=
+lancamentos.map(l=>({
+
+"Data":
+l.data,
+
+"Responsável":
+l.responsavel,
+
+"Cor":
+l.cor,
 
 "Massa - Valor":
 l.massa?.valor??"",
@@ -2459,11 +4641,17 @@ l.massa?.valor??"",
 "Massa - Padrão":
 l.massa?.padrao??"",
 
+"Massa - Resultado":
+l.massa?.resultado??"",
+
 "Primer - Valor":
 l.primer?.valor??"",
 
 "Primer - Padrão":
 l.primer?.padrao??"",
+
+"Primer - Resultado":
+l.primer?.resultado??"",
 
 "Impressão - Valor":
 l.impressao?.valor??"",
@@ -2471,50 +4659,111 @@ l.impressao?.valor??"",
 "Impressão - Padrão":
 l.impressao?.padrao??"",
 
+"Impressão - Resultado":
+l.impressao?.resultado??"",
+
 "Base - Valor":
 l.base?.valor??"",
 
 "Base - Padrão":
 l.base?.padrao??"",
 
+"Base - Resultado":
+l.base?.resultado??"",
+
 "Verniz - Valor":
 l.verniz?.valor??"",
 
 "Verniz - Padrão":
-l.verniz?.padrao??""
+l.verniz?.padrao??"",
+
+"Verniz - Resultado":
+l.verniz?.resultado??""
 
 }));
 
-const maquinasExcel=registrosMaquinas.map(r=>({
+/* MÁQUINAS */
 
-"Data":r.data,
-"Máquina":r.maquina,
-"Cor":r.cor,
-"Operador":r.operador,
-"Peças Passado":r.passado,
-"Padrão de Peças":r.padrao,
-"Resultado":r.resultado
+const maquinasExcel=
+registrosMaquinas.map(r=>({
+
+"Data":
+r.data,
+
+"Máquina":
+r.maquina,
+
+"Cor":
+r.cor,
+
+"Operador":
+r.operador,
+
+"Peças Passando":
+r.passando,
+
+"Padrão de Peças":
+r.padrao,
+
+"Resultado":
+r.resultado,
+
+"Comentário":
+r.comentario||""
 
 }));
 
-const workbook=XLSX.utils.book_new();
+/* CRIAR EXCEL */
+
+const workbook=
+XLSX.utils.book_new();
 
 const wsResumo=
-XLSX.utils.json_to_sheet(resumo);
+XLSX.utils.json_to_sheet(
+resumo
+);
+
+const wsDashboardProdutos=
+XLSX.utils.json_to_sheet(
+dashboardProdutos
+);
+
+const wsDashboardMaquinas=
+XLSX.utils.json_to_sheet(
+dashboardMaquinas
+);
 
 const wsCadastro=
-XLSX.utils.json_to_sheet(cadastroExcel);
+XLSX.utils.json_to_sheet(
+cadastroExcel
+);
 
 const wsLancamentos=
-XLSX.utils.json_to_sheet(lancamentosExcel);
+XLSX.utils.json_to_sheet(
+lancamentosExcel
+);
 
 const wsMaquinas=
-XLSX.utils.json_to_sheet(maquinasExcel);
+XLSX.utils.json_to_sheet(
+maquinasExcel
+);
 
 XLSX.utils.book_append_sheet(
 workbook,
 wsResumo,
 "Resumo"
+);
+
+XLSX.utils.book_append_sheet(
+workbook,
+wsDashboardProdutos,
+"Dashboard Produtos"
+);
+
+XLSX.utils.book_append_sheet(
+workbook,
+wsDashboardMaquinas,
+"Dashboard Máquinas"
 );
 
 XLSX.utils.book_append_sheet(
@@ -2535,44 +4784,156 @@ wsMaquinas,
 "Padrão Máquinas"
 );
 
+/* LARGURAS */
+
 wsResumo["!cols"]=[
-{wch:35},
-{wch:20}
+{
+wch:40
+},
+{
+wch:22
+}
+];
+
+wsDashboardProdutos["!cols"]=[
+{
+wch:20
+},
+{
+wch:22
+},
+{
+wch:22
+},
+{
+wch:22
+},
+{
+wch:22
+}
+];
+
+wsDashboardMaquinas["!cols"]=[
+{
+wch:15
+},
+{
+wch:22
+},
+{
+wch:22
+},
+{
+wch:22
+},
+{
+wch:22
+},
+{
+wch:22
+}
 ];
 
 wsCadastro["!cols"]=[
-{wch:30},
-{wch:18},
-{wch:22}
+{
+wch:30
+},
+{
+wch:18
+},
+{
+wch:22
+}
 ];
 
 wsLancamentos["!cols"]=[
-{wch:22},
-{wch:15},
-{wch:20},
-{wch:18},
-{wch:18},
-{wch:18},
-{wch:18},
-{wch:18},
-{wch:18},
-{wch:18},
-{wch:18},
-{wch:18},
-{wch:18}
+{
+wch:22
+},
+{
+wch:18
+},
+{
+wch:20
+},
+{
+wch:18
+},
+{
+wch:18
+},
+{
+wch:25
+},
+{
+wch:18
+},
+{
+wch:18
+},
+{
+wch:25
+},
+{
+wch:20
+},
+{
+wch:20
+},
+{
+wch:25
+},
+{
+wch:18
+},
+{
+wch:18
+},
+{
+wch:25
+},
+{
+wch:18
+},
+{
+wch:18
+},
+{
+wch:25
+}
 ];
 
 wsMaquinas["!cols"]=[
-{wch:22},
-{wch:15},
-{wch:20},
-{wch:20},
-{wch:18},
-{wch:18},
-{wch:25}
+{
+wch:22
+},
+{
+wch:15
+},
+{
+wch:20
+},
+{
+wch:20
+},
+{
+wch:20
+},
+{
+wch:20
+},
+{
+wch:22
+},
+{
+wch:40
+}
 ];
 
-const data=new Date()
+/* NOME DO ARQUIVO */
+
+const data=
+new Date()
 .toISOString()
 .slice(0,10);
 
@@ -2583,8 +4944,9 @@ workbook,
 
 }
 
-
-/* SALVAR DADOS */
+/* =========================
+SALVAR DADOS
+========================= */
 
 function salvarDados(){
 
@@ -2605,8 +4967,9 @@ JSON.stringify(registrosMaquinas)
 
 }
 
-
-/* PROTEÇÃO */
+/* =========================
+SEGURANÇA HTML
+========================= */
 
 function escaparHTML(texto){
 
@@ -2619,8 +4982,9 @@ return String(texto??"")
 
 }
 
-
-/* INICIALIZAÇÃO */
+/* =========================
+INICIALIZAÇÃO
+========================= */
 
 renderizarCadastro();
 
@@ -2630,5 +4994,7 @@ renderizarMaquinas();
 
 atualizarDashboard();
 
-</script></body>
+</script>
+
+</body>
 </html>
