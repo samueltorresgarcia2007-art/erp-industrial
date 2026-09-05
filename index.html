@@ -15,7 +15,7 @@
 --azul-claro:#0d74d5;
 --cyan:#16b8d4;
 --fundo:#f3f6f9;
---card:#ffffff;
+--card:#fff;
 --texto:#17202a;
 --texto-sec:#667085;
 --borda:#dce3ea;
@@ -27,20 +27,29 @@
 --amarelo-bg:#fff7df;
 --sombra:0 5px 18px rgba(15,23,42,.08);
 --sidebar:245px;
---topbar:64px;
+--topbar:64px
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
 
 body{
 font-family:Inter,Arial,Helvetica,sans-serif;
 background:var(--fundo);
 color:var(--texto);
-min-height:100vh;
+min-height:100vh
 }
 
-button,input,select,textarea{font-family:inherit}
-button{cursor:pointer}
+button,input,select,textarea{
+font-family:inherit
+}
+
+button{
+cursor:pointer
+}
 
 body.dark{
 --fundo:#0d141b;
@@ -51,7 +60,7 @@ body.dark{
 --verde-bg:#123c2b;
 --vermelho-bg:#401d1b;
 --amarelo-bg:#40331a;
---sombra:0 5px 18px rgba(0,0,0,.25);
+--sombra:0 5px 18px rgba(0,0,0,.25)
 }
 
 /* TOPBAR */
@@ -63,16 +72,20 @@ left:0;
 right:0;
 height:var(--topbar);
 background:#071a2a;
-color:white;
+color:#fff;
 display:flex;
 align-items:center;
 justify-content:space-between;
 padding:0 18px;
 z-index:1000;
-border-bottom:1px solid rgba(255,255,255,.08);
+border-bottom:1px solid rgba(255,255,255,.08)
 }
 
-.top-left{display:flex;align-items:center;gap:14px}
+.top-left{
+display:flex;
+align-items:center;
+gap:14px
+}
 
 .menu-btn{
 width:42px;
@@ -80,14 +93,16 @@ height:42px;
 border:none;
 border-radius:9px;
 background:rgba(255,255,255,.08);
-color:white;
+color:#fff;
 font-size:22px;
 display:flex;
 align-items:center;
-justify-content:center;
+justify-content:center
 }
 
-.menu-btn:hover{background:rgba(255,255,255,.15)}
+.menu-btn:hover{
+background:rgba(255,255,255,.15)
+}
 
 .brand{
 display:flex;
@@ -153,10 +168,10 @@ border-radius:50%
 .theme-btn{
 border:1px solid rgba(255,255,255,.12);
 background:rgba(255,255,255,.07);
-color:white;
+color:#fff;
 border-radius:8px;
 padding:9px 12px;
-font-size:13px;
+font-size:13px
 }
 
 .theme-btn:hover{
@@ -172,10 +187,10 @@ bottom:0;
 left:0;
 width:var(--sidebar);
 background:#0a2337;
-color:white;
+color:#fff;
 z-index:900;
 overflow-y:auto;
-transition:.25s;
+transition:.25s
 }
 
 .sidebar.hidden{
@@ -188,7 +203,7 @@ font-size:10px;
 color:#8ea5b7;
 text-transform:uppercase;
 letter-spacing:1.2px;
-font-weight:700;
+font-weight:700
 }
 
 .menu-item{
@@ -201,17 +216,17 @@ align-items:center;
 gap:11px;
 font-size:13px;
 transition:.2s;
-user-select:none;
+user-select:none
 }
 
 .menu-item:hover{
 background:rgba(255,255,255,.08);
-color:white
+color:#fff
 }
 
 .menu-item.active{
 background:var(--azul);
-color:white;
+color:#fff;
 box-shadow:0 4px 10px rgba(0,0,0,.15)
 }
 
@@ -227,7 +242,7 @@ font-size:16px
 margin-left:var(--sidebar);
 padding-top:var(--topbar);
 min-height:100vh;
-transition:.25s;
+transition:.25s
 }
 
 .main.expanded{
@@ -242,16 +257,20 @@ margin:auto
 
 /* PAGES */
 
-.page{display:none}
+.page{
+display:none
+}
 
-.page.active{display:block}
+.page.active{
+display:block
+}
 
 .page-header{
 display:flex;
 justify-content:space-between;
 align-items:flex-start;
 gap:15px;
-margin-bottom:22px;
+margin-bottom:22px
 }
 
 .page-title{
@@ -274,7 +293,7 @@ border:1px solid var(--borda);
 border-radius:12px;
 box-shadow:var(--sombra);
 padding:20px;
-margin-bottom:20px;
+margin-bottom:20px
 }
 
 .card-title{
@@ -295,7 +314,7 @@ margin-bottom:18px
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:15px;
-margin-bottom:20px;
+margin-bottom:20px
 }
 
 .kpi{
@@ -303,7 +322,7 @@ background:var(--card);
 border:1px solid var(--borda);
 border-radius:12px;
 padding:18px;
-box-shadow:var(--sombra);
+box-shadow:var(--sombra)
 }
 
 .kpi-top{
@@ -362,12 +381,12 @@ background:var(--card);
 color:var(--texto);
 padding:8px 13px;
 border-radius:7px;
-font-size:12px;
+font-size:12px
 }
 
 .filter-btn.active{
 background:var(--azul);
-color:white;
+color:#fff;
 border-color:var(--azul)
 }
 
@@ -376,7 +395,7 @@ border-color:var(--azul)
 .form-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:15px;
+gap:15px
 }
 
 .form-group{
@@ -403,12 +422,12 @@ color:var(--texto);
 border-radius:7px;
 padding:10px 11px;
 outline:none;
-font-size:13px;
+font-size:13px
 }
 
 input:focus,select:focus,textarea:focus{
 border-color:var(--azul);
-box-shadow:0 0 0 2px rgba(7,86,163,.10);
+box-shadow:0 0 0 2px rgba(7,86,163,.10)
 }
 
 textarea{
@@ -420,7 +439,7 @@ resize:vertical
 background:#f1f5f8!important;
 font-weight:700;
 color:#0756a3!important;
-cursor:not-allowed;
+cursor:not-allowed
 }
 
 body.dark .campo-tempo-real{
@@ -428,16 +447,17 @@ background:#202c37!important;
 color:#69aef0!important
 }
 
-#resultadoLancamento,#resultadoPecas{
+#resultadoLancamento,
+#resultadoPecas{
 font-weight:800;
 cursor:not-allowed;
-background:#f1f5f8;
+background:#f1f5f8
 }
 
 body.dark #resultadoLancamento,
 body.dark #resultadoPecas{
 background:#202c37;
-color:#ffffff;
+color:#fff
 }
 
 .form-actions{
@@ -451,12 +471,12 @@ border:none;
 border-radius:7px;
 padding:10px 15px;
 font-size:12px;
-font-weight:700;
+font-weight:700
 }
 
 .btn-primary{
 background:var(--azul);
-color:white
+color:#fff
 }
 
 .btn-primary:hover{
@@ -475,20 +495,20 @@ color:#dce4ea
 
 .btn-danger{
 background:var(--vermelho);
-color:white
+color:#fff
 }
 
 .btn-success{
 background:var(--verde);
-color:white
+color:#fff
 }
 
-/* 5 OPÇÕES DE MEDIÇÃO */
+/* MEDIÇÕES */
 
 .medicoes-container{
 display:flex;
 flex-direction:column;
-gap:12px;
+gap:12px
 }
 
 .medicao-item{
@@ -496,11 +516,11 @@ border:1px solid var(--borda);
 border-radius:10px;
 padding:15px;
 background:rgba(7,86,163,.025);
-transition:.2s;
+transition:.2s
 }
 
 body.dark .medicao-item{
-background:rgba(255,255,255,.025);
+background:rgba(255,255,255,.025)
 }
 
 .medicao-header{
@@ -508,68 +528,64 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 gap:10px;
-margin-bottom:12px;
+margin-bottom:12px
 }
 
 .medicao-numero{
 font-size:13px;
 font-weight:800;
-color:var(--azul);
+color:var(--azul)
 }
 
 .medicao-status{
 font-size:10px;
 font-weight:800;
-color:var(--texto-sec);
+color:var(--texto-sec)
 }
 
 .medicao-grid{
 display:grid;
 grid-template-columns:2fr 1fr 1fr 1.5fr;
 gap:12px;
-align-items:end;
+align-items:end
 }
 
 .resultado-medicao{
 font-weight:800!important;
-cursor:not-allowed;
+cursor:not-allowed
 }
 
 .resultado-dentro{
 border-color:var(--verde)!important;
 background:var(--verde-bg)!important;
-color:var(--verde)!important;
+color:var(--verde)!important
 }
 
 .resultado-acima{
 border-color:var(--amarelo)!important;
 background:var(--amarelo-bg)!important;
-color:var(--amarelo)!important;
+color:var(--amarelo)!important
 }
 
 .resultado-abaixo{
 border-color:var(--vermelho)!important;
 background:var(--vermelho-bg)!important;
-color:var(--vermelho)!important;
+color:var(--vermelho)!important
 }
 
 .resultado-nao-utilizado{
 border-color:#667085!important;
 background:#eef2f5!important;
-color:#667085!important;
+color:#667085!important
 }
 
 body.dark .resultado-nao-utilizado{
 background:#25313c!important;
 color:#b7c2cc!important;
-border-color:#667085!important;
+border-color:#667085!important
 }
 
-.medicao-vazia{
-opacity:.75;
-}
-
-/* BOTÃO OPÇÃO 4 */
+/* BOTÃO NÃO UTILIZAR */
 
 .btn-nao-utilizar{
 border:1px solid var(--borda);
@@ -579,30 +595,30 @@ border-radius:6px;
 padding:6px 10px;
 font-size:10px;
 font-weight:800;
-transition:.2s;
+transition:.2s
 }
 
 .btn-nao-utilizar:hover{
 background:var(--vermelho-bg);
 color:var(--vermelho);
-border-color:var(--vermelho);
+border-color:var(--vermelho)
 }
 
 .btn-nao-utilizar.ativo{
 background:var(--verde-bg);
 color:var(--verde);
-border-color:var(--verde);
+border-color:var(--verde)
 }
 
-.opcao4-desativada{
+.medicao-desativada{
 opacity:.72;
-border-color:#98a2b3;
+border-color:#98a2b3
 }
 
-.opcao4-desativada input:disabled,
-.opcao4-desativada select:disabled{
+.medicao-desativada input:disabled,
+.medicao-desativada select:disabled{
 cursor:not-allowed;
-opacity:.65;
+opacity:.65
 }
 
 /* TABLE */
@@ -625,7 +641,7 @@ color:#52606d;
 font-size:11px;
 text-transform:uppercase;
 letter-spacing:.4px;
-border-bottom:1px solid var(--borda);
+border-bottom:1px solid var(--borda)
 }
 
 body.dark th{
@@ -637,7 +653,7 @@ td{
 padding:11px;
 border-bottom:1px solid var(--borda);
 font-size:12px;
-color:var(--texto);
+color:var(--texto)
 }
 
 tr:hover td{
@@ -652,7 +668,7 @@ align-items:center;
 padding:5px 8px;
 border-radius:20px;
 font-size:10px;
-font-weight:800;
+font-weight:800
 }
 
 .badge-green{
@@ -693,7 +709,7 @@ padding:6px 9px;
 border:none;
 border-radius:5px;
 font-size:10px;
-font-weight:700;
+font-weight:700
 }
 
 .btn-edit{
@@ -711,20 +727,20 @@ background:#142f4a;
 color:#69aef0
 }
 
-/* RESUMO PEÇAS */
+/* RESUMO */
 
 .summary-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:12px;
-margin-bottom:20px;
+margin-bottom:20px
 }
 
 .summary-card{
 background:var(--card);
 border:1px solid var(--borda);
 border-radius:10px;
-padding:15px;
+padding:15px
 }
 
 .summary-label{
@@ -737,8 +753,6 @@ font-size:22px;
 font-weight:800;
 margin-top:5px
 }
-
-/* EMPTY */
 
 .empty{
 padding:35px 20px;
@@ -759,7 +773,7 @@ gap:15px
 border:1px solid var(--borda);
 border-radius:10px;
 padding:15px;
-background:var(--card);
+background:var(--card)
 }
 
 .machine-name{
@@ -778,14 +792,10 @@ font-size:11px;
 color:var(--texto-sec)
 }
 
-/* SEARCH */
-
 .search-box{
 max-width:350px;
 margin-bottom:15px
 }
-
-/* FOOTER */
 
 .footer{
 margin-top:30px;
@@ -793,14 +803,12 @@ padding:20px;
 text-align:center;
 color:var(--texto-sec);
 font-size:11px;
-border-top:1px solid var(--borda);
+border-top:1px solid var(--borda)
 }
 
 .footer strong{
 color:var(--azul)
 }
-
-/* RESPONSIVO */
 
 @media(max-width:1200px){
 
@@ -818,10 +826,6 @@ grid-template-columns:1fr
 
 .form-grid{
 grid-template-columns:repeat(2,1fr)
-}
-
-.medicao-grid{
-grid-template-columns:2fr 1fr 1fr 1.5fr
 }
 
 }
@@ -921,123 +925,239 @@ grid-template-columns:1fr
 
 <div class="top-left">
 
-<button class="menu-btn" onclick="alternarMenu()" title="Abrir menu">☰</button>
+<button
+class="menu-btn"
+onclick="alternarMenu()"
+title="Abrir menu">
+☰
+</button>
 
 <div class="brand">
 
 <div class="logo-symbol">
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 
-<circle cx="50" cy="50" r="40" fill="none" stroke="#16b8d4" stroke-width="6"/>
-<circle cx="50" cy="50" r="31" fill="none" stroke="#b9c5ce" stroke-width="5" stroke-dasharray="8 5"/>
+<svg
+viewBox="0 0 100 100"
+xmlns="http://www.w3.org/2000/svg">
 
-<path d="M25 39 H47 L55 47 H77"
+<circle
+cx="50"
+cy="50"
+r="40"
+fill="none"
+stroke="#16b8d4"
+stroke-width="6"/>
+
+<circle
+cx="50"
+cy="50"
+r="31"
+fill="none"
+stroke="#b9c5ce"
+stroke-width="5"
+stroke-dasharray="8 5"/>
+
+<path
+d="M25 39 H47 L55 47 H77"
 fill="none"
 stroke="#16b8d4"
 stroke-width="6"
 stroke-linecap="round"/>
 
-<path d="M25 52 H42 L49 59 H72"
+<path
+d="M25 52 H42 L49 59 H72"
 fill="none"
 stroke="#16b8d4"
 stroke-width="5"
 stroke-linecap="round"/>
 
-<rect x="43" y="30" width="14" height="40" rx="2"
+<rect
+x="43"
+y="30"
+width="14"
+height="40"
+rx="2"
 fill="#d9e0e5"
 stroke="#263746"
 stroke-width="3"/>
 
-<rect x="47" y="47" width="7" height="13" fill="#16b8d4"/>
+<rect
+x="47"
+y="47"
+width="7"
+height="13"
+fill="#16b8d4"/>
 
-<path d="M50 69 V87"
+<path
+d="M50 69 V87"
 stroke="#16b8d4"
 stroke-width="5"
 stroke-linecap="round"/>
 
-<path d="M42 80 L50 89 L58 80"
+<path
+d="M42 80 L50 89 L58 80"
 fill="none"
 stroke="#16b8d4"
 stroke-width="5"
 stroke-linecap="round"
 stroke-linejoin="round"/>
 
-<circle cx="76" cy="38" r="5" fill="#16b8d4"/>
-<circle cx="76" cy="52" r="5" fill="#16b8d4"/>
-<circle cx="76" cy="66" r="5" fill="#16b8d4"/>
+<circle
+cx="76"
+cy="38"
+r="5"
+fill="#16b8d4"/>
+
+<circle
+cx="76"
+cy="52"
+r="5"
+fill="#16b8d4"/>
+
+<circle
+cx="76"
+cy="66"
+r="5"
+fill="#16b8d4"/>
 
 </svg>
+
 </div>
 
 <div class="brand-text">
-<div class="brand-name">GraviUnit MES</div>
-<div class="brand-subtitle">MANUFACTURING EXECUTION SYSTEM</div>
+
+<div class="brand-name">
+GraviUnit MES
+</div>
+
+<div class="brand-subtitle">
+MANUFACTURING EXECUTION SYSTEM
 </div>
 
 </div>
+
+</div>
+
 </div>
 
 <div class="top-right">
 
 <div class="status">
+
 <span class="status-dot"></span>
+
 Sistema online
-</div>
-
-<button class="theme-btn" onclick="alternarTema()">🌙 Tema</button>
 
 </div>
+
+<button
+class="theme-btn"
+onclick="alternarTema()">
+
+🌙 Tema
+
+</button>
+
+</div>
+
 </header>
 
-<aside class="sidebar" id="sidebar">
+<aside
+class="sidebar"
+id="sidebar">
 
-<div class="menu-title">Sistema</div>
-
-<div class="menu-item active" onclick="mostrarPagina('dashboard',this)">
-<span class="menu-icon">📊</span>Dashboard
+<div class="menu-title">
+Sistema
 </div>
 
-<div class="menu-item" onclick="mostrarPagina('cadastro',this)">
-<span class="menu-icon">🧪</span>Cadastro de Químicos
+<div
+class="menu-item active"
+onclick="mostrarPagina('dashboard',this)">
+
+<span class="menu-icon">📊</span>
+Dashboard
+
 </div>
 
-<div class="menu-item" onclick="mostrarPagina('lancamento',this)">
-<span class="menu-icon">📝</span>Lançamento
+<div
+class="menu-item"
+onclick="mostrarPagina('cadastro',this)">
+
+<span class="menu-icon">🧪</span>
+Cadastro de Químicos
+
 </div>
 
-<div class="menu-item" onclick="mostrarPagina('pecas',this)">
-<span class="menu-icon">📦</span>Peças em Produção
+<div
+class="menu-item"
+onclick="mostrarPagina('lancamento',this)">
+
+<span class="menu-icon">📝</span>
+Lançamento
+
 </div>
 
-<div class="menu-item" onclick="mostrarPagina('maquinas',this)">
-<span class="menu-icon">⚙️</span>Padrão de Máquinas
+<div
+class="menu-item"
+onclick="mostrarPagina('pecas',this)">
+
+<span class="menu-icon">📦</span>
+Peças em Produção
+
 </div>
 
-<div class="menu-item" onclick="mostrarPagina('historico',this)">
-<span class="menu-icon">📋</span>Histórico
+<div
+class="menu-item"
+onclick="mostrarPagina('maquinas',this)">
+
+<span class="menu-icon">⚙️</span>
+Padrão de Máquinas
+
 </div>
 
-<div class="menu-title">Relatórios</div>
+<div
+class="menu-item"
+onclick="mostrarPagina('historico',this)">
 
-<div class="menu-item" onclick="exportarExcel()">
-<span class="menu-icon">📥</span>Exportar Excel
+<span class="menu-icon">📋</span>
+Histórico
+
+</div>
+
+<div class="menu-title">
+Relatórios
+</div>
+
+<div
+class="menu-item"
+onclick="exportarExcel()">
+
+<span class="menu-icon">📥</span>
+Exportar Excel
+
 </div>
 
 </aside>
 
-<main class="main" id="main">
+<main
+class="main"
+id="main">
 
 <div class="content">
 
 <!-- DASHBOARD -->
 
-<section class="page active" id="dashboard">
+<section
+class="page active"
+id="dashboard">
 
 <div class="page-header">
 
 <div>
 
-<div class="page-title">Dashboard</div>
+<div class="page-title">
+Dashboard
+</div>
 
 <div class="page-description">
 Visão geral do processo produtivo e controle de qualidade.
@@ -1049,22 +1169,26 @@ Visão geral do processo produtivo e controle de qualidade.
 
 <div class="filters">
 
-<button class="filter-btn active"
+<button
+class="filter-btn active"
 onclick="filtrarPeriodo('todos',this)">
 Todos
 </button>
 
-<button class="filter-btn"
+<button
+class="filter-btn"
 onclick="filtrarPeriodo('hoje',this)">
 Hoje
 </button>
 
-<button class="filter-btn"
+<button
+class="filter-btn"
 onclick="filtrarPeriodo('7',this)">
 7 dias
 </button>
 
-<button class="filter-btn"
+<button
+class="filter-btn"
 onclick="filtrarPeriodo('30',this)">
 30 dias
 </button>
@@ -1076,11 +1200,22 @@ onclick="filtrarPeriodo('30',this)">
 <div class="kpi">
 
 <div class="kpi-top">
-<span class="kpi-label">Avaliações</span>
-<span class="kpi-icon">📋</span>
+
+<span class="kpi-label">
+Avaliações
+</span>
+
+<span class="kpi-icon">
+📋
+</span>
+
 </div>
 
-<div class="kpi-value" id="kpiAvaliacoes">0</div>
+<div
+class="kpi-value"
+id="kpiAvaliacoes">
+0
+</div>
 
 <div class="kpi-info">
 Total de lançamentos
@@ -1091,11 +1226,22 @@ Total de lançamentos
 <div class="kpi">
 
 <div class="kpi-top">
-<span class="kpi-label">Conformidade</span>
-<span class="kpi-icon">✅</span>
+
+<span class="kpi-label">
+Conformidade
+</span>
+
+<span class="kpi-icon">
+✅
+</span>
+
 </div>
 
-<div class="kpi-value" id="kpiConformidade">0%</div>
+<div
+class="kpi-value"
+id="kpiConformidade">
+0%
+</div>
 
 <div class="kpi-info">
 Dentro do padrão
@@ -1106,11 +1252,22 @@ Dentro do padrão
 <div class="kpi">
 
 <div class="kpi-top">
-<span class="kpi-label">Fora do padrão</span>
-<span class="kpi-icon">⚠️</span>
+
+<span class="kpi-label">
+Fora do padrão
+</span>
+
+<span class="kpi-icon">
+⚠️
+</span>
+
 </div>
 
-<div class="kpi-value" id="kpiFora">0</div>
+<div
+class="kpi-value"
+id="kpiFora">
+0
+</div>
 
 <div class="kpi-info">
 Avaliações fora do padrão
@@ -1121,11 +1278,22 @@ Avaliações fora do padrão
 <div class="kpi">
 
 <div class="kpi-top">
-<span class="kpi-label">Máquinas avaliadas</span>
-<span class="kpi-icon">⚙️</span>
+
+<span class="kpi-label">
+Máquinas avaliadas
+</span>
+
+<span class="kpi-icon">
+⚙️
+</span>
+
 </div>
 
-<div class="kpi-value" id="kpiMaquinas">0</div>
+<div
+class="kpi-value"
+id="kpiMaquinas">
+0
+</div>
 
 <div class="kpi-info">
 Máquinas com registros
@@ -1187,7 +1355,9 @@ Atividade Recente
 Últimos lançamentos registrados no sistema.
 </div>
 
-<div class="table-wrapper" id="atividadeRecente">
+<div
+class="table-wrapper"
+id="atividadeRecente">
 
 <div class="empty">
 Nenhuma atividade registrada.
@@ -1201,7 +1371,9 @@ Nenhuma atividade registrada.
 
 <!-- CADASTRO -->
 
-<section class="page" id="cadastro">
+<section
+class="page"
+id="cadastro">
 
 <div class="page-header">
 
@@ -1229,17 +1401,24 @@ Novo Químico
 Informe o nome, código e demais informações do produto.
 </div>
 
-<form id="formQuimico" onsubmit="salvarQuimico(event)">
+<form
+id="formQuimico"
+onsubmit="salvarQuimico(event)">
 
-<input type="hidden" id="idQuimico">
+<input
+type="hidden"
+id="idQuimico">
 
 <div class="form-grid">
 
 <div class="form-group">
 
-<label>Nome do químico *</label>
+<label>
+Nome do químico *
+</label>
 
-<input type="text"
+<input
+type="text"
 id="nomeQuimico"
 required
 placeholder="Ex.: Primer Branco">
@@ -1248,9 +1427,12 @@ placeholder="Ex.: Primer Branco">
 
 <div class="form-group">
 
-<label>Código *</label>
+<label>
+Código *
+</label>
 
-<input type="text"
+<input
+type="text"
 id="codigoQuimico"
 required
 placeholder="Ex.: 307507-002">
@@ -1259,9 +1441,12 @@ placeholder="Ex.: 307507-002">
 
 <div class="form-group">
 
-<label>Cor</label>
+<label>
+Cor
+</label>
 
-<input type="text"
+<input
+type="text"
 id="corQuimico"
 placeholder="Ex.: Branco">
 
@@ -1269,17 +1454,39 @@ placeholder="Ex.: Branco">
 
 <div class="form-group">
 
-<label>Tipo</label>
+<label>
+Tipo
+</label>
 
 <select id="tipoQuimico">
 
-<option value="">Selecione</option>
-<option>Massa</option>
-<option>Primer</option>
-<option>Impressão</option>
-<option>Base</option>
-<option>Verniz</option>
-<option>Outro</option>
+<option value="">
+Selecione
+</option>
+
+<option value="Massa">
+Massa
+</option>
+
+<option value="Primer">
+Primer
+</option>
+
+<option value="Impressão">
+Impressão
+</option>
+
+<option value="Base">
+Base
+</option>
+
+<option value="Verniz">
+Verniz
+</option>
+
+<option value="Outro">
+Outro
+</option>
 
 </select>
 
@@ -1287,11 +1494,14 @@ placeholder="Ex.: Branco">
 
 <div class="form-group full">
 
-<label>Observação</label>
+<label>
+Observação
+</label>
 
 <textarea
 id="observacaoQuimico"
-placeholder="Informações adicionais..."></textarea>
+placeholder="Informações adicionais...">
+</textarea>
 
 </div>
 
@@ -1299,15 +1509,21 @@ placeholder="Informações adicionais..."></textarea>
 
 <div class="form-actions">
 
-<button type="submit"
+<button
+type="submit"
 class="btn btn-primary">
+
 💾 Salvar Químico
+
 </button>
 
-<button type="button"
+<button
+type="button"
 class="btn btn-secondary"
 onclick="limparFormularioQuimico()">
+
 Limpar
+
 </button>
 
 </div>
@@ -1333,8 +1549,10 @@ type="text"
 placeholder="🔎 Pesquisar químico..."
 oninput="renderizarQuimicos()">
 
-<div class="table-wrapper"
-id="tabelaQuimicos"></div>
+<div
+class="table-wrapper"
+id="tabelaQuimicos">
+</div>
 
 </div>
 
@@ -1342,7 +1560,9 @@ id="tabelaQuimicos"></div>
 
 <!-- LANÇAMENTO -->
 
-<section class="page" id="lancamento">
+<section
+class="page"
+id="lancamento">
 
 <div class="page-header">
 
@@ -1367,24 +1587,28 @@ Novo lançamento
 </div>
 
 <div class="card-description">
-
-Selecione os químicos utilizados, informe o padrão e o valor medido.
-O resultado de cada opção será calculado automaticamente.
-
+Cada opção possui uma categoria específica. Selecione o químico correspondente, informe o padrão e o valor medido.
 </div>
 
-<form id="formLancamento"
+<form
+id="formLancamento"
 onsubmit="salvarLancamento(event)">
 
-<input type="hidden" id="idLancamento">
+<input
+type="hidden"
+id="idLancamento">
 
 <div class="form-grid">
 
 <div class="form-group">
 
-<label>Máquina *</label>
+<label>
+Máquina *
+</label>
 
-<select id="maquinaLancamento" required>
+<select
+id="maquinaLancamento"
+required>
 
 <option value="">
 Selecione a máquina
@@ -1444,7 +1668,9 @@ Selecione a máquina
 
 <div class="form-group">
 
-<label>Responsável</label>
+<label>
+Responsável
+</label>
 
 <input
 type="text"
@@ -1455,32 +1681,36 @@ placeholder="Nome do responsável">
 
 <div class="form-group">
 
-<label>Data e hora em tempo real</label>
+<label>
+Data e hora em tempo real
+</label>
 
 <input
 type="text"
 id="dataHoraLancamento"
 class="campo-tempo-real"
-readonly
-aria-readonly="true">
+readonly>
 
 </div>
 
 </div>
 
-<div style="margin-top:25px;margin-bottom:12px">
+<div
+style="margin-top:25px;margin-bottom:12px">
 
-<div class="card-title"
+<div
+class="card-title"
 style="margin-bottom:4px">
 
 🧪 Avaliações químicas
 
 </div>
 
-<div class="card-description"
+<div
+class="card-description"
 style="margin-bottom:0">
 
-Preencha uma ou mais das 5 opções abaixo.
+As opções possuem categorias fixas: Massa, Primer, Impressão, Base e Verniz. Caso uma categoria não seja necessária, clique em "Não utilizar".
 
 </div>
 
@@ -1488,19 +1718,39 @@ Preencha uma ou mais das 5 opções abaixo.
 
 <div class="medicoes-container">
 
-<!-- MEDIÇÃO 1 -->
+<!-- OPÇÃO 1 MASSA -->
 
-<div class="medicao-item">
+<div
+class="medicao-item"
+id="medicaoItem1">
 
 <div class="medicao-header">
 
+<div
+style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+
 <span class="medicao-numero">
-OPÇÃO 1
+OPÇÃO 1 — MASSA
 </span>
 
-<span class="medicao-status"
+<button
+type="button"
+id="btnOpcao1"
+class="btn-nao-utilizar"
+onclick="alternarOpcao(1)">
+
+Não utilizar
+
+</button>
+
+</div>
+
+<span
+class="medicao-status"
 id="statusMedicao1">
+
 Aguardando preenchimento
+
 </span>
 
 </div>
@@ -1509,14 +1759,16 @@ Aguardando preenchimento
 
 <div class="form-group">
 
-<label>Químico</label>
+<label>
+Químico — Massa
+</label>
 
 <select
 id="quimicoLancamento1"
 onchange="calcularResultadoMedicao(1)">
 
 <option value="">
-Selecione o químico
+Selecione a Massa
 </option>
 
 </select>
@@ -1525,7 +1777,9 @@ Selecione o químico
 
 <div class="form-group">
 
-<label>Padrão</label>
+<label>
+Padrão
+</label>
 
 <input
 type="number"
@@ -1538,7 +1792,9 @@ placeholder="Ex.: 100">
 
 <div class="form-group">
 
-<label>Valor medido</label>
+<label>
+Valor medido
+</label>
 
 <input
 type="number"
@@ -1551,7 +1807,9 @@ placeholder="Valor">
 
 <div class="form-group">
 
-<label>Resultado</label>
+<label>
+Resultado
+</label>
 
 <select
 id="resultadoLancamento1"
@@ -1570,6 +1828,10 @@ ACIMA DO PADRÃO
 ABAIXO DO PADRÃO
 </option>
 
+<option value="NAO UTILIZADO">
+NÃO UTILIZADO
+</option>
+
 </select>
 
 </div>
@@ -1578,19 +1840,39 @@ ABAIXO DO PADRÃO
 
 </div>
 
-<!-- MEDIÇÃO 2 -->
+<!-- OPÇÃO 2 PRIMER -->
 
-<div class="medicao-item">
+<div
+class="medicao-item"
+id="medicaoItem2">
 
 <div class="medicao-header">
 
+<div
+style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+
 <span class="medicao-numero">
-OPÇÃO 2
+OPÇÃO 2 — PRIMER
 </span>
 
-<span class="medicao-status"
+<button
+type="button"
+id="btnOpcao2"
+class="btn-nao-utilizar"
+onclick="alternarOpcao(2)">
+
+Não utilizar
+
+</button>
+
+</div>
+
+<span
+class="medicao-status"
 id="statusMedicao2">
+
 Aguardando preenchimento
+
 </span>
 
 </div>
@@ -1599,14 +1881,16 @@ Aguardando preenchimento
 
 <div class="form-group">
 
-<label>Químico</label>
+<label>
+Químico — Primer
+</label>
 
 <select
 id="quimicoLancamento2"
 onchange="calcularResultadoMedicao(2)">
 
 <option value="">
-Selecione o químico
+Selecione o Primer
 </option>
 
 </select>
@@ -1615,7 +1899,9 @@ Selecione o químico
 
 <div class="form-group">
 
-<label>Padrão</label>
+<label>
+Padrão
+</label>
 
 <input
 type="number"
@@ -1628,7 +1914,9 @@ placeholder="Ex.: 100">
 
 <div class="form-group">
 
-<label>Valor medido</label>
+<label>
+Valor medido
+</label>
 
 <input
 type="number"
@@ -1641,7 +1929,9 @@ placeholder="Valor">
 
 <div class="form-group">
 
-<label>Resultado</label>
+<label>
+Resultado
+</label>
 
 <select
 id="resultadoLancamento2"
@@ -1660,6 +1950,10 @@ ACIMA DO PADRÃO
 ABAIXO DO PADRÃO
 </option>
 
+<option value="NAO UTILIZADO">
+NÃO UTILIZADO
+</option>
+
 </select>
 
 </div>
@@ -1668,19 +1962,39 @@ ABAIXO DO PADRÃO
 
 </div>
 
-<!-- MEDIÇÃO 3 -->
+<!-- OPÇÃO 3 IMPRESSÃO -->
 
-<div class="medicao-item">
+<div
+class="medicao-item"
+id="medicaoItem3">
 
 <div class="medicao-header">
 
+<div
+style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+
 <span class="medicao-numero">
-OPÇÃO 3
+OPÇÃO 3 — IMPRESSÃO
 </span>
 
-<span class="medicao-status"
+<button
+type="button"
+id="btnOpcao3"
+class="btn-nao-utilizar"
+onclick="alternarOpcao(3)">
+
+Não utilizar
+
+</button>
+
+</div>
+
+<span
+class="medicao-status"
 id="statusMedicao3">
+
 Aguardando preenchimento
+
 </span>
 
 </div>
@@ -1689,14 +2003,16 @@ Aguardando preenchimento
 
 <div class="form-group">
 
-<label>Químico</label>
+<label>
+Químico — Impressão
+</label>
 
 <select
 id="quimicoLancamento3"
 onchange="calcularResultadoMedicao(3)">
 
 <option value="">
-Selecione o químico
+Selecione a Impressão
 </option>
 
 </select>
@@ -1705,7 +2021,9 @@ Selecione o químico
 
 <div class="form-group">
 
-<label>Padrão</label>
+<label>
+Padrão
+</label>
 
 <input
 type="number"
@@ -1718,7 +2036,9 @@ placeholder="Ex.: 100">
 
 <div class="form-group">
 
-<label>Valor medido</label>
+<label>
+Valor medido
+</label>
 
 <input
 type="number"
@@ -1731,7 +2051,9 @@ placeholder="Valor">
 
 <div class="form-group">
 
-<label>Resultado</label>
+<label>
+Resultado
+</label>
 
 <select
 id="resultadoLancamento3"
@@ -1750,6 +2072,10 @@ ACIMA DO PADRÃO
 ABAIXO DO PADRÃO
 </option>
 
+<option value="NAO UTILIZADO">
+NÃO UTILIZADO
+</option>
+
 </select>
 
 </div>
@@ -1758,24 +2084,26 @@ ABAIXO DO PADRÃO
 
 </div>
 
-<!-- MEDIÇÃO 4 ALTERADA -->
+<!-- OPÇÃO 4 BASE -->
 
-<div class="medicao-item"
+<div
+class="medicao-item"
 id="medicaoItem4">
 
 <div class="medicao-header">
 
-<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+<div
+style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
 
 <span class="medicao-numero">
-OPÇÃO 4
+OPÇÃO 4 — BASE
 </span>
 
 <button
 type="button"
 id="btnOpcao4"
 class="btn-nao-utilizar"
-onclick="alternarOpcao4()">
+onclick="alternarOpcao(4)">
 
 Não utilizar
 
@@ -1797,14 +2125,16 @@ Aguardando preenchimento
 
 <div class="form-group">
 
-<label>Químico</label>
+<label>
+Químico — Base
+</label>
 
 <select
 id="quimicoLancamento4"
 onchange="calcularResultadoMedicao(4)">
 
 <option value="">
-Selecione o químico
+Selecione a Base
 </option>
 
 </select>
@@ -1813,7 +2143,9 @@ Selecione o químico
 
 <div class="form-group">
 
-<label>Padrão</label>
+<label>
+Padrão
+</label>
 
 <input
 type="number"
@@ -1826,7 +2158,9 @@ placeholder="Ex.: 100">
 
 <div class="form-group">
 
-<label>Valor medido</label>
+<label>
+Valor medido
+</label>
 
 <input
 type="number"
@@ -1839,7 +2173,9 @@ placeholder="Valor">
 
 <div class="form-group">
 
-<label>Resultado</label>
+<label>
+Resultado
+</label>
 
 <select
 id="resultadoLancamento4"
@@ -1870,19 +2206,39 @@ NÃO UTILIZADO
 
 </div>
 
-<!-- MEDIÇÃO 5 -->
+<!-- OPÇÃO 5 VERNIZ -->
 
-<div class="medicao-item">
+<div
+class="medicao-item"
+id="medicaoItem5">
 
 <div class="medicao-header">
 
+<div
+style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+
 <span class="medicao-numero">
-OPÇÃO 5
+OPÇÃO 5 — VERNIZ
 </span>
 
-<span class="medicao-status"
+<button
+type="button"
+id="btnOpcao5"
+class="btn-nao-utilizar"
+onclick="alternarOpcao(5)">
+
+Não utilizar
+
+</button>
+
+</div>
+
+<span
+class="medicao-status"
 id="statusMedicao5">
+
 Aguardando preenchimento
+
 </span>
 
 </div>
@@ -1891,14 +2247,16 @@ Aguardando preenchimento
 
 <div class="form-group">
 
-<label>Químico</label>
+<label>
+Químico — Verniz
+</label>
 
 <select
 id="quimicoLancamento5"
 onchange="calcularResultadoMedicao(5)">
 
 <option value="">
-Selecione o químico
+Selecione o Verniz
 </option>
 
 </select>
@@ -1907,7 +2265,9 @@ Selecione o químico
 
 <div class="form-group">
 
-<label>Padrão</label>
+<label>
+Padrão
+</label>
 
 <input
 type="number"
@@ -1920,7 +2280,9 @@ placeholder="Ex.: 100">
 
 <div class="form-group">
 
-<label>Valor medido</label>
+<label>
+Valor medido
+</label>
 
 <input
 type="number"
@@ -1933,7 +2295,9 @@ placeholder="Valor">
 
 <div class="form-group">
 
-<label>Resultado</label>
+<label>
+Resultado
+</label>
 
 <select
 id="resultadoLancamento5"
@@ -1952,6 +2316,10 @@ ACIMA DO PADRÃO
 ABAIXO DO PADRÃO
 </option>
 
+<option value="NAO UTILIZADO">
+NÃO UTILIZADO
+</option>
+
 </select>
 
 </div>
@@ -1962,14 +2330,18 @@ ABAIXO DO PADRÃO
 
 </div>
 
-<div class="form-group full"
+<div
+class="form-group full"
 style="margin-top:18px">
 
-<label>Observação</label>
+<label>
+Observação
+</label>
 
 <textarea
 id="observacaoLancamento"
-placeholder="Observações da avaliação..."></textarea>
+placeholder="Observações da avaliação...">
+</textarea>
 
 </div>
 
@@ -2004,8 +2376,10 @@ Limpar
 Lançamentos recentes
 </div>
 
-<div class="table-wrapper"
-id="tabelaLancamentos"></div>
+<div
+class="table-wrapper"
+id="tabelaLancamentos">
+</div>
 
 </div>
 
@@ -2013,7 +2387,9 @@ id="tabelaLancamentos"></div>
 
 <!-- PEÇAS -->
 
-<section class="page" id="pecas">
+<section
+class="page"
+id="pecas">
 
 <div class="page-header">
 
@@ -2039,7 +2415,8 @@ Controle da quantidade de peças que estão passando em cada máquina.
 Total de peças
 </div>
 
-<div class="summary-value"
+<div
+class="summary-value"
 id="totalPecas">
 0
 </div>
@@ -2052,7 +2429,8 @@ id="totalPecas">
 Total padrão
 </div>
 
-<div class="summary-value"
+<div
+class="summary-value"
 id="totalPadraoPecas">
 0
 </div>
@@ -2065,7 +2443,8 @@ id="totalPadraoPecas">
 Dentro do padrão
 </div>
 
-<div class="summary-value"
+<div
+class="summary-value"
 id="pecasDentro">
 0
 </div>
@@ -2078,7 +2457,8 @@ id="pecasDentro">
 Fora do padrão
 </div>
 
-<div class="summary-value"
+<div
+class="summary-value"
 id="pecasFora">
 0
 </div>
@@ -2097,18 +2477,25 @@ Registro de peças
 Informe o padrão esperado e a quantidade que está passando.
 </div>
 
-<form id="formPecas"
+<form
+id="formPecas"
 onsubmit="salvarPecas(event)">
 
-<input type="hidden" id="idPecas">
+<input
+type="hidden"
+id="idPecas">
 
 <div class="form-grid">
 
 <div class="form-group">
 
-<label>Máquina *</label>
+<label>
+Máquina *
+</label>
 
-<select id="maquinaPecas" required>
+<select
+id="maquinaPecas"
+required>
 
 <option value="">
 Selecione a máquina
@@ -2168,7 +2555,9 @@ Selecione a máquina
 
 <div class="form-group">
 
-<label>Responsável</label>
+<label>
+Responsável
+</label>
 
 <input
 type="text"
@@ -2179,7 +2568,9 @@ placeholder="Nome do responsável">
 
 <div class="form-group">
 
-<label>Data e hora em tempo real</label>
+<label>
+Data e hora em tempo real
+</label>
 
 <input
 type="text"
@@ -2191,7 +2582,9 @@ readonly>
 
 <div class="form-group">
 
-<label>Padrão de peças *</label>
+<label>
+Padrão de peças *
+</label>
 
 <input
 type="number"
@@ -2206,7 +2599,9 @@ placeholder="Quantidade padrão">
 
 <div class="form-group">
 
-<label>Quantidade passando *</label>
+<label>
+Quantidade passando *
+</label>
 
 <input
 type="number"
@@ -2221,7 +2616,9 @@ placeholder="Quantidade atual">
 
 <div class="form-group">
 
-<label>Resultado</label>
+<label>
+Resultado
+</label>
 
 <select
 id="resultadoPecas"
@@ -2245,11 +2642,14 @@ ABAIXO DO PADRÃO
 
 <div class="form-group full">
 
-<label>Observação</label>
+<label>
+Observação
+</label>
 
 <textarea
 id="observacaoPecas"
-placeholder="Observações da produção..."></textarea>
+placeholder="Observações da produção...">
+</textarea>
 
 </div>
 
@@ -2286,8 +2686,10 @@ Limpar
 Registros de produção
 </div>
 
-<div class="table-wrapper"
-id="tabelaPecas"></div>
+<div
+class="table-wrapper"
+id="tabelaPecas">
+</div>
 
 </div>
 
@@ -2295,7 +2697,9 @@ id="tabelaPecas"></div>
 
 <!-- MAQUINAS -->
 
-<section class="page" id="maquinas">
+<section
+class="page"
+id="maquinas">
 
 <div class="page-header">
 
@@ -2323,8 +2727,10 @@ Máquinas do processo
 Indicadores técnicos de cada equipamento.
 </div>
 
-<div class="machine-grid"
-id="gridMaquinas"></div>
+<div
+class="machine-grid"
+id="gridMaquinas">
+</div>
 
 </div>
 
@@ -2334,8 +2740,10 @@ id="gridMaquinas"></div>
 Detalhamento por máquina
 </div>
 
-<div class="table-wrapper"
-id="tabelaMaquinas"></div>
+<div
+class="table-wrapper"
+id="tabelaMaquinas">
+</div>
 
 </div>
 
@@ -2343,7 +2751,9 @@ id="tabelaMaquinas"></div>
 
 <!-- HISTORICO -->
 
-<section class="page" id="historico">
+<section
+class="page"
+id="historico">
 
 <div class="page-header">
 
@@ -2378,8 +2788,10 @@ type="text"
 placeholder="🔎 Pesquisar histórico..."
 oninput="renderizarHistorico()">
 
-<div class="table-wrapper"
-id="tabelaHistorico"></div>
+<div
+class="table-wrapper"
+id="tabelaHistorico">
+</div>
 
 </div>
 
@@ -2406,6 +2818,7 @@ Desenvolvido por <strong>Samuel Torres Garcia</strong>
 </footer>
 
 </div>
+
 </main>
 
 <script>
@@ -2424,9 +2837,38 @@ let registrosPecas=[];
 let graficoResultados=null;
 let periodoAtual="todos";
 
-/* CONTROLE DA OPÇÃO 4 */
+/*
+CONTROLE DAS 5 OPÇÕES
 
-let opcao4NaoUtilizada=false;
+false = opção sendo utilizada
+true = opção não utilizada
+*/
+
+const opcoesNaoUtilizadas={
+1:false,
+2:false,
+3:false,
+4:false,
+5:false
+};
+
+/*
+CATEGORIAS FIXAS DAS OPÇÕES
+
+1 = MASSA
+2 = PRIMER
+3 = IMPRESSÃO
+4 = BASE
+5 = VERNIZ
+*/
+
+const categoriasOpcoes={
+1:"Massa",
+2:"Primer",
+3:"Impressão",
+4:"Base",
+5:"Verniz"
+};
 
 const maquinas=[
 "701e",
@@ -2472,53 +2914,222 @@ return nomes[maquina]||maquina||"-";
 
 const quimicosPadrao=[
 
-{nome:"MASSA ESPATULADEIRA",codigo:"314001-000",cor:"",tipo:"Massa"},
-{nome:"MASSA ALISADORA",codigo:"314002-000",cor:"",tipo:"Massa"},
-{nome:"ESMALTE BRANCO FOSCO",codigo:"311281-000",cor:"Branco",tipo:"Base"},
-{nome:"ESMALTE BRANCO BRILHANTE",codigo:"311276-000",cor:"Branco",tipo:"Base"},
-{nome:"VERNIZ UV PRETO FOSCO 10",codigo:"310081-000",cor:"Preto",tipo:"Verniz"},
-{nome:"VERNIZ UV (ALTA RESIS) 100",codigo:"310082-000",cor:"",tipo:"Verniz"},
-{nome:"VERNIZ UV ACETINADO (GRAFITE) 25",codigo:"310084-000",cor:"Grafite",tipo:"Verniz"},
-{nome:"PRIMER DAMASCO 1",codigo:"307502-004",cor:"Damasco",tipo:"Primer"},
-{nome:"PRIMER BRANCO NOVO",codigo:"307507-002",cor:"Branco",tipo:"Primer"},
-{nome:"PRIMER AVELA",codigo:"307503-004",cor:"Avelã",tipo:"Primer"},
-{nome:"PRIMER CAFE",codigo:"307305-004",cor:"Café",tipo:"Primer"},
-{nome:"PRIMER CASTANHO NEW (CAPUCCINO)",codigo:"307264-002",cor:"Capuccino",tipo:"Primer"},
-{nome:"PRIMER GRAPIA",codigo:"307261-004",cor:"Grapia",tipo:"Primer"},
-{nome:"PRIMER GRAFITE",codigo:"307272-004",cor:"Grafite",tipo:"Primer"},
-{nome:"PRIMER VERDE MENTA",codigo:"307506-002",cor:"Verde Menta",tipo:"Primer"},
-{nome:"PRIMER CHAMPANHE",codigo:"307231-002",cor:"Champanhe",tipo:"Primer"},
-{nome:"PRIMER UV PLATINA",codigo:"307505-004",cor:"Platinha",tipo:"Primer"},
-{nome:"PRIMER IMBUIA",codigo:"307302-004",cor:"Imbuia",tipo:"Primer"},
-{nome:"PRIMER CINZA",codigo:"307303-004",cor:"Cinza",tipo:"Primer"},
-{nome:"PRIMER AMEIXA",codigo:"307229-002",cor:"Ameixa",tipo:"Primer"},
-{nome:"PRIMER UV PRETO",codigo:"307205-002",cor:"Preto",tipo:"Primer"},
-{nome:"TEXTURA PARA IMPRESSAO DIRETA",codigo:"307323-008",cor:"",tipo:"Impressão"},
-{nome:"IMPRESSAO DIRETA DAMASCO",codigo:"307403-006",cor:"Damasco",tipo:"Impressão"},
-{nome:"IMPRESSAO AVELA",codigo:"307335-006",cor:"Avelã",tipo:"Impressão"},
-{nome:"IMPRESSAO CAFÉ",codigo:"307400-006",cor:"Café",tipo:"Impressão"},
-{nome:"IMPRESSAO GRAPIA",codigo:"307301-006",cor:"Grapia",tipo:"Impressão"}
+{
+nome:"MASSA ESPATULADEIRA",
+codigo:"314001-000",
+cor:"",
+tipo:"Massa"
+},
+
+{
+nome:"MASSA ALISADORA",
+codigo:"314002-000",
+cor:"",
+tipo:"Massa"
+},
+
+{
+nome:"ESMALTE BRANCO FOSCO",
+codigo:"311281-000",
+cor:"Branco",
+tipo:"Base"
+},
+
+{
+nome:"ESMALTE BRANCO BRILHANTE",
+codigo:"311276-000",
+cor:"Branco",
+tipo:"Base"
+},
+
+{
+nome:"VERNIZ UV PRETO FOSCO 10",
+codigo:"310081-000",
+cor:"Preto",
+tipo:"Verniz"
+},
+
+{
+nome:"VERNIZ UV (ALTA RESIS) 100",
+codigo:"310082-000",
+cor:"",
+tipo:"Verniz"
+},
+
+{
+nome:"VERNIZ UV ACETINADO (GRAFITE) 25",
+codigo:"310084-000",
+cor:"Grafite",
+tipo:"Verniz"
+},
+
+{
+nome:"PRIMER DAMASCO 1",
+codigo:"307502-004",
+cor:"Damasco",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER BRANCO NOVO",
+codigo:"307507-002",
+cor:"Branco",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER AVELA",
+codigo:"307503-004",
+cor:"Avelã",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER CAFE",
+codigo:"307305-004",
+cor:"Café",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER CASTANHO NEW (CAPUCCINO)",
+codigo:"307264-002",
+cor:"Capuccino",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER GRAPIA",
+codigo:"307261-004",
+cor:"Grapia",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER GRAFITE",
+codigo:"307272-004",
+cor:"Grafite",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER VERDE MENTA",
+codigo:"307506-002",
+cor:"Verde Menta",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER CHAMPANHE",
+codigo:"307231-002",
+cor:"Champanhe",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER UV PLATINA",
+codigo:"307505-004",
+cor:"Platinha",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER IMBUIA",
+codigo:"307302-004",
+cor:"Imbuia",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER CINZA",
+codigo:"307303-004",
+cor:"Cinza",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER AMEIXA",
+codigo:"307229-002",
+cor:"Ameixa",
+tipo:"Primer"
+},
+
+{
+nome:"PRIMER UV PRETO",
+codigo:"307205-002",
+cor:"Preto",
+tipo:"Primer"
+},
+
+{
+nome:"TEXTURA PARA IMPRESSAO DIRETA",
+codigo:"307323-008",
+cor:"",
+tipo:"Impressão"
+},
+
+{
+nome:"IMPRESSAO DIRETA DAMASCO",
+codigo:"307403-006",
+cor:"Damasco",
+tipo:"Impressão"
+},
+
+{
+nome:"IMPRESSAO AVELA",
+codigo:"307335-006",
+cor:"Avelã",
+tipo:"Impressão"
+},
+
+{
+nome:"IMPRESSAO CAFÉ",
+codigo:"307400-006",
+cor:"Café",
+tipo:"Impressão"
+},
+
+{
+nome:"IMPRESSAO GRAPIA",
+codigo:"307301-006",
+cor:"Grapia",
+tipo:"Impressão"
+}
 
 ];
 
 /* INICIALIZAÇÃO */
 
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
 carregarDados();
-carregarTema();
-renderizarQuimicos();
-preencherTodosSelectsQuimicos();
-renderizarLancamentos();
-renderizarHistorico();
-renderizarMaquinas();
-renderizarPecas();
-atualizarResumoPecas();
-atualizarDashboard();
-atualizarDataHoraTempoReal();
-resetarOpcao4();
 
-});
+carregarTema();
+
+renderizarQuimicos();
+
+preencherTodosSelectsQuimicos();
+
+renderizarLancamentos();
+
+renderizarHistorico();
+
+renderizarMaquinas();
+
+renderizarPecas();
+
+atualizarResumoPecas();
+
+atualizarDashboard();
+
+atualizarDataHoraTempoReal();
+
+resetarTodasOpcoes();
+
+}
+);
 
 /* DATA E HORA */
 
@@ -2526,13 +3137,27 @@ function gerarDataHoraAtual(){
 
 const agora=new Date();
 
-const dia=String(agora.getDate()).padStart(2,"0");
-const mes=String(agora.getMonth()+1).padStart(2,"0");
+const dia=String(
+agora.getDate()
+).padStart(2,"0");
+
+const mes=String(
+agora.getMonth()+1
+).padStart(2,"0");
+
 const ano=agora.getFullYear();
 
-const hora=String(agora.getHours()).padStart(2,"0");
-const minuto=String(agora.getMinutes()).padStart(2,"0");
-const segundo=String(agora.getSeconds()).padStart(2,"0");
+const hora=String(
+agora.getHours()
+).padStart(2,"0");
+
+const minuto=String(
+agora.getMinutes()
+).padStart(2,"0");
+
+const segundo=String(
+agora.getSeconds()
+).padStart(2,"0");
 
 return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
 
@@ -2543,12 +3168,26 @@ function formatoDataHora(){
 const agora=new Date();
 
 const ano=agora.getFullYear();
-const mes=String(agora.getMonth()+1).padStart(2,"0");
-const dia=String(agora.getDate()).padStart(2,"0");
 
-const hora=String(agora.getHours()).padStart(2,"0");
-const minuto=String(agora.getMinutes()).padStart(2,"0");
-const segundo=String(agora.getSeconds()).padStart(2,"0");
+const mes=String(
+agora.getMonth()+1
+).padStart(2,"0");
+
+const dia=String(
+agora.getDate()
+).padStart(2,"0");
+
+const hora=String(
+agora.getHours()
+).padStart(2,"0");
+
+const minuto=String(
+agora.getMinutes()
+).padStart(2,"0");
+
+const segundo=String(
+agora.getSeconds()
+).padStart(2,"0");
 
 return `${ano}-${mes}-${dia}T${hora}:${minuto}:${segundo}`;
 
@@ -2558,15 +3197,32 @@ function atualizarDataHoraTempoReal(){
 
 const agora=gerarDataHoraAtual();
 
-const campoLancamento=document.getElementById("dataHoraLancamento");
-const campoPecas=document.getElementById("dataHoraPecas");
+const campoLancamento=document.getElementById(
+"dataHoraLancamento"
+);
 
-if(campoLancamento)campoLancamento.value=agora;
-if(campoPecas)campoPecas.value=agora;
+const campoPecas=document.getElementById(
+"dataHoraPecas"
+);
+
+if(campoLancamento){
+
+campoLancamento.value=agora;
 
 }
 
-setInterval(atualizarDataHoraTempoReal,1000);
+if(campoPecas){
+
+campoPecas.value=agora;
+
+}
+
+}
+
+setInterval(
+atualizarDataHoraTempoReal,
+1000
+);
 
 /* CARREGAR DADOS */
 
@@ -2575,7 +3231,9 @@ function carregarDados(){
 try{
 
 const dadosQuimicos=JSON.parse(
-localStorage.getItem(STORAGE_QUIMICOS)
+localStorage.getItem(
+STORAGE_QUIMICOS
+)
 );
 
 if(Array.isArray(dadosQuimicos)){
@@ -2584,7 +3242,9 @@ quimicos=dadosQuimicos;
 
 }else{
 
-quimicos=quimicosPadrao.map(q=>({...q,id:gerarID()}));
+quimicos=quimicosPadrao.map(
+q=>({...q,id:gerarID()})
+);
 
 localStorage.setItem(
 STORAGE_QUIMICOS,
@@ -2595,24 +3255,36 @@ JSON.stringify(quimicos)
 
 }catch(e){
 
-quimicos=quimicosPadrao.map(q=>({...q,id:gerarID()}));
+quimicos=quimicosPadrao.map(
+q=>({...q,id:gerarID()})
+);
 
 }
 
 try{
 
 const dadosLancamentos=JSON.parse(
-localStorage.getItem(STORAGE_LANCAMENTOS)
+localStorage.getItem(
+STORAGE_LANCAMENTOS
+)
 );
 
 const ids=new Set();
 
-lancamentos=Array.isArray(dadosLancamentos)
+lancamentos=Array.isArray(
+dadosLancamentos
+)
 ?dadosLancamentos.map(l=>{
 
-let id=l.id?String(l.id):gerarID();
+let id=l.id
+?String(l.id)
+:gerarID();
 
-while(ids.has(id))id=gerarID();
+while(ids.has(id)){
+
+id=gerarID();
+
+}
 
 ids.add(id);
 
@@ -2635,10 +3307,14 @@ lancamentos=[];
 try{
 
 const dadosPecas=JSON.parse(
-localStorage.getItem(STORAGE_PECAS)
+localStorage.getItem(
+STORAGE_PECAS
+)
 );
 
-registrosPecas=Array.isArray(dadosPecas)
+registrosPecas=Array.isArray(
+dadosPecas
+)
 ?dadosPecas
 :[];
 
@@ -2655,7 +3331,9 @@ registrosPecas=[];
 function gerarID(){
 
 return Date.now().toString(36)+
-Math.random().toString(36).substring(2,9);
+Math.random()
+.toString(36)
+.substring(2,9);
 
 }
 
@@ -2663,17 +3341,29 @@ Math.random().toString(36).substring(2,9);
 
 function alternarMenu(){
 
-const sidebar=document.getElementById("sidebar");
-const main=document.getElementById("main");
+const sidebar=document.getElementById(
+"sidebar"
+);
+
+const main=document.getElementById(
+"main"
+);
 
 if(window.innerWidth<=800){
 
-sidebar.classList.toggle("mobile-open");
+sidebar.classList.toggle(
+"mobile-open"
+);
 
 }else{
 
-sidebar.classList.toggle("hidden");
-main.classList.toggle("expanded");
+sidebar.classList.toggle(
+"hidden"
+);
+
+main.classList.toggle(
+"expanded"
+);
 
 }
 
@@ -2681,26 +3371,58 @@ main.classList.toggle("expanded");
 
 /* PÁGINAS */
 
-function mostrarPagina(id,elemento){
+function mostrarPagina(
+id,
+elemento
+){
 
-document.querySelectorAll(".page").forEach(page=>{
-page.classList.remove("active");
-});
+document.querySelectorAll(
+".page"
+).forEach(
+page=>{
+page.classList.remove(
+"active"
+);
+}
+);
 
-const pagina=document.getElementById(id);
+const pagina=document.getElementById(
+id
+);
 
-if(pagina)pagina.classList.add("active");
+if(pagina){
 
-document.querySelectorAll(".menu-item").forEach(item=>{
-item.classList.remove("active");
-});
+pagina.classList.add(
+"active"
+);
 
-if(elemento)elemento.classList.add("active");
+}
+
+document.querySelectorAll(
+".menu-item"
+).forEach(
+item=>{
+item.classList.remove(
+"active"
+);
+}
+);
+
+if(elemento){
+
+elemento.classList.add(
+"active"
+);
+
+}
 
 if(window.innerWidth<=800){
 
-document.getElementById("sidebar")
-.classList.remove("mobile-open");
+document.getElementById(
+"sidebar"
+).classList.remove(
+"mobile-open"
+);
 
 }
 
@@ -2710,21 +3432,31 @@ document.getElementById("sidebar")
 
 function carregarTema(){
 
-const tema=localStorage.getItem(THEME_KEY);
+const tema=localStorage.getItem(
+THEME_KEY
+);
 
 if(tema==="dark"){
-document.body.classList.add("dark");
+
+document.body.classList.add(
+"dark"
+);
+
 }
 
 }
 
 function alternarTema(){
 
-document.body.classList.toggle("dark");
+document.body.classList.toggle(
+"dark"
+);
 
 localStorage.setItem(
 THEME_KEY,
-document.body.classList.contains("dark")
+document.body.classList.contains(
+"dark"
+)
 ?"dark"
 :"light"
 );
@@ -2739,21 +3471,33 @@ function salvarQuimico(event){
 
 event.preventDefault();
 
-const id=document.getElementById("idQuimico").value;
+const id=document.getElementById(
+"idQuimico"
+).value;
 
 const objeto={
 
 id:id||gerarID(),
 
-nome:document.getElementById("nomeQuimico").value.trim(),
+nome:document.getElementById(
+"nomeQuimico"
+).value.trim(),
 
-codigo:document.getElementById("codigoQuimico").value.trim(),
+codigo:document.getElementById(
+"codigoQuimico"
+).value.trim(),
 
-cor:document.getElementById("corQuimico").value.trim(),
+cor:document.getElementById(
+"corQuimico"
+).value.trim(),
 
-tipo:document.getElementById("tipoQuimico").value,
+tipo:document.getElementById(
+"tipoQuimico"
+).value,
 
-observacao:document.getElementById("observacaoQuimico").value.trim()
+observacao:document.getElementById(
+"observacaoQuimico"
+).value.trim()
 
 };
 
@@ -2763,11 +3507,17 @@ const index=quimicos.findIndex(
 q=>String(q.id)===String(id)
 );
 
-if(index>=0)quimicos[index]=objeto;
+if(index>=0){
+
+quimicos[index]=objeto;
+
+}
 
 }else{
 
-quimicos.push(objeto);
+quimicos.push(
+objeto
+);
 
 }
 
@@ -2777,18 +3527,68 @@ JSON.stringify(quimicos)
 );
 
 limparFormularioQuimico();
+
 renderizarQuimicos();
+
 preencherTodosSelectsQuimicos();
 
-alert("Químico salvo com sucesso!");
+alert(
+"Químico salvo com sucesso!"
+);
 
 }
 
 function limparFormularioQuimico(){
 
-document.getElementById("formQuimico").reset();
+document.getElementById(
+"formQuimico"
+).reset();
 
-document.getElementById("idQuimico").value="";
+document.getElementById(
+"idQuimico"
+).value="";
+
+}
+
+/* NORMALIZAR TIPO */
+
+function normalizarTipo(
+valor
+){
+
+return String(
+valor||""
+)
+.normalize("NFD")
+.replace(
+/[\u0300-\u036f]/g,
+""
+)
+.toLowerCase()
+.trim();
+
+}
+
+/*
+RETORNA OS QUÍMICOS DE UMA
+CATEGORIA ESPECÍFICA
+*/
+
+function obterQuimicosPorCategoria(
+categoria
+){
+
+const categoriaNormalizada=
+normalizarTipo(
+categoria
+);
+
+return quimicos.filter(
+q=>
+normalizarTipo(
+q.tipo
+)===categoriaNormalizada
+);
 
 }
 
@@ -2796,18 +3596,40 @@ document.getElementById("idQuimico").value="";
 
 function renderizarQuimicos(){
 
-const container=document.getElementById("tabelaQuimicos");
+const container=document.getElementById(
+"tabelaQuimicos"
+);
 
 if(!container)return;
 
 const busca=(
-document.getElementById("buscaQuimico")?.value||""
+document.getElementById(
+"buscaQuimico"
+)?.value||""
 ).toLowerCase();
 
-const lista=quimicos.filter(q=>
-String(q.nome||"").toLowerCase().includes(busca)||
-String(q.codigo||"").toLowerCase().includes(busca)||
-String(q.cor||"").toLowerCase().includes(busca)
+const lista=quimicos.filter(
+q=>
+String(
+q.nome||""
+).toLowerCase().includes(
+busca
+)||
+String(
+q.codigo||""
+).toLowerCase().includes(
+busca
+)||
+String(
+q.cor||""
+).toLowerCase().includes(
+busca
+)||
+String(
+q.tipo||""
+).toLowerCase().includes(
+busca
+)
 );
 
 if(lista.length===0){
@@ -2838,19 +3660,28 @@ let html=`
 <tbody>
 `;
 
-lista.forEach(q=>{
+lista.forEach(
+q=>{
 
 html+=`
 
 <tr>
 
-<td><strong>${esc(q.nome)}</strong></td>
+<td>
+<strong>${esc(q.nome)}</strong>
+</td>
 
-<td>${esc(q.codigo)}</td>
+<td>
+${esc(q.codigo)}
+</td>
 
-<td>${esc(q.cor||"-")}</td>
+<td>
+${esc(q.cor||"-")}
+</td>
 
-<td>${esc(q.tipo||"-")}</td>
+<td>
+${esc(q.tipo||"-")}
+</td>
 
 <td>
 
@@ -2879,19 +3710,27 @@ Excluir
 </tr>
 `;
 
-});
+}
+);
 
-html+=`</tbody></table>`;
+html+=`
+</tbody>
+</table>
+`;
 
 container.innerHTML=html;
 
 }
 
-/* PREENCHER OS 5 SELECTS */
+/* PREENCHER SELECTS POR CATEGORIA */
 
 function preencherTodosSelectsQuimicos(){
 
-for(let i=1;i<=5;i++){
+for(
+let i=1;
+i<=5;
+i++
+){
 
 const select=document.getElementById(
 `quimicoLancamento${i}`
@@ -2899,31 +3738,62 @@ const select=document.getElementById(
 
 if(!select)continue;
 
-const valorAtual=select.value;
+const categoria=
+categoriasOpcoes[i];
 
-select.innerHTML=`
-<option value="">Selecione o químico</option>
-`;
+const valorAtual=
+select.value;
 
-quimicos.forEach(q=>{
+const lista=
+obterQuimicosPorCategoria(
+categoria
+);
 
-const option=document.createElement("option");
+select.innerHTML="";
+
+const primeiraOpcao=
+document.createElement(
+"option"
+);
+
+primeiraOpcao.value="";
+
+primeiraOpcao.textContent=
+`Selecione ${categoria}`;
+
+select.appendChild(
+primeiraOpcao
+);
+
+lista.forEach(
+q=>{
+
+const option=
+document.createElement(
+"option"
+);
 
 option.value=q.codigo;
 
 option.textContent=
 `${q.codigo} — ${q.nome}`;
 
-select.appendChild(option);
+select.appendChild(
+option
+);
 
-});
+}
+);
 
 if(
 valorAtual &&
-quimicos.some(q=>q.codigo===valorAtual)
+lista.some(
+q=>q.codigo===valorAtual
+)
 ){
 
-select.value=valorAtual;
+select.value=
+valorAtual;
 
 }
 
@@ -2936,19 +3806,40 @@ select.value=valorAtual;
 function editarQuimico(id){
 
 const q=quimicos.find(
-item=>String(item.id)===String(id)
+item=>
+String(item.id)===
+String(id)
 );
 
 if(!q)return;
 
-document.getElementById("idQuimico").value=q.id;
-document.getElementById("nomeQuimico").value=q.nome||"";
-document.getElementById("codigoQuimico").value=q.codigo||"";
-document.getElementById("corQuimico").value=q.cor||"";
-document.getElementById("tipoQuimico").value=q.tipo||"";
-document.getElementById("observacaoQuimico").value=q.observacao||"";
+document.getElementById(
+"idQuimico"
+).value=q.id;
 
-mostrarPagina("cadastro");
+document.getElementById(
+"nomeQuimico"
+).value=q.nome||"";
+
+document.getElementById(
+"codigoQuimico"
+).value=q.codigo||"";
+
+document.getElementById(
+"corQuimico"
+).value=q.cor||"";
+
+document.getElementById(
+"tipoQuimico"
+).value=q.tipo||"";
+
+document.getElementById(
+"observacaoQuimico"
+).value=q.observacao||"";
+
+mostrarPagina(
+"cadastro"
+);
 
 window.scrollTo({
 top:0,
@@ -2962,18 +3853,26 @@ behavior:"smooth"
 function excluirQuimico(id){
 
 const q=quimicos.find(
-item=>String(item.id)===String(id)
+item=>
+String(item.id)===
+String(id)
 );
 
 if(!q)return;
 
-if(!confirm(
+if(
+!confirm(
 "Deseja realmente excluir o químico?\n\n"+
-q.nome+"\n"+q.codigo
-))return;
+q.nome+"\n"+
+q.codigo
+)
+)return;
 
-quimicos=quimicos.filter(
-item=>String(item.id)!==String(id)
+quimicos=
+quimicos.filter(
+item=>
+String(item.id)!==
+String(id)
 );
 
 localStorage.setItem(
@@ -2982,62 +3881,102 @@ JSON.stringify(quimicos)
 );
 
 renderizarQuimicos();
+
 preencherTodosSelectsQuimicos();
 
 }
 
-/* OPÇÃO 4 */
+/* CONTROLE DAS 5 OPÇÕES */
 
-function alternarOpcao4(){
+function alternarOpcao(
+numero
+){
 
-const item=document.getElementById("medicaoItem4");
+if(
+numero<1||
+numero>5
+)return;
 
-const select=document.getElementById(
-"quimicoLancamento4"
+opcoesNaoUtilizadas[numero]=
+!opcoesNaoUtilizadas[numero];
+
+atualizarVisualOpcao(
+numero
 );
 
-const padrao=document.getElementById(
-"padraoLancamento4"
+}
+
+/* ATUALIZAR VISUAL DA OPÇÃO */
+
+function atualizarVisualOpcao(
+numero
+){
+
+const desativada=
+opcoesNaoUtilizadas[numero];
+
+const item=
+document.getElementById(
+`medicaoItem${numero}`
 );
 
-const valor=document.getElementById(
-"valorLancamento4"
+const select=
+document.getElementById(
+`quimicoLancamento${numero}`
 );
 
-const resultado=document.getElementById(
-"resultadoLancamento4"
+const padrao=
+document.getElementById(
+`padraoLancamento${numero}`
 );
 
-const status=document.getElementById(
-"statusMedicao4"
+const valor=
+document.getElementById(
+`valorLancamento${numero}`
 );
 
-const botao=document.getElementById(
-"btnOpcao4"
+const resultado=
+document.getElementById(
+`resultadoLancamento${numero}`
 );
 
-opcao4NaoUtilizada=!opcao4NaoUtilizada;
+const status=
+document.getElementById(
+`statusMedicao${numero}`
+);
 
-if(opcao4NaoUtilizada){
+const botao=
+document.getElementById(
+`btnOpcao${numero}`
+);
+
+if(desativada){
 
 if(select){
+
 select.value="";
 select.disabled=true;
+
 }
 
 if(padrao){
+
 padrao.value="";
 padrao.disabled=true;
+
 }
 
 if(valor){
+
 valor.value="";
 valor.disabled=true;
+
 }
 
 if(resultado){
 
-resultado.value="NAO UTILIZADO";
+resultado.value=
+"NAO UTILIZADO";
 
 resultado.classList.remove(
 "resultado-dentro",
@@ -3052,121 +3991,55 @@ resultado.classList.add(
 }
 
 if(status){
-status.textContent="✓ Opção não utilizada";
+
+status.textContent=
+"✓ Opção não utilizada";
+
 }
 
 if(botao){
 
-botao.textContent="Utilizar opção 4";
-botao.classList.add("ativo");
+botao.textContent=
+`Utilizar opção ${numero}`;
+
+botao.classList.add(
+"ativo"
+);
 
 }
 
 if(item){
-item.classList.add("opcao4-desativada");
+
+item.classList.add(
+"medicao-desativada"
+);
+
 }
 
 }else{
 
 if(select){
+
 select.disabled=false;
+
 }
 
 if(padrao){
+
 padrao.disabled=false;
+
 }
 
 if(valor){
+
 valor.disabled=false;
+
 }
 
 if(resultado){
 
-resultado.value="DENTRO DO PADRÃO";
-
-resultado.classList.remove(
-"resultado-nao-utilizado",
-"resultado-acima",
-"resultado-abaixo",
-"resultado-dentro"
-);
-
-}
-
-if(status){
-status.textContent="Aguardando preenchimento";
-}
-
-if(botao){
-
-botao.textContent="Não utilizar";
-botao.classList.remove("ativo");
-
-}
-
-if(item){
-item.classList.remove("opcao4-desativada");
-}
-
-calcularResultadoMedicao(4);
-
-}
-
-}
-
-/* RESETAR OPÇÃO 4 */
-
-function resetarOpcao4(){
-
-opcao4NaoUtilizada=false;
-
-const select=document.getElementById(
-"quimicoLancamento4"
-);
-
-const padrao=document.getElementById(
-"padraoLancamento4"
-);
-
-const valor=document.getElementById(
-"valorLancamento4"
-);
-
-const resultado=document.getElementById(
-"resultadoLancamento4"
-);
-
-const status=document.getElementById(
-"statusMedicao4"
-);
-
-const botao=document.getElementById(
-"btnOpcao4"
-);
-
-const item=document.getElementById(
-"medicaoItem4"
-);
-
-if(select){
-select.disabled=false;
-select.value="";
-}
-
-if(padrao){
-padrao.disabled=false;
-padrao.value="";
-}
-
-if(valor){
-valor.disabled=false;
-valor.value="";
-}
-
-if(resultado){
-
-resultado.disabled=true;
-resultado.value="DENTRO DO PADRÃO";
+resultado.value=
+"DENTRO DO PADRÃO";
 
 resultado.classList.remove(
 "resultado-dentro",
@@ -3178,53 +4051,120 @@ resultado.classList.remove(
 }
 
 if(status){
-status.textContent="Aguardando preenchimento";
+
+status.textContent=
+"Aguardando preenchimento";
+
 }
 
 if(botao){
 
-botao.textContent="Não utilizar";
-botao.classList.remove("ativo");
+botao.textContent=
+"Não utilizar";
+
+botao.classList.remove(
+"ativo"
+);
 
 }
 
 if(item){
-item.classList.remove("opcao4-desativada");
+
+item.classList.remove(
+"medicao-desativada"
+);
+
+}
+
+calcularResultadoMedicao(
+numero
+);
+
 }
 
 }
 
-/* RESULTADO DAS 5 MEDIÇÕES */
+/* RESETAR TODAS AS OPÇÕES */
 
-function calcularResultadoMedicao(numero){
+function resetarTodasOpcoes(){
 
-if(numero===4 && opcao4NaoUtilizada){
+for(
+let i=1;
+i<=5;
+i++
+){
+
+opcoesNaoUtilizadas[i]=false;
+
+atualizarVisualOpcao(
+i
+);
+
+}
+
+}
+
+/* COMPATIBILIDADE COM OPÇÃO 4 */
+
+function alternarOpcao4(){
+
+alternarOpcao(4);
+
+}
+
+function resetarOpcao4(){
+
+opcoesNaoUtilizadas[4]=false;
+
+atualizarVisualOpcao(4);
+
+}
+
+/* RESULTADO DAS MEDIÇÕES */
+
+function calcularResultadoMedicao(
+numero
+){
+
+if(
+opcoesNaoUtilizadas[numero]
+){
 
 return;
 
 }
 
-const padraoCampo=document.getElementById(
+const padraoCampo=
+document.getElementById(
 `padraoLancamento${numero}`
 );
 
-const valorCampo=document.getElementById(
+const valorCampo=
+document.getElementById(
 `valorLancamento${numero}`
 );
 
-const resultado=document.getElementById(
+const resultado=
+document.getElementById(
 `resultadoLancamento${numero}`
 );
 
-const status=document.getElementById(
+const status=
+document.getElementById(
 `statusMedicao${numero}`
 );
 
-if(!padraoCampo||!valorCampo||!resultado)return;
+if(
+!padraoCampo||
+!valorCampo||
+!resultado
+)return;
 
-const padraoTexto=padraoCampo.value.trim();
+const padraoTexto=
+padraoCampo.value.trim();
 
-const valorTexto=valorCampo.value.trim();
+const valorTexto=
+valorCampo.value.trim();
 
 resultado.classList.remove(
 "resultado-dentro",
@@ -3234,24 +4174,34 @@ resultado.classList.remove(
 );
 
 if(
-padraoTexto==="" ||
+padraoTexto===""||
 valorTexto===""
 ){
 
-resultado.value="DENTRO DO PADRÃO";
+resultado.value=
+"DENTRO DO PADRÃO";
 
-status.textContent="Aguardando preenchimento";
+status.textContent=
+"Aguardando preenchimento";
 
 return;
 
 }
 
-const padrao=Number(
-padraoTexto.replace(",",".")
+const padrao=
+Number(
+padraoTexto.replace(
+",",
+"."
+)
 );
 
-const valor=Number(
-valorTexto.replace(",",".")
+const valor=
+Number(
+valorTexto.replace(
+",",
+"."
+)
 );
 
 if(
@@ -3259,55 +4209,79 @@ if(
 !Number.isFinite(valor)
 ){
 
-resultado.value="DENTRO DO PADRÃO";
+resultado.value=
+"DENTRO DO PADRÃO";
 
-status.textContent="Valor inválido";
+status.textContent=
+"Valor inválido";
 
 return;
 
 }
 
-if(valor>padrao){
+if(
+valor>padrao
+){
 
-resultado.value="ACIMA DO PADRÃO";
+resultado.value=
+"ACIMA DO PADRÃO";
 
 resultado.classList.add(
 "resultado-acima"
 );
 
-status.textContent="⚠ Acima do padrão";
+status.textContent=
+"⚠ Acima do padrão";
 
-}else if(valor<padrao){
+}else if(
+valor<padrao
+){
 
-resultado.value="ABAIXO DO PADRÃO";
+resultado.value=
+"ABAIXO DO PADRÃO";
 
 resultado.classList.add(
 "resultado-abaixo"
 );
 
-status.textContent="✕ Abaixo do padrão";
+status.textContent=
+"✕ Abaixo do padrão";
 
 }else{
 
-resultado.value="DENTRO DO PADRÃO";
+resultado.value=
+"DENTRO DO PADRÃO";
 
 resultado.classList.add(
 "resultado-dentro"
 );
 
-status.textContent="✓ Dentro do padrão";
+status.textContent=
+"✓ Dentro do padrão";
 
 }
 
 }
 
-/* COMPATIBILIDADE COM FUNÇÃO ANTIGA */
+/* RESULTADO AUTOMÁTICO */
 
 function calcularResultadoAutomatico(){
 
-for(let i=1;i<=5;i++){
+for(
+let i=1;
+i<=5;
+i++
+){
 
-calcularResultadoMedicao(i);
+if(
+!opcoesNaoUtilizadas[i]
+){
+
+calcularResultadoMedicao(
+i
+);
+
+}
 
 }
 
@@ -3315,27 +4289,37 @@ calcularResultadoMedicao(i);
 
 /* SALVAR LANÇAMENTOS */
 
-function salvarLancamento(event){
+function salvarLancamento(
+event
+){
 
 event.preventDefault();
 
 calcularResultadoAutomatico();
 
-const idEdicao=document.getElementById(
+const idEdicao=
+document.getElementById(
 "idLancamento"
 ).value;
 
 let medicoes=[];
 
-for(let i=1;i<=5;i++){
+for(
+let i=1;
+i<=5;
+i++
+){
 
-/* OPÇÃO 4 NÃO UTILIZADA */
-
-if(i===4 && opcao4NaoUtilizada){
+if(
+opcoesNaoUtilizadas[i]
+){
 
 medicoes.push({
 
-numero:4,
+numero:i,
+
+categoria:
+categoriasOpcoes[i],
 
 codigo:"",
 
@@ -3343,7 +4327,8 @@ padrao:"",
 
 valor:"",
 
-resultado:"NAO UTILIZADO",
+resultado:
+"NAO UTILIZADO",
 
 naoUtilizada:true
 
@@ -3353,25 +4338,29 @@ continue;
 
 }
 
-const codigo=document.getElementById(
+const codigo=
+document.getElementById(
 `quimicoLancamento${i}`
 ).value.trim();
 
-const padrao=document.getElementById(
+const padrao=
+document.getElementById(
 `padraoLancamento${i}`
 ).value.trim();
 
-const valor=document.getElementById(
+const valor=
+document.getElementById(
 `valorLancamento${i}`
 ).value.trim();
 
-const resultado=document.getElementById(
+const resultado=
+document.getElementById(
 `resultadoLancamento${i}`
 ).value;
 
 if(
-codigo!=="" ||
-padrao!=="" ||
+codigo!==""||
+padrao!==""||
 valor!==""
 ){
 
@@ -3382,7 +4371,7 @@ valor===""
 ){
 
 alert(
-`Preencha Químico, Padrão e Valor Medido da Opção ${i}.`
+`Preencha Químico, Padrão e Valor Medido da Opção ${i} — ${categoriasOpcoes[i]}.`
 );
 
 return;
@@ -3392,10 +4381,18 @@ return;
 medicoes.push({
 
 numero:i,
+
+categoria:
+categoriasOpcoes[i],
+
 codigo:codigo,
+
 padrao:padrao,
+
 valor:valor,
+
 resultado:resultado,
+
 naoUtilizada:false
 
 });
@@ -3404,43 +4401,53 @@ naoUtilizada:false
 
 }
 
-if(medicoes.length===0){
+/*
+IMPEDIR SALVAMENTO DE UM LANÇAMENTO
+COM TODAS AS OPÇÕES VAZIAS.
+*/
+
+if(
+medicoes.length===0
+){
 
 alert(
-"Preencha pelo menos uma das 5 opções de avaliação."
+"Preencha pelo menos uma das 5 opções de avaliação ou marque uma opção como 'Não utilizar'."
 );
 
 return;
 
 }
 
-const maquina=document.getElementById(
+const maquina=
+document.getElementById(
 "maquinaLancamento"
 ).value;
 
-const responsavel=document.getElementById(
+const responsavel=
+document.getElementById(
 "responsavelLancamento"
 ).value.trim();
 
-const observacao=document.getElementById(
+const observacao=
+document.getElementById(
 "observacaoLancamento"
 ).value.trim();
 
-const dataHora=formatoDataHora();
+const dataHora=
+formatoDataHora();
 
-const timestamp=Date.now();
+const timestamp=
+Date.now();
 
 /* EDIÇÃO */
 
 if(idEdicao){
 
-/*
-Na edição, se a opção 4 estiver marcada como
-não utilizada, o sistema aceita a edição.
-*/
-
-let medicao=medicoes.find(
-m=>m.numero===4 && m.naoUtilizada
+let medicao=
+medicoes.find(
+m=>
+m.numero===4&&
+m.naoUtilizada
 );
 
 if(!medicao){
@@ -3451,20 +4458,28 @@ medicao=medicoes[0];
 
 if(!medicao){
 
-alert("Nenhuma avaliação encontrada.");
+alert(
+"Nenhuma avaliação encontrada."
+);
 
 return;
 
 }
 
-const quimico=medicao.naoUtilizada
+const quimico=
+medicao.naoUtilizada
 ?null
 :quimicos.find(
-q=>String(q.codigo||"").trim()===medicao.codigo
+q=>
+String(q.codigo||"").trim()===
+medicao.codigo
 );
 
-const index=lancamentos.findIndex(
-l=>String(l.id)===String(idEdicao)
+const index=
+lancamentos.findIndex(
+l=>
+String(l.id)===
+String(idEdicao)
 );
 
 if(index>=0){
@@ -3474,27 +4489,48 @@ lancamentos[index]={
 ...lancamentos[index],
 
 timestamp:timestamp,
+
 data:dataHora,
+
 maquina:maquina,
+
 responsavel:responsavel,
 
-quimico:medicao.naoUtilizada
+categoria:
+medicao.categoria,
+
+quimico:
+medicao.naoUtilizada
 ?"Não utilizado"
 :(quimico
 ?quimico.nome
 :medicao.codigo),
 
-quimicoId:quimico
+quimicoId:
+quimico
 ?quimico.id
 :"",
 
-codigo:medicao.codigo,
-valor:medicao.valor,
-padrao:medicao.padrao,
-resultado:medicao.resultado,
-naoUtilizada:!!medicao.naoUtilizada,
-observacao:observacao,
-numeroOpcao:medicao.numero
+codigo:
+medicao.codigo,
+
+valor:
+medicao.valor,
+
+padrao:
+medicao.padrao,
+
+resultado:
+medicao.resultado,
+
+naoUtilizada:
+!!medicao.naoUtilizada,
+
+observacao:
+observacao,
+
+numeroOpcao:
+medicao.numero
 
 };
 
@@ -3504,16 +4540,20 @@ numeroOpcao:medicao.numero
 
 /*
 NOVO LANÇAMENTO:
-cada opção preenchida é salva como
-uma avaliação individual.
+CADA OPÇÃO PREENCHIDA É SALVA
+COMO UMA AVALIAÇÃO INDIVIDUAL.
 */
 
-medicoes.forEach(medicao=>{
+medicoes.forEach(
+medicao=>{
 
-const quimico=medicao.naoUtilizada
+const quimico=
+medicao.naoUtilizada
 ?null
 :quimicos.find(
-q=>String(q.codigo||"").trim()===medicao.codigo
+q=>
+String(q.codigo||"").trim()===
+medicao.codigo
 );
 
 lancamentos.push({
@@ -3528,33 +4568,46 @@ maquina:maquina,
 
 responsavel:responsavel,
 
-quimico:medicao.naoUtilizada
+categoria:
+medicao.categoria,
+
+quimico:
+medicao.naoUtilizada
 ?"Não utilizado"
 :(quimico
 ?quimico.nome
 :medicao.codigo),
 
-quimicoId:quimico
+quimicoId:
+quimico
 ?quimico.id
 :"",
 
-codigo:medicao.codigo,
+codigo:
+medicao.codigo,
 
-valor:medicao.valor,
+valor:
+medicao.valor,
 
-padrao:medicao.padrao,
+padrao:
+medicao.padrao,
 
-resultado:medicao.resultado,
+resultado:
+medicao.resultado,
 
-naoUtilizada:!!medicao.naoUtilizada,
+naoUtilizada:
+!!medicao.naoUtilizada,
 
-observacao:observacao,
+observacao:
+observacao,
 
-numeroOpcao:medicao.numero
+numeroOpcao:
+medicao.numero
 
 });
 
-});
+}
+);
 
 }
 
@@ -3566,15 +4619,20 @@ JSON.stringify(lancamentos)
 limparFormularioLancamento();
 
 renderizarLancamentos();
+
 renderizarHistorico();
+
 renderizarMaquinas();
+
 atualizarDashboard();
 
-const quantidadeUtilizada=medicoes.filter(
+const quantidadeUtilizada=
+medicoes.filter(
 m=>!m.naoUtilizada
 ).length;
 
-const quantidadeNaoUtilizada=medicoes.filter(
+const quantidadeNaoUtilizada=
+medicoes.filter(
 m=>m.naoUtilizada
 ).length;
 
@@ -3583,9 +4641,11 @@ idEdicao
 ?"Lançamento atualizado com sucesso!"
 :
 `${quantidadeUtilizada} avaliação(ões) salva(s)`+
-(quantidadeNaoUtilizada
+(
+quantidadeNaoUtilizada
 ?` e ${quantidadeNaoUtilizada} opção(ões) não utilizada(s)!`
-:" com sucesso!")
+:" com sucesso!"
+)
 );
 
 }
@@ -3602,19 +4662,28 @@ document.getElementById(
 "idLancamento"
 ).value="";
 
-for(let i=1;i<=5;i++){
+resetarTodasOpcoes();
 
-const resultado=document.getElementById(
+for(
+let i=1;
+i<=5;
+i++
+){
+
+const resultado=
+document.getElementById(
 `resultadoLancamento${i}`
 );
 
-const status=document.getElementById(
+const status=
+document.getElementById(
 `statusMedicao${i}`
 );
 
 if(resultado){
 
-resultado.value="DENTRO DO PADRÃO";
+resultado.value=
+"DENTRO DO PADRÃO";
 
 resultado.classList.remove(
 "resultado-dentro",
@@ -3634,8 +4703,6 @@ status.textContent=
 
 }
 
-resetarOpcao4();
-
 atualizarDataHoraTempoReal();
 
 }
@@ -3644,13 +4711,15 @@ atualizarDataHoraTempoReal();
 
 function renderizarLancamentos(){
 
-const container=document.getElementById(
+const container=
+document.getElementById(
 "tabelaLancamentos"
 );
 
 if(!container)return;
 
-const lista=[...lancamentos]
+const lista=
+[...lancamentos]
 .sort(
 (a,b)=>
 Number(b.timestamp||0)-
@@ -3688,13 +4757,16 @@ let html=`
 <tbody>
 `;
 
-lista.forEach(l=>{
+lista.forEach(
+l=>{
 
 html+=`
 
 <tr>
 
-<td>${formatarData(l.data)}</td>
+<td>
+${formatarData(l.data)}
+</td>
 
 <td>
 <strong>
@@ -3703,16 +4775,28 @@ ${esc(nomeMaquina(l.maquina))}
 </td>
 
 <td>
+
 ${esc(l.quimico||"-")}
+
 <br>
-<small>${esc(l.codigo||"")}</small>
+
+<small>
+${esc(l.codigo||"")}
+</small>
+
 </td>
 
-<td>${esc(l.valor||"-")}</td>
+<td>
+${esc(l.valor||"-")}
+</td>
 
-<td>${esc(l.padrao||"-")}</td>
+<td>
+${esc(l.padrao||"-")}
+</td>
 
-<td>${badgeResultado(l.resultado)}</td>
+<td>
+${badgeResultado(l.resultado)}
+</td>
 
 <td>
 
@@ -3741,9 +4825,13 @@ Excluir
 </tr>
 `;
 
-});
+}
+);
 
-html+=`</tbody></table>`;
+html+=`
+</tbody>
+</table>
+`;
 
 container.innerHTML=html;
 
@@ -3753,8 +4841,11 @@ container.innerHTML=html;
 
 function editarLancamento(id){
 
-const l=lancamentos.find(
-item=>String(item.id)===String(id)
+const l=
+lancamentos.find(
+item=>
+String(item.id)===
+String(id)
 );
 
 if(!l)return;
@@ -3773,45 +4864,92 @@ document.getElementById(
 "responsavelLancamento"
 ).value=l.responsavel||"";
 
-let numero=Number(l.numeroOpcao||1);
-
-if(numero<1||numero>5)numero=1;
-
-/* EDIÇÃO DA OPÇÃO 4 NÃO UTILIZADA */
+let numero=
+Number(l.numeroOpcao||1);
 
 if(
-numero===4 &&
-(
-l.naoUtilizada===true ||
-l.resultado==="NAO UTILIZADO"
-)
+numero<1||
+numero>5
 ){
 
-alternarOpcao4();
+numero=1;
+
+}
+
+if(
+l.naoUtilizada===true||
+l.resultado==="NAO UTILIZADO"||
+l.resultado==="NÃO UTILIZADO"
+){
+
+opcoesNaoUtilizadas[numero]=true;
+
+atualizarVisualOpcao(
+numero
+);
 
 }else{
 
+const categoriaEsperada=
+categoriasOpcoes[numero];
+
+const select=
 document.getElementById(
 `quimicoLancamento${numero}`
-).value=l.codigo||"";
+);
+
+preencherTodosSelectsQuimicos();
+
+if(select){
+
+const quimicoAtual=
+quimicos.find(
+q=>
+String(q.codigo||"").trim()===
+String(l.codigo||"").trim()
+);
+
+if(
+quimicoAtual &&
+normalizarTipo(
+quimicoAtual.tipo
+)===
+normalizarTipo(
+categoriaEsperada
+)
+){
+
+select.value=
+l.codigo||"";
+
+}
+
+}
 
 document.getElementById(
 `valorLancamento${numero}`
-).value=l.valor||"";
+).value=
+l.valor||"";
 
 document.getElementById(
 `padraoLancamento${numero}`
-).value=l.padrao||"";
+).value=
+l.padrao||"";
 
-calcularResultadoMedicao(numero);
+calcularResultadoMedicao(
+numero
+);
 
 }
 
 document.getElementById(
 "observacaoLancamento"
-).value=l.observacao||"";
+).value=
+l.observacao||"";
 
-mostrarPagina("lancamento");
+mostrarPagina(
+"lancamento"
+);
 
 window.scrollTo({
 top:0,
@@ -3824,31 +4962,45 @@ behavior:"smooth"
 
 function excluirLancamento(id){
 
-const lancamento=lancamentos.find(
-l=>String(l.id)===String(id)
+const lancamento=
+lancamentos.find(
+l=>
+String(l.id)===
+String(id)
 );
 
 if(!lancamento){
 
-alert("Lançamento não encontrado.");
+alert(
+"Lançamento não encontrado."
+);
 
 return;
 
 }
 
-const confirmacao=confirm(
+const confirmacao=
+confirm(
 
 "Deseja realmente excluir este lançamento?\n\n"+
-"Máquina: "+nomeMaquina(lancamento.maquina)+
-"\nQuímico: "+(lancamento.quimico||"-")+
-"\nData: "+(lancamento.data||"-")
+"Máquina: "+
+nomeMaquina(
+lancamento.maquina
+)+
+"\nQuímico: "+
+(lancamento.quimico||"-")+
+"\nData: "+
+(lancamento.data||"-")
 
 );
 
 if(!confirmacao)return;
 
-lancamentos=lancamentos.filter(
-l=>String(l.id)!==String(id)
+lancamentos=
+lancamentos.filter(
+l=>
+String(l.id)!==
+String(id)
 );
 
 localStorage.setItem(
@@ -3857,11 +5009,16 @@ JSON.stringify(lancamentos)
 );
 
 renderizarLancamentos();
+
 renderizarHistorico();
+
 renderizarMaquinas();
+
 atualizarDashboard();
 
-alert("Lançamento excluído com sucesso!");
+alert(
+"Lançamento excluído com sucesso!"
+);
 
 }
 
@@ -3869,15 +5026,18 @@ alert("Lançamento excluído com sucesso!");
 
 function atualizarResultadoPecas(){
 
-const campoPadrao=document.getElementById(
+const campoPadrao=
+document.getElementById(
 "padraoPecas"
 );
 
-const campoQuantidade=document.getElementById(
+const campoQuantidade=
+document.getElementById(
 "quantidadePecas"
 );
 
-const resultado=document.getElementById(
+const resultado=
+document.getElementById(
 "resultadoPecas"
 );
 
@@ -3886,26 +5046,41 @@ campoPadrao.value===""||
 campoQuantidade.value===""
 ){
 
-resultado.value="DENTRO DO PADRÃO";
+resultado.value=
+"DENTRO DO PADRÃO";
 
 return;
 
 }
 
-const padrao=Number(campoPadrao.value);
-const quantidade=Number(campoQuantidade.value);
+const padrao=
+Number(
+campoPadrao.value
+);
 
-if(quantidade>padrao){
+const quantidade=
+Number(
+campoQuantidade.value
+);
 
-resultado.value="ACIMA DO PADRÃO";
+if(
+quantidade>padrao
+){
 
-}else if(quantidade<padrao){
+resultado.value=
+"ACIMA DO PADRÃO";
 
-resultado.value="ABAIXO DO PADRÃO";
+}else if(
+quantidade<padrao
+){
+
+resultado.value=
+"ABAIXO DO PADRÃO";
 
 }else{
 
-resultado.value="DENTRO DO PADRÃO";
+resultado.value=
+"DENTRO DO PADRÃO";
 
 }
 
@@ -3919,7 +5094,8 @@ event.preventDefault();
 
 atualizarResultadoPecas();
 
-const id=document.getElementById(
+const id=
+document.getElementById(
 "idPecas"
 ).value;
 
@@ -3927,35 +5103,43 @@ const objeto={
 
 id:id||gerarID(),
 
-timestamp:Date.now(),
+timestamp:
+Date.now(),
 
-data:formatoDataHora(),
+data:
+formatoDataHora(),
 
-maquina:document.getElementById(
+maquina:
+document.getElementById(
 "maquinaPecas"
 ).value,
 
-responsavel:document.getElementById(
+responsavel:
+document.getElementById(
 "responsavelPecas"
 ).value.trim(),
 
-padrao:Number(
+padrao:
+Number(
 document.getElementById(
 "padraoPecas"
 ).value
 ),
 
-quantidade:Number(
+quantidade:
+Number(
 document.getElementById(
 "quantidadePecas"
 ).value
 ),
 
-resultado:document.getElementById(
+resultado:
+document.getElementById(
 "resultadoPecas"
 ).value,
 
-observacao:document.getElementById(
+observacao:
+document.getElementById(
 "observacaoPecas"
 ).value.trim()
 
@@ -3963,15 +5147,25 @@ observacao:document.getElementById(
 
 if(id){
 
-const index=registrosPecas.findIndex(
-r=>String(r.id)===String(id)
+const index=
+registrosPecas.findIndex(
+r=>
+String(r.id)===
+String(id)
 );
 
-if(index>=0)registrosPecas[index]=objeto;
+if(index>=0){
+
+registrosPecas[index]=
+objeto;
+
+}
 
 }else{
 
-registrosPecas.push(objeto);
+registrosPecas.push(
+objeto
+);
 
 }
 
@@ -3981,10 +5175,14 @@ JSON.stringify(registrosPecas)
 );
 
 limparFormularioPecas();
+
 renderizarPecas();
+
 atualizarResumoPecas();
 
-alert("Registro de peças salvo com sucesso!");
+alert(
+"Registro de peças salvo com sucesso!"
+);
 
 }
 
@@ -4002,7 +5200,8 @@ document.getElementById(
 
 document.getElementById(
 "resultadoPecas"
-).value="DENTRO DO PADRÃO";
+).value=
+"DENTRO DO PADRÃO";
 
 atualizarDataHoraTempoReal();
 
@@ -4012,13 +5211,16 @@ atualizarDataHoraTempoReal();
 
 function renderizarPecas(){
 
-const container=document.getElementById(
+const container=
+document.getElementById(
 "tabelaPecas"
 );
 
 if(!container)return;
 
-const lista=[...registrosPecas].sort(
+const lista=
+[...registrosPecas]
+.sort(
 (a,b)=>
 Number(b.timestamp||0)-
 Number(a.timestamp||0)
@@ -4040,6 +5242,7 @@ let html=`
 <thead>
 
 <tr>
+
 <th>Data</th>
 <th>Máquina</th>
 <th>Responsável</th>
@@ -4047,6 +5250,7 @@ let html=`
 <th>Quantidade</th>
 <th>Resultado</th>
 <th>Ações</th>
+
 </tr>
 
 </thead>
@@ -4054,31 +5258,46 @@ let html=`
 <tbody>
 `;
 
-lista.forEach(r=>{
+lista.forEach(
+r=>{
 
 html+=`
 
 <tr>
 
-<td>${formatarData(r.data)}</td>
-
 <td>
-<strong>${esc(nomeMaquina(r.maquina))}</strong>
-</td>
-
-<td>${esc(r.responsavel||"-")}</td>
-
-<td>
-${Number(r.padrao||0).toLocaleString("pt-BR")}
+${formatarData(r.data)}
 </td>
 
 <td>
 <strong>
-${Number(r.quantidade||0).toLocaleString("pt-BR")}
+${esc(nomeMaquina(r.maquina))}
 </strong>
 </td>
 
-<td>${badgeResultado(r.resultado)}</td>
+<td>
+${esc(r.responsavel||"-")}
+</td>
+
+<td>
+${Number(
+r.padrao||0
+).toLocaleString("pt-BR")}
+</td>
+
+<td>
+
+<strong>
+${Number(
+r.quantidade||0
+).toLocaleString("pt-BR")}
+</strong>
+
+</td>
+
+<td>
+${badgeResultado(r.resultado)}
+</td>
 
 <td>
 
@@ -4107,11 +5326,16 @@ Excluir
 </tr>
 `;
 
-});
+}
+);
 
-html+=`</tbody></table>`;
+html+=`
+</tbody>
+</table>
+`;
 
-container.innerHTML=html;
+container.innerHTML=
+html;
 
 }
 
@@ -4119,39 +5343,50 @@ container.innerHTML=html;
 
 function editarPecas(id){
 
-const registro=registrosPecas.find(
-r=>String(r.id)===String(id)
+const registro=
+registrosPecas.find(
+r=>
+String(r.id)===
+String(id)
 );
 
 if(!registro)return;
 
 document.getElementById(
 "idPecas"
-).value=registro.id;
+).value=
+registro.id;
 
 document.getElementById(
 "maquinaPecas"
-).value=registro.maquina||"";
+).value=
+registro.maquina||"";
 
 document.getElementById(
 "responsavelPecas"
-).value=registro.responsavel||"";
+).value=
+registro.responsavel||"";
 
 document.getElementById(
 "padraoPecas"
-).value=registro.padrao??"";
+).value=
+registro.padrao??"";
 
 document.getElementById(
 "quantidadePecas"
-).value=registro.quantidade??"";
+).value=
+registro.quantidade??"";
 
 atualizarResultadoPecas();
 
 document.getElementById(
 "observacaoPecas"
-).value=registro.observacao||"";
+).value=
+registro.observacao||"";
 
-mostrarPagina("pecas");
+mostrarPagina(
+"pecas"
+);
 
 window.scrollTo({
 top:0,
@@ -4164,20 +5399,32 @@ behavior:"smooth"
 
 function excluirPecas(id){
 
-const registro=registrosPecas.find(
-r=>String(r.id)===String(id)
+const registro=
+registrosPecas.find(
+r=>
+String(r.id)===
+String(id)
 );
 
 if(!registro)return;
 
-if(!confirm(
+if(
+!confirm(
 "Deseja realmente excluir este registro?\n\n"+
-"Máquina: "+nomeMaquina(registro.maquina)+
-"\nQuantidade: "+registro.quantidade
-))return;
+"Máquina: "+
+nomeMaquina(
+registro.maquina
+)+
+"\nQuantidade: "+
+registro.quantidade
+)
+)return;
 
-registrosPecas=registrosPecas.filter(
-r=>String(r.id)!==String(id)
+registrosPecas=
+registrosPecas.filter(
+r=>
+String(r.id)!==
+String(id)
 );
 
 localStorage.setItem(
@@ -4186,6 +5433,7 @@ JSON.stringify(registrosPecas)
 );
 
 renderizarPecas();
+
 atualizarResumoPecas();
 
 }
@@ -4194,45 +5442,67 @@ atualizarResumoPecas();
 
 function atualizarResumoPecas(){
 
-const total=registrosPecas.reduce(
+const total=
+registrosPecas.reduce(
 (soma,r)=>
-soma+Number(r.quantidade||0),
+soma+
+Number(
+r.quantidade||0
+),
 0
 );
 
-const padrao=registrosPecas.reduce(
+const padrao=
+registrosPecas.reduce(
 (soma,r)=>
-soma+Number(r.padrao||0),
+soma+
+Number(
+r.padrao||0
+),
 0
 );
 
-const dentro=registrosPecas.filter(
-r=>r.resultado==="DENTRO DO PADRÃO"
+const dentro=
+registrosPecas.filter(
+r=>
+r.resultado===
+"DENTRO DO PADRÃO"
 ).length;
 
-const fora=registrosPecas.filter(
-r=>r.resultado!=="DENTRO DO PADRÃO"
+const fora=
+registrosPecas.filter(
+r=>
+r.resultado!==
+"DENTRO DO PADRÃO"
 ).length;
 
 document.getElementById(
 "totalPecas"
 ).textContent=
-total.toLocaleString("pt-BR");
+total.toLocaleString(
+"pt-BR"
+);
 
 document.getElementById(
 "totalPadraoPecas"
 ).textContent=
-padrao.toLocaleString("pt-BR");
+padrao.toLocaleString(
+"pt-BR"
+);
 
 document.getElementById(
 "pecasDentro"
 ).textContent=
-dentro.toLocaleString("pt-BR");
+dentro.toLocaleString(
+"pt-BR"
+);
 
 document.getElementById(
 "pecasFora"
 ).textContent=
-fora.toLocaleString("pt-BR");
+fora.toLocaleString(
+"pt-BR"
+);
 
 }
 
@@ -4240,7 +5510,8 @@ fora.toLocaleString("pt-BR");
 
 function renderizarHistorico(){
 
-const container=document.getElementById(
+const container=
+document.getElementById(
 "tabelaHistorico"
 );
 
@@ -4252,28 +5523,49 @@ document.getElementById(
 )?.value||""
 ).toLowerCase();
 
-const lista=[...lancamentos]
-.filter(l=>{
+const lista=
+[...lancamentos]
+.filter(
+l=>{
 
 const texto=(
 
-String(l.quimico||"")+
+String(
+l.quimico||""
+)+
 " "+
-String(l.codigo||"")+
+String(
+l.codigo||""
+)+
 " "+
-String(l.maquina||"")+
+String(
+l.categoria||""
+)+
 " "+
-nomeMaquina(l.maquina)+
+String(
+l.maquina||""
+)+
 " "+
-String(l.responsavel||"")+
+nomeMaquina(
+l.maquina
+)+
 " "+
-String(l.resultado||"")
+String(
+l.responsavel||""
+)+
+" "+
+String(
+l.resultado||""
+)
 
 ).toLowerCase();
 
-return texto.includes(busca);
+return texto.includes(
+busca
+);
 
-})
+}
+)
 .sort(
 (a,b)=>
 Number(b.timestamp||0)-
@@ -4296,14 +5588,17 @@ let html=`
 <thead>
 
 <tr>
+
 <th>Data</th>
 <th>Máquina</th>
 <th>Responsável</th>
+<th>Categoria</th>
 <th>Químico</th>
 <th>Valor</th>
 <th>Padrão</th>
 <th>Resultado</th>
 <th>Ações</th>
+
 </tr>
 
 </thead>
@@ -4311,29 +5606,52 @@ let html=`
 <tbody>
 `;
 
-lista.forEach(l=>{
+lista.forEach(
+l=>{
 
 html+=`
 
 <tr>
 
-<td>${formatarData(l.data)}</td>
-
-<td>${esc(nomeMaquina(l.maquina))}</td>
-
-<td>${esc(l.responsavel||"-")}</td>
-
 <td>
-${esc(l.quimico||"-")}
-<br>
-<small>${esc(l.codigo||"")}</small>
+${formatarData(l.data)}
 </td>
 
-<td>${esc(l.valor||"-")}</td>
+<td>
+${esc(nomeMaquina(l.maquina))}
+</td>
 
-<td>${esc(l.padrao||"-")}</td>
+<td>
+${esc(l.responsavel||"-")}
+</td>
 
-<td>${badgeResultado(l.resultado)}</td>
+<td>
+${esc(l.categoria||"-")}
+</td>
+
+<td>
+
+${esc(l.quimico||"-")}
+
+<br>
+
+<small>
+${esc(l.codigo||"")}
+</small>
+
+</td>
+
+<td>
+${esc(l.valor||"-")}
+</td>
+
+<td>
+${esc(l.padrao||"-")}
+</td>
+
+<td>
+${badgeResultado(l.resultado)}
+</td>
 
 <td>
 
@@ -4362,11 +5680,16 @@ Excluir
 </tr>
 `;
 
-});
+}
+);
 
-html+=`</tbody></table>`;
+html+=`
+</tbody>
+</table>
+`;
 
-container.innerHTML=html;
+container.innerHTML=
+html;
 
 }
 
@@ -4374,33 +5697,50 @@ container.innerHTML=html;
 
 function renderizarMaquinas(){
 
-const grid=document.getElementById(
+const grid=
+document.getElementById(
 "gridMaquinas"
 );
 
-const tabela=document.getElementById(
+const tabela=
+document.getElementById(
 "tabelaMaquinas"
 );
 
-if(!grid||!tabela)return;
+if(
+!grid||
+!tabela
+)return;
 
 let cards="";
+
 let rows="";
 
-maquinas.forEach(maquina=>{
+maquinas.forEach(
+maquina=>{
 
-const registros=lancamentos.filter(
-l=>l.maquina===maquina
+const registros=
+lancamentos.filter(
+l=>
+l.maquina===
+maquina
 );
 
-const total=registros.length;
+const total=
+registros.length;
 
-const dentro=registros.filter(
-r=>r.resultado==="DENTRO DO PADRÃO"
+const dentro=
+registros.filter(
+r=>
+r.resultado===
+"DENTRO DO PADRÃO"
 ).length;
 
-const conformidade=total
-?Math.round((dentro/total)*100)
+const conformidade=
+total
+?Math.round(
+(dentro/total)*100
+)
 :0;
 
 cards+=`
@@ -4408,19 +5748,31 @@ cards+=`
 <div class="machine-card">
 
 <div class="machine-name">
-${esc(nomeMaquina(maquina))}
+
+${esc(
+nomeMaquina(maquina)
+)}
+
 </div>
 
 <div class="machine-value">
+
 ${total}
+
 </div>
 
 <div class="machine-label">
+
 avaliações
+
 </div>
 
 <div style="margin-top:10px;">
-${badgeConformidade(conformidade)}
+
+${badgeConformidade(
+conformidade
+)}
+
 </div>
 
 </div>
@@ -4431,20 +5783,39 @@ rows+=`
 <tr>
 
 <td>
-<strong>${esc(nomeMaquina(maquina))}</strong>
+
+<strong>
+${esc(
+nomeMaquina(maquina)
+)}
+</strong>
+
 </td>
 
-<td>${total}</td>
-<td>${dentro}</td>
-<td>${total-dentro}</td>
-<td>${conformidade}%</td>
+<td>
+${total}
+</td>
+
+<td>
+${dentro}
+</td>
+
+<td>
+${total-dentro}
+</td>
+
+<td>
+${conformidade}%
+</td>
 
 </tr>
 `;
 
-});
+}
+);
 
-grid.innerHTML=cards;
+grid.innerHTML=
+cards;
 
 tabela.innerHTML=`
 
@@ -4453,17 +5824,21 @@ tabela.innerHTML=`
 <thead>
 
 <tr>
+
 <th>Máquina</th>
 <th>Avaliações</th>
 <th>Dentro</th>
 <th>Fora</th>
 <th>Conformidade</th>
+
 </tr>
 
 </thead>
 
 <tbody>
+
 ${rows}
+
 </tbody>
 
 </table>
@@ -4473,17 +5848,31 @@ ${rows}
 
 /* DASHBOARD */
 
-function filtrarPeriodo(periodo,elemento){
+function filtrarPeriodo(
+periodo,
+elemento
+){
 
-periodoAtual=periodo;
+periodoAtual=
+periodo;
 
 document.querySelectorAll(
 ".filter-btn"
-).forEach(btn=>{
-btn.classList.remove("active");
-});
+).forEach(
+btn=>{
+btn.classList.remove(
+"active"
+);
+}
+);
 
-if(elemento)elemento.classList.add("active");
+if(elemento){
+
+elemento.classList.add(
+"active"
+);
+
+}
 
 atualizarDashboard();
 
@@ -4491,76 +5880,117 @@ atualizarDashboard();
 
 function obterLancamentosFiltrados(){
 
-if(periodoAtual==="todos"){
+if(
+periodoAtual===
+"todos"
+){
 
-return [...lancamentos];
+return [
+...lancamentos
+];
 
 }
 
-const agora=new Date();
+const agora=
+new Date();
 
-let inicio=new Date();
+let inicio=
+new Date();
 
-if(periodoAtual==="hoje"){
+if(
+periodoAtual===
+"hoje"
+){
 
-inicio.setHours(0,0,0,0);
+inicio.setHours(
+0,0,0,0
+);
 
 }else{
 
 inicio.setDate(
-agora.getDate()-Number(periodoAtual)
+agora.getDate()-
+Number(periodoAtual)
 );
 
 }
 
-return lancamentos.filter(l=>{
+return lancamentos.filter(
+l=>{
 
-const data=l.timestamp
-?new Date(Number(l.timestamp))
-:new Date(l.data);
+const data=
+l.timestamp
+?new Date(
+Number(l.timestamp)
+)
+:new Date(
+l.data
+);
 
 return data>=inicio;
 
-});
+}
+);
 
 }
 
 function atualizarDashboard(){
 
-const dados=obterLancamentosFiltrados();
+const dados=
+obterLancamentosFiltrados();
 
-const total=dados.length;
+const total=
+dados.length;
 
-const dentro=dados.filter(
-r=>r.resultado==="DENTRO DO PADRÃO"
+const dentro=
+dados.filter(
+r=>
+r.resultado===
+"DENTRO DO PADRÃO"
 ).length;
 
-const fora=dados.filter(
-r=>r.resultado!=="DENTRO DO PADRÃO"
+const fora=
+dados.filter(
+r=>
+r.resultado!==
+"DENTRO DO PADRÃO"
 ).length;
 
-const maquinasUsadas=new Set(
-dados.map(r=>r.maquina).filter(Boolean)
+const maquinasUsadas=
+new Set(
+dados
+.map(
+r=>r.maquina
+)
+.filter(Boolean)
 );
 
-const conformidade=total
-?Math.round((dentro/total)*100)
+const conformidade=
+total
+?Math.round(
+(dentro/total)*100
+)
 :0;
 
 document.getElementById(
 "kpiAvaliacoes"
 ).textContent=
-total.toLocaleString("pt-BR");
+total.toLocaleString(
+"pt-BR"
+);
 
 document.getElementById(
 "kpiConformidade"
 ).textContent=
-conformidade+"%";
+conformidade+
+"%";
 
 document.getElementById(
 "kpiFora"
 ).textContent=
-fora.toLocaleString("pt-BR");
+fora.toLocaleString(
+"pt-BR"
+);
 
 document.getElementById(
 "kpiMaquinas"
@@ -4568,8 +5998,14 @@ document.getElementById(
 maquinasUsadas.size;
 
 atualizarGrafico();
-atualizarRanking(dados);
-atualizarAtividade(dados);
+
+atualizarRanking(
+dados
+);
+
+atualizarAtividade(
+dados
+);
 
 }
 
@@ -4577,24 +6013,35 @@ atualizarAtividade(dados);
 
 function atualizarGrafico(){
 
-const canvas=document.getElementById(
+const canvas=
+document.getElementById(
 "graficoResultados"
 );
 
 if(!canvas)return;
 
-const dados=obterLancamentosFiltrados();
+const dados=
+obterLancamentosFiltrados();
 
-const dentro=dados.filter(
-r=>r.resultado==="DENTRO DO PADRÃO"
+const dentro=
+dados.filter(
+r=>
+r.resultado===
+"DENTRO DO PADRÃO"
 ).length;
 
-const acima=dados.filter(
-r=>r.resultado==="ACIMA DO PADRÃO"
+const acima=
+dados.filter(
+r=>
+r.resultado===
+"ACIMA DO PADRÃO"
 ).length;
 
-const abaixo=dados.filter(
-r=>r.resultado==="ABAIXO DO PADRÃO"
+const abaixo=
+dados.filter(
+r=>
+r.resultado===
+"ABAIXO DO PADRÃO"
 ).length;
 
 if(graficoResultados){
@@ -4603,11 +6050,15 @@ graficoResultados.destroy();
 
 }
 
-const corTexto=document.body.classList.contains("dark")
+const corTexto=
+document.body.classList.contains(
+"dark"
+)
 ?"#dbe4ea"
 :"#344054";
 
-graficoResultados=new Chart(
+graficoResultados=
+new Chart(
 canvas,
 {
 
@@ -4616,23 +6067,35 @@ type:"doughnut",
 data:{
 
 labels:[
+
 "Dentro do padrão",
+
 "Acima do padrão",
+
 "Abaixo do padrão"
+
 ],
 
 datasets:[{
 
 data:[
+
 dentro,
+
 acima,
+
 abaixo
+
 ],
 
 backgroundColor:[
+
 "#159957",
+
 "#b7791f",
+
 "#d92d20"
+
 ],
 
 borderWidth:0
@@ -4644,15 +6107,23 @@ borderWidth:0
 options:{
 
 responsive:true,
+
 maintainAspectRatio:false,
 
 plugins:{
+
 legend:{
+
 position:"bottom",
+
 labels:{
+
 color:corTexto
+
 }
+
 }
+
 }
 
 }
@@ -4664,9 +6135,12 @@ color:corTexto
 
 /* RANKING */
 
-function atualizarRanking(dados){
+function atualizarRanking(
+dados
+){
 
-const container=document.getElementById(
+const container=
+document.getElementById(
 "rankingMaquinas"
 );
 
@@ -4674,18 +6148,29 @@ if(!container)return;
 
 const contagem={};
 
-dados.forEach(r=>{
+dados.forEach(
+r=>{
 
-const maquina=r.maquina||"Não informado";
+const maquina=
+r.maquina||
+"Não informado";
 
-contagem[maquina]=(
+contagem[maquina]=
+(
 contagem[maquina]||0
 )+1;
 
-});
+}
+);
 
-const lista=Object.entries(contagem)
-.sort((a,b)=>b[1]-a[1]);
+const lista=
+Object.entries(
+contagem
+)
+.sort(
+(a,b)=>
+b[1]-a[1]
+);
 
 if(lista.length===0){
 
@@ -4698,11 +6183,13 @@ return;
 
 let html="";
 
-lista.forEach(([maquina,total])=>{
+lista.forEach(
+([maquina,total])=>{
 
 html+=`
 
-<div style="
+<div
+style="
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -4711,39 +6198,56 @@ border-bottom:1px solid var(--borda);
 ">
 
 <div>
-<strong>${esc(nomeMaquina(maquina))}</strong>
+
+<strong>
+${esc(
+nomeMaquina(maquina)
+)}
+</strong>
+
 </div>
 
 <span class="badge badge-blue">
+
 ${total}
+
 </span>
 
 </div>
 `;
 
-});
+}
+);
 
-container.innerHTML=html;
+container.innerHTML=
+html;
 
 }
 
 /* ATIVIDADE */
 
-function atualizarAtividade(dados){
+function atualizarAtividade(
+dados
+){
 
-const container=document.getElementById(
+const container=
+document.getElementById(
 "atividadeRecente"
 );
 
 if(!container)return;
 
-const lista=[...dados]
+const lista=
+[...dados]
 .sort(
 (a,b)=>
 Number(b.timestamp||0)-
 Number(a.timestamp||0)
 )
-.slice(0,10);
+.slice(
+0,
+10
+);
 
 if(lista.length===0){
 
@@ -4761,10 +6265,12 @@ let html=`
 <thead>
 
 <tr>
+
 <th>Data</th>
 <th>Máquina</th>
 <th>Químico</th>
 <th>Resultado</th>
+
 </tr>
 
 </thead>
@@ -4772,28 +6278,48 @@ let html=`
 <tbody>
 `;
 
-lista.forEach(r=>{
+lista.forEach(
+r=>{
 
 html+=`
 
 <tr>
 
-<td>${formatarData(r.data)}</td>
+<td>
+${formatarData(r.data)}
+</td>
 
-<td>${esc(nomeMaquina(r.maquina))}</td>
+<td>
+${esc(
+nomeMaquina(r.maquina)
+)}
+</td>
 
-<td>${esc(r.quimico||"-")}</td>
+<td>
+${esc(
+r.quimico||"-"
+)}
+</td>
 
-<td>${badgeResultado(r.resultado)}</td>
+<td>
+${badgeResultado(
+r.resultado
+)}
+</td>
 
 </tr>
 `;
 
-});
+}
+);
 
-html+=`</tbody></table>`;
+html+=`
+</tbody>
+</table>
+`;
 
-container.innerHTML=html;
+container.innerHTML=
+html;
 
 }
 
@@ -4801,27 +6327,46 @@ container.innerHTML=html;
 
 function exportarExcel(){
 
-if(typeof XLSX==="undefined"){
+if(
+typeof XLSX===
+"undefined"
+){
 
-alert("Biblioteca Excel não carregada.");
+alert(
+"Biblioteca Excel não carregada."
+);
 
 return;
 
 }
 
-const wb=XLSX.utils.book_new();
+const wb=
+XLSX.utils.book_new();
 
-const dadosQuimicos=quimicos.map(q=>({
+const dadosQuimicos=
+quimicos.map(
+q=>({
 
-"Nome":q.nome||"",
-"Código":q.codigo||"",
-"Cor":q.cor||"",
-"Tipo":q.tipo||"",
-"Observação":q.observacao||""
+"Nome":
+q.nome||"",
 
-}));
+"Código":
+q.codigo||"",
 
-const wsQuimicos=XLSX.utils.json_to_sheet(
+"Cor":
+q.cor||"",
+
+"Tipo":
+q.tipo||"",
+
+"Observação":
+q.observacao||""
+
+})
+);
+
+const wsQuimicos=
+XLSX.utils.json_to_sheet(
 dadosQuimicos
 );
 
@@ -4831,37 +6376,58 @@ wsQuimicos,
 "Químicos"
 );
 
-const dadosLancamentos=lancamentos.map(l=>({
+const dadosLancamentos=
+lancamentos.map(
+l=>({
 
-"Data":formatarData(l.data),
+"Data":
+formatarData(l.data),
 
-"Máquina":nomeMaquina(l.maquina),
+"Máquina":
+nomeMaquina(
+l.maquina
+),
 
-"Responsável":l.responsavel||"",
+"Responsável":
+l.responsavel||"",
 
-"Opção":l.numeroOpcao||1,
+"Opção":
+l.numeroOpcao||1,
 
-"Químico":l.quimico||"",
+"Categoria":
+l.categoria||"",
 
-"Código":l.codigo||"",
+"Químico":
+l.quimico||"",
 
-"Valor":l.valor||"",
+"Código":
+l.codigo||"",
 
-"Padrão":l.padrao||"",
+"Valor":
+l.valor||"",
 
-"Resultado":l.resultado==="NAO UTILIZADO"
+"Padrão":
+l.padrao||"",
+
+"Resultado":
+l.resultado===
+"NAO UTILIZADO"
 ?"NÃO UTILIZADO"
 :(l.resultado||""),
 
-"Não utilizada":l.naoUtilizada
+"Não utilizada":
+l.naoUtilizada
 ?"SIM"
 :"NÃO",
 
-"Observação":l.observacao||""
+"Observação":
+l.observacao||""
 
-}));
+})
+);
 
-const wsLancamentos=XLSX.utils.json_to_sheet(
+const wsLancamentos=
+XLSX.utils.json_to_sheet(
 dadosLancamentos
 );
 
@@ -4871,25 +6437,38 @@ wsLancamentos,
 "Lançamentos"
 );
 
-const dadosPecas=registrosPecas.map(r=>({
+const dadosPecas=
+registrosPecas.map(
+r=>({
 
-"Data":formatarData(r.data),
+"Data":
+formatarData(r.data),
 
-"Máquina":nomeMaquina(r.maquina),
+"Máquina":
+nomeMaquina(
+r.maquina
+),
 
-"Responsável":r.responsavel||"",
+"Responsável":
+r.responsavel||"",
 
-"Padrão":r.padrao||0,
+"Padrão":
+r.padrao||0,
 
-"Quantidade":r.quantidade||0,
+"Quantidade":
+r.quantidade||0,
 
-"Resultado":r.resultado||"",
+"Resultado":
+r.resultado||"",
 
-"Observação":r.observacao||""
+"Observação":
+r.observacao||""
 
-}));
+})
+);
 
-const wsPecas=XLSX.utils.json_to_sheet(
+const wsPecas=
+XLSX.utils.json_to_sheet(
 dadosPecas
 );
 
@@ -4899,37 +6478,56 @@ wsPecas,
 "Peças em Produção"
 );
 
-const dadosMaquinas=maquinas.map(maquina=>{
+const dadosMaquinas=
+maquinas.map(
+maquina=>{
 
-const registros=lancamentos.filter(
-l=>l.maquina===maquina
+const registros=
+lancamentos.filter(
+l=>
+l.maquina===
+maquina
 );
 
-const dentro=registros.filter(
-r=>r.resultado==="DENTRO DO PADRÃO"
+const dentro=
+registros.filter(
+r=>
+r.resultado===
+"DENTRO DO PADRÃO"
 ).length;
 
 return{
 
-"Máquina":nomeMaquina(maquina),
+"Máquina":
+nomeMaquina(
+maquina
+),
 
-"Avaliações":registros.length,
+"Avaliações":
+registros.length,
 
-"Dentro do padrão":dentro,
+"Dentro do padrão":
+dentro,
 
 "Fora do padrão":
 registros.length-dentro,
 
 "Conformidade":
 registros.length
-?((dentro/registros.length)*100).toFixed(1)+"%"
+?(
+(dentro/
+registros.length)*
+100
+).toFixed(1)+"%"
 :"0%"
 
 };
 
-});
+}
+);
 
-const wsMaquinas=XLSX.utils.json_to_sheet(
+const wsMaquinas=
+XLSX.utils.json_to_sheet(
 dadosMaquinas
 );
 
@@ -4939,15 +6537,26 @@ wsMaquinas,
 "Máquinas"
 );
 
-const agora=new Date();
+const agora=
+new Date();
 
 const nomeArquivo=
 "GraviUnit_MES_"+
 agora.getFullYear()+
 "-"+
-String(agora.getMonth()+1).padStart(2,"0")+
+String(
+agora.getMonth()+1
+).padStart(
+2,
+"0"
+)+
 "-"+
-String(agora.getDate()).padStart(2,"0")+
+String(
+agora.getDate()
+).padStart(
+2,
+"0"
+)+
 ".xlsx";
 
 XLSX.writeFile(
@@ -4990,72 +6599,109 @@ TEMPO_ATUALIZACAO
 
 /* FORMATAÇÃO DATA */
 
-function formatarData(valor){
+function formatarData(
+valor
+){
 
 if(!valor)return "-";
 
-let data=new Date(valor);
+let data=
+new Date(valor);
 
-if(Number.isNaN(data.getTime())){
+if(
+Number.isNaN(
+data.getTime()
+)
+){
 
 return valor;
 
 }
 
-return data.toLocaleString("pt-BR");
+return data.toLocaleString(
+"pt-BR"
+);
 
 }
 
 /* BADGE RESULTADO */
 
-function badgeResultado(resultado){
+function badgeResultado(
+resultado
+){
 
-if(resultado==="DENTRO DO PADRÃO"){
+if(
+resultado===
+"DENTRO DO PADRÃO"
+){
 
 return `
+
 <span class="badge badge-green">
+
 ✓ DENTRO DO PADRÃO
-</span>
-`;
 
-}
-
-if(resultado==="ACIMA DO PADRÃO"){
-
-return `
-<span class="badge badge-yellow">
-⚠ ACIMA DO PADRÃO
-</span>
-`;
-
-}
-
-if(resultado==="ABAIXO DO PADRÃO"){
-
-return `
-<span class="badge badge-red">
-✕ ABAIXO DO PADRÃO
 </span>
 `;
 
 }
 
 if(
-resultado==="NAO UTILIZADO" ||
-resultado==="NÃO UTILIZADO"
+resultado===
+"ACIMA DO PADRÃO"
 ){
 
 return `
+
+<span class="badge badge-yellow">
+
+⚠ ACIMA DO PADRÃO
+
+</span>
+`;
+
+}
+
+if(
+resultado===
+"ABAIXO DO PADRÃO"
+){
+
+return `
+
+<span class="badge badge-red">
+
+✕ ABAIXO DO PADRÃO
+
+</span>
+`;
+
+}
+
+if(
+resultado===
+"NAO UTILIZADO"||
+resultado===
+"NÃO UTILIZADO"
+){
+
+return `
+
 <span class="badge badge-blue">
+
 — NÃO UTILIZADO
+
 </span>
 `;
 
 }
 
 return `
+
 <span class="badge badge-blue">
+
 ${esc(resultado||"-")}
+
 </span>
 `;
 
@@ -5063,31 +6709,46 @@ ${esc(resultado||"-")}
 
 /* BADGE CONFORMIDADE */
 
-function badgeConformidade(valor){
+function badgeConformidade(
+valor
+){
 
-if(valor>=90){
+if(
+valor>=90
+){
 
 return `
+
 <span class="badge badge-green">
+
 ${valor}% conformidade
+
 </span>
 `;
 
 }
 
-if(valor>=70){
+if(
+valor>=70
+){
 
 return `
+
 <span class="badge badge-yellow">
+
 ${valor}% conformidade
+
 </span>
 `;
 
 }
 
 return `
+
 <span class="badge badge-red">
+
 ${valor}% conformidade
+
 </span>
 `;
 
@@ -5095,14 +6756,38 @@ ${valor}% conformidade
 
 /* SEGURANÇA HTML */
 
-function esc(valor){
+function esc(
+valor
+){
 
-return String(valor??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+return String(
+valor??""
+)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
