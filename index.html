@@ -37,10 +37,7 @@ body{
     color:var(--texto);
 }
 
-button,
-input,
-select,
-textarea{
+button,input,select,textarea{
     font-family:inherit;
 }
 
@@ -168,6 +165,26 @@ textarea{
 .atualizacao{
     color:#667085;
     font-size:12px;
+}
+
+.atualizacao-auto{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:rgba(255,255,255,.12);
+    color:white;
+    padding:7px 11px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.ponto-online{
+    width:8px;
+    height:8px;
+    background:#50d890;
+    border-radius:50%;
+    display:inline-block;
 }
 
 .kpis{
@@ -373,7 +390,7 @@ textarea{
     color:#333;
 }
 
-/* FORMULARIOS */
+/* FORMULÁRIOS */
 
 .formulario{
     background:white;
@@ -559,28 +576,6 @@ tr:hover td{
     color:var(--vermelho);
 }
 
-/* INDICADOR DE ATUALIZAÇÃO */
-
-.atualizacao-auto{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    background:#f0f7ff;
-    color:var(--azul);
-    padding:7px 11px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:bold;
-}
-
-.ponto-online{
-    width:8px;
-    height:8px;
-    background:var(--verde);
-    border-radius:50%;
-    display:inline-block;
-}
-
 /* RESPONSIVO */
 
 @media(max-width:1100px){
@@ -629,6 +624,10 @@ tr:hover td{
 
     .logo{
         font-size:17px;
+    }
+
+    .topbar > .atualizacao-auto{
+        display:none;
     }
 
     .conteudo{
@@ -696,6 +695,7 @@ tr:hover td{
 
     </div>
 
+
     <div class="atualizacao-auto">
 
         <span class="ponto-online"></span>
@@ -719,12 +719,14 @@ tr:hover td{
 
     </button>
 
+
     <button
         onclick="mostrarPagina('cadastro',this)">
 
         🧪 Cadastro de Químicos
 
     </button>
+
 
     <button
         onclick="mostrarPagina('lancamento',this)">
@@ -733,6 +735,7 @@ tr:hover td{
 
     </button>
 
+
     <button
         onclick="mostrarPagina('maquinas',this)">
 
@@ -740,12 +743,14 @@ tr:hover td{
 
     </button>
 
+
     <button
         onclick="mostrarPagina('historico',this)">
 
         📋 Histórico
 
     </button>
+
 
     <button
         onclick="exportarExcel()">
@@ -764,9 +769,7 @@ tr:hover td{
      DASHBOARD
 ===================================================== -->
 
-<section
-    id="dashboard"
-    class="pagina ativa">
+<section id="dashboard" class="pagina ativa">
 
     <div class="titulo">
 
@@ -914,9 +917,7 @@ tr:hover td{
             </strong>
 
             <span id="textoStatusGerencial">
-
                 Aguardando dados...
-
             </span>
 
         </div>
@@ -941,9 +942,7 @@ tr:hover td{
                 📊 Conformidade Geral
             </h2>
 
-            <canvas
-                id="graficoConformidade">
-            </canvas>
+            <canvas id="graficoConformidade"></canvas>
 
         </div>
 
@@ -954,9 +953,7 @@ tr:hover td{
                 🏭 Lançamentos por Máquina
             </h2>
 
-            <canvas
-                id="graficoProcessos">
-            </canvas>
+            <canvas id="graficoProcessos"></canvas>
 
         </div>
 
@@ -967,9 +964,7 @@ tr:hover td{
                 ⚙️ Ocorrências por Máquina
             </h2>
 
-            <canvas
-                id="graficoMaquinas">
-            </canvas>
+            <canvas id="graficoMaquinas"></canvas>
 
         </div>
 
@@ -980,9 +975,7 @@ tr:hover td{
                 📈 Tendência de Conformidade
             </h2>
 
-            <canvas
-                id="graficoTendencia">
-            </canvas>
+            <canvas id="graficoTendencia"></canvas>
 
         </div>
 
@@ -1092,12 +1085,10 @@ tr:hover td{
 
 
 <!-- =====================================================
-     CADASTRO
+     CADASTRO DE QUÍMICOS
 ===================================================== -->
 
-<section
-    id="cadastro"
-    class="pagina">
+<section id="cadastro" class="pagina">
 
     <div class="titulo">
 
@@ -1260,9 +1251,7 @@ tr:hover td{
 
             </thead>
 
-            <tbody
-                id="tabelaQuimicos">
-            </tbody>
+            <tbody id="tabelaQuimicos"></tbody>
 
         </table>
 
@@ -1275,9 +1264,7 @@ tr:hover td{
      LANÇAMENTO
 ===================================================== -->
 
-<section
-    id="lancamento"
-    class="pagina">
+<section id="lancamento" class="pagina">
 
     <div class="titulo">
 
@@ -1308,8 +1295,7 @@ tr:hover td{
                     Químico / Produto *
                 </label>
 
-                <select
-                    id="quimicoLancamento">
+                <select id="quimicoLancamento">
 
                     <option value="">
                         Selecione o químico
@@ -1326,8 +1312,7 @@ tr:hover td{
                     Máquina *
                 </label>
 
-                <select
-                    id="maquinaLancamento">
+                <select id="maquinaLancamento">
 
                     <option value="">
                         Selecione a máquina
@@ -1357,8 +1342,7 @@ tr:hover td{
                     Responsável *
                 </label>
 
-                <select
-                    id="responsavelLancamento">
+                <select id="responsavelLancamento">
 
                     <option value="">
                         Selecione o responsável
@@ -1446,8 +1430,7 @@ tr:hover td{
 
                 <textarea
                     id="observacaoLancamento"
-                    placeholder="Digite alguma observação...">
-                </textarea>
+                    placeholder="Digite alguma observação..."></textarea>
 
             </div>
 
@@ -1519,9 +1502,7 @@ tr:hover td{
 
             </thead>
 
-            <tbody
-                id="tabelaLancamentos">
-            </tbody>
+            <tbody id="tabelaLancamentos"></tbody>
 
         </table>
 
@@ -1534,9 +1515,7 @@ tr:hover td{
      MÁQUINAS
 ===================================================== -->
 
-<section
-    id="maquinas"
-    class="pagina">
+<section id="maquinas" class="pagina">
 
     <div class="titulo">
 
@@ -1684,8 +1663,7 @@ tr:hover td{
 
                 <textarea
                     id="comentarioMaquina"
-                    placeholder="Digite um comentário...">
-                </textarea>
+                    placeholder="Digite um comentário..."></textarea>
 
             </div>
 
@@ -1757,9 +1735,7 @@ tr:hover td{
 
             </thead>
 
-            <tbody
-                id="tabelaMaquinas">
-            </tbody>
+            <tbody id="tabelaMaquinas"></tbody>
 
         </table>
 
@@ -1772,9 +1748,7 @@ tr:hover td{
      HISTÓRICO
 ===================================================== -->
 
-<section
-    id="historico"
-    class="pagina">
+<section id="historico" class="pagina">
 
     <div class="titulo">
 
@@ -1830,16 +1804,13 @@ tr:hover td{
 
             </thead>
 
-            <tbody
-                id="tabelaHistorico">
-            </tbody>
+            <tbody id="tabelaHistorico"></tbody>
 
         </table>
 
     </div>
 
 </section>
-
 
 </main>
 
@@ -1869,20 +1840,20 @@ const STORAGE_MAQUINAS =
     "erp_maquinas_v3";
 
 
-let quimicos=[];
+let quimicos = [];
 
-let lancamentos=[];
+let lancamentos = [];
 
-let registrosMaquinas=[];
+let registrosMaquinas = [];
 
-let graficos={};
+let graficos = {};
 
 
 /* =========================================================
    QUÍMICOS PADRÃO
 ========================================================= */
 
-const QUIMICOS_PADRAO=[
+const QUIMICOS_PADRAO = [
 
 {
     codigo:"314001-000",
@@ -2049,7 +2020,8 @@ const QUIMICOS_PADRAO=[
 
 function gerarID(){
 
-    return Date.now()+
+    return Date.now() +
+        "-" +
         Math.random()
         .toString(16)
         .slice(2);
@@ -2059,7 +2031,7 @@ function gerarID(){
 
 function escaparHTML(valor){
 
-    return String(valor??"")
+    return String(valor ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -2093,13 +2065,17 @@ function obterTimestamp(item){
     }
 
 
-    const d=
-        new Date(item.data);
+    const d =
+        new Date(
+            item.data
+        );
 
 
-    return isNaN(d.getTime())
-        ?0
-        :d.getTime();
+    return isNaN(
+        d.getTime()
+    )
+    ?0
+    :d.getTime();
 
 }
 
@@ -2109,15 +2085,17 @@ function calcularDesvioPercentual(
     padrao
 ){
 
-    const v=Number(valor);
+    const v =
+        Number(valor);
 
-    const p=Number(padrao);
+    const p =
+        Number(padrao);
 
 
     if(
-        !Number.isFinite(v)||
-        !Number.isFinite(p)||
-        p===0
+        !Number.isFinite(v) ||
+        !Number.isFinite(p) ||
+        p === 0
     ){
 
         return 0;
@@ -2125,7 +2103,7 @@ function calcularDesvioPercentual(
     }
 
 
-    return(
+    return (
         (v-p)/p
     )*100;
 
@@ -2137,13 +2115,15 @@ function calcularResultado(
     padrao
 ){
 
-    const v=Number(valor);
+    const v =
+        Number(valor);
 
-    const p=Number(padrao);
+    const p =
+        Number(padrao);
 
 
     if(
-        !Number.isFinite(v)||
+        !Number.isFinite(v) ||
         !Number.isFinite(p)
     ){
 
@@ -2152,11 +2132,11 @@ function calcularResultado(
     }
 
 
-    if(v>p)
+    if(v > p)
         return "ACIMA DO PADRÃO";
 
 
-    if(v<p)
+    if(v < p)
         return "ABAIXO DO PADRÃO";
 
 
@@ -2170,21 +2150,21 @@ function classeResultado(
 ){
 
     if(
-        resultado===
+        resultado ===
         "ACIMA DO PADRÃO"
     )
         return "acima";
 
 
     if(
-        resultado===
+        resultado ===
         "ABAIXO DO PADRÃO"
     )
         return "abaixo";
 
 
     if(
-        resultado===
+        resultado ===
         "DENTRO DO PADRÃO"
     )
         return "dentro";
@@ -2196,7 +2176,7 @@ function classeResultado(
 
 
 /* =========================================================
-   DATA E HORA
+   DATA / HORA
 ========================================================= */
 
 function obterDataHoraAtual(){
@@ -2211,7 +2191,7 @@ function obterDataHoraAtual(){
 
 function atualizarDataHoraLancamento(){
 
-    const campo=
+    const campo =
         document.getElementById(
             "dataHoraAutomatica"
         );
@@ -2221,44 +2201,63 @@ function atualizarDataHoraLancamento(){
         return;
 
 
-    campo.value=
+    /*
+       Só atualiza a hora se
+       não estiver editando.
+    */
+
+    const id =
+        document.getElementById(
+            "idLancamento"
+        );
+
+
+    if(
+        id &&
+        id.value
+    ){
+
+        return;
+
+    }
+
+
+    campo.value =
         obterDataHoraAtual();
 
 }
 
 
 /* =========================================================
-   RESULTADO LANÇAMENTO
+   RESULTADO DO LANÇAMENTO
 ========================================================= */
 
 function atualizarResultadoLancamento(){
 
-    const padrao=
+    const padrao =
         document.getElementById(
             "padraoLancamento"
         );
 
-
-    const valor=
+    const valor =
         document.getElementById(
             "valorLancamento"
         );
 
-
-    const resultado=
+    const resultado =
         document.getElementById(
             "resultadoLancamento"
         );
 
 
     if(
-        padrao.value===""||
-        valor.value===""
+        padrao.value === "" ||
+        valor.value === ""
     ){
 
-        resultado.textContent="";
+        resultado.textContent = "";
 
-        resultado.className=
+        resultado.className =
             "resultado-lancamento";
 
         return;
@@ -2266,44 +2265,43 @@ function atualizarResultadoLancamento(){
     }
 
 
-    const p=
+    const p =
         Number(
             padrao.value
         );
 
-
-    const v=
+    const v =
         Number(
             valor.value
         );
 
 
-    if(v>p){
+    if(v > p){
 
-        resultado.textContent=
+        resultado.textContent =
             "▲ ACIMA DO PADRÃO";
 
-        resultado.className=
+        resultado.className =
             "resultado-lancamento acima";
 
     }
 
-    else if(v<p){
+    else if(v < p){
 
-        resultado.textContent=
+        resultado.textContent =
             "▼ ABAIXO DO PADRÃO";
 
-        resultado.className=
+        resultado.className =
             "resultado-lancamento abaixo";
 
     }
 
     else{
 
-        resultado.textContent=
+        resultado.textContent =
             "✓ DENTRO DO PADRÃO";
 
-        resultado.className=
+        resultado.className =
             "resultado-lancamento dentro";
 
     }
@@ -2312,37 +2310,35 @@ function atualizarResultadoLancamento(){
 
 
 /* =========================================================
-   RESULTADO MÁQUINA
+   RESULTADO DA MÁQUINA
 ========================================================= */
 
 function atualizarResultadoMaquina(){
 
-    const padrao=
+    const padrao =
         document.getElementById(
             "padraoPecas"
         );
 
-
-    const valor=
+    const valor =
         document.getElementById(
             "pecasPassando"
         );
 
-
-    const resultado=
+    const resultado =
         document.getElementById(
             "resultadoMaquina"
         );
 
 
     if(
-        padrao.value===""||
-        valor.value===""
+        padrao.value === "" ||
+        valor.value === ""
     ){
 
-        resultado.textContent="";
+        resultado.textContent = "";
 
-        resultado.className=
+        resultado.className =
             "resultado-lancamento";
 
         return;
@@ -2350,44 +2346,43 @@ function atualizarResultadoMaquina(){
     }
 
 
-    const p=
+    const p =
         Number(
             padrao.value
         );
 
-
-    const v=
+    const v =
         Number(
             valor.value
         );
 
 
-    if(v>p){
+    if(v > p){
 
-        resultado.textContent=
+        resultado.textContent =
             "▲ ACIMA DO PADRÃO";
 
-        resultado.className=
+        resultado.className =
             "resultado-lancamento acima";
 
     }
 
-    else if(v<p){
+    else if(v < p){
 
-        resultado.textContent=
+        resultado.textContent =
             "▼ ABAIXO DO PADRÃO";
 
-        resultado.className=
+        resultado.className =
             "resultado-lancamento abaixo";
 
     }
 
     else{
 
-        resultado.textContent=
+        resultado.textContent =
             "✓ DENTRO DO PADRÃO";
 
-        resultado.className=
+        resultado.className =
             "resultado-lancamento dentro";
 
     }
@@ -2403,37 +2398,37 @@ function carregarDados(){
 
     try{
 
-        const salvos=
+        const salvos =
             JSON.parse(
                 localStorage.getItem(
                     STORAGE_QUIMICOS
-                )||"null"
+                ) || "null"
             );
 
 
         if(
-            Array.isArray(salvos)&&
-            salvos.length>0
+            Array.isArray(salvos) &&
+            salvos.length > 0
         ){
 
-            quimicos=
-                salvos.map(q=>({
+            quimicos =
+                salvos.map(q => ({
 
                     id:
-                        q.id||
+                        q.id ||
                         gerarID(),
 
                     codigo:
-                        q.codigo||
+                        q.codigo ||
                         "",
 
                     nome:
-                        q.nome||
-                        q.nomeQuimico||
+                        q.nome ||
+                        q.nomeQuimico ||
                         "",
 
                     categoria:
-                        q.categoria||
+                        q.categoria ||
                         ""
 
                 }));
@@ -2442,16 +2437,13 @@ function carregarDados(){
 
         else{
 
-            quimicos=
-                QUIMICOS_PADRAO
-                .map(q=>({
-
-                    ...q,
-
-                    id:
-                        gerarID()
-
-                }));
+            quimicos =
+                QUIMICOS_PADRAO.map(
+                    q => ({
+                        ...q,
+                        id:gerarID()
+                    })
+                );
 
 
             salvarQuimicos();
@@ -2459,91 +2451,146 @@ function carregarDados(){
         }
 
 
-        const codigosExistentes=
+        /*
+           Garante que os 26 produtos
+           padrão existam.
+        */
+
+        const codigosExistentes =
             new Set(
                 quimicos.map(
-                    q=>q.codigo
+                    q => q.codigo
                 )
             );
 
 
-        const faltantes=
+        const faltantes =
             QUIMICOS_PADRAO
-            .filter(q=>
-                !codigosExistentes
-                .has(q.codigo)
+            .filter(
+                q =>
+                    !codigosExistentes
+                    .has(q.codigo)
             )
-            .map(q=>({
-
-                ...q,
-
-                id:
-                    gerarID()
-
-            }));
+            .map(
+                q => ({
+                    ...q,
+                    id:gerarID()
+                })
+            );
 
 
         if(faltantes.length){
 
-            quimicos=[
+            quimicos = [
                 ...faltantes,
                 ...quimicos
             ];
-
 
             salvarQuimicos();
 
         }
 
 
-        const dadosLancamentos=
+        /*
+           CORREÇÃO IMPORTANTE:
+           garante ID em todos os lançamentos.
+        */
+
+        const dadosLancamentos =
             JSON.parse(
                 localStorage.getItem(
                     STORAGE_LANCAMENTOS
-                )||"[]"
+                ) || "[]"
             );
 
 
-        lancamentos=
+        lancamentos =
             Array.isArray(
                 dadosLancamentos
             )
-            ?dadosLancamentos
-            :[];
+
+            ?
+
+            dadosLancamentos.map(
+                l => ({
+
+                    ...l,
+
+                    id:
+                        l.id ||
+                        gerarID(),
+
+                    timestamp:
+                        l.timestamp ||
+                        obterTimestamp(l)
+
+                })
+            )
+
+            :
+
+            [];
 
 
-        const dadosMaquinas=
+        /*
+           Salva os IDs corrigidos.
+        */
+
+        localStorage.setItem(
+            STORAGE_LANCAMENTOS,
+            JSON.stringify(
+                lancamentos
+            )
+        );
+
+
+        const dadosMaquinas =
             JSON.parse(
                 localStorage.getItem(
                     STORAGE_MAQUINAS
-                )||"[]"
+                ) || "[]"
             );
 
 
-        registrosMaquinas=
+        registrosMaquinas =
             Array.isArray(
                 dadosMaquinas
             )
-            ?dadosMaquinas
-            :[];
-
-
-        registrosMaquinas=
-            registrosMaquinas.map(
-                r=>({
+            ?
+            dadosMaquinas.map(
+                r => ({
 
                     ...r,
 
+                    id:
+                        r.id ||
+                        gerarID(),
+
                     passando:
-                        r.passando!==undefined
-                        ?r.passando
-                        :(r.passado!==undefined
-                            ?r.passado
-                            :0)
+                        r.passando !== undefined
+                        ?
+                        r.passando
+                        :
+                        (
+                            r.passado !== undefined
+                            ?
+                            r.passado
+                            :
+                            0
+                        )
 
                 })
-            );
+            )
+            :
+            [];
 
+
+        localStorage.setItem(
+            STORAGE_MAQUINAS,
+            JSON.stringify(
+                registrosMaquinas
+            )
+        );
 
     }
 
@@ -2572,47 +2619,58 @@ function mostrarPagina(
         .querySelectorAll(
             ".pagina"
         )
-        .forEach(p=>
-            p.classList.remove(
-                "ativa"
-            )
+        .forEach(
+            p =>
+                p.classList.remove(
+                    "ativa"
+                )
         );
 
 
-    const pagina=
+    const pagina =
         document.getElementById(
             id
         );
 
 
-    if(pagina)
+    if(pagina){
+
         pagina.classList.add(
             "ativa"
         );
+
+    }
 
 
     document
         .querySelectorAll(
             ".sidebar button"
         )
-        .forEach(b=>
-            b.classList.remove(
-                "ativo"
-            )
+        .forEach(
+            b =>
+                b.classList.remove(
+                    "ativo"
+                )
         );
 
 
-    if(botao)
+    if(botao){
+
         botao.classList.add(
             "ativo"
         );
 
+    }
 
-    if(id==="dashboard")
+
+    if(id === "dashboard"){
+
         atualizarDashboard();
 
+    }
 
-    if(id==="lancamento"){
+
+    if(id === "lancamento"){
 
         preencherSelectQuimicos();
 
@@ -2663,7 +2721,7 @@ function salvarQuimicos(){
 
 function preencherSelectQuimicos(){
 
-    const select=
+    const select =
         document.getElementById(
             "quimicoLancamento"
         );
@@ -2673,53 +2731,58 @@ function preencherSelectQuimicos(){
         return;
 
 
-    const valorAtual=
+    const valorAtual =
         select.value;
 
 
-    select.innerHTML=
+    select.innerHTML =
         '<option value="">Selecione o químico</option>';
 
 
     quimicos
         .slice()
-        .sort((a,b)=>
-            a.nome.localeCompare(
-                b.nome,
-                "pt-BR"
-            )
+        .sort(
+            (a,b) =>
+                a.nome.localeCompare(
+                    b.nome,
+                    "pt-BR"
+                )
         )
-        .forEach(q=>{
+        .forEach(
+            q => {
 
-            const option=
-                document.createElement(
-                    "option"
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    q.codigo;
+
+
+                option.textContent =
+                    `${q.codigo} - ${q.nome}`;
+
+
+                select.appendChild(
+                    option
                 );
 
-
-            option.value=
-                q.codigo;
-
-
-            option.textContent=
-                `${q.codigo} - ${q.nome}`;
-
-
-            select.appendChild(
-                option
-            );
-
-        });
+            }
+        );
 
 
     if(
         valorAtual &&
         quimicos.some(
-            q=>q.codigo===valorAtual
+            q =>
+                q.codigo ===
+                valorAtual
         )
     ){
 
-        select.value=
+        select.value =
             valorAtual;
 
     }
@@ -2729,31 +2792,31 @@ function preencherSelectQuimicos(){
 
 function salvarQuimico(){
 
-    const id=
+    const id =
         document.getElementById(
             "idQuimico"
         ).value;
 
 
-    const codigo=
+    const codigo =
         document.getElementById(
             "codigoQuimico"
         ).value.trim();
 
 
-    const nome=
+    const nome =
         document.getElementById(
             "nomeQuimico"
         ).value.trim();
 
 
-    const categoria=
+    const categoria =
         document.getElementById(
             "categoriaQuimico"
         ).value;
 
 
-    if(!codigo||!nome){
+    if(!codigo || !nome){
 
         alert(
             "Preencha o código e o nome."
@@ -2764,10 +2827,11 @@ function salvarQuimico(){
     }
 
 
-    const duplicado=
-        quimicos.find(q=>
-            q.codigo===codigo&&
-            q.id!==id
+    const duplicado =
+        quimicos.find(
+            q =>
+                q.codigo === codigo &&
+                q.id !== id
         );
 
 
@@ -2784,21 +2848,22 @@ function salvarQuimico(){
 
     if(id){
 
-        const q=
+        const q =
             quimicos.find(
-                x=>x.id===id
+                x =>
+                    x.id === id
             );
 
 
         if(q){
 
-            q.codigo=
+            q.codigo =
                 codigo;
 
-            q.nome=
+            q.nome =
                 nome;
 
-            q.categoria=
+            q.categoria =
                 categoria;
 
         }
@@ -2845,31 +2910,33 @@ function limparFormularioQuimico(){
 
     document.getElementById(
         "idQuimico"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "codigoQuimico"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "nomeQuimico"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "categoriaQuimico"
-    ).value="";
+    ).value = "";
 
 }
 
 
 function editarQuimico(id){
 
-    const q=
+    const q =
         quimicos.find(
-            x=>x.id===id
+            x =>
+                String(x.id) ===
+                String(id)
         );
 
 
@@ -2879,23 +2946,26 @@ function editarQuimico(id){
 
     document.getElementById(
         "idQuimico"
-    ).value=q.id;
+    ).value =
+        q.id;
 
 
     document.getElementById(
         "codigoQuimico"
-    ).value=q.codigo;
+    ).value =
+        q.codigo;
 
 
     document.getElementById(
         "nomeQuimico"
-    ).value=q.nome;
+    ).value =
+        q.nome;
 
 
     document.getElementById(
         "categoriaQuimico"
-    ).value=
-        q.categoria||"";
+    ).value =
+        q.categoria || "";
 
 
     mostrarPagina(
@@ -2913,9 +2983,11 @@ function editarQuimico(id){
 
 function excluirQuimico(id){
 
-    const q=
+    const q =
         quimicos.find(
-            x=>x.id===id
+            x =>
+                String(x.id) ===
+                String(id)
         );
 
 
@@ -2923,15 +2995,19 @@ function excluirQuimico(id){
         return;
 
 
-    if(!confirm(
-        `Excluir "${q.nome}"?`
-    ))
+    if(
+        !confirm(
+            `Excluir "${q.nome}"?`
+        )
+    )
         return;
 
 
-    quimicos=
+    quimicos =
         quimicos.filter(
-            x=>x.id!==id
+            x =>
+                String(x.id) !==
+                String(id)
         );
 
 
@@ -2948,124 +3024,135 @@ function excluirQuimico(id){
 
 function renderizarQuimicos(){
 
-    const tbody=
+    const tbody =
         document.getElementById(
             "tabelaQuimicos"
         );
 
 
-    const busca=
+    const busca =
         (
             document.getElementById(
                 "buscaQuimico"
-            )?.value||""
-        ).toLowerCase();
+            )?.value || ""
+        )
+        .toLowerCase();
 
 
-    const lista=
-        quimicos.filter(q=>
+    const lista =
+        quimicos.filter(
+            q =>
 
-            q.codigo
-            .toLowerCase()
-            .includes(busca)||
+                q.codigo
+                .toLowerCase()
+                .includes(busca)
 
-            q.nome
-            .toLowerCase()
-            .includes(busca)||
+                ||
 
-            (
-                q.categoria||""
-            )
-            .toLowerCase()
-            .includes(busca)
+                q.nome
+                .toLowerCase()
+                .includes(busca)
+
+                ||
+
+                (
+                    q.categoria ||
+                    ""
+                )
+                .toLowerCase()
+                .includes(busca)
 
         );
 
 
-    tbody.innerHTML=
-        lista.map(q=>`
+    tbody.innerHTML =
+        lista.map(
+            q => `
 
-        <tr>
+            <tr>
 
-            <td>
-                <strong>
+                <td>
+                    <strong>
+                        ${escaparHTML(
+                            q.codigo
+                        )}
+                    </strong>
+                </td>
+
+                <td>
                     ${escaparHTML(
-                        q.codigo
+                        q.nome
                     )}
-                </strong>
-            </td>
+                </td>
 
-            <td>
-                ${escaparHTML(
-                    q.nome
-                )}
-            </td>
+                <td>
+                    ${escaparHTML(
+                        q.categoria ||
+                        "-"
+                    )}
+                </td>
 
-            <td>
-                ${escaparHTML(
-                    q.categoria||"-"
-                )}
-            </td>
+                <td>
 
-            <td>
+                    <button
+                        class="btn-mini btn-editar"
+                        onclick="editarQuimico('${q.id}')">
 
-                <button
-                    class="btn-mini btn-editar"
-                    onclick="editarQuimico('${q.id}')">
+                        Editar
 
-                    Editar
-
-                </button>
+                    </button>
 
 
-                <button
-                    class="btn-mini btn-excluir"
-                    onclick="excluirQuimico('${q.id}')">
+                    <button
+                        class="btn-mini btn-excluir"
+                        onclick="excluirQuimico('${q.id}')">
 
-                    Excluir
+                        Excluir
 
-                </button>
+                    </button>
 
-            </td>
+                </td>
 
-        </tr>
+            </tr>
 
-        `).join("");
+            `
+        )
+        .join("");
 
 }
 
 
 /* =========================================================
-   LANÇAMENTO
+   SALVAR LANÇAMENTO
 ========================================================= */
 
 function salvarLancamento(){
 
-    const id=
+    const id =
         document.getElementById(
             "idLancamento"
         ).value;
 
 
-    const quimicoCodigo=
+    const quimicoCodigo =
         document.getElementById(
             "quimicoLancamento"
         ).value;
 
 
-    const maquina=
+    const maquina =
         document.getElementById(
             "maquinaLancamento"
         ).value;
 
 
-    const responsavel=
+    const responsavel =
         document.getElementById(
             "responsavelLancamento"
         ).value;
 
 
-    const padrao=
+    const padrao =
         Number(
             document.getElementById(
                 "padraoLancamento"
@@ -3073,7 +3160,7 @@ function salvarLancamento(){
         );
 
 
-    const valor=
+    const valor =
         Number(
             document.getElementById(
                 "valorLancamento"
@@ -3081,17 +3168,17 @@ function salvarLancamento(){
         );
 
 
-    const observacao=
+    const observacao =
         document.getElementById(
             "observacaoLancamento"
         ).value.trim();
 
 
     if(
-        !quimicoCodigo||
-        !maquina||
-        !responsavel||
-        !Number.isFinite(padrao)||
+        !quimicoCodigo ||
+        !maquina ||
+        !responsavel ||
+        !Number.isFinite(padrao) ||
         !Number.isFinite(valor)
     ){
 
@@ -3104,10 +3191,11 @@ function salvarLancamento(){
     }
 
 
-    const quimico=
-        quimicos.find(q=>
-            String(q.codigo).trim()===
-            String(quimicoCodigo).trim()
+    const quimico =
+        quimicos.find(
+            q =>
+                String(q.codigo).trim() ===
+                String(quimicoCodigo).trim()
         );
 
 
@@ -3129,19 +3217,20 @@ function salvarLancamento(){
 
     /*
        NOVO LANÇAMENTO:
-       pega exatamente a data/hora
-       do momento do salvamento.
+       data e hora do momento
+       em que o usuário salva.
     */
 
     if(!id){
 
-        timestamp=
+        timestamp =
             Date.now();
 
-        data=
+        data =
             new Date(
                 timestamp
-            ).toLocaleString(
+            )
+            .toLocaleString(
                 "pt-BR"
             );
 
@@ -3154,9 +3243,11 @@ function salvarLancamento(){
 
     else{
 
-        const antigo=
+        const antigo =
             lancamentos.find(
-                l=>l.id===id
+                l =>
+                    String(l.id) ===
+                    String(id)
             );
 
 
@@ -3165,25 +3256,26 @@ function salvarLancamento(){
             antigo.timestamp
         ){
 
-            timestamp=
+            timestamp =
                 Number(
                     antigo.timestamp
                 );
 
-            data=
+            data =
                 antigo.data;
 
         }
 
         else{
 
-            timestamp=
+            timestamp =
                 Date.now();
 
-            data=
+            data =
                 new Date(
                     timestamp
-                ).toLocaleString(
+                )
+                .toLocaleString(
                     "pt-BR"
                 );
 
@@ -3192,24 +3284,32 @@ function salvarLancamento(){
     }
 
 
-    const resultado=
+    const resultado =
         calcularResultado(
             valor,
             padrao
         );
 
 
-    const desvio=
+    const desvio =
         calcularDesvioPercentual(
             valor,
             padrao
         );
 
 
-    const registro={
+    /*
+       CORREÇÃO:
+       garante que o ID usado
+       no botão excluir seja
+       exatamente o mesmo salvo.
+    */
+
+    const registro = {
 
         id:
-            id||gerarID(),
+            id ||
+            gerarID(),
 
         timestamp,
 
@@ -3238,24 +3338,33 @@ function salvarLancamento(){
 
         observacao,
 
-        processo:
-            ""
+        processo:""
 
     };
 
 
     if(id){
 
-        const index=
+        const index =
             lancamentos.findIndex(
-                l=>l.id===id
+                l =>
+                    String(l.id) ===
+                    String(id)
             );
 
 
-        if(index>=0){
+        if(index >= 0){
 
-            lancamentos[index]=
+            lancamentos[index] =
                 registro;
+
+        }
+
+        else{
+
+            lancamentos.unshift(
+                registro
+            );
 
         }
 
@@ -3294,36 +3403,40 @@ function salvarLancamento(){
 }
 
 
+/* =========================================================
+   LIMPAR LANÇAMENTO
+========================================================= */
+
 function limparFormularioLancamento(){
 
     document.getElementById(
         "idLancamento"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "quimicoLancamento"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "maquinaLancamento"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "responsavelLancamento"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "padraoLancamento"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "valorLancamento"
-    ).value="";
+    ).value = "";
 
 
     atualizarDataHoraLancamento();
@@ -3331,34 +3444,46 @@ function limparFormularioLancamento(){
 
     document.getElementById(
         "observacaoLancamento"
-    ).value="";
+    ).value = "";
 
 
-    const resultado=
+    const resultado =
         document.getElementById(
             "resultadoLancamento"
         );
 
 
-    resultado.textContent="";
+    resultado.textContent = "";
 
-
-    resultado.className=
+    resultado.className =
         "resultado-lancamento";
 
 }
 
 
+/* =========================================================
+   EDITAR LANÇAMENTO
+========================================================= */
+
 function editarLancamento(id){
 
-    const l=
+    const l =
         lancamentos.find(
-            x=>x.id===id
+            x =>
+                String(x.id) ===
+                String(id)
         );
 
 
-    if(!l)
+    if(!l){
+
+        alert(
+            "Lançamento não encontrado."
+        );
+
         return;
+
+    }
 
 
     preencherSelectQuimicos();
@@ -3366,54 +3491,55 @@ function editarLancamento(id){
 
     document.getElementById(
         "idLancamento"
-    ).value=l.id;
+    ).value =
+        l.id;
 
 
     document.getElementById(
         "quimicoLancamento"
-    ).value=
-        l.codigo||
-        l.quimicoId||
+    ).value =
+        l.codigo ||
+        l.quimicoId ||
         "";
 
 
     document.getElementById(
         "maquinaLancamento"
-    ).value=
-        l.maquina||
+    ).value =
+        l.maquina ||
         "";
 
 
     document.getElementById(
         "responsavelLancamento"
-    ).value=
-        l.responsavel||
+    ).value =
+        l.responsavel ||
         "";
 
 
     document.getElementById(
         "padraoLancamento"
-    ).value=
+    ).value =
         l.padrao;
 
 
     document.getElementById(
         "valorLancamento"
-    ).value=
+    ).value =
         l.valor;
 
 
     document.getElementById(
         "dataHoraAutomatica"
-    ).value=
-        l.data||
+    ).value =
+        l.data ||
         "";
 
 
     document.getElementById(
         "observacaoLancamento"
-    ).value=
-        l.observacao||
+    ).value =
+        l.observacao ||
         "";
 
 
@@ -3433,19 +3559,88 @@ function editarLancamento(id){
 }
 
 
+/* =========================================================
+   EXCLUIR LANÇAMENTO - CORRIGIDO
+========================================================= */
+
 function excluirLancamento(id){
 
-    if(!confirm(
-        "Excluir este lançamento?"
-    ))
-        return;
+    /*
+       Procura o lançamento usando
+       String para evitar problemas
+       entre número e texto.
+    */
 
-
-    lancamentos=
-        lancamentos.filter(
-            l=>l.id!==id
+    const lancamento =
+        lancamentos.find(
+            l =>
+                String(l.id) ===
+                String(id)
         );
 
+
+    if(!lancamento){
+
+        alert(
+            "Lançamento não encontrado."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Confirmação antes da exclusão.
+    */
+
+    const confirmacao =
+        confirm(
+
+            "Deseja realmente excluir este lançamento?\n\n" +
+
+            "Data: " +
+            (lancamento.data || "-") +
+            "\n" +
+
+            "Máquina: " +
+            (lancamento.maquina || "-") +
+            "\n" +
+
+            "Químico: " +
+            (lancamento.quimico || "-") +
+            "\n" +
+
+            "Responsável: " +
+            (lancamento.responsavel || "-")
+
+        );
+
+
+    if(!confirmacao){
+
+        return;
+
+    }
+
+
+    /*
+       Remove somente o lançamento
+       selecionado.
+    */
+
+    lancamentos =
+        lancamentos.filter(
+            l =>
+                String(l.id) !==
+                String(id)
+        );
+
+
+    /*
+       Salva a nova lista no
+       localStorage.
+    */
 
     localStorage.setItem(
         STORAGE_LANCAMENTOS,
@@ -3455,179 +3650,205 @@ function excluirLancamento(id){
     );
 
 
+    /*
+       Atualiza imediatamente
+       todas as telas.
+    */
+
     renderizarLancamentos();
 
     renderizarHistorico();
 
     atualizarDashboard();
 
+
+    alert(
+        "Lançamento excluído com sucesso!"
+    );
+
 }
 
 
+/* =========================================================
+   RENDERIZAR LANÇAMENTOS
+========================================================= */
+
 function renderizarLancamentos(){
 
-    const tbody=
+    const tbody =
         document.getElementById(
             "tabelaLancamentos"
         );
 
 
-    const busca=
+    const busca =
         (
             document.getElementById(
                 "buscaLancamento"
-            )?.value||""
-        ).toLowerCase();
+            )?.value ||
+            ""
+        )
+        .toLowerCase();
 
 
-    const lista=
-        lancamentos.filter(l=>
+    const lista =
+        lancamentos.filter(
+            l =>
 
-            `${l.data||""}
-            ${l.maquina||""}
-            ${l.quimico||""}
-            ${l.codigo||""}
-            ${l.responsavel||""}
-            ${l.resultado||""}`
-            .toLowerCase()
-            .includes(busca)
+                `${l.data || ""}
+                ${l.maquina || ""}
+                ${l.quimico || ""}
+                ${l.codigo || ""}
+                ${l.responsavel || ""}
+                ${l.resultado || ""}`
+                .toLowerCase()
+                .includes(busca)
 
         );
 
 
-    tbody.innerHTML=
-        lista.map(l=>{
+    tbody.innerHTML =
+        lista.map(
+            l => {
 
-            const resultado=
-                l.resultado||
-                calcularResultado(
-                    l.valor,
-                    l.padrao
-                );
-
-
-            const classe=
-                classeResultado(
-                    resultado
-                );
+                const resultado =
+                    l.resultado ||
+                    calcularResultado(
+                        l.valor,
+                        l.padrao
+                    );
 
 
-            const desvio=
-                l.desvio!==undefined
-                ?Number(l.desvio)
-                :calcularDesvioPercentual(
-                    l.valor,
-                    l.padrao
-                );
+                const classe =
+                    classeResultado(
+                        resultado
+                    );
 
 
-            return `
+                const desvio =
+                    l.desvio !== undefined
+                    ?
+                    Number(l.desvio)
+                    :
+                    calcularDesvioPercentual(
+                        l.valor,
+                        l.padrao
+                    );
 
-            <tr>
 
-                <td>
-                    ${escaparHTML(
-                        l.data
-                    )}
-                </td>
+                return `
 
+                <tr>
 
-                <td>
-                    <strong>
+                    <td>
                         ${escaparHTML(
-                            l.maquina||
-                            "-"
+                            l.data || ""
                         )}
-                    </strong>
-                </td>
+                    </td>
 
 
-                <td>
+                    <td>
 
-                    <strong>
+                        <strong>
+                            ${escaparHTML(
+                                l.maquina ||
+                                "-"
+                            )}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        <strong>
+                            ${escaparHTML(
+                                l.codigo ||
+                                ""
+                            )}
+                        </strong>
+
+                        <br>
+
                         ${escaparHTML(
-                            l.codigo||
+                            l.quimico ||
                             ""
                         )}
-                    </strong>
 
-                    <br>
-
-                    ${escaparHTML(
-                        l.quimico||
-                        ""
-                    )}
-
-                </td>
+                    </td>
 
 
-                <td>
-                    ${escaparHTML(
-                        l.responsavel||
-                        "-"
-                    )}
-                </td>
-
-
-                <td>
-                    ${Number(
-                        l.padrao
-                    ).toFixed(2)}
-                </td>
-
-
-                <td>
-                    ${Number(
-                        l.valor
-                    ).toFixed(2)}
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="status ${classe}">
-
+                    <td>
                         ${escaparHTML(
-                            resultado
+                            l.responsavel ||
+                            "-"
                         )}
-
-                    </span>
-
-                </td>
+                    </td>
 
 
-                <td>
-                    ${desvio.toFixed(2)}%
-                </td>
+                    <td>
+                        ${Number(
+                            l.padrao
+                        ).toFixed(2)}
+                    </td>
 
 
-                <td>
-
-                    <button
-                        class="btn-mini btn-editar"
-                        onclick="editarLancamento('${l.id}')">
-
-                        Editar
-
-                    </button>
+                    <td>
+                        ${Number(
+                            l.valor
+                        ).toFixed(2)}
+                    </td>
 
 
-                    <button
-                        class="btn-mini btn-excluir"
-                        onclick="excluirLancamento('${l.id}')">
+                    <td>
 
-                        Excluir
+                        <span
+                            class="status ${classe}">
 
-                    </button>
+                            ${escaparHTML(
+                                resultado
+                            )}
 
-                </td>
+                        </span>
 
-            </tr>
+                    </td>
 
-            `;
 
-        }).join("");
+                    <td>
+                        ${desvio.toFixed(2)}%
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            type="button"
+                            class="btn-mini btn-editar"
+                            onclick="editarLancamento('${String(l.id)}')">
+
+                            Editar
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="btn-mini btn-excluir"
+                            onclick="excluirLancamento('${String(l.id)}')">
+
+                            🗑️ Excluir
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                `;
+
+            }
+        )
+        .join("");
 
 }
 
@@ -3638,31 +3859,31 @@ function renderizarLancamentos(){
 
 function salvarMaquina(){
 
-    const id=
+    const id =
         document.getElementById(
             "idMaquina"
         ).value;
 
 
-    const maquina=
+    const maquina =
         document.getElementById(
             "maquina"
         ).value;
 
 
-    const cor=
+    const cor =
         document.getElementById(
             "corMaquina"
         ).value.trim();
 
 
-    const operador=
+    const operador =
         document.getElementById(
             "operadorMaquina"
         ).value.trim();
 
 
-    const passando=
+    const passando =
         Number(
             document.getElementById(
                 "pecasPassando"
@@ -3670,7 +3891,7 @@ function salvarMaquina(){
         );
 
 
-    const padrao=
+    const padrao =
         Number(
             document.getElementById(
                 "padraoPecas"
@@ -3678,21 +3899,21 @@ function salvarMaquina(){
         );
 
 
-    const dataCampo=
+    const dataCampo =
         document.getElementById(
             "dataMaquina"
         ).value;
 
 
-    const comentario=
+    const comentario =
         document.getElementById(
             "comentarioMaquina"
         ).value.trim();
 
 
     if(
-        !maquina||
-        !Number.isFinite(passando)||
+        !maquina ||
+        !Number.isFinite(passando) ||
         !Number.isFinite(padrao)
     ){
 
@@ -3705,40 +3926,44 @@ function salvarMaquina(){
     }
 
 
-    const resultado=
+    const resultado =
         calcularResultado(
             passando,
             padrao
         );
 
 
-    const desvio=
+    const desvio =
         calcularDesvioPercentual(
             passando,
             padrao
         );
 
 
-    const timestamp=
+    const timestamp =
         dataCampo
-        ?new Date(
+        ?
+        new Date(
             dataCampo
         ).getTime()
-        :Date.now();
+        :
+        Date.now();
 
 
-    const data=
+    const data =
         new Date(
             timestamp
-        ).toLocaleString(
+        )
+        .toLocaleString(
             "pt-BR"
         );
 
 
-    const registro={
+    const registro = {
 
         id:
-            id||gerarID(),
+            id ||
+            gerarID(),
 
         timestamp,
 
@@ -3765,15 +3990,20 @@ function salvarMaquina(){
 
     if(id){
 
-        const index=
+        const index =
             registrosMaquinas.findIndex(
-                r=>r.id===id
+                r =>
+                    String(r.id) ===
+                    String(id)
             );
 
 
-        if(index>=0)
-            registrosMaquinas[index]=
+        if(index >= 0){
+
+            registrosMaquinas[index] =
                 registro;
+
+        }
 
     }
 
@@ -3814,37 +4044,37 @@ function limparFormularioMaquina(){
 
     document.getElementById(
         "idMaquina"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "maquina"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "corMaquina"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "operadorMaquina"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "pecasPassando"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "padraoPecas"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "dataMaquina"
-    ).value=
+    ).value =
         new Date()
         .toISOString()
         .slice(0,16);
@@ -3852,17 +4082,17 @@ function limparFormularioMaquina(){
 
     document.getElementById(
         "comentarioMaquina"
-    ).value="";
+    ).value = "";
 
 
     document.getElementById(
         "resultadoMaquina"
-    ).textContent="";
+    ).textContent = "";
 
 
     document.getElementById(
         "resultadoMaquina"
-    ).className=
+    ).className =
         "resultado-lancamento";
 
 }
@@ -3870,9 +4100,11 @@ function limparFormularioMaquina(){
 
 function editarMaquina(id){
 
-    const r=
+    const r =
         registrosMaquinas.find(
-            x=>x.id===id
+            x =>
+                String(x.id) ===
+                String(id)
         );
 
 
@@ -3882,46 +4114,47 @@ function editarMaquina(id){
 
     document.getElementById(
         "idMaquina"
-    ).value=r.id;
+    ).value =
+        r.id;
 
 
     document.getElementById(
         "maquina"
-    ).value=
-        r.maquina||
+    ).value =
+        r.maquina ||
         "";
 
 
     document.getElementById(
         "corMaquina"
-    ).value=
-        r.cor||
+    ).value =
+        r.cor ||
         "";
 
 
     document.getElementById(
         "operadorMaquina"
-    ).value=
-        r.operador||
+    ).value =
+        r.operador ||
         "";
 
 
     document.getElementById(
         "pecasPassando"
-    ).value=
+    ).value =
         r.passando;
 
 
     document.getElementById(
         "padraoPecas"
-    ).value=
+    ).value =
         r.padrao;
 
 
     document.getElementById(
         "comentarioMaquina"
-    ).value=
-        r.comentario||
+    ).value =
+        r.comentario ||
         "";
 
 
@@ -3929,7 +4162,7 @@ function editarMaquina(id){
 
         document.getElementById(
             "dataMaquina"
-        ).value=
+        ).value =
             new Date(
                 r.timestamp
             )
@@ -3957,15 +4190,41 @@ function editarMaquina(id){
 
 function excluirMaquina(id){
 
-    if(!confirm(
-        "Excluir esta avaliação?"
-    ))
+    const registro =
+        registrosMaquinas.find(
+            r =>
+                String(r.id) ===
+                String(id)
+        );
+
+
+    if(!registro){
+
+        alert(
+            "Avaliação não encontrada."
+        );
+
         return;
 
+    }
 
-    registrosMaquinas=
+
+    if(
+        !confirm(
+            "Deseja realmente excluir esta avaliação?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    registrosMaquinas =
         registrosMaquinas.filter(
-            r=>r.id!==id
+            r =>
+                String(r.id) !==
+                String(id)
         );
 
 
@@ -3983,160 +4242,177 @@ function excluirMaquina(id){
 
     atualizarDashboard();
 
+
+    alert(
+        "Avaliação excluída com sucesso!"
+    );
+
 }
 
 
 function renderizarMaquinas(){
 
-    const tbody=
+    const tbody =
         document.getElementById(
             "tabelaMaquinas"
         );
 
 
-    const busca=
+    const busca =
         (
             document.getElementById(
                 "buscaMaquina"
-            )?.value||""
-        ).toLowerCase();
+            )?.value ||
+            ""
+        )
+        .toLowerCase();
 
 
-    const lista=
-        registrosMaquinas.filter(r=>
+    const lista =
+        registrosMaquinas.filter(
+            r =>
 
-            `${r.data||""}
-            ${r.maquina||""}
-            ${r.cor||""}
-            ${r.operador||""}
-            ${r.resultado||""}`
-            .toLowerCase()
-            .includes(busca)
+                `${r.data || ""}
+                ${r.maquina || ""}
+                ${r.cor || ""}
+                ${r.operador || ""}
+                ${r.resultado || ""}`
+                .toLowerCase()
+                .includes(busca)
 
         );
 
 
-    tbody.innerHTML=
-        lista.map(r=>{
+    tbody.innerHTML =
+        lista.map(
+            r => {
 
-            const resultado=
-                r.resultado||
-                calcularResultado(
-                    r.passando,
-                    r.padrao
-                );
-
-
-            const classe=
-                classeResultado(
-                    resultado
-                );
-
-
-            const desvio=
-                r.desvio!==undefined
-                ?Number(r.desvio)
-                :calcularDesvioPercentual(
-                    r.passando,
-                    r.padrao
-                );
-
-
-            return `
-
-            <tr>
-
-                <td>
-                    ${escaparHTML(
-                        r.data
-                    )}
-                </td>
-
-
-                <td>
-                    <strong>
-                        ${escaparHTML(
-                            r.maquina
-                        )}
-                    </strong>
-                </td>
-
-
-                <td>
-                    ${escaparHTML(
-                        r.cor||
-                        "-"
-                    )}
-                </td>
-
-
-                <td>
-                    ${escaparHTML(
-                        r.operador||
-                        "-"
-                    )}
-                </td>
-
-
-                <td>
-                    ${Number(
-                        r.passando
-                    ).toFixed(2)}
-                </td>
-
-
-                <td>
-                    ${Number(
+                const resultado =
+                    r.resultado ||
+                    calcularResultado(
+                        r.passando,
                         r.padrao
-                    ).toFixed(2)}
-                </td>
+                    );
 
 
-                <td>
+                const classe =
+                    classeResultado(
+                        resultado
+                    );
 
-                    <span
-                        class="status ${classe}">
 
+                const desvio =
+                    r.desvio !== undefined
+                    ?
+                    Number(r.desvio)
+                    :
+                    calcularDesvioPercentual(
+                        r.passando,
+                        r.padrao
+                    );
+
+
+                return `
+
+                <tr>
+
+                    <td>
                         ${escaparHTML(
-                            resultado
+                            r.data
                         )}
-
-                    </span>
-
-                </td>
+                    </td>
 
 
-                <td>
-                    ${desvio.toFixed(2)}%
-                </td>
+                    <td>
+
+                        <strong>
+                            ${escaparHTML(
+                                r.maquina
+                            )}
+                        </strong>
+
+                    </td>
 
 
-                <td>
-
-                    <button
-                        class="btn-mini btn-editar"
-                        onclick="editarMaquina('${r.id}')">
-
-                        Editar
-
-                    </button>
+                    <td>
+                        ${escaparHTML(
+                            r.cor ||
+                            "-"
+                        )}
+                    </td>
 
 
-                    <button
-                        class="btn-mini btn-excluir"
-                        onclick="excluirMaquina('${r.id}')">
+                    <td>
+                        ${escaparHTML(
+                            r.operador ||
+                            "-"
+                        )}
+                    </td>
 
-                        Excluir
 
-                    </button>
+                    <td>
+                        ${Number(
+                            r.passando
+                        ).toFixed(2)}
+                    </td>
 
-                </td>
 
-            </tr>
+                    <td>
+                        ${Number(
+                            r.padrao
+                        ).toFixed(2)}
+                    </td>
 
-            `;
 
-        }).join("");
+                    <td>
+
+                        <span
+                            class="status ${classe}">
+
+                            ${escaparHTML(
+                                resultado
+                            )}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+                        ${desvio.toFixed(2)}%
+                    </td>
+
+
+                    <td>
+
+                        <button
+                            type="button"
+                            class="btn-mini btn-editar"
+                            onclick="editarMaquina('${String(r.id)}')">
+
+                            Editar
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="btn-mini btn-excluir"
+                            onclick="excluirMaquina('${String(r.id)}')">
+
+                            🗑️ Excluir
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                `;
+
+            }
+        )
+        .join("");
 
 }
 
@@ -4147,220 +4423,226 @@ function renderizarMaquinas(){
 
 function renderizarHistorico(){
 
-    const tbody=
+    const tbody =
         document.getElementById(
             "tabelaHistorico"
         );
 
 
-    const busca=
+    const busca =
         (
             document.getElementById(
                 "buscaHistorico"
-            )?.value||""
-        ).toLowerCase();
+            )?.value ||
+            ""
+        )
+        .toLowerCase();
 
 
-    const listaLancamentos=
-        lancamentos.map(l=>({
+    const listaLancamentos =
+        lancamentos.map(
+            l => ({
 
-            timestamp:
-                obterTimestamp(l),
+                timestamp:
+                    obterTimestamp(l),
 
-            data:
-                l.data,
+                data:
+                    l.data,
 
-            tipo:
-                "Lançamento",
+                tipo:
+                    "Lançamento",
 
-            item:
-                `${l.codigo||""}
-                 ${l.quimico||""}`,
+                item:
+                    `${l.codigo || ""}
+                    ${l.quimico || ""}`,
 
-            maquina:
-                l.maquina||
-                "-",
+                maquina:
+                    l.maquina ||
+                    "-",
 
-            responsavel:
-                l.responsavel||
-                "-",
+                responsavel:
+                    l.responsavel ||
+                    "-",
 
-            padrao:
-                l.padrao,
+                padrao:
+                    l.padrao,
 
-            valor:
-                l.valor,
-
-            resultado:
-                l.resultado||
-                calcularResultado(
+                valor:
                     l.valor,
-                    l.padrao
-                ),
 
-            desvio:
-                l.desvio!==undefined
-                ?l.desvio
-                :calcularDesvioPercentual(
-                    l.valor,
-                    l.padrao
-                )
+                resultado:
+                    l.resultado ||
+                    calcularResultado(
+                        l.valor,
+                        l.padrao
+                    ),
 
-        }));
+                desvio:
+                    l.desvio !== undefined
+                    ?
+                    l.desvio
+                    :
+                    calcularDesvioPercentual(
+                        l.valor,
+                        l.padrao
+                    )
+
+            })
+        );
 
 
-    const listaMaquinas=
-        registrosMaquinas.map(r=>({
+    const listaMaquinas =
+        registrosMaquinas.map(
+            r => ({
 
-            timestamp:
-                obterTimestamp(r),
+                timestamp:
+                    obterTimestamp(r),
 
-            data:
-                r.data,
+                data:
+                    r.data,
 
-            tipo:
-                "Máquina",
+                tipo:
+                    "Máquina",
 
-            item:
-                `Máquina ${r.maquina}`,
+                item:
+                    `Máquina ${r.maquina}`,
 
-            maquina:
-                r.maquina||
-                "-",
+                maquina:
+                    r.maquina ||
+                    "-",
 
-            responsavel:
-                r.operador||
-                "-",
+                responsavel:
+                    r.operador ||
+                    "-",
 
-            padrao:
-                r.padrao,
+                padrao:
+                    r.padrao,
 
-            valor:
-                r.passando,
-
-            resultado:
-                r.resultado||
-                calcularResultado(
+                valor:
                     r.passando,
-                    r.padrao
-                ),
 
-            desvio:
-                r.desvio!==undefined
-                ?r.desvio
-                :calcularDesvioPercentual(
-                    r.passando,
-                    r.padrao
+                resultado:
+                    r.resultado ||
+                    calcularResultado(
+                        r.passando,
+                        r.padrao
+                    ),
 
-                )
+                desvio:
+                    r.desvio !== undefined
+                    ?
+                    r.desvio
+                    :
+                    calcularDesvioPercentual(
+                        r.passando,
+                        r.padrao
+                    )
 
-        }));
+            })
+        );
 
 
-    const lista=[
+    const lista = [
 
         ...listaLancamentos,
+
         ...listaMaquinas
 
     ]
 
-    .filter(r=>
+    .filter(
+        r =>
 
-        `${r.data||""}
-        ${r.tipo||""}
-        ${r.item||""}
-        ${r.maquina||""}
-        ${r.responsavel||""}
-        ${r.resultado||""}`
-        .toLowerCase()
-        .includes(busca)
+            `${r.data || ""}
+            ${r.tipo || ""}
+            ${r.item || ""}
+            ${r.maquina || ""}
+            ${r.responsavel || ""}
+            ${r.resultado || ""}`
+            .toLowerCase()
+            .includes(busca)
 
     )
 
     .sort(
-        (a,b)=>
-            b.timestamp-
+        (a,b) =>
+            b.timestamp -
             a.timestamp
     );
 
 
-    tbody.innerHTML=
-        lista.map(r=>`
+    tbody.innerHTML =
+        lista.map(
+            r => `
 
-        <tr>
+            <tr>
 
-            <td>
-                ${escaparHTML(
-                    r.data
-                )}
-            </td>
-
-
-            <td>
-                ${escaparHTML(
-                    r.tipo
-                )}
-            </td>
-
-
-            <td>
-                ${escaparHTML(
-                    r.item
-                )}
-            </td>
-
-
-            <td>
-                ${escaparHTML(
-                    r.maquina
-                )}
-            </td>
-
-
-            <td>
-                ${escaparHTML(
-                    r.responsavel
-                )}
-            </td>
-
-
-            <td>
-                ${Number(
-                    r.padrao
-                ).toFixed(2)}
-            </td>
-
-
-            <td>
-                ${Number(
-                    r.valor
-                ).toFixed(2)}
-            </td>
-
-
-            <td>
-
-                <span
-                    class="status ${classeResultado(r.resultado)}">
-
+                <td>
                     ${escaparHTML(
-                        r.resultado
+                        r.data
                     )}
+                </td>
 
-                </span>
+                <td>
+                    ${escaparHTML(
+                        r.tipo
+                    )}
+                </td>
 
-            </td>
+                <td>
+                    ${escaparHTML(
+                        r.item
+                    )}
+                </td>
 
+                <td>
+                    ${escaparHTML(
+                        r.maquina
+                    )}
+                </td>
 
-            <td>
-                ${Number(
-                    r.desvio
-                ).toFixed(2)}%
-            </td>
+                <td>
+                    ${escaparHTML(
+                        r.responsavel
+                    )}
+                </td>
 
-        </tr>
+                <td>
+                    ${Number(
+                        r.padrao
+                    ).toFixed(2)}
+                </td>
 
-        `).join("");
+                <td>
+                    ${Number(
+                        r.valor
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+
+                    <span
+                        class="status ${classeResultado(r.resultado)}">
+
+                        ${escaparHTML(
+                            r.resultado
+                        )}
+
+                    </span>
+
+                </td>
+
+                <td>
+                    ${Number(
+                        r.desvio
+                    ).toFixed(2)}%
+                </td>
+
+            </tr>
+
+            `
+        )
+        .join("");
 
 }
 
@@ -4371,19 +4653,19 @@ function renderizarHistorico(){
 
 function obterLimitePeriodo(){
 
-    const periodo=
+    const periodo =
         document.getElementById(
             "filtroPeriodoDashboard"
         ).value;
 
 
-    if(periodo==="todos")
+    if(periodo === "todos")
         return 0;
 
 
-    if(periodo==="hoje"){
+    if(periodo === "hoje"){
 
-        const d=
+        const d =
             new Date();
 
 
@@ -4400,11 +4682,11 @@ function obterLimitePeriodo(){
     }
 
 
-    return Date.now()-
-        Number(periodo)*
-        24*
-        60*
-        60*
+    return Date.now() -
+        Number(periodo) *
+        24 *
+        60 *
+        60 *
         1000;
 
 }
@@ -4414,7 +4696,7 @@ function filtrarPorPeriodo(
     lista
 ){
 
-    const limite=
+    const limite =
         obterLimitePeriodo();
 
 
@@ -4423,17 +4705,17 @@ function filtrarPorPeriodo(
 
 
     return lista.filter(
-        item=>
+        item =>
             obterTimestamp(
                 item
-            )>=limite
+            ) >= limite
     );
 
 }
 
 
 /* =========================================================
-   STATUS
+   STATUS GERENCIAL
 ========================================================= */
 
 function atualizarStatusGerencial(
@@ -4442,25 +4724,25 @@ function atualizarStatusGerencial(
     total
 ){
 
-    const badge=
+    const badge =
         document.getElementById(
             "badgeStatusGerencial"
         );
 
 
-    const texto=
+    const texto =
         document.getElementById(
             "textoStatusGerencial"
         );
 
 
-    badge.className=
+    badge.className =
         "status-gerencial-badge";
 
 
-    if(total===0){
+    if(total === 0){
 
-        badge.textContent=
+        badge.textContent =
             "SEM DADOS";
 
 
@@ -4469,7 +4751,7 @@ function atualizarStatusGerencial(
         );
 
 
-        texto.textContent=
+        texto.textContent =
             "Ainda não existem avaliações no período selecionado.";
 
         return;
@@ -4477,9 +4759,9 @@ function atualizarStatusGerencial(
     }
 
 
-    if(conformidade>=90){
+    if(conformidade >= 90){
 
-        badge.textContent=
+        badge.textContent =
             "NORMAL";
 
 
@@ -4488,14 +4770,14 @@ function atualizarStatusGerencial(
         );
 
 
-        texto.textContent=
+        texto.textContent =
             `${conformidade.toFixed(1)}% das avaliações estão dentro do padrão.`;
 
     }
 
-    else if(conformidade>=75){
+    else if(conformidade >= 75){
 
-        badge.textContent=
+        badge.textContent =
             "ATENÇÃO";
 
 
@@ -4504,14 +4786,14 @@ function atualizarStatusGerencial(
         );
 
 
-        texto.textContent=
+        texto.textContent =
             `${fora} ocorrência(s) fora do padrão. Recomenda-se acompanhamento.`;
 
     }
 
     else{
 
-        badge.textContent=
+        badge.textContent =
             "CRÍTICO";
 
 
@@ -4520,7 +4802,7 @@ function atualizarStatusGerencial(
         );
 
 
-        texto.textContent=
+        texto.textContent =
             `Conformidade baixa: ${conformidade.toFixed(1)}%.`;
 
     }
@@ -4540,7 +4822,7 @@ function destruirGrafico(
 
         graficos[nome].destroy();
 
-        graficos[nome]=null;
+        graficos[nome] = null;
 
     }
 
@@ -4552,41 +4834,45 @@ function atualizarGraficosGerenciais(
     maq
 ){
 
-    const todos=[
+    const todos = [
         ...lanc,
         ...maq
     ];
 
 
-    const conformes=
-        todos.filter(item=>{
+    const conformes =
+        todos.filter(
+            item => {
 
-            const valor=
-                item.valor!==undefined
-                ?item.valor
-                :item.passando;
-
-
-            const resultado=
-                item.resultado||
-                calcularResultado(
-                    valor,
-                    item.padrao
-                );
+                const valor =
+                    item.valor !== undefined
+                    ?
+                    item.valor
+                    :
+                    item.passando;
 
 
-            return resultado===
-                "DENTRO DO PADRÃO";
+                const resultado =
+                    item.resultado ||
+                    calcularResultado(
+                        valor,
+                        item.padrao
+                    );
 
-        }).length;
+
+                return resultado ===
+                    "DENTRO DO PADRÃO";
+
+            }
+        ).length;
 
 
-    const total=
+    const total =
         todos.length;
 
 
-    const fora=
-        total-
+    const fora =
+        total -
         conformes;
 
 
@@ -4595,7 +4881,7 @@ function atualizarGraficosGerenciais(
     );
 
 
-    graficos.conformidade=
+    graficos.conformidade =
         new Chart(
 
             document.getElementById(
@@ -4645,32 +4931,35 @@ function atualizarGraficosGerenciais(
 
     /* LANÇAMENTOS POR MÁQUINA */
 
-    const mapaLancamentos={};
+    const mapaLancamentos = {};
 
 
-    lanc.forEach(l=>{
+    lanc.forEach(
+        l => {
 
-        const maquina=
-            l.maquina||
-            "Não informada";
-
-
-        mapaLancamentos[maquina]=
-            (
-                mapaLancamentos[maquina]||
-                0
-            )+1;
-
-    });
+            const maquina =
+                l.maquina ||
+                "Não informada";
 
 
-    const maquinasLancamento=
+            mapaLancamentos[maquina] =
+                (
+                    mapaLancamentos[maquina] ||
+                    0
+                ) + 1;
+
+        }
+    );
+
+
+    const maquinasLancamento =
         Object.entries(
             mapaLancamentos
         )
         .sort(
-            (a,b)=>
-                b[1]-a[1]
+            (a,b) =>
+                b[1] -
+                a[1]
         );
 
 
@@ -4679,7 +4968,7 @@ function atualizarGraficosGerenciais(
     );
 
 
-    graficos.processos=
+    graficos.processos =
         new Chart(
 
             document.getElementById(
@@ -4695,7 +4984,7 @@ function atualizarGraficosGerenciais(
                     labels:
                         maquinasLancamento
                         .map(
-                            x=>x[0]
+                            x => x[0]
                         ),
 
                     datasets:[{
@@ -4706,7 +4995,7 @@ function atualizarGraficosGerenciais(
                         data:
                             maquinasLancamento
                             .map(
-                                x=>x[1]
+                                x => x[1]
                             )
 
                     }]
@@ -4734,51 +5023,58 @@ function atualizarGraficosGerenciais(
 
     /* OCORRÊNCIAS POR MÁQUINA */
 
-    const mapaMaquinas={};
+    const mapaMaquinas = {};
 
 
-    maq.forEach(r=>{
+    maq.forEach(
+        r => {
 
-        if(!r.maquina)
-            return;
-
-
-        const resultado=
-            r.resultado||
-            calcularResultado(
-                r.passando,
-                r.padrao
-            );
+            if(!r.maquina)
+                return;
 
 
-        if(
-            resultado===
-            "DENTRO DO PADRÃO"
-        )
-            return;
+            const resultado =
+                r.resultado ||
+                calcularResultado(
+                    r.passando,
+                    r.padrao
+                );
 
 
-        mapaMaquinas[
-            r.maquina
-        ]=
-            (
-                mapaMaquinas[
-                    r.maquina
-                ]||0
-            )+1;
-
-    });
+            if(
+                resultado ===
+                "DENTRO DO PADRÃO"
+            )
+                return;
 
 
-    const maquinasOrdenadas=
+            mapaMaquinas[
+                r.maquina
+            ] =
+                (
+                    mapaMaquinas[
+                        r.maquina
+                    ] ||
+                    0
+                ) + 1;
+
+        }
+    );
+
+
+    const maquinasOrdenadas =
         Object.entries(
             mapaMaquinas
         )
         .sort(
-            (a,b)=>
-                b[1]-a[1]
+            (a,b) =>
+                b[1] -
+                a[1]
         )
-        .slice(0,8);
+        .slice(
+            0,
+            8
+        );
 
 
     destruirGrafico(
@@ -4786,7 +5082,7 @@ function atualizarGraficosGerenciais(
     );
 
 
-    graficos.maquinas=
+    graficos.maquinas =
         new Chart(
 
             document.getElementById(
@@ -4802,7 +5098,7 @@ function atualizarGraficosGerenciais(
                     labels:
                         maquinasOrdenadas
                         .map(
-                            x=>x[0]
+                            x => x[0]
                         ),
 
                     datasets:[{
@@ -4813,7 +5109,7 @@ function atualizarGraficosGerenciais(
                         data:
                             maquinasOrdenadas
                             .map(
-                                x=>x[1]
+                                x => x[1]
                             )
 
                     }]
@@ -4851,100 +5147,112 @@ function atualizarGraficosGerenciais(
 
     /* TENDÊNCIA */
 
-    const dias={};
+    const dias = {};
 
 
-    todos
-
+    [...todos]
     .sort(
-        (a,b)=>
-            obterTimestamp(a)-
+        (a,b) =>
+            obterTimestamp(a) -
             obterTimestamp(b)
     )
+    .forEach(
+        item => {
 
-    .forEach(item=>{
-
-        const ts=
-            obterTimestamp(item);
-
-
-        if(!ts)
-            return;
+            const ts =
+                obterTimestamp(
+                    item
+                );
 
 
-        const d=
-            new Date(ts);
+            if(!ts)
+                return;
 
 
-        const chave=
-            String(
-                d.getDate()
-            ).padStart(2,"0")
-            +"/"+
-            String(
-                d.getMonth()+1
-            ).padStart(2,"0");
+            const d =
+                new Date(ts);
 
 
-        if(!dias[chave]){
+            const chave =
+                String(
+                    d.getDate()
+                ).padStart(
+                    2,
+                    "0"
+                )
+                +
+                "/"
+                +
+                String(
+                    d.getMonth()+1
+                ).padStart(
+                    2,
+                    "0"
+                );
 
-            dias[chave]={
-                total:0,
-                conformes:0
-            };
+
+            if(!dias[chave]){
+
+                dias[chave] = {
+
+                    total:0,
+
+                    conformes:0
+
+                };
+
+            }
+
+
+            dias[chave].total++;
+
+
+            const valor =
+                item.valor !== undefined
+                ?
+                item.valor
+                :
+                item.passando;
+
+
+            const resultado =
+                item.resultado ||
+                calcularResultado(
+                    valor,
+                    item.padrao
+                );
+
+
+            if(
+                resultado ===
+                "DENTRO DO PADRÃO"
+            ){
+
+                dias[chave].conformes++;
+
+            }
 
         }
+    );
 
 
-        dias[chave].total++;
-
-
-        const valor=
-            item.valor!==undefined
-            ?item.valor
-            :item.passando;
-
-
-        const resultado=
-            item.resultado||
-            calcularResultado(
-                valor,
-                item.padrao
-            );
-
-
-        if(
-            resultado===
-            "DENTRO DO PADRÃO"
-        ){
-
-            dias[chave].conformes++;
-
-        }
-
-    });
-
-
-    const labels=
+    const labels =
         Object.keys(
             dias
         );
 
 
-    const dados=
-        labels.map(d=>
-
-            dias[d].total
-
-            ?
-
-            (
-                dias[d].conformes/
+    const dados =
+        labels.map(
+            d =>
                 dias[d].total
-            )*100
-
-            :0
-
+                ?
+                (
+                    dias[d].conformes /
+                    dias[d].total
+                ) * 100
+                :
+                0
         );
 
 
@@ -4953,7 +5261,7 @@ function atualizarGraficosGerenciais(
     );
 
 
-    graficos.tendencia=
+    graficos.tendencia =
         new Chart(
 
             document.getElementById(
@@ -5015,89 +5323,99 @@ function atualizarRankingProblemas(
     maq
 ){
 
-    const container=
+    const container =
         document.getElementById(
             "rankingProblemas"
         );
 
 
-    const problemas={};
+    const problemas = {};
 
 
-    lanc.forEach(l=>{
+    lanc.forEach(
+        l => {
 
-        const resultado=
-            l.resultado||
-            calcularResultado(
-                l.valor,
-                l.padrao
-            );
-
-
-        if(
-            resultado===
-            "DENTRO DO PADRÃO"
-        )
-            return;
+            const resultado =
+                l.resultado ||
+                calcularResultado(
+                    l.valor,
+                    l.padrao
+                );
 
 
-        const nome=
-            `${l.maquina||"Máquina não informada"} - ${l.quimico||"Produto não informado"}`;
+            if(
+                resultado ===
+                "DENTRO DO PADRÃO"
+            )
+                return;
 
 
-        problemas[nome]=
-            (
-                problemas[nome]||
-                0
-            )+1;
-
-    });
+            const nome =
+                `${l.maquina || "Máquina não informada"} - ${l.quimico || "Produto não informado"}`;
 
 
-    maq.forEach(r=>{
+            problemas[nome] =
+                (
+                    problemas[nome] ||
+                    0
+                ) + 1;
 
-        const resultado=
-            r.resultado||
-            calcularResultado(
-                r.passando,
-                r.padrao
-            );
-
-
-        if(
-            resultado===
-            "DENTRO DO PADRÃO"
-        )
-            return;
+        }
+    );
 
 
-        const nome=
-            "Máquina "+r.maquina;
+    maq.forEach(
+        r => {
+
+            const resultado =
+                r.resultado ||
+                calcularResultado(
+                    r.passando,
+                    r.padrao
+                );
 
 
-        problemas[nome]=
-            (
-                problemas[nome]||
-                0
-            )+1;
-
-    });
+            if(
+                resultado ===
+                "DENTRO DO PADRÃO"
+            )
+                return;
 
 
-    const ranking=
+            const nome =
+                "Máquina " +
+                r.maquina;
+
+
+            problemas[nome] =
+                (
+                    problemas[nome] ||
+                    0
+                ) + 1;
+
+        }
+    );
+
+
+    const ranking =
         Object.entries(
             problemas
         )
         .sort(
-            (a,b)=>
-                b[1]-a[1]
+            (a,b) =>
+                b[1] -
+                a[1]
         )
-        .slice(0,5);
+        .slice(
+            0,
+            5
+        );
 
 
     if(!ranking.length){
 
-        container.innerHTML=
+        container.innerHTML =
+
             `<div style="padding:10px;color:#159447;font-weight:bold;">
 
                 ✓ Nenhum problema identificado no período.
@@ -5109,9 +5427,9 @@ function atualizarRankingProblemas(
     }
 
 
-    container.innerHTML=
+    container.innerHTML =
         ranking.map(
-            (item,index)=>`
+            (item,index) => `
 
             <div class="ranking-item">
 
@@ -5135,7 +5453,8 @@ function atualizarRankingProblemas(
             </div>
 
             `
-        ).join("");
+        )
+        .join("");
 
 }
 
@@ -5149,99 +5468,107 @@ function atualizarAtividadeRecente(
     maq
 ){
 
-    const tbody=
+    const tbody =
         document.getElementById(
             "atividadeRecente"
         );
 
 
-    const atividades=[
+    const atividades = [
 
-        ...lanc.map(l=>({
+        ...lanc.map(
+            l => ({
 
-            timestamp:
-                obterTimestamp(l),
+                timestamp:
+                    obterTimestamp(l),
 
-            data:
-                l.data,
+                data:
+                    l.data,
 
-            tipo:
-                "Lançamento",
+                tipo:
+                    "Lançamento",
 
-            item:
-                `${l.codigo||""} - ${l.quimico||""}`,
+                item:
+                    `${l.codigo || ""} - ${l.quimico || ""}`,
 
-            maquina:
-                l.maquina||
-                "-",
+                maquina:
+                    l.maquina ||
+                    "-",
 
-            responsavel:
-                l.responsavel||
-                "-",
+                responsavel:
+                    l.responsavel ||
+                    "-",
 
-            resultado:
-                l.resultado||
-                calcularResultado(
-                    l.valor,
-                    l.padrao
-                ),
+                resultado:
+                    l.resultado ||
+                    calcularResultado(
+                        l.valor,
+                        l.padrao
+                    ),
 
-            desvio:
-                l.desvio!==undefined
-                ?Number(l.desvio)
-                :calcularDesvioPercentual(
-                    l.valor,
-                    l.padrao
-                )
+                desvio:
+                    l.desvio !== undefined
+                    ?
+                    Number(l.desvio)
+                    :
+                    calcularDesvioPercentual(
+                        l.valor,
+                        l.padrao
+                    )
 
-        })),
+            })
+        ),
 
 
-        ...maq.map(r=>({
+        ...maq.map(
+            r => ({
 
-            timestamp:
-                obterTimestamp(r),
+                timestamp:
+                    obterTimestamp(r),
 
-            data:
-                r.data,
+                data:
+                    r.data,
 
-            tipo:
-                "Máquina",
+                tipo:
+                    "Máquina",
 
-            item:
-                "Avaliação da máquina",
+                item:
+                    "Avaliação da máquina",
 
-            maquina:
-                r.maquina||
-                "-",
+                maquina:
+                    r.maquina ||
+                    "-",
 
-            responsavel:
-                r.operador||
-                "-",
+                responsavel:
+                    r.operador ||
+                    "-",
 
-            resultado:
-                r.resultado||
-                calcularResultado(
-                    r.passando,
-                    r.padrao
-                ),
+                resultado:
+                    r.resultado ||
+                    calcularResultado(
+                        r.passando,
+                        r.padrao
+                    ),
 
-            desvio:
-                r.desvio!==undefined
-                ?Number(r.desvio)
-                :calcularDesvioPercentual(
-                    r.passando,
-                    r.padrao
-                )
+                desvio:
+                    r.desvio !== undefined
+                    ?
+                    Number(r.desvio)
+                    :
+                    calcularDesvioPercentual(
+                        r.passando,
+                        r.padrao
+                    )
 
-        }))
+            })
+        )
 
     ]
 
 
     .sort(
-        (a,b)=>
-            b.timestamp-
+        (a,b) =>
+            b.timestamp -
             a.timestamp
     )
 
@@ -5252,69 +5579,74 @@ function atualizarAtividadeRecente(
     );
 
 
-    tbody.innerHTML=
-        atividades.map(a=>`
+    tbody.innerHTML =
+        atividades.map(
+            a => `
 
-        <tr>
+            <tr>
 
-            <td>
-                ${escaparHTML(
-                    a.data
-                )}
-            </td>
-
-
-            <td>
-                ${escaparHTML(
-                    a.tipo
-                )}
-            </td>
-
-
-            <td>
-                ${escaparHTML(
-                    a.item
-                )}
-            </td>
-
-
-            <td>
-                <strong>
+                <td>
                     ${escaparHTML(
-                        a.maquina
+                        a.data
                     )}
-                </strong>
-            </td>
+                </td>
 
 
-            <td>
-                ${escaparHTML(
-                    a.responsavel
-                )}
-            </td>
-
-
-            <td>
-
-                <span
-                    class="status ${classeResultado(a.resultado)}">
-
+                <td>
                     ${escaparHTML(
-                        a.resultado
+                        a.tipo
                     )}
-
-                </span>
-
-            </td>
+                </td>
 
 
-            <td>
-                ${a.desvio.toFixed(2)}%
-            </td>
+                <td>
+                    ${escaparHTML(
+                        a.item
+                    )}
+                </td>
 
-        </tr>
 
-        `).join("");
+                <td>
+
+                    <strong>
+                        ${escaparHTML(
+                            a.maquina
+                        )}
+                    </strong>
+
+                </td>
+
+
+                <td>
+                    ${escaparHTML(
+                        a.responsavel
+                    )}
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="status ${classeResultado(a.resultado)}">
+
+                        ${escaparHTML(
+                            a.resultado
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+                    ${a.desvio.toFixed(2)}%
+                </td>
+
+            </tr>
+
+            `
+        )
+        .join("");
 
 }
 
@@ -5325,94 +5657,97 @@ function atualizarAtividadeRecente(
 
 function atualizarDashboard(){
 
-    const lanc=
+    const lanc =
         filtrarPorPeriodo(
             lancamentos
         );
 
 
-    const maq=
+    const maq =
         filtrarPorPeriodo(
             registrosMaquinas
         );
 
 
-    const avaliacoes=
-        lanc.length+
+    const avaliacoes =
+        lanc.length +
         maq.length;
 
 
-    const conformes=
+    const conformes =
 
-        lanc.filter(l=>
-            (
-                l.resultado||
-                calcularResultado(
-                    l.valor,
-                    l.padrao
-                )
-            )===
-            "DENTRO DO PADRÃO"
+        lanc.filter(
+            l =>
+                (
+                    l.resultado ||
+                    calcularResultado(
+                        l.valor,
+                        l.padrao
+                    )
+                ) ===
+                "DENTRO DO PADRÃO"
         ).length
 
         +
 
-        maq.filter(r=>
-            (
-                r.resultado||
-                calcularResultado(
-                    r.passando,
-                    r.padrao
-                )
-            )===
-            "DENTRO DO PADRÃO"
+        maq.filter(
+            r =>
+                (
+                    r.resultado ||
+                    calcularResultado(
+                        r.passando,
+                        r.padrao
+                    )
+                ) ===
+                "DENTRO DO PADRÃO"
         ).length;
 
 
-    const fora=
-        avaliacoes-
+    const fora =
+        avaliacoes -
         conformes;
 
 
-    const conformidade=
+    const conformidade =
         avaliacoes
         ?
         (
-            conformes/
+            conformes /
             avaliacoes
-        )*100
-        :0;
+        ) * 100
+        :
+        0;
 
 
     document.getElementById(
         "kpiAvaliacoes"
-    ).textContent=
+    ).textContent =
         avaliacoes;
 
 
     document.getElementById(
         "kpiConformidade"
-    ).textContent=
-        conformidade.toFixed(1)+
+    ).textContent =
+        conformidade.toFixed(1) +
         "%";
 
 
     document.getElementById(
         "kpiFora"
-    ).textContent=
+    ).textContent =
         fora;
 
 
     document.getElementById(
         "kpiMaquinas"
-    ).textContent=
+    ).textContent =
         maq.length;
 
 
     document.getElementById(
         "ultimaAtualizacao"
-    ).textContent=
-        "Última atualização: "+
+    ).textContent =
+        "Última atualização: " +
         new Date()
         .toLocaleTimeString(
             "pt-BR"
@@ -5447,27 +5782,24 @@ function atualizarDashboard(){
 
 
 /* =========================================================
-   ATUALIZAÇÃO AUTOMÁTICA COMPLETA
+   ATUALIZAÇÃO AUTOMÁTICA
 ========================================================= */
 
 function atualizarSistemaAutomaticamente(){
 
     /*
-       Recarrega os dados do localStorage.
-       Isso permite que os registros sejam
-       sincronizados automaticamente.
+       Recarrega novamente os dados
+       do armazenamento do navegador.
     */
 
     carregarDados();
 
 
     /*
-       Atualiza todas as telas.
+       Atualiza as tabelas.
     */
 
     renderizarQuimicos();
-
-    preencherSelectQuimicos();
 
     renderizarLancamentos();
 
@@ -5475,19 +5807,24 @@ function atualizarSistemaAutomaticamente(){
 
     renderizarHistorico();
 
+
+    /*
+       Atualiza o Dashboard.
+    */
+
     atualizarDashboard();
 
 
     /*
-       Atualiza também a data/hora
-       exibida no lançamento.
+       Atualiza a data/hora do
+       formulário de lançamento.
     */
 
     atualizarDataHoraLancamento();
 
 
     console.log(
-        "Sistema atualizado automaticamente às:",
+        "Sistema atualizado automaticamente:",
         obterDataHoraAtual()
     );
 
@@ -5501,7 +5838,7 @@ function atualizarSistemaAutomaticamente(){
 function exportarExcel(){
 
     if(
-        typeof XLSX===
+        typeof XLSX ===
         "undefined"
     ){
 
@@ -5514,53 +5851,56 @@ function exportarExcel(){
     }
 
 
-    const wb=
+    const wb =
         XLSX.utils.book_new();
 
 
-    const total=
-        lancamentos.length+
+    const total =
+        lancamentos.length +
         registrosMaquinas.length;
 
 
-    const conformes=
+    const conformes =
 
-        lancamentos.filter(l=>
-            (
-                l.resultado||
-                calcularResultado(
-                    l.valor,
-                    l.padrao
-                )
-            )===
-            "DENTRO DO PADRÃO"
+        lancamentos.filter(
+            l =>
+                (
+                    l.resultado ||
+                    calcularResultado(
+                        l.valor,
+                        l.padrao
+                    )
+                ) ===
+                "DENTRO DO PADRÃO"
         ).length
 
         +
 
-        registrosMaquinas.filter(r=>
-            (
-                r.resultado||
-                calcularResultado(
-                    r.passando,
-                    r.padrao
-                )
-            )===
-            "DENTRO DO PADRÃO"
+        registrosMaquinas.filter(
+            r =>
+                (
+                    r.resultado ||
+                    calcularResultado(
+                        r.passando,
+                        r.padrao
+                    )
+                ) ===
+                "DENTRO DO PADRÃO"
         ).length;
 
 
-    const conformidade=
+    const conformidade =
         total
         ?
         (
-            conformes/
+            conformes /
             total
-        )*100
-        :0;
+        ) * 100
+        :
+        0;
 
 
-    const resumo=[
+    const resumo = [
 
         {
             Indicador:
@@ -5591,7 +5931,8 @@ function exportarExcel(){
                 "Fora do Padrão",
 
             Valor:
-                total-conformes
+                total -
+                conformes
         },
 
         {
@@ -5624,18 +5965,20 @@ function exportarExcel(){
 
         XLSX.utils.json_to_sheet(
 
-            quimicos.map(q=>({
+            quimicos.map(
+                q => ({
 
-                "Código":
-                    q.codigo,
+                    "Código":
+                        q.codigo,
 
-                "Químico / Produto":
-                    q.nome,
+                    "Químico / Produto":
+                        q.nome,
 
-                "Categoria":
-                    q.categoria
+                    "Categoria":
+                        q.categoria
 
-            }))
+                })
+            )
 
         ),
 
@@ -5650,39 +5993,41 @@ function exportarExcel(){
 
         XLSX.utils.json_to_sheet(
 
-            lancamentos.map(l=>({
+            lancamentos.map(
+                l => ({
 
-                "Data":
-                    l.data,
+                    "Data":
+                        l.data,
 
-                "Código":
-                    l.codigo,
+                    "Código":
+                        l.codigo,
 
-                "Químico":
-                    l.quimico,
+                    "Químico":
+                        l.quimico,
 
-                "Máquina":
-                    l.maquina,
+                    "Máquina":
+                        l.maquina,
 
-                "Responsável":
-                    l.responsavel,
+                    "Responsável":
+                        l.responsavel,
 
-                "Padrão":
-                    l.padrao,
+                    "Padrão":
+                        l.padrao,
 
-                "Valor":
-                    l.valor,
+                    "Valor":
+                        l.valor,
 
-                "Resultado":
-                    l.resultado,
+                    "Resultado":
+                        l.resultado,
 
-                "Desvio %":
-                    l.desvio,
+                    "Desvio %":
+                        l.desvio,
 
-                "Observação":
-                    l.observacao
+                    "Observação":
+                        l.observacao
 
-            }))
+                })
+            )
 
         ),
 
@@ -5697,36 +6042,38 @@ function exportarExcel(){
 
         XLSX.utils.json_to_sheet(
 
-            registrosMaquinas.map(r=>({
+            registrosMaquinas.map(
+                r => ({
 
-                "Data":
-                    r.data,
+                    "Data":
+                        r.data,
 
-                "Máquina":
-                    r.maquina,
+                    "Máquina":
+                        r.maquina,
 
-                "Cor":
-                    r.cor,
+                    "Cor":
+                        r.cor,
 
-                "Operador":
-                    r.operador,
+                    "Operador":
+                        r.operador,
 
-                "Peças Passando":
-                    r.passando,
+                    "Peças Passando":
+                        r.passando,
 
-                "Padrão":
-                    r.padrao,
+                    "Padrão":
+                        r.padrao,
 
-                "Resultado":
-                    r.resultado,
+                    "Resultado":
+                        r.resultado,
 
-                "Desvio %":
-                    r.desvio,
+                    "Desvio %":
+                        r.desvio,
 
-                "Comentário":
-                    r.comentario
+                    "Comentário":
+                        r.comentario
 
-            }))
+                })
+            )
 
         ),
 
@@ -5776,57 +6123,46 @@ document.addEventListener(
 
 
         /*
-           ATUALIZAÇÃO AUTOMÁTICA
-           A cada 50 segundos.
+           Atualização automática
+           a cada 50 segundos.
         */
 
         setInterval(
-
             function(){
 
                 atualizarSistemaAutomaticamente();
 
             },
-
             TEMPO_ATUALIZACAO
-
         );
 
 
         /*
-           Atualiza a hora mostrada no
-           formulário a cada segundo.
+           Relógio do lançamento.
         */
 
         setInterval(
-
             function(){
 
-                const paginaLancamento=
+                const pagina =
                     document.getElementById(
                         "lancamento"
                     );
 
 
-                const idLancamento=
+                const id =
                     document.getElementById(
                         "idLancamento"
                     );
 
 
-                /*
-                   Só atualiza a hora automaticamente
-                   quando não estamos editando um
-                   lançamento antigo.
-                */
-
                 if(
-                    paginaLancamento &&
-                    paginaLancamento.classList.contains(
+                    pagina &&
+                    pagina.classList.contains(
                         "ativa"
                     ) &&
-                    idLancamento &&
-                    !idLancamento.value
+                    id &&
+                    !id.value
                 ){
 
                     atualizarDataHoraLancamento();
@@ -5834,13 +6170,10 @@ document.addEventListener(
                 }
 
             },
-
             1000
-
         );
 
     }
-
 );
 
 </script>
