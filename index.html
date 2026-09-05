@@ -44,12 +44,15 @@
 
     --sidebar:245px;
     --topbar:64px;
+
 }
 
 *{
+
     box-sizing:border-box;
     margin:0;
     padding:0;
+
 }
 
 body{
@@ -65,6 +68,7 @@ body{
     color:var(--texto);
 
     min-height:100vh;
+
 }
 
 button,
@@ -73,11 +77,13 @@ select,
 textarea{
 
     font-family:inherit;
+
 }
 
 button{
 
     cursor:pointer;
+
 }
 
 /* =========================
@@ -99,6 +105,7 @@ body.dark{
     --amarelo-bg:#40331a;
 
     --sombra:0 5px 18px rgba(0,0,0,.25);
+
 }
 
 /* =========================
@@ -130,6 +137,7 @@ body.dark{
     z-index:1000;
 
     border-bottom:1px solid rgba(255,255,255,.08);
+
 }
 
 .top-left{
@@ -139,9 +147,8 @@ body.dark{
     align-items:center;
 
     gap:14px;
-}
 
-/* BOTÃO MENU */
+}
 
 .menu-btn{
 
@@ -163,14 +170,14 @@ body.dark{
     align-items:center;
 
     justify-content:center;
+
 }
 
 .menu-btn:hover{
 
     background:rgba(255,255,255,.15);
-}
 
-/* LOGO */
+}
 
 .brand{
 
@@ -181,6 +188,7 @@ body.dark{
     gap:10px;
 
     white-space:nowrap;
+
 }
 
 .logo-symbol{
@@ -193,12 +201,14 @@ body.dark{
     align-items:center;
 
     justify-content:center;
+
 }
 
 .logo-symbol svg{
 
     width:40px;
     height:40px;
+
 }
 
 .brand-text{
@@ -208,6 +218,7 @@ body.dark{
     flex-direction:column;
 
     line-height:1;
+
 }
 
 .brand-name{
@@ -217,6 +228,7 @@ body.dark{
     font-weight:800;
 
     letter-spacing:.4px;
+
 }
 
 .brand-subtitle{
@@ -230,6 +242,7 @@ body.dark{
     letter-spacing:1.3px;
 
     font-weight:600;
+
 }
 
 .top-right{
@@ -238,7 +251,8 @@ body.dark{
 
     align-items:center;
 
-    gap:10px;
+    gap:12px;
+
 }
 
 .status{
@@ -252,6 +266,7 @@ body.dark{
     align-items:center;
 
     gap:6px;
+
 }
 
 .status-dot{
@@ -262,6 +277,7 @@ body.dark{
     background:#27c46b;
 
     border-radius:50%;
+
 }
 
 .theme-btn{
@@ -277,11 +293,13 @@ body.dark{
     padding:9px 12px;
 
     font-size:13px;
+
 }
 
 .theme-btn:hover{
 
     background:rgba(255,255,255,.14);
+
 }
 
 /* =========================
@@ -309,11 +327,13 @@ body.dark{
     overflow-y:auto;
 
     transition:.25s;
+
 }
 
 .sidebar.hidden{
 
     transform:translateX(-100%);
+
 }
 
 .menu-title{
@@ -329,6 +349,7 @@ body.dark{
     letter-spacing:1.2px;
 
     font-weight:700;
+
 }
 
 .menu-item{
@@ -352,6 +373,7 @@ body.dark{
     transition:.2s;
 
     user-select:none;
+
 }
 
 .menu-item:hover{
@@ -359,6 +381,7 @@ body.dark{
     background:rgba(255,255,255,.08);
 
     color:white;
+
 }
 
 .menu-item.active{
@@ -368,6 +391,7 @@ body.dark{
     color:white;
 
     box-shadow:0 4px 10px rgba(0,0,0,.15);
+
 }
 
 .menu-icon{
@@ -377,6 +401,7 @@ body.dark{
     text-align:center;
 
     font-size:16px;
+
 }
 
 /* =========================
@@ -392,11 +417,13 @@ body.dark{
     min-height:100vh;
 
     transition:.25s;
+
 }
 
 .main.expanded{
 
     margin-left:0;
+
 }
 
 .content{
@@ -406,6 +433,7 @@ body.dark{
     max-width:1600px;
 
     margin:auto;
+
 }
 
 /* =========================
@@ -415,11 +443,13 @@ body.dark{
 .page{
 
     display:none;
+
 }
 
 .page.active{
 
     display:block;
+
 }
 
 .page-header{
@@ -433,6 +463,7 @@ body.dark{
     gap:15px;
 
     margin-bottom:22px;
+
 }
 
 .page-title{
@@ -442,6 +473,7 @@ body.dark{
     font-weight:800;
 
     color:var(--texto);
+
 }
 
 .page-description{
@@ -451,6 +483,7 @@ body.dark{
     color:var(--texto-sec);
 
     font-size:13px;
+
 }
 
 /* =========================
@@ -470,6 +503,7 @@ body.dark{
     padding:20px;
 
     margin-bottom:20px;
+
 }
 
 .card-title{
@@ -479,6 +513,7 @@ body.dark{
     font-weight:750;
 
     margin-bottom:5px;
+
 }
 
 .card-description{
@@ -488,10 +523,11 @@ body.dark{
     font-size:12px;
 
     margin-bottom:18px;
+
 }
 
 /* =========================
-   DASHBOARD KPIS
+   KPIS
 ========================= */
 
 .kpis{
@@ -503,6 +539,7 @@ body.dark{
     gap:15px;
 
     margin-bottom:20px;
+
 }
 
 .kpi{
@@ -516,6 +553,7 @@ body.dark{
     padding:18px;
 
     box-shadow:var(--sombra);
+
 }
 
 .kpi-top{
@@ -525,6 +563,7 @@ body.dark{
     justify-content:space-between;
 
     align-items:center;
+
 }
 
 .kpi-label{
@@ -534,11 +573,13 @@ body.dark{
     font-size:12px;
 
     font-weight:600;
+
 }
 
 .kpi-icon{
 
     font-size:20px;
+
 }
 
 .kpi-value{
@@ -548,6 +589,7 @@ body.dark{
     font-weight:800;
 
     margin-top:10px;
+
 }
 
 .kpi-info{
@@ -557,10 +599,11 @@ body.dark{
     color:var(--texto-sec);
 
     margin-top:5px;
+
 }
 
 /* =========================
-   DASHBOARD GRID
+   DASHBOARD
 ========================= */
 
 .dashboard-grid{
@@ -570,6 +613,7 @@ body.dark{
     grid-template-columns:1.5fr 1fr;
 
     gap:20px;
+
 }
 
 .chart-container{
@@ -577,6 +621,7 @@ body.dark{
     position:relative;
 
     height:310px;
+
 }
 
 /* =========================
@@ -592,6 +637,7 @@ body.dark{
     gap:10px;
 
     margin-bottom:18px;
+
 }
 
 .filter-btn{
@@ -607,6 +653,7 @@ body.dark{
     border-radius:7px;
 
     font-size:12px;
+
 }
 
 .filter-btn.active{
@@ -616,6 +663,7 @@ body.dark{
     color:white;
 
     border-color:var(--azul);
+
 }
 
 /* =========================
@@ -629,6 +677,7 @@ body.dark{
     grid-template-columns:repeat(3,1fr);
 
     gap:15px;
+
 }
 
 .form-group{
@@ -638,11 +687,13 @@ body.dark{
     flex-direction:column;
 
     gap:6px;
+
 }
 
 .form-group.full{
 
     grid-column:1/-1;
+
 }
 
 label{
@@ -652,6 +703,7 @@ label{
     font-weight:700;
 
     color:var(--texto);
+
 }
 
 input,
@@ -673,6 +725,7 @@ textarea{
     outline:none;
 
     font-size:13px;
+
 }
 
 input:focus,
@@ -682,6 +735,7 @@ textarea:focus{
     border-color:var(--azul);
 
     box-shadow:0 0 0 2px rgba(7,86,163,.10);
+
 }
 
 textarea{
@@ -689,6 +743,71 @@ textarea{
     min-height:90px;
 
     resize:vertical;
+
+}
+
+/* =========================
+   DATA/HORA EM TEMPO REAL
+========================= */
+
+.campo-tempo-real{
+
+    background:#f1f5f8 !important;
+
+    font-weight:700;
+
+    color:#0756a3 !important;
+
+    cursor:not-allowed;
+
+}
+
+body.dark .campo-tempo-real{
+
+    background:#202c37 !important;
+
+    color:#69aef0 !important;
+
+}
+
+/* =========================
+   RESULTADO AUTOMÁTICO
+========================= */
+
+#resultadoLancamento{
+
+    font-weight:800;
+
+    cursor:not-allowed;
+
+    background:#f1f5f8;
+
+}
+
+body.dark #resultadoLancamento{
+
+    background:#202c37;
+
+    color:#ffffff;
+
+}
+
+#resultadoPecas{
+
+    font-weight:800;
+
+    cursor:not-allowed;
+
+    background:#f1f5f8;
+
+}
+
+body.dark #resultadoPecas{
+
+    background:#202c37;
+
+    color:#ffffff;
+
 }
 
 .form-actions{
@@ -698,6 +817,7 @@ textarea{
     gap:10px;
 
     margin-top:18px;
+
 }
 
 .btn{
@@ -711,6 +831,7 @@ textarea{
     font-size:12px;
 
     font-weight:700;
+
 }
 
 .btn-primary{
@@ -718,11 +839,13 @@ textarea{
     background:var(--azul);
 
     color:white;
+
 }
 
 .btn-primary:hover{
 
     background:var(--azul-escuro);
+
 }
 
 .btn-secondary{
@@ -730,6 +853,7 @@ textarea{
     background:#eef2f5;
 
     color:#344054;
+
 }
 
 body.dark .btn-secondary{
@@ -737,6 +861,7 @@ body.dark .btn-secondary{
     background:#25313c;
 
     color:#dce4ea;
+
 }
 
 .btn-danger{
@@ -744,6 +869,7 @@ body.dark .btn-secondary{
     background:var(--vermelho);
 
     color:white;
+
 }
 
 .btn-success{
@@ -751,6 +877,7 @@ body.dark .btn-secondary{
     background:var(--verde);
 
     color:white;
+
 }
 
 /* =========================
@@ -760,6 +887,7 @@ body.dark .btn-secondary{
 .table-wrapper{
 
     overflow-x:auto;
+
 }
 
 table{
@@ -769,6 +897,7 @@ table{
     border-collapse:collapse;
 
     min-width:700px;
+
 }
 
 th{
@@ -788,6 +917,7 @@ th{
     letter-spacing:.4px;
 
     border-bottom:1px solid var(--borda);
+
 }
 
 body.dark th{
@@ -795,6 +925,7 @@ body.dark th{
     background:#202c37;
 
     color:#b7c2cc;
+
 }
 
 td{
@@ -806,11 +937,13 @@ td{
     font-size:12px;
 
     color:var(--texto);
+
 }
 
 tr:hover td{
 
     background:rgba(7,86,163,.035);
+
 }
 
 /* =========================
@@ -830,6 +963,7 @@ tr:hover td{
     font-size:10px;
 
     font-weight:800;
+
 }
 
 .badge-green{
@@ -837,6 +971,7 @@ tr:hover td{
     background:var(--verde-bg);
 
     color:var(--verde);
+
 }
 
 .badge-red{
@@ -844,6 +979,7 @@ tr:hover td{
     background:var(--vermelho-bg);
 
     color:var(--vermelho);
+
 }
 
 .badge-yellow{
@@ -851,6 +987,7 @@ tr:hover td{
     background:var(--amarelo-bg);
 
     color:var(--amarelo);
+
 }
 
 .badge-blue{
@@ -858,6 +995,7 @@ tr:hover td{
     background:#e8f1fc;
 
     color:var(--azul);
+
 }
 
 body.dark .badge-blue{
@@ -865,6 +1003,7 @@ body.dark .badge-blue{
     background:#142f4a;
 
     color:#69aef0;
+
 }
 
 /* =========================
@@ -878,6 +1017,7 @@ body.dark .badge-blue{
     gap:6px;
 
     flex-wrap:wrap;
+
 }
 
 .btn-small{
@@ -891,6 +1031,7 @@ body.dark .badge-blue{
     font-size:10px;
 
     font-weight:700;
+
 }
 
 .btn-edit{
@@ -898,6 +1039,7 @@ body.dark .badge-blue{
     background:#e8f1fc;
 
     color:var(--azul);
+
 }
 
 .btn-delete{
@@ -905,6 +1047,7 @@ body.dark .badge-blue{
     background:var(--vermelho-bg);
 
     color:var(--vermelho);
+
 }
 
 body.dark .btn-edit{
@@ -912,6 +1055,7 @@ body.dark .btn-edit{
     background:#142f4a;
 
     color:#69aef0;
+
 }
 
 /* =========================
@@ -927,6 +1071,7 @@ body.dark .btn-edit{
     gap:12px;
 
     margin-bottom:20px;
+
 }
 
 .summary-card{
@@ -938,6 +1083,7 @@ body.dark .btn-edit{
     border-radius:10px;
 
     padding:15px;
+
 }
 
 .summary-label{
@@ -945,6 +1091,7 @@ body.dark .btn-edit{
     font-size:11px;
 
     color:var(--texto-sec);
+
 }
 
 .summary-value{
@@ -954,6 +1101,7 @@ body.dark .btn-edit{
     font-weight:800;
 
     margin-top:5px;
+
 }
 
 /* =========================
@@ -969,10 +1117,11 @@ body.dark .btn-edit{
     color:var(--texto-sec);
 
     font-size:13px;
+
 }
 
 /* =========================
-   MACHINE CARDS
+   MACHINE
 ========================= */
 
 .machine-grid{
@@ -982,6 +1131,7 @@ body.dark .btn-edit{
     grid-template-columns:repeat(4,1fr);
 
     gap:15px;
+
 }
 
 .machine-card{
@@ -993,6 +1143,7 @@ body.dark .btn-edit{
     padding:15px;
 
     background:var(--card);
+
 }
 
 .machine-name{
@@ -1000,6 +1151,7 @@ body.dark .btn-edit{
     font-weight:800;
 
     font-size:15px;
+
 }
 
 .machine-value{
@@ -1009,6 +1161,7 @@ body.dark .btn-edit{
     font-weight:800;
 
     margin-top:10px;
+
 }
 
 .machine-label{
@@ -1016,6 +1169,7 @@ body.dark .btn-edit{
     font-size:11px;
 
     color:var(--texto-sec);
+
 }
 
 /* =========================
@@ -1027,6 +1181,7 @@ body.dark .btn-edit{
     max-width:350px;
 
     margin-bottom:15px;
+
 }
 
 /* =========================
@@ -1046,11 +1201,13 @@ body.dark .btn-edit{
     font-size:11px;
 
     border-top:1px solid var(--borda);
+
 }
 
 .footer strong{
 
     color:var(--azul);
+
 }
 
 /* =========================
@@ -1062,21 +1219,25 @@ body.dark .btn-edit{
     .kpis{
 
         grid-template-columns:repeat(2,1fr);
+
     }
 
     .machine-grid{
 
         grid-template-columns:repeat(3,1fr);
+
     }
 
     .dashboard-grid{
 
         grid-template-columns:1fr;
+
     }
 
     .form-grid{
 
         grid-template-columns:repeat(2,1fr);
+
     }
 
 }
@@ -1086,41 +1247,49 @@ body.dark .btn-edit{
     .sidebar{
 
         transform:translateX(-100%);
+
     }
 
     .sidebar.mobile-open{
 
         transform:translateX(0);
+
     }
 
     .main{
 
         margin-left:0;
+
     }
 
     .content{
 
         padding:16px;
+
     }
 
     .top-right .status{
 
         display:none;
+
     }
 
     .brand-subtitle{
 
         display:none;
+
     }
 
     .summary-grid{
 
         grid-template-columns:repeat(2,1fr);
+
     }
 
     .machine-grid{
 
         grid-template-columns:repeat(2,1fr);
+
     }
 
 }
@@ -1130,6 +1299,7 @@ body.dark .btn-edit{
     .brand-name{
 
         font-size:16px;
+
     }
 
     .logo-symbol,
@@ -1137,36 +1307,51 @@ body.dark .btn-edit{
 
         width:34px;
         height:34px;
+
     }
 
     .kpis{
 
         grid-template-columns:1fr;
+
     }
 
     .form-grid{
 
         grid-template-columns:1fr;
+
     }
 
     .summary-grid{
 
         grid-template-columns:1fr 1fr;
+
     }
 
     .machine-grid{
 
         grid-template-columns:1fr;
+
     }
 
     .page-title{
 
         font-size:21px;
+
     }
 
     .topbar{
 
         padding:0 10px;
+
+    }
+
+    .theme-btn{
+
+        padding:8px;
+
+        font-size:11px;
+
     }
 
 }
@@ -1177,10 +1362,6 @@ body.dark .btn-edit{
 
 <body>
 
-<!-- =========================
-     TOPBAR
-========================= -->
-
 <header class="topbar">
 
     <div class="top-left">
@@ -1189,14 +1370,14 @@ body.dark .btn-edit{
             class="menu-btn"
             onclick="alternarMenu()"
             title="Abrir menu">
+
             ☰
+
         </button>
 
         <div class="brand">
 
             <div class="logo-symbol">
-
-                <!-- SÍMBOLO GRAVIUNIT -->
 
                 <svg
                     viewBox="0 0 100 100"
@@ -1220,20 +1401,14 @@ body.dark .btn-edit{
                         stroke-dasharray="8 5"/>
 
                     <path
-                        d="M25 39
-                           H47
-                           L55 47
-                           H77"
+                        d="M25 39 H47 L55 47 H77"
                         fill="none"
                         stroke="#16b8d4"
                         stroke-width="6"
                         stroke-linecap="round"/>
 
                     <path
-                        d="M25 52
-                           H42
-                           L49 59
-                           H72"
+                        d="M25 52 H42 L49 59 H72"
                         fill="none"
                         stroke="#16b8d4"
                         stroke-width="5"
@@ -1314,7 +1489,7 @@ body.dark .btn-edit{
 
             <span class="status-dot"></span>
 
-            Atualização automática: 50 segundos
+            Sistema online
 
         </div>
 
@@ -1329,11 +1504,6 @@ body.dark .btn-edit{
     </div>
 
 </header>
-
-
-<!-- =========================
-     SIDEBAR
-========================= -->
 
 <aside class="sidebar" id="sidebar">
 
@@ -1417,23 +1587,11 @@ body.dark .btn-edit{
 
 </aside>
 
-
-<!-- =========================
-     MAIN
-========================= -->
-
 <main class="main" id="main">
 
 <div class="content">
 
-
-<!-- =====================================================
-     DASHBOARD
-===================================================== -->
-
-<section
-    class="page active"
-    id="dashboard">
+<section class="page active" id="dashboard">
 
     <div class="page-header">
 
@@ -1450,9 +1608,6 @@ body.dark .btn-edit{
         </div>
 
     </div>
-
-
-    <!-- FILTROS -->
 
     <div class="filters">
 
@@ -1482,9 +1637,6 @@ body.dark .btn-edit{
 
     </div>
 
-
-    <!-- KPIS -->
-
     <div class="kpis">
 
         <div class="kpi">
@@ -1501,9 +1653,7 @@ body.dark .btn-edit{
 
             </div>
 
-            <div
-                class="kpi-value"
-                id="kpiAvaliacoes">
+            <div class="kpi-value" id="kpiAvaliacoes">
                 0
             </div>
 
@@ -1512,7 +1662,6 @@ body.dark .btn-edit{
             </div>
 
         </div>
-
 
         <div class="kpi">
 
@@ -1528,9 +1677,7 @@ body.dark .btn-edit{
 
             </div>
 
-            <div
-                class="kpi-value"
-                id="kpiConformidade">
+            <div class="kpi-value" id="kpiConformidade">
                 0%
             </div>
 
@@ -1539,7 +1686,6 @@ body.dark .btn-edit{
             </div>
 
         </div>
-
 
         <div class="kpi">
 
@@ -1555,9 +1701,7 @@ body.dark .btn-edit{
 
             </div>
 
-            <div
-                class="kpi-value"
-                id="kpiFora">
+            <div class="kpi-value" id="kpiFora">
                 0
             </div>
 
@@ -1566,7 +1710,6 @@ body.dark .btn-edit{
             </div>
 
         </div>
-
 
         <div class="kpi">
 
@@ -1582,9 +1725,7 @@ body.dark .btn-edit{
 
             </div>
 
-            <div
-                class="kpi-value"
-                id="kpiMaquinas">
+            <div class="kpi-value" id="kpiMaquinas">
                 0
             </div>
 
@@ -1596,11 +1737,7 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="dashboard-grid">
-
-
-        <!-- GRÁFICO -->
 
         <div class="card">
 
@@ -1619,9 +1756,6 @@ body.dark .btn-edit{
             </div>
 
         </div>
-
-
-        <!-- RANKING -->
 
         <div class="card">
 
@@ -1645,7 +1779,6 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="card">
 
         <div class="card-title">
@@ -1656,9 +1789,7 @@ body.dark .btn-edit{
             Últimos lançamentos registrados no sistema.
         </div>
 
-        <div
-            class="table-wrapper"
-            id="atividadeRecente">
+        <div class="table-wrapper" id="atividadeRecente">
 
             <div class="empty">
                 Nenhuma atividade registrada.
@@ -1668,17 +1799,9 @@ body.dark .btn-edit{
 
     </div>
 
-
 </section>
 
-
-<!-- =====================================================
-     CADASTRO DE QUÍMICOS
-===================================================== -->
-
-<section
-    class="page"
-    id="cadastro">
+<section class="page" id="cadastro">
 
     <div class="page-header">
 
@@ -1696,7 +1819,6 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="card">
 
         <div class="card-title">
@@ -1707,24 +1829,15 @@ body.dark .btn-edit{
             Informe o nome, código e demais informações do produto.
         </div>
 
+        <form id="formQuimico" onsubmit="salvarQuimico(event)">
 
-        <form
-            id="formQuimico"
-            onsubmit="salvarQuimico(event)">
-
-            <input
-                type="hidden"
-                id="idQuimico">
-
+            <input type="hidden" id="idQuimico">
 
             <div class="form-grid">
 
-
                 <div class="form-group">
 
-                    <label>
-                        Nome do químico *
-                    </label>
+                    <label>Nome do químico *</label>
 
                     <input
                         type="text"
@@ -1734,12 +1847,9 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Código *
-                    </label>
+                    <label>Código *</label>
 
                     <input
                         type="text"
@@ -1749,12 +1859,9 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Cor
-                    </label>
+                    <label>Cor</label>
 
                     <input
                         type="text"
@@ -1763,12 +1870,9 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Tipo
-                    </label>
+                    <label>Tipo</label>
 
                     <select id="tipoQuimico">
 
@@ -1776,40 +1880,20 @@ body.dark .btn-edit{
                             Selecione
                         </option>
 
-                        <option>
-                            Massa
-                        </option>
-
-                        <option>
-                            Primer
-                        </option>
-
-                        <option>
-                            Impressão
-                        </option>
-
-                        <option>
-                            Base
-                        </option>
-
-                        <option>
-                            Verniz
-                        </option>
-
-                        <option>
-                            Outro
-                        </option>
+                        <option>Massa</option>
+                        <option>Primer</option>
+                        <option>Impressão</option>
+                        <option>Base</option>
+                        <option>Verniz</option>
+                        <option>Outro</option>
 
                     </select>
 
                 </div>
 
-
                 <div class="form-group full">
 
-                    <label>
-                        Observação
-                    </label>
+                    <label>Observação</label>
 
                     <textarea
                         id="observacaoQuimico"
@@ -1817,9 +1901,7 @@ body.dark .btn-edit{
 
                 </div>
 
-
             </div>
-
 
             <div class="form-actions">
 
@@ -1846,7 +1928,6 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="card">
 
         <div class="card-title">
@@ -1864,25 +1945,13 @@ body.dark .btn-edit{
             placeholder="🔎 Pesquisar químico..."
             oninput="renderizarQuimicos()">
 
-
-        <div
-            class="table-wrapper"
-            id="tabelaQuimicos">
-
-        </div>
+        <div class="table-wrapper" id="tabelaQuimicos"></div>
 
     </div>
 
 </section>
 
-
-<!-- =====================================================
-     LANÇAMENTO
-===================================================== -->
-
-<section
-    class="page"
-    id="lancamento">
+<section class="page" id="lancamento">
 
     <div class="page-header">
 
@@ -1900,7 +1969,6 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="card">
 
         <div class="card-title">
@@ -1908,94 +1976,45 @@ body.dark .btn-edit{
         </div>
 
         <div class="card-description">
-            Preencha os dados da avaliação.
+            O resultado será calculado automaticamente conforme o padrão e o valor medido.
         </div>
 
+        <form id="formLancamento" onsubmit="salvarLancamento(event)">
 
-        <form
-            id="formLancamento"
-            onsubmit="salvarLancamento(event)">
-
-            <input
-                type="hidden"
-                id="idLancamento">
-
+            <input type="hidden" id="idLancamento">
 
             <div class="form-grid">
 
-
                 <div class="form-group">
 
-                    <label>
-                        Máquina *
-                    </label>
+                    <label>Máquina *</label>
 
-                    <select
-                        id="maquinaLancamento"
-                        required>
+                    <select id="maquinaLancamento" required>
 
                         <option value="">
                             Selecione a máquina
                         </option>
 
-                        <option value="701e">
-                            701 - Externo
-                        </option>
-
-                        <option value="701i">
-                            701 - Interno
-                        </option>
-
-                        <option value="703e">
-                            703 - Externo
-                        </option>
-
-                        <option value="703i">
-                            703 - Interno
-                        </option>
-
-                        <option value="705">
-                            705
-                        </option>
-
-                        <option value="706">
-                            706
-                        </option>
-
-                        <option value="707">
-                            707
-                        </option>
-
-                        <option value="708">
-                            708
-                        </option>
-
-                        <option value="710e">
-                            710 - Externo
-                        </option>
-
-                        <option value="710i">
-                            710 - Interno
-                        </option>
-
-                        <option value="712e">
-                            712 - Externo
-                        </option>
-
-                        <option value="712i">
-                            712 - Interno
-                        </option>
+                        <option value="701e">701 - Externo</option>
+                        <option value="701i">701 - Interno</option>
+                        <option value="703e">703 - Externo</option>
+                        <option value="703i">703 - Interno</option>
+                        <option value="705">705</option>
+                        <option value="706">706</option>
+                        <option value="707">707</option>
+                        <option value="708">708</option>
+                        <option value="710e">710 - Externo</option>
+                        <option value="710i">710 - Interno</option>
+                        <option value="712e">712 - Externo</option>
+                        <option value="712i">712 - Interno</option>
 
                     </select>
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Responsável
-                    </label>
+                    <label>Responsável</label>
 
                     <input
                         type="text"
@@ -2004,29 +2023,24 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Data e hora
-                    </label>
+                    <label>Data e hora em tempo real</label>
 
                     <input
-                        type="datetime-local"
-                        id="dataHoraLancamento">
+                        type="text"
+                        id="dataHoraLancamento"
+                        class="campo-tempo-real"
+                        readonly
+                        aria-readonly="true">
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Químico *
-                    </label>
+                    <label>Químico *</label>
 
-                    <select
-                        id="quimicoLancamento"
-                        required>
+                    <select id="quimicoLancamento" required>
 
                         <option value="">
                             Selecione o químico
@@ -2036,44 +2050,39 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Valor medido *
-                    </label>
+                    <label>Valor medido *</label>
 
                     <input
                         type="number"
                         step="any"
                         id="valorLancamento"
                         required
+                        oninput="calcularResultadoAutomatico()"
                         placeholder="Digite o valor">
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Padrão
-                    </label>
+                    <label>Padrão *</label>
 
                     <input
-                        type="text"
+                        type="number"
+                        step="any"
                         id="padraoLancamento"
-                        placeholder="Ex.: 100 ± 5">
+                        required
+                        oninput="calcularResultadoAutomatico()"
+                        placeholder="Ex.: 100">
 
                 </div>
 
-
                 <div class="form-group full">
 
-                    <label>
-                        Resultado
-                    </label>
+                    <label>Resultado automático</label>
 
-                    <select id="resultadoLancamento">
+                    <select id="resultadoLancamento" disabled>
 
                         <option value="DENTRO DO PADRÃO">
                             DENTRO DO PADRÃO
@@ -2091,12 +2100,9 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group full">
 
-                    <label>
-                        Observação
-                    </label>
+                    <label>Observação</label>
 
                     <textarea
                         id="observacaoLancamento"
@@ -2105,7 +2111,6 @@ body.dark .btn-edit{
                 </div>
 
             </div>
-
 
             <div class="form-actions">
 
@@ -2132,31 +2137,19 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="card">
 
         <div class="card-title">
             Lançamentos recentes
         </div>
 
-        <div
-            class="table-wrapper"
-            id="tabelaLancamentos">
-
-        </div>
+        <div class="table-wrapper" id="tabelaLancamentos"></div>
 
     </div>
 
 </section>
 
-
-<!-- =====================================================
-     PEÇAS EM PRODUÇÃO
-===================================================== -->
-
-<section
-    class="page"
-    id="pecas">
+<section class="page" id="pecas">
 
     <div class="page-header">
 
@@ -2174,9 +2167,7 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="summary-grid">
-
 
         <div class="summary-card">
 
@@ -2184,14 +2175,11 @@ body.dark .btn-edit{
                 Total de peças
             </div>
 
-            <div
-                class="summary-value"
-                id="totalPecas">
+            <div class="summary-value" id="totalPecas">
                 0
             </div>
 
         </div>
-
 
         <div class="summary-card">
 
@@ -2199,14 +2187,11 @@ body.dark .btn-edit{
                 Total padrão
             </div>
 
-            <div
-                class="summary-value"
-                id="totalPadraoPecas">
+            <div class="summary-value" id="totalPadraoPecas">
                 0
             </div>
 
         </div>
-
 
         <div class="summary-card">
 
@@ -2214,14 +2199,11 @@ body.dark .btn-edit{
                 Dentro do padrão
             </div>
 
-            <div
-                class="summary-value"
-                id="pecasDentro">
+            <div class="summary-value" id="pecasDentro">
                 0
             </div>
 
         </div>
-
 
         <div class="summary-card">
 
@@ -2229,16 +2211,13 @@ body.dark .btn-edit{
                 Fora do padrão
             </div>
 
-            <div
-                class="summary-value"
-                id="pecasFora">
+            <div class="summary-value" id="pecasFora">
                 0
             </div>
 
         </div>
 
     </div>
-
 
     <div class="card">
 
@@ -2250,91 +2229,42 @@ body.dark .btn-edit{
             Informe o padrão esperado e a quantidade que está passando.
         </div>
 
+        <form id="formPecas" onsubmit="salvarPecas(event)">
 
-        <form
-            id="formPecas"
-            onsubmit="salvarPecas(event)">
-
-            <input
-                type="hidden"
-                id="idPecas">
-
+            <input type="hidden" id="idPecas">
 
             <div class="form-grid">
 
-
                 <div class="form-group">
 
-                    <label>
-                        Máquina *
-                    </label>
+                    <label>Máquina *</label>
 
-                    <select
-                        id="maquinaPecas"
-                        required>
+                    <select id="maquinaPecas" required>
 
                         <option value="">
                             Selecione a máquina
                         </option>
 
-                        <option value="701e">
-                            701 - Externo
-                        </option>
-
-                        <option value="701i">
-                            701 - Interno
-                        </option>
-
-                        <option value="703e">
-                            703 - Externo
-                        </option>
-
-                        <option value="703i">
-                            703 - Interno
-                        </option>
-
-                        <option value="705">
-                            705
-                        </option>
-
-                        <option value="706">
-                            706
-                        </option>
-
-                        <option value="707">
-                            707
-                        </option>
-
-                        <option value="708">
-                            708
-                        </option>
-
-                        <option value="710e">
-                            710 - Externo
-                        </option>
-
-                        <option value="710i">
-                            710 - Interno
-                        </option>
-
-                        <option value="712e">
-                            712 - Externo
-                        </option>
-
-                        <option value="712i">
-                            712 - Interno
-                        </option>
+                        <option value="701e">701 - Externo</option>
+                        <option value="701i">701 - Interno</option>
+                        <option value="703e">703 - Externo</option>
+                        <option value="703i">703 - Interno</option>
+                        <option value="705">705</option>
+                        <option value="706">706</option>
+                        <option value="707">707</option>
+                        <option value="708">708</option>
+                        <option value="710e">710 - Externo</option>
+                        <option value="710i">710 - Interno</option>
+                        <option value="712e">712 - Externo</option>
+                        <option value="712i">712 - Interno</option>
 
                     </select>
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Responsável
-                    </label>
+                    <label>Responsável</label>
 
                     <input
                         type="text"
@@ -2343,25 +2273,22 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Data e hora
-                    </label>
+                    <label>Data e hora em tempo real</label>
 
                     <input
-                        type="datetime-local"
-                        id="dataHoraPecas">
+                        type="text"
+                        id="dataHoraPecas"
+                        class="campo-tempo-real"
+                        readonly
+                        aria-readonly="true">
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Padrão de peças *
-                    </label>
+                    <label>Padrão de peças *</label>
 
                     <input
                         type="number"
@@ -2374,12 +2301,9 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Quantidade passando *
-                    </label>
+                    <label>Quantidade passando *</label>
 
                     <input
                         type="number"
@@ -2392,15 +2316,11 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group">
 
-                    <label>
-                        Resultado
-                    </label>
+                    <label>Resultado</label>
 
-                    <select
-                        id="resultadoPecas">
+                    <select id="resultadoPecas" disabled>
 
                         <option value="DENTRO DO PADRÃO">
                             DENTRO DO PADRÃO
@@ -2418,12 +2338,9 @@ body.dark .btn-edit{
 
                 </div>
 
-
                 <div class="form-group full">
 
-                    <label>
-                        Observação
-                    </label>
+                    <label>Observação</label>
 
                     <textarea
                         id="observacaoPecas"
@@ -2432,7 +2349,6 @@ body.dark .btn-edit{
                 </div>
 
             </div>
-
 
             <div class="form-actions">
 
@@ -2459,31 +2375,19 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="card">
 
         <div class="card-title">
             Registros de produção
         </div>
 
-        <div
-            class="table-wrapper"
-            id="tabelaPecas">
-
-        </div>
+        <div class="table-wrapper" id="tabelaPecas"></div>
 
     </div>
 
 </section>
 
-
-<!-- =====================================================
-     PADRÃO DE MÁQUINAS
-===================================================== -->
-
-<section
-    class="page"
-    id="maquinas">
+<section class="page" id="maquinas">
 
     <div class="page-header">
 
@@ -2501,7 +2405,6 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="card">
 
         <div class="card-title">
@@ -2512,14 +2415,9 @@ body.dark .btn-edit{
             Indicadores técnicos de cada equipamento.
         </div>
 
-        <div
-            class="machine-grid"
-            id="gridMaquinas">
-
-        </div>
+        <div class="machine-grid" id="gridMaquinas"></div>
 
     </div>
-
 
     <div class="card">
 
@@ -2527,24 +2425,13 @@ body.dark .btn-edit{
             Detalhamento por máquina
         </div>
 
-        <div
-            class="table-wrapper"
-            id="tabelaMaquinas">
-
-        </div>
+        <div class="table-wrapper" id="tabelaMaquinas"></div>
 
     </div>
 
 </section>
 
-
-<!-- =====================================================
-     HISTÓRICO
-===================================================== -->
-
-<section
-    class="page"
-    id="historico">
+<section class="page" id="historico">
 
     <div class="page-header">
 
@@ -2562,7 +2449,6 @@ body.dark .btn-edit{
 
     </div>
 
-
     <div class="card">
 
         <div class="card-title">
@@ -2573,7 +2459,6 @@ body.dark .btn-edit{
             Todos os registros armazenados no sistema.
         </div>
 
-
         <input
             class="search-box"
             id="buscaHistorico"
@@ -2581,21 +2466,14 @@ body.dark .btn-edit{
             placeholder="🔎 Pesquisar histórico..."
             oninput="renderizarHistorico()">
 
-
         <div
             class="table-wrapper"
             id="tabelaHistorico">
-
         </div>
 
     </div>
 
 </section>
-
-
-<!-- =====================================================
-     FOOTER / CRÉDITOS
-===================================================== -->
 
 <footer class="footer">
 
@@ -2604,31 +2482,23 @@ body.dark .btn-edit{
     </div>
 
     <div style="margin-top:6px;">
-
         Manufacturing Execution System
-
     </div>
 
     <div style="margin-top:8px;">
-
         Desenvolvido por
         <strong>Samuel Torres Garcia</strong>
-
     </div>
 
     <div style="margin-top:5px;">
-
         © 2026 GraviUnit MES — Sistema de Controle de Produção
-
     </div>
 
 </footer>
 
-
 </div>
 
 </main>
-
 
 <script>
 
@@ -2637,11 +2507,8 @@ body.dark .btn-edit{
 ========================================================= */
 
 const STORAGE_QUIMICOS = "graviunit_quimicos_v1";
-
 const STORAGE_LANCAMENTOS = "graviunit_lancamentos_v1";
-
 const STORAGE_PECAS = "erp_pecas_v1";
-
 const THEME_KEY = "graviunit_theme";
 
 const TEMPO_ATUALIZACAO = 50000;
@@ -2652,13 +2519,9 @@ const TEMPO_ATUALIZACAO = 50000;
 ========================================================= */
 
 let quimicos = [];
-
 let lancamentos = [];
-
 let registrosPecas = [];
-
 let graficoResultados = null;
-
 let periodoAtual = "todos";
 
 
@@ -2685,7 +2548,7 @@ const maquinas = [
 
 
 /* =========================================================
-   NOME TÉCNICO DAS MÁQUINAS
+   NOME DAS MÁQUINAS
 ========================================================= */
 
 function nomeMaquina(maquina){
@@ -2693,27 +2556,16 @@ function nomeMaquina(maquina){
     const nomes = {
 
         "701e":"701 - Externo",
-
         "701i":"701 - Interno",
-
         "703e":"703 - Externo",
-
         "703i":"703 - Interno",
-
         "705":"705",
-
         "706":"706",
-
         "707":"707",
-
         "708":"708",
-
         "710e":"710 - Externo",
-
         "710i":"710 - Interno",
-
         "712e":"712 - Externo",
-
         "712i":"712 - Interno"
 
     };
@@ -2940,11 +2792,135 @@ document.addEventListener("DOMContentLoaded",function(){
 
     atualizarDashboard();
 
-    atualizarDataHoraLancamento();
-
-    atualizarDataHoraPecas();
+    atualizarDataHoraTempoReal();
 
 });
+
+
+/* =========================================================
+   DATA/HORA EM TEMPO REAL
+========================================================= */
+
+function gerarDataHoraAtual(){
+
+    const agora = new Date();
+
+    const dia =
+        String(
+            agora.getDate()
+        ).padStart(2,"0");
+
+    const mes =
+        String(
+            agora.getMonth()+1
+        ).padStart(2,"0");
+
+    const ano =
+        agora.getFullYear();
+
+    const hora =
+        String(
+            agora.getHours()
+        ).padStart(2,"0");
+
+    const minuto =
+        String(
+            agora.getMinutes()
+        ).padStart(2,"0");
+
+    const segundo =
+        String(
+            agora.getSeconds()
+        ).padStart(2,"0");
+
+    return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+
+}
+
+
+/* =========================================================
+   FORMATO PARA SALVAR NO BANCO LOCAL
+========================================================= */
+
+function formatoDataHora(){
+
+    const agora = new Date();
+
+    const ano =
+        agora.getFullYear();
+
+    const mes =
+        String(
+            agora.getMonth()+1
+        ).padStart(2,"0");
+
+    const dia =
+        String(
+            agora.getDate()
+        ).padStart(2,"0");
+
+    const hora =
+        String(
+            agora.getHours()
+        ).padStart(2,"0");
+
+    const minuto =
+        String(
+            agora.getMinutes()
+        ).padStart(2,"0");
+
+    const segundo =
+        String(
+            agora.getSeconds()
+        ).padStart(2,"0");
+
+    return `${ano}-${mes}-${dia}T${hora}:${minuto}:${segundo}`;
+
+}
+
+
+/* =========================================================
+   ATUALIZA OS DOIS CAMPOS EM TEMPO REAL
+========================================================= */
+
+function atualizarDataHoraTempoReal(){
+
+    const agora =
+        gerarDataHoraAtual();
+
+    const campoLancamento =
+        document.getElementById(
+            "dataHoraLancamento"
+        );
+
+    const campoPecas =
+        document.getElementById(
+            "dataHoraPecas"
+        );
+
+    if(campoLancamento){
+
+        campoLancamento.value =
+            agora;
+
+    }
+
+    if(campoPecas){
+
+        campoPecas.value =
+            agora;
+
+    }
+
+}
+
+
+/* ATUALIZA A CADA 1 SEGUNDO */
+
+setInterval(
+    atualizarDataHoraTempoReal,
+    1000
+);
 
 
 /* =========================================================
@@ -2957,7 +2933,9 @@ function carregarDados(){
 
         const dadosQuimicos =
             JSON.parse(
-                localStorage.getItem(STORAGE_QUIMICOS)
+                localStorage.getItem(
+                    STORAGE_QUIMICOS
+                )
             );
 
         if(Array.isArray(dadosQuimicos)){
@@ -2966,13 +2944,13 @@ function carregarDados(){
 
         }else{
 
-            quimicos = quimicosPadrao.map(q => ({
-
-                ...q,
-
-                id:gerarID()
-
-            }));
+            quimicos =
+                quimicosPadrao.map(
+                    q => ({
+                        ...q,
+                        id:gerarID()
+                    })
+                );
 
             localStorage.setItem(
                 STORAGE_QUIMICOS,
@@ -2983,13 +2961,13 @@ function carregarDados(){
 
     }catch(e){
 
-        quimicos = quimicosPadrao.map(q => ({
-
-            ...q,
-
-            id:gerarID()
-
-        }));
+        quimicos =
+            quimicosPadrao.map(
+                q => ({
+                    ...q,
+                    id:gerarID()
+                })
+            );
 
     }
 
@@ -2998,7 +2976,9 @@ function carregarDados(){
 
         const dadosLancamentos =
             JSON.parse(
-                localStorage.getItem(STORAGE_LANCAMENTOS)
+                localStorage.getItem(
+                    STORAGE_LANCAMENTOS
+                )
             );
 
         const ids = new Set();
@@ -3024,11 +3004,8 @@ function carregarDados(){
                 ids.add(id);
 
                 return {
-
                     ...l,
-
                     id
-
                 };
 
             })
@@ -3051,7 +3028,9 @@ function carregarDados(){
 
         const dadosPecas =
             JSON.parse(
-                localStorage.getItem(STORAGE_PECAS)
+                localStorage.getItem(
+                    STORAGE_PECAS
+                )
             );
 
         registrosPecas =
@@ -3099,13 +3078,19 @@ function alternarMenu(){
 
     if(window.innerWidth <= 800){
 
-        sidebar.classList.toggle("mobile-open");
+        sidebar.classList.toggle(
+            "mobile-open"
+        );
 
     }else{
 
-        sidebar.classList.toggle("hidden");
+        sidebar.classList.toggle(
+            "hidden"
+        );
 
-        main.classList.toggle("expanded");
+        main.classList.toggle(
+            "expanded"
+        );
 
     }
 
@@ -3121,7 +3106,9 @@ function mostrarPagina(id,elemento){
     document.querySelectorAll(".page")
         .forEach(page => {
 
-            page.classList.remove("active");
+            page.classList.remove(
+                "active"
+            );
 
         });
 
@@ -3131,7 +3118,9 @@ function mostrarPagina(id,elemento){
 
     if(pagina){
 
-        pagina.classList.add("active");
+        pagina.classList.add(
+            "active"
+        );
 
     }
 
@@ -3139,14 +3128,18 @@ function mostrarPagina(id,elemento){
     document.querySelectorAll(".menu-item")
         .forEach(item => {
 
-            item.classList.remove("active");
+            item.classList.remove(
+                "active"
+            );
 
         });
 
 
     if(elemento){
 
-        elemento.classList.add("active");
+        elemento.classList.add(
+            "active"
+        );
 
     }
 
@@ -3155,7 +3148,9 @@ function mostrarPagina(id,elemento){
 
         document
             .getElementById("sidebar")
-            .classList.remove("mobile-open");
+            .classList.remove(
+                "mobile-open"
+            );
 
     }
 
@@ -3169,11 +3164,15 @@ function mostrarPagina(id,elemento){
 function carregarTema(){
 
     const tema =
-        localStorage.getItem(THEME_KEY);
+        localStorage.getItem(
+            THEME_KEY
+        );
 
     if(tema === "dark"){
 
-        document.body.classList.add("dark");
+        document.body.classList.add(
+            "dark"
+        );
 
     }
 
@@ -3182,13 +3181,17 @@ function carregarTema(){
 
 function alternarTema(){
 
-    document.body.classList.toggle("dark");
+    document.body.classList.toggle(
+        "dark"
+    );
 
     localStorage.setItem(
 
         THEME_KEY,
 
-        document.body.classList.contains("dark")
+        document.body.classList.contains(
+            "dark"
+        )
         ?
         "dark"
         :
@@ -3202,82 +3205,6 @@ function alternarTema(){
 
 
 /* =========================================================
-   DATA E HORA
-========================================================= */
-
-function formatoDataHora(){
-
-    const agora = new Date();
-
-    const ano =
-        agora.getFullYear();
-
-    const mes =
-        String(
-            agora.getMonth()+1
-        ).padStart(2,"0");
-
-    const dia =
-        String(
-            agora.getDate()
-        ).padStart(2,"0");
-
-    const hora =
-        String(
-            agora.getHours()
-        ).padStart(2,"0");
-
-    const minuto =
-        String(
-            agora.getMinutes()
-        ).padStart(2,"0");
-
-    return `${ano}-${mes}-${dia}T${hora}:${minuto}`;
-
-}
-
-
-function atualizarDataHoraLancamento(){
-
-    const campo =
-        document.getElementById(
-            "dataHoraLancamento"
-        );
-
-    if(
-        campo &&
-        !campo.value
-    ){
-
-        campo.value =
-            formatoDataHora();
-
-    }
-
-}
-
-
-function atualizarDataHoraPecas(){
-
-    const campo =
-        document.getElementById(
-            "dataHoraPecas"
-        );
-
-    if(
-        campo &&
-        !campo.value
-    ){
-
-        campo.value =
-            formatoDataHora();
-
-    }
-
-}
-
-
-/* =========================================================
    QUÍMICOS
 ========================================================= */
 
@@ -3285,18 +3212,15 @@ function salvarQuimico(event){
 
     event.preventDefault();
 
-
     const id =
         document.getElementById(
             "idQuimico"
         ).value;
 
-
     const objeto = {
 
         id:
-            id
-            ||
+            id ||
             gerarID(),
 
         nome:
@@ -3332,12 +3256,15 @@ function salvarQuimico(event){
         const index =
             quimicos.findIndex(
                 q =>
-                String(q.id) === String(id)
+                String(q.id)
+                ===
+                String(id)
             );
 
         if(index >= 0){
 
-            quimicos[index] = objeto;
+            quimicos[index] =
+                objeto;
 
         }
 
@@ -3383,6 +3310,10 @@ function limparFormularioQuimico(){
 }
 
 
+/* =========================================================
+   RENDER QUÍMICOS
+========================================================= */
+
 function renderizarQuimicos(){
 
     const container =
@@ -3391,7 +3322,6 @@ function renderizarQuimicos(){
         );
 
     if(!container)return;
-
 
     const busca =
         (
@@ -3433,7 +3363,6 @@ function renderizarQuimicos(){
     if(lista.length === 0){
 
         container.innerHTML =
-
             `<div class="empty">
                 Nenhum químico encontrado.
             </div>`;
@@ -3452,13 +3381,9 @@ function renderizarQuimicos(){
                 <tr>
 
                     <th>Nome</th>
-
                     <th>Código</th>
-
                     <th>Cor</th>
-
                     <th>Tipo</th>
-
                     <th>Ações</th>
 
                 </tr>
@@ -3534,10 +3459,15 @@ function renderizarQuimicos(){
     `;
 
 
-    container.innerHTML = html;
+    container.innerHTML =
+        html;
 
 }
 
+
+/* =========================================================
+   SELECT QUÍMICOS
+========================================================= */
 
 function preencherSelectQuimicos(){
 
@@ -3575,7 +3505,9 @@ function preencherSelectQuimicos(){
         option.textContent =
             `${q.codigo} — ${q.nome}`;
 
-        select.appendChild(option);
+        select.appendChild(
+            option
+        );
 
     });
 
@@ -3596,12 +3528,18 @@ function preencherSelectQuimicos(){
 }
 
 
+/* =========================================================
+   EDITAR QUÍMICO
+========================================================= */
+
 function editarQuimico(id){
 
     const q =
         quimicos.find(
             item =>
-            String(item.id) === String(id)
+            String(item.id)
+            ===
+            String(id)
         );
 
     if(!q)return;
@@ -3633,10 +3571,7 @@ function editarQuimico(id){
 
 
     mostrarPagina(
-        "cadastro",
-        document.querySelector(
-            ".menu-item:nth-of-type(3)"
-        )
+        "cadastro"
     );
 
 
@@ -3648,12 +3583,18 @@ function editarQuimico(id){
 }
 
 
+/* =========================================================
+   EXCLUIR QUÍMICO
+========================================================= */
+
 function excluirQuimico(id){
 
     const q =
         quimicos.find(
             item =>
-            String(item.id) === String(id)
+            String(item.id)
+            ===
+            String(id)
         );
 
     if(!q)return;
@@ -3679,7 +3620,9 @@ function excluirQuimico(id){
     quimicos =
         quimicos.filter(
             item =>
-            String(item.id) !== String(id)
+            String(item.id)
+            !==
+            String(id)
         );
 
 
@@ -3687,7 +3630,9 @@ function excluirQuimico(id){
 
         STORAGE_QUIMICOS,
 
-        JSON.stringify(quimicos)
+        JSON.stringify(
+            quimicos
+        )
 
     );
 
@@ -3700,13 +3645,113 @@ function excluirQuimico(id){
 
 
 /* =========================================================
-   LANÇAMENTOS
+   RESULTADO AUTOMÁTICO
+========================================================= */
+
+function calcularResultadoAutomatico(){
+
+    const campoPadrao =
+        document.getElementById(
+            "padraoLancamento"
+        );
+
+    const campoValor =
+        document.getElementById(
+            "valorLancamento"
+        );
+
+    const resultado =
+        document.getElementById(
+            "resultadoLancamento"
+        );
+
+
+    if(
+        !campoPadrao ||
+        !campoValor ||
+        !resultado
+    ){
+
+        return;
+
+    }
+
+
+    const textoPadrao =
+        campoPadrao.value.trim();
+
+    const textoValor =
+        campoValor.value.trim();
+
+
+    if(
+        textoPadrao === ""
+        ||
+        textoValor === ""
+    ){
+
+        resultado.value =
+            "DENTRO DO PADRÃO";
+
+        return;
+
+    }
+
+
+    const padrao =
+        Number(
+            textoPadrao.replace(",",".")
+        );
+
+    const valor =
+        Number(
+            textoValor.replace(",",".")
+        );
+
+
+    if(
+        !Number.isFinite(padrao)
+        ||
+        !Number.isFinite(valor)
+    ){
+
+        resultado.value =
+            "DENTRO DO PADRÃO";
+
+        return;
+
+    }
+
+
+    if(valor > padrao){
+
+        resultado.value =
+            "ACIMA DO PADRÃO";
+
+    }else if(valor < padrao){
+
+        resultado.value =
+            "ABAIXO DO PADRÃO";
+
+    }else{
+
+        resultado.value =
+            "DENTRO DO PADRÃO";
+
+    }
+
+}
+
+
+/* =========================================================
+   SALVAR LANÇAMENTO
 ========================================================= */
 
 function salvarLancamento(event){
 
     event.preventDefault();
 
+    calcularResultadoAutomatico();
 
     const id =
         document.getElementById(
@@ -3729,6 +3774,12 @@ function salvarLancamento(event){
         );
 
 
+    const resultado =
+        document.getElementById(
+            "resultadoLancamento"
+        ).value;
+
+
     const objeto = {
 
         id:
@@ -3740,9 +3791,7 @@ function salvarLancamento(event){
             Date.now(),
 
         data:
-            document.getElementById(
-                "dataHoraLancamento"
-            ).value,
+            formatoDataHora(),
 
         maquina:
             document.getElementById(
@@ -3782,9 +3831,7 @@ function salvarLancamento(event){
             ).value,
 
         resultado:
-            document.getElementById(
-                "resultadoLancamento"
-            ).value,
+            resultado,
 
         observacao:
             document.getElementById(
@@ -3813,7 +3860,9 @@ function salvarLancamento(event){
 
     }else{
 
-        lancamentos.push(objeto);
+        lancamentos.push(
+            objeto
+        );
 
     }
 
@@ -3822,7 +3871,9 @@ function salvarLancamento(event){
 
         STORAGE_LANCAMENTOS,
 
-        JSON.stringify(lancamentos)
+        JSON.stringify(
+            lancamentos
+        )
 
     );
 
@@ -3845,20 +3896,41 @@ function salvarLancamento(event){
 }
 
 
+/* =========================================================
+   LIMPAR LANÇAMENTO
+========================================================= */
+
 function limparFormularioLancamento(){
 
     document
-        .getElementById("formLancamento")
+        .getElementById(
+            "formLancamento"
+        )
         .reset();
 
     document
-        .getElementById("idLancamento")
+        .getElementById(
+            "idLancamento"
+        )
         .value="";
 
-    atualizarDataHoraLancamento();
+
+    document
+        .getElementById(
+            "resultadoLancamento"
+        )
+        .value=
+            "DENTRO DO PADRÃO";
+
+
+    atualizarDataHoraTempoReal();
 
 }
 
+
+/* =========================================================
+   RENDER LANÇAMENTOS
+========================================================= */
 
 function renderizarLancamentos(){
 
@@ -3884,7 +3956,6 @@ function renderizarLancamentos(){
     if(lista.length === 0){
 
         container.innerHTML =
-
             `<div class="empty">
                 Nenhum lançamento registrado.
             </div>`;
@@ -3903,17 +3974,11 @@ function renderizarLancamentos(){
                 <tr>
 
                     <th>Data</th>
-
                     <th>Máquina</th>
-
                     <th>Químico</th>
-
                     <th>Valor</th>
-
                     <th>Padrão</th>
-
                     <th>Resultado</th>
-
                     <th>Ações</th>
 
                 </tr>
@@ -3947,22 +4012,30 @@ function renderizarLancamentos(){
 
                 <td>
 
-                    ${esc(l.quimico || "-")}
+                    ${esc(
+                        l.quimico || "-"
+                    )}
 
                     <br>
 
                     <small>
-                        ${esc(l.codigo || "")}
+                        ${esc(
+                            l.codigo || ""
+                        )}
                     </small>
 
                 </td>
 
                 <td>
-                    ${esc(l.valor || "-")}
+                    ${esc(
+                        l.valor || "-"
+                    )}
                 </td>
 
                 <td>
-                    ${esc(l.padrao || "-")}
+                    ${esc(
+                        l.padrao || "-"
+                    )}
                 </td>
 
                 <td>
@@ -4011,10 +4084,15 @@ function renderizarLancamentos(){
     `;
 
 
-    container.innerHTML=html;
+    container.innerHTML =
+        html;
 
 }
 
+
+/* =========================================================
+   EDITAR LANÇAMENTO
+========================================================= */
 
 function editarLancamento(id){
 
@@ -4042,10 +4120,6 @@ function editarLancamento(id){
     ).value=l.responsavel || "";
 
     document.getElementById(
-        "dataHoraLancamento"
-    ).value=l.data || "";
-
-    document.getElementById(
         "quimicoLancamento"
     ).value=l.codigo || "";
 
@@ -4057,25 +4131,13 @@ function editarLancamento(id){
         "padraoLancamento"
     ).value=l.padrao || "";
 
-    document.getElementById(
-        "resultadoLancamento"
-    ).value=
-        l.resultado
-        ||
-        "DENTRO DO PADRÃO";
+
+    calcularResultadoAutomatico();
+
 
     document.getElementById(
         "observacaoLancamento"
     ).value=l.observacao || "";
-
-
-    document.querySelectorAll(
-        ".menu-item"
-    ).forEach(item => {
-
-        item.classList.remove("active");
-
-    });
 
 
     mostrarPagina(
@@ -4090,6 +4152,10 @@ function editarLancamento(id){
 
 }
 
+
+/* =========================================================
+   EXCLUIR LANÇAMENTO
+========================================================= */
 
 function excluirLancamento(id){
 
@@ -4163,7 +4229,9 @@ function excluirLancamento(id){
 
         STORAGE_LANCAMENTOS,
 
-        JSON.stringify(lancamentos)
+        JSON.stringify(
+            lancamentos
+        )
 
     );
 
@@ -4185,25 +4253,20 @@ function excluirLancamento(id){
 
 
 /* =========================================================
-   PEÇAS
+   RESULTADO PEÇAS
 ========================================================= */
 
 function atualizarResultadoPecas(){
 
-    const padrao =
-        Number(
-            document.getElementById(
-                "padraoPecas"
-            ).value
+    const campoPadrao =
+        document.getElementById(
+            "padraoPecas"
         );
 
-    const quantidade =
-        Number(
-            document.getElementById(
-                "quantidadePecas"
-            ).value
+    const campoQuantidade =
+        document.getElementById(
+            "quantidadePecas"
         );
-
 
     const resultado =
         document.getElementById(
@@ -4212,8 +4275,9 @@ function atualizarResultadoPecas(){
 
 
     if(
-        !padrao &&
-        !quantidade
+        campoPadrao.value === ""
+        ||
+        campoQuantidade.value === ""
     ){
 
         resultado.value =
@@ -4222,6 +4286,17 @@ function atualizarResultadoPecas(){
         return;
 
     }
+
+
+    const padrao =
+        Number(
+            campoPadrao.value
+        );
+
+    const quantidade =
+        Number(
+            campoQuantidade.value
+        );
 
 
     if(quantidade > padrao){
@@ -4244,10 +4319,13 @@ function atualizarResultadoPecas(){
 }
 
 
+/* =========================================================
+   SALVAR PEÇAS
+========================================================= */
+
 function salvarPecas(event){
 
     event.preventDefault();
-
 
     atualizarResultadoPecas();
 
@@ -4269,9 +4347,7 @@ function salvarPecas(event){
             Date.now(),
 
         data:
-            document.getElementById(
-                "dataHoraPecas"
-            ).value,
+            formatoDataHora(),
 
         maquina:
             document.getElementById(
@@ -4329,7 +4405,9 @@ function salvarPecas(event){
 
     }else{
 
-        registrosPecas.push(objeto);
+        registrosPecas.push(
+            objeto
+        );
 
     }
 
@@ -4338,7 +4416,9 @@ function salvarPecas(event){
 
         STORAGE_PECAS,
 
-        JSON.stringify(registrosPecas)
+        JSON.stringify(
+            registrosPecas
+        )
 
     );
 
@@ -4357,20 +4437,39 @@ function salvarPecas(event){
 }
 
 
+/* =========================================================
+   LIMPAR PEÇAS
+========================================================= */
+
 function limparFormularioPecas(){
 
     document
-        .getElementById("formPecas")
+        .getElementById(
+            "formPecas"
+        )
         .reset();
 
     document
-        .getElementById("idPecas")
+        .getElementById(
+            "idPecas"
+        )
         .value="";
 
-    atualizarDataHoraPecas();
+    document
+        .getElementById(
+            "resultadoPecas"
+        )
+        .value=
+            "DENTRO DO PADRÃO";
+
+    atualizarDataHoraTempoReal();
 
 }
 
+
+/* =========================================================
+   RENDER PEÇAS
+========================================================= */
 
 function renderizarPecas(){
 
@@ -4395,7 +4494,6 @@ function renderizarPecas(){
     if(lista.length === 0){
 
         container.innerHTML =
-
             `<div class="empty">
                 Nenhum registro de produção.
             </div>`;
@@ -4414,17 +4512,11 @@ function renderizarPecas(){
                 <tr>
 
                     <th>Data</th>
-
                     <th>Máquina</th>
-
                     <th>Responsável</th>
-
                     <th>Padrão</th>
-
                     <th>Quantidade</th>
-
                     <th>Resultado</th>
-
                     <th>Ações</th>
 
                 </tr>
@@ -4528,10 +4620,15 @@ function renderizarPecas(){
     `;
 
 
-    container.innerHTML=html;
+    container.innerHTML =
+        html;
 
 }
 
+
+/* =========================================================
+   EDITAR PEÇAS
+========================================================= */
 
 function editarPecas(id){
 
@@ -4561,22 +4658,13 @@ function editarPecas(id){
 
     document.getElementById(
         "padraoPecas"
-    ).value=registro.padrao || "";
+    ).value=registro.padrao ?? "";
 
     document.getElementById(
         "quantidadePecas"
-    ).value=registro.quantidade || "";
+    ).value=registro.quantidade ?? "";
 
-    document.getElementById(
-        "dataHoraPecas"
-    ).value=registro.data || "";
-
-    document.getElementById(
-        "resultadoPecas"
-    ).value=
-        registro.resultado
-        ||
-        "DENTRO DO PADRÃO";
+    atualizarResultadoPecas();
 
     document.getElementById(
         "observacaoPecas"
@@ -4584,7 +4672,9 @@ function editarPecas(id){
         registro.observacao || "";
 
 
-    mostrarPagina("pecas");
+    mostrarPagina(
+        "pecas"
+    );
 
 
     window.scrollTo({
@@ -4594,6 +4684,10 @@ function editarPecas(id){
 
 }
 
+
+/* =========================================================
+   EXCLUIR PEÇAS
+========================================================= */
 
 function excluirPecas(id){
 
@@ -4658,6 +4752,10 @@ function excluirPecas(id){
 
 }
 
+
+/* =========================================================
+   RESUMO PEÇAS
+========================================================= */
 
 function atualizarResumoPecas(){
 
@@ -4768,15 +4866,21 @@ function renderizarHistorico(){
 
             const texto = (
 
-                String(l.quimico || "")
+                String(
+                    l.quimico || ""
+                )
                 +
                 " "
                 +
-                String(l.codigo || "")
+                String(
+                    l.codigo || ""
+                )
                 +
                 " "
                 +
-                String(l.maquina || "")
+                String(
+                    l.maquina || ""
+                )
                 +
                 " "
                 +
@@ -4786,30 +4890,39 @@ function renderizarHistorico(){
                 +
                 " "
                 +
-                String(l.responsavel || "")
+                String(
+                    l.responsavel || ""
+                )
                 +
                 " "
                 +
-                String(l.resultado || "")
+                String(
+                    l.resultado || ""
+                )
 
             ).toLowerCase();
 
 
-            return texto.includes(busca);
+            return texto.includes(
+                busca
+            );
 
         })
         .sort(
             (a,b) =>
-            Number(b.timestamp || 0)
+            Number(
+                b.timestamp || 0
+            )
             -
-            Number(a.timestamp || 0)
+            Number(
+                a.timestamp || 0
+            )
         );
 
 
     if(lista.length === 0){
 
         container.innerHTML =
-
             `<div class="empty">
                 Nenhum registro encontrado.
             </div>`;
@@ -4828,17 +4941,11 @@ function renderizarHistorico(){
                 <tr>
 
                     <th>Data</th>
-
                     <th>Máquina</th>
-
                     <th>Responsável</th>
-
                     <th>Químico</th>
-
                     <th>Valor</th>
-
                     <th>Resultado</th>
-
                     <th>Ações</th>
 
                 </tr>
@@ -4950,7 +5057,8 @@ function renderizarHistorico(){
     `;
 
 
-    container.innerHTML=html;
+    container.innerHTML =
+        html;
 
 }
 
@@ -4980,124 +5088,126 @@ function renderizarMaquinas(){
     let rows = "";
 
 
-    maquinas.forEach(maquina => {
+    maquinas.forEach(
+        maquina => {
+
+            const registros =
+                lancamentos.filter(
+                    l =>
+                    l.maquina
+                    ===
+                    maquina
+                );
 
 
-        const registros =
-            lancamentos.filter(
-                l =>
-                l.maquina
-                ===
-                maquina
-            );
+            const total =
+                registros.length;
 
 
-        const total =
-            registros.length;
+            const dentro =
+                registros.filter(
+                    r =>
+                    r.resultado
+                    ===
+                    "DENTRO DO PADRÃO"
+                ).length;
 
 
-        const dentro =
-            registros.filter(
-                r =>
-                r.resultado
-                ===
-                "DENTRO DO PADRÃO"
-            ).length;
-
-
-        const conformidade =
-            total
-            ?
-            Math.round(
-                (
-                    dentro
-                    /
-                    total
+            const conformidade =
+                total
+                ?
+                Math.round(
+                    (
+                        dentro
+                        /
+                        total
+                    )
+                    *
+                    100
                 )
-                *
-                100
-            )
-            :
-            0;
+                :
+                0;
 
 
-        cards += `
+            cards += `
 
-            <div class="machine-card">
+                <div class="machine-card">
 
-                <div class="machine-name">
+                    <div class="machine-name">
 
-                    ${esc(
-                        nomeMaquina(
-                            maquina
-                        )
-                    )}
-
-                </div>
-
-                <div class="machine-value">
-
-                    ${total}
-
-                </div>
-
-                <div class="machine-label">
-
-                    avaliações
-
-                </div>
-
-                <div style="margin-top:10px;">
-
-                    ${badgeConformidade(
-                        conformidade
-                    )}
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        rows += `
-
-            <tr>
-
-                <td>
-                    <strong>
                         ${esc(
                             nomeMaquina(
                                 maquina
                             )
                         )}
-                    </strong>
-                </td>
 
-                <td>
-                    ${total}
-                </td>
+                    </div>
 
-                <td>
-                    ${dentro}
-                </td>
+                    <div class="machine-value">
 
-                <td>
-                    ${total-dentro}
-                </td>
+                        ${total}
 
-                <td>
-                    ${conformidade}%
-                </td>
+                    </div>
 
-            </tr>
+                    <div class="machine-label">
 
-        `;
+                        avaliações
 
-    });
+                    </div>
+
+                    <div style="margin-top:10px;">
+
+                        ${badgeConformidade(
+                            conformidade
+                        )}
+
+                    </div>
+
+                </div>
+
+            `;
 
 
-    grid.innerHTML=cards;
+            rows += `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${esc(
+                                nomeMaquina(
+                                    maquina
+                                )
+                            )}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${total}
+                    </td>
+
+                    <td>
+                        ${dentro}
+                    </td>
+
+                    <td>
+                        ${total-dentro}
+                    </td>
+
+                    <td>
+                        ${conformidade}%
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    grid.innerHTML =
+        cards;
 
 
     tabela.innerHTML = `
@@ -5109,13 +5219,9 @@ function renderizarMaquinas(){
                 <tr>
 
                     <th>Máquina</th>
-
                     <th>Avaliações</th>
-
                     <th>Dentro</th>
-
                     <th>Fora</th>
-
                     <th>Conformidade</th>
 
                 </tr>
@@ -5139,13 +5245,19 @@ function renderizarMaquinas(){
    DASHBOARD
 ========================================================= */
 
-function filtrarPeriodo(periodo,elemento){
+function filtrarPeriodo(
+    periodo,
+    elemento
+){
 
-    periodoAtual=periodo;
+    periodoAtual =
+        periodo;
 
 
     document
-        .querySelectorAll(".filter-btn")
+        .querySelectorAll(
+            ".filter-btn"
+        )
         .forEach(btn => {
 
             btn.classList.remove(
@@ -5197,29 +5309,33 @@ function obterLancamentosFiltrados(){
         inicio.setDate(
             agora.getDate()
             -
-            Number(periodoAtual)
+            Number(
+                periodoAtual
+            )
         );
 
     }
 
 
-    return lancamentos.filter(l => {
+    return lancamentos.filter(
+        l => {
 
-        const data =
-            l.data
-            ?
-            new Date(l.data)
-            :
-            new Date(
-                Number(
-                    l.timestamp || 0
-                )
-            );
+            const data =
+                l.data
+                ?
+                new Date(l.data)
+                :
+                new Date(
+                    Number(
+                        l.timestamp || 0
+                    )
+                );
 
 
-        return data >= inicio;
+            return data >= inicio;
 
-    });
+        }
+    );
 
 }
 
@@ -5254,11 +5370,12 @@ function atualizarDashboard(){
 
     const maquinasUsadas =
         new Set(
-            dados.map(
-                r =>
-                r.maquina
-            )
-            .filter(Boolean)
+            dados
+                .map(
+                    r =>
+                    r.maquina
+                )
+                .filter(Boolean)
         );
 
 
@@ -5310,12 +5427,20 @@ function atualizarDashboard(){
 
     atualizarGrafico();
 
-    atualizarRanking(dados);
+    atualizarRanking(
+        dados
+    );
 
-    atualizarAtividade(dados);
+    atualizarAtividade(
+        dados
+    );
 
 }
 
+
+/* =========================================================
+   GRÁFICO
+========================================================= */
 
 function atualizarGrafico(){
 
@@ -5399,9 +5524,7 @@ function atualizarGrafico(){
                         data:[
 
                             dentro,
-
                             acima,
-
                             abaixo
 
                         ],
@@ -5409,9 +5532,7 @@ function atualizarGrafico(){
                         backgroundColor:[
 
                             "#159957",
-
                             "#b7791f",
-
                             "#d92d20"
 
                         ],
@@ -5436,7 +5557,8 @@ function atualizarGrafico(){
 
                             labels:{
 
-                                color:corTexto
+                                color:
+                                    corTexto
 
                             }
 
@@ -5447,11 +5569,14 @@ function atualizarGrafico(){
                 }
 
             }
-
         );
 
 }
 
+
+/* =========================================================
+   RANKING
+========================================================= */
 
 function atualizarRanking(dados){
 
@@ -5466,24 +5591,26 @@ function atualizarRanking(dados){
     const contagem={};
 
 
-    dados.forEach(r => {
+    dados.forEach(
+        r => {
 
-        const maquina =
-            r.maquina
-            ||
-            "Não informado";
-
-
-        contagem[maquina] =
-            (
-                contagem[maquina]
+            const maquina =
+                r.maquina
                 ||
-                0
-            )
-            +
-            1;
+                "Não informado";
 
-    });
+
+            contagem[maquina] =
+                (
+                    contagem[maquina]
+                    ||
+                    0
+                )
+                +
+                1;
+
+        }
+    );
 
 
     const lista =
@@ -5499,7 +5626,6 @@ function atualizarRanking(dados){
     if(lista.length === 0){
 
         container.innerHTML =
-
             `<div class="empty">
                 Nenhum registro encontrado.
             </div>`;
@@ -5555,10 +5681,15 @@ function atualizarRanking(dados){
     );
 
 
-    container.innerHTML=html;
+    container.innerHTML =
+        html;
 
 }
 
+
+/* =========================================================
+   ATIVIDADE
+========================================================= */
 
 function atualizarAtividade(dados){
 
@@ -5574,17 +5705,23 @@ function atualizarAtividade(dados){
         [...dados]
         .sort(
             (a,b) =>
-            Number(b.timestamp || 0)
+            Number(
+                b.timestamp || 0
+            )
             -
-            Number(a.timestamp || 0)
+            Number(
+                a.timestamp || 0
+            )
         )
-        .slice(0,10);
+        .slice(
+            0,
+            10
+        );
 
 
     if(lista.length === 0){
 
         container.innerHTML =
-
             `<div class="empty">
                 Nenhuma atividade registrada.
             </div>`;
@@ -5603,11 +5740,8 @@ function atualizarAtividade(dados){
                 <tr>
 
                     <th>Data</th>
-
                     <th>Máquina</th>
-
                     <th>Químico</th>
-
                     <th>Resultado</th>
 
                 </tr>
@@ -5619,45 +5753,47 @@ function atualizarAtividade(dados){
     `;
 
 
-    lista.forEach(r => {
+    lista.forEach(
+        r => {
 
-        html += `
+            html += `
 
-            <tr>
+                <tr>
 
-                <td>
-                    ${formatarData(
-                        r.data
-                    )}
-                </td>
+                    <td>
+                        ${formatarData(
+                            r.data
+                        )}
+                    </td>
 
-                <td>
-                    ${esc(
-                        nomeMaquina(
-                            r.maquina
-                        )
-                    )}
-                </td>
+                    <td>
+                        ${esc(
+                            nomeMaquina(
+                                r.maquina
+                            )
+                        )}
+                    </td>
 
-                <td>
-                    ${esc(
-                        r.quimico
-                        ||
-                        "-"
-                    )}
-                </td>
+                    <td>
+                        ${esc(
+                            r.quimico
+                            ||
+                            "-"
+                        )}
+                    </td>
 
-                <td>
-                    ${badgeResultado(
-                        r.resultado
-                    )}
-                </td>
+                    <td>
+                        ${badgeResultado(
+                            r.resultado
+                        )}
+                    </td>
 
-            </tr>
+                </tr>
 
-        `;
+            `;
 
-    });
+        }
+    );
 
 
     html += `
@@ -5669,7 +5805,8 @@ function atualizarAtividade(dados){
     `;
 
 
-    container.innerHTML=html;
+    container.innerHTML =
+        html;
 
 }
 
@@ -5699,27 +5836,27 @@ function exportarExcel(){
         XLSX.utils.book_new();
 
 
-    /* QUÍMICOS */
-
     const dadosQuimicos =
-        quimicos.map(q => ({
+        quimicos.map(
+            q => ({
 
-            "Nome":
-                q.nome || "",
+                "Nome":
+                    q.nome || "",
 
-            "Código":
-                q.codigo || "",
+                "Código":
+                    q.codigo || "",
 
-            "Cor":
-                q.cor || "",
+                "Cor":
+                    q.cor || "",
 
-            "Tipo":
-                q.tipo || "",
+                "Tipo":
+                    q.tipo || "",
 
-            "Observação":
-                q.observacao || ""
+                "Observação":
+                    q.observacao || ""
 
-        }));
+            })
+        );
 
 
     const wsQuimicos =
@@ -5739,43 +5876,57 @@ function exportarExcel(){
     );
 
 
-    /* LANÇAMENTOS */
-
     const dadosLancamentos =
-        lancamentos.map(l => ({
+        lancamentos.map(
+            l => ({
 
-            "Data":
-                formatarData(
-                    l.data
-                ),
+                "Data":
+                    formatarData(
+                        l.data
+                    ),
 
-            "Máquina":
-                nomeMaquina(
-                    l.maquina
-                ),
+                "Máquina":
+                    nomeMaquina(
+                        l.maquina
+                    ),
 
-            "Responsável":
-                l.responsavel || "",
+                "Responsável":
+                    l.responsavel
+                    ||
+                    "",
 
-            "Químico":
-                l.quimico || "",
+                "Químico":
+                    l.quimico
+                    ||
+                    "",
 
-            "Código":
-                l.codigo || "",
+                "Código":
+                    l.codigo
+                    ||
+                    "",
 
-            "Valor":
-                l.valor || "",
+                "Valor":
+                    l.valor
+                    ||
+                    "",
 
-            "Padrão":
-                l.padrao || "",
+                "Padrão":
+                    l.padrao
+                    ||
+                    "",
 
-            "Resultado":
-                l.resultado || "",
+                "Resultado":
+                    l.resultado
+                    ||
+                    "",
 
-            "Observação":
-                l.observacao || ""
+                "Observação":
+                    l.observacao
+                    ||
+                    ""
 
-        }));
+            })
+        );
 
 
     const wsLancamentos =
@@ -5795,37 +5946,47 @@ function exportarExcel(){
     );
 
 
-    /* PEÇAS */
-
     const dadosPecas =
-        registrosPecas.map(r => ({
+        registrosPecas.map(
+            r => ({
 
-            "Data":
-                formatarData(
-                    r.data
-                ),
+                "Data":
+                    formatarData(
+                        r.data
+                    ),
 
-            "Máquina":
-                nomeMaquina(
-                    r.maquina
-                ),
+                "Máquina":
+                    nomeMaquina(
+                        r.maquina
+                    ),
 
-            "Responsável":
-                r.responsavel || "",
+                "Responsável":
+                    r.responsavel
+                    ||
+                    "",
 
-            "Padrão":
-                r.padrao || 0,
+                "Padrão":
+                    r.padrao
+                    ||
+                    0,
 
-            "Quantidade":
-                r.quantidade || 0,
+                "Quantidade":
+                    r.quantidade
+                    ||
+                    0,
 
-            "Resultado":
-                r.resultado || "",
+                "Resultado":
+                    r.resultado
+                    ||
+                    "",
 
-            "Observação":
-                r.observacao || ""
+                "Observação":
+                    r.observacao
+                    ||
+                    ""
 
-        }));
+            })
+        );
 
 
     const wsPecas =
@@ -5845,67 +6006,67 @@ function exportarExcel(){
     );
 
 
-    /* MÁQUINAS */
-
     const dadosMaquinas =
-        maquinas.map(maquina => {
+        maquinas.map(
+            maquina => {
 
-            const registros =
-                lancamentos.filter(
-                    l =>
-                    l.maquina
-                    ===
-                    maquina
-                );
-
-
-            const dentro =
-                registros.filter(
-                    r =>
-                    r.resultado
-                    ===
-                    "DENTRO DO PADRÃO"
-                ).length;
-
-
-            return {
-
-                "Máquina":
-                    nomeMaquina(
+                const registros =
+                    lancamentos.filter(
+                        l =>
+                        l.maquina
+                        ===
                         maquina
-                    ),
+                    );
 
-                "Avaliações":
-                    registros.length,
 
-                "Dentro do padrão":
-                    dentro,
+                const dentro =
+                    registros.filter(
+                        r =>
+                        r.resultado
+                        ===
+                        "DENTRO DO PADRÃO"
+                    ).length;
 
-                "Fora do padrão":
-                    registros.length
-                    -
-                    dentro,
 
-                "Conformidade":
-                    registros.length
-                    ?
-                    (
+                return {
+
+                    "Máquina":
+                        nomeMaquina(
+                            maquina
+                        ),
+
+                    "Avaliações":
+                        registros.length,
+
+                    "Dentro do padrão":
+                        dentro,
+
+                    "Fora do padrão":
+                        registros.length
+                        -
+                        dentro,
+
+                    "Conformidade":
+                        registros.length
+                        ?
                         (
-                            dentro
-                            /
-                            registros.length
-                        )
-                        *
-                        100
-                    ).toFixed(1)
-                    +
-                    "%"
-                    :
-                    "0%"
+                            (
+                                dentro
+                                /
+                                registros.length
+                            )
+                            *
+                            100
+                        ).toFixed(1)
+                        +
+                        "%"
+                        :
+                        "0%"
 
-            };
+                };
 
-        });
+            }
+        );
 
 
     const wsMaquinas =
@@ -5925,8 +6086,6 @@ function exportarExcel(){
     );
 
 
-    /* DOWNLOAD */
-
     const agora =
         new Date();
 
@@ -5940,13 +6099,19 @@ function exportarExcel(){
         +
         String(
             agora.getMonth()+1
-        ).padStart(2,"0")
+        ).padStart(
+            2,
+            "0"
+        )
         +
         "-"
         +
         String(
             agora.getDate()
-        ).padStart(2,"0")
+        ).padStart(
+            2,
+            "0"
+        )
         +
         ".xlsx";
 
@@ -5983,9 +6148,7 @@ function atualizarSistemaAutomaticamente(){
 
     atualizarDashboard();
 
-    atualizarDataHoraLancamento();
-
-    atualizarDataHoraPecas();
+    atualizarDataHoraTempoReal();
 
 }
 
@@ -6000,7 +6163,7 @@ setInterval(
 
 
 /* =========================================================
-   FUNÇÕES AUXILIARES
+   FORMATAÇÃO DA DATA
 ========================================================= */
 
 function formatarData(valor){
@@ -6029,6 +6192,10 @@ function formatarData(valor){
 
 }
 
+
+/* =========================================================
+   BADGE RESULTADO
+========================================================= */
 
 function badgeResultado(resultado){
 
@@ -6085,6 +6252,10 @@ function badgeResultado(resultado){
 
 }
 
+
+/* =========================================================
+   BADGE CONFORMIDADE
+========================================================= */
 
 function badgeConformidade(valor){
 
