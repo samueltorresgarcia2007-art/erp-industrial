@@ -1,1589 +1,1027 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>GraviUnit MES | Manufacturing Execution System</title>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
 :root{
-
-    --azul:#0756a3;
-    --azul-escuro:#063b70;
-    --azul-claro:#0d74d5;
-
-    --cyan:#16b8d4;
-
-    --fundo:#f3f6f9;
-    --card:#ffffff;
-
-    --texto:#17202a;
-    --texto-sec:#667085;
-
-    --borda:#dce3ea;
-
-    --verde:#159957;
-    --verde-bg:#e8f8ef;
-
-    --vermelho:#d92d20;
-    --vermelho-bg:#fdeceb;
-
-    --amarelo:#b7791f;
-    --amarelo-bg:#fff7df;
-
-    --sombra:0 5px 18px rgba(15,23,42,.08);
-
-    --sidebar:245px;
-    --topbar:64px;
-
+--azul:#0756a3;
+--azul-escuro:#063b70;
+--azul-claro:#0d74d5;
+--cyan:#16b8d4;
+--fundo:#f3f6f9;
+--card:#ffffff;
+--texto:#17202a;
+--texto-sec:#667085;
+--borda:#dce3ea;
+--verde:#159957;
+--verde-bg:#e8f8ef;
+--vermelho:#d92d20;
+--vermelho-bg:#fdeceb;
+--amarelo:#b7791f;
+--amarelo-bg:#fff7df;
+--sombra:0 5px 18px rgba(15,23,42,.08);
+--sidebar:245px;
+--topbar:64px;
 }
 
-*{
-
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-
-    font-family:
-    Inter,
-    Arial,
-    Helvetica,
-    sans-serif;
-
-    background:var(--fundo);
-
-    color:var(--texto);
-
-    min-height:100vh;
-
+font-family:Inter,Arial,Helvetica,sans-serif;
+background:var(--fundo);
+color:var(--texto);
+min-height:100vh;
 }
 
-button,
-input,
-select,
-textarea{
-
-    font-family:inherit;
-
-}
-
-button{
-
-    cursor:pointer;
-
-}
-
-/* =========================
-   DARK MODE
-========================= */
+button,input,select,textarea{font-family:inherit}
+button{cursor:pointer}
 
 body.dark{
-
-    --fundo:#0d141b;
-    --card:#151e27;
-
-    --texto:#f2f5f7;
-    --texto-sec:#9ca9b5;
-
-    --borda:#2a3744;
-
-    --verde-bg:#123c2b;
-    --vermelho-bg:#401d1b;
-    --amarelo-bg:#40331a;
-
-    --sombra:0 5px 18px rgba(0,0,0,.25);
-
+--fundo:#0d141b;
+--card:#151e27;
+--texto:#f2f5f7;
+--texto-sec:#9ca9b5;
+--borda:#2a3744;
+--verde-bg:#123c2b;
+--vermelho-bg:#401d1b;
+--amarelo-bg:#40331a;
+--sombra:0 5px 18px rgba(0,0,0,.25);
 }
 
-/* =========================
-   TOPBAR
-========================= */
+/* TOPBAR */
 
 .topbar{
-
-    position:fixed;
-
-    top:0;
-    left:0;
-    right:0;
-
-    height:var(--topbar);
-
-    background:#071a2a;
-
-    color:white;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 18px;
-
-    z-index:1000;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-
+position:fixed;
+top:0;
+left:0;
+right:0;
+height:var(--topbar);
+background:#071a2a;
+color:white;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 18px;
+z-index:1000;
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-.top-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-}
+.top-left{display:flex;align-items:center;gap:14px}
 
 .menu-btn{
-
-    width:42px;
-    height:42px;
-
-    border:none;
-
-    border-radius:9px;
-
-    background:rgba(255,255,255,.08);
-
-    color:white;
-
-    font-size:22px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
+width:42px;
+height:42px;
+border:none;
+border-radius:9px;
+background:rgba(255,255,255,.08);
+color:white;
+font-size:22px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
-.menu-btn:hover{
-
-    background:rgba(255,255,255,.15);
-
-}
+.menu-btn:hover{background:rgba(255,255,255,.15)}
 
 .brand{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    white-space:nowrap;
-
+display:flex;
+align-items:center;
+gap:10px;
+white-space:nowrap
 }
 
 .logo-symbol{
-
-    width:40px;
-    height:40px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center
 }
 
 .logo-symbol svg{
-
-    width:40px;
-    height:40px;
-
+width:40px;
+height:40px
 }
 
 .brand-text{
-
-    display:flex;
-
-    flex-direction:column;
-
-    line-height:1;
-
+display:flex;
+flex-direction:column;
+line-height:1
 }
 
 .brand-name{
-
-    font-size:20px;
-
-    font-weight:800;
-
-    letter-spacing:.4px;
-
+font-size:20px;
+font-weight:800;
+letter-spacing:.4px
 }
 
 .brand-subtitle{
-
-    font-size:8px;
-
-    margin-top:5px;
-
-    color:#aebdca;
-
-    letter-spacing:1.3px;
-
-    font-weight:600;
-
+font-size:8px;
+margin-top:5px;
+color:#aebdca;
+letter-spacing:1.3px;
+font-weight:600
 }
 
 .top-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
+display:flex;
+align-items:center;
+gap:12px
 }
 
 .status{
-
-    font-size:12px;
-
-    color:#c7d2da;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:6px;
-
+font-size:12px;
+color:#c7d2da;
+display:flex;
+align-items:center;
+gap:6px
 }
 
 .status-dot{
-
-    width:8px;
-    height:8px;
-
-    background:#27c46b;
-
-    border-radius:50%;
-
+width:8px;
+height:8px;
+background:#27c46b;
+border-radius:50%
 }
 
 .theme-btn{
-
-    border:1px solid rgba(255,255,255,.12);
-
-    background:rgba(255,255,255,.07);
-
-    color:white;
-
-    border-radius:8px;
-
-    padding:9px 12px;
-
-    font-size:13px;
-
+border:1px solid rgba(255,255,255,.12);
+background:rgba(255,255,255,.07);
+color:white;
+border-radius:8px;
+padding:9px 12px;
+font-size:13px;
 }
 
 .theme-btn:hover{
-
-    background:rgba(255,255,255,.14);
-
+background:rgba(255,255,255,.14)
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+/* SIDEBAR */
 
 .sidebar{
-
-    position:fixed;
-
-    top:var(--topbar);
-
-    bottom:0;
-
-    left:0;
-
-    width:var(--sidebar);
-
-    background:#0a2337;
-
-    color:white;
-
-    z-index:900;
-
-    overflow-y:auto;
-
-    transition:.25s;
-
+position:fixed;
+top:var(--topbar);
+bottom:0;
+left:0;
+width:var(--sidebar);
+background:#0a2337;
+color:white;
+z-index:900;
+overflow-y:auto;
+transition:.25s;
 }
 
 .sidebar.hidden{
-
-    transform:translateX(-100%);
-
+transform:translateX(-100%)
 }
 
 .menu-title{
-
-    padding:22px 18px 10px;
-
-    font-size:10px;
-
-    color:#8ea5b7;
-
-    text-transform:uppercase;
-
-    letter-spacing:1.2px;
-
-    font-weight:700;
-
+padding:22px 18px 10px;
+font-size:10px;
+color:#8ea5b7;
+text-transform:uppercase;
+letter-spacing:1.2px;
+font-weight:700;
 }
 
 .menu-item{
-
-    margin:4px 10px;
-
-    padding:12px 13px;
-
-    border-radius:8px;
-
-    color:#d7e1e8;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:11px;
-
-    font-size:13px;
-
-    transition:.2s;
-
-    user-select:none;
-
+margin:4px 10px;
+padding:12px 13px;
+border-radius:8px;
+color:#d7e1e8;
+display:flex;
+align-items:center;
+gap:11px;
+font-size:13px;
+transition:.2s;
+user-select:none;
 }
 
 .menu-item:hover{
-
-    background:rgba(255,255,255,.08);
-
-    color:white;
-
+background:rgba(255,255,255,.08);
+color:white
 }
 
 .menu-item.active{
-
-    background:var(--azul);
-
-    color:white;
-
-    box-shadow:0 4px 10px rgba(0,0,0,.15);
-
+background:var(--azul);
+color:white;
+box-shadow:0 4px 10px rgba(0,0,0,.15)
 }
 
 .menu-icon{
-
-    width:20px;
-
-    text-align:center;
-
-    font-size:16px;
-
+width:20px;
+text-align:center;
+font-size:16px
 }
 
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 .main{
-
-    margin-left:var(--sidebar);
-
-    padding-top:var(--topbar);
-
-    min-height:100vh;
-
-    transition:.25s;
-
+margin-left:var(--sidebar);
+padding-top:var(--topbar);
+min-height:100vh;
+transition:.25s;
 }
 
 .main.expanded{
-
-    margin-left:0;
-
+margin-left:0
 }
 
 .content{
-
-    padding:25px;
-
-    max-width:1600px;
-
-    margin:auto;
-
+padding:25px;
+max-width:1600px;
+margin:auto
 }
 
-/* =========================
-   PAGES
-========================= */
+/* PAGES */
 
-.page{
+.page{display:none}
 
-    display:none;
-
-}
-
-.page.active{
-
-    display:block;
-
-}
+.page.active{display:block}
 
 .page-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    gap:15px;
-
-    margin-bottom:22px;
-
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:15px;
+margin-bottom:22px;
 }
 
 .page-title{
-
-    font-size:25px;
-
-    font-weight:800;
-
-    color:var(--texto);
-
+font-size:25px;
+font-weight:800;
+color:var(--texto)
 }
 
 .page-description{
-
-    margin-top:5px;
-
-    color:var(--texto-sec);
-
-    font-size:13px;
-
+margin-top:5px;
+color:var(--texto-sec);
+font-size:13px
 }
 
-/* =========================
-   CARDS
-========================= */
+/* CARDS */
 
 .card{
-
-    background:var(--card);
-
-    border:1px solid var(--borda);
-
-    border-radius:12px;
-
-    box-shadow:var(--sombra);
-
-    padding:20px;
-
-    margin-bottom:20px;
-
+background:var(--card);
+border:1px solid var(--borda);
+border-radius:12px;
+box-shadow:var(--sombra);
+padding:20px;
+margin-bottom:20px;
 }
 
 .card-title{
-
-    font-size:16px;
-
-    font-weight:750;
-
-    margin-bottom:5px;
-
+font-size:16px;
+font-weight:750;
+margin-bottom:5px
 }
 
 .card-description{
-
-    color:var(--texto-sec);
-
-    font-size:12px;
-
-    margin-bottom:18px;
-
+color:var(--texto-sec);
+font-size:12px;
+margin-bottom:18px
 }
 
-/* =========================
-   KPIS
-========================= */
+/* KPIS */
 
 .kpis{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:15px;
-
-    margin-bottom:20px;
-
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-bottom:20px;
 }
 
 .kpi{
-
-    background:var(--card);
-
-    border:1px solid var(--borda);
-
-    border-radius:12px;
-
-    padding:18px;
-
-    box-shadow:var(--sombra);
-
+background:var(--card);
+border:1px solid var(--borda);
+border-radius:12px;
+padding:18px;
+box-shadow:var(--sombra);
 }
 
 .kpi-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
+display:flex;
+justify-content:space-between;
+align-items:center
 }
 
 .kpi-label{
-
-    color:var(--texto-sec);
-
-    font-size:12px;
-
-    font-weight:600;
-
+color:var(--texto-sec);
+font-size:12px;
+font-weight:600
 }
 
 .kpi-icon{
-
-    font-size:20px;
-
+font-size:20px
 }
 
 .kpi-value{
-
-    font-size:28px;
-
-    font-weight:800;
-
-    margin-top:10px;
-
+font-size:28px;
+font-weight:800;
+margin-top:10px
 }
 
 .kpi-info{
-
-    font-size:11px;
-
-    color:var(--texto-sec);
-
-    margin-top:5px;
-
+font-size:11px;
+color:var(--texto-sec);
+margin-top:5px
 }
 
-/* =========================
-   DASHBOARD
-========================= */
+/* DASHBOARD */
 
 .dashboard-grid{
-
-    display:grid;
-
-    grid-template-columns:1.5fr 1fr;
-
-    gap:20px;
-
+display:grid;
+grid-template-columns:1.5fr 1fr;
+gap:20px
 }
 
 .chart-container{
-
-    position:relative;
-
-    height:310px;
-
+position:relative;
+height:310px
 }
 
-/* =========================
-   FILTROS
-========================= */
+/* FILTROS */
 
 .filters{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    margin-bottom:18px;
-
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:18px
 }
 
 .filter-btn{
-
-    border:1px solid var(--borda);
-
-    background:var(--card);
-
-    color:var(--texto);
-
-    padding:8px 13px;
-
-    border-radius:7px;
-
-    font-size:12px;
-
+border:1px solid var(--borda);
+background:var(--card);
+color:var(--texto);
+padding:8px 13px;
+border-radius:7px;
+font-size:12px;
 }
 
 .filter-btn.active{
-
-    background:var(--azul);
-
-    color:white;
-
-    border-color:var(--azul);
-
+background:var(--azul);
+color:white;
+border-color:var(--azul)
 }
 
-/* =========================
-   FORMS
-========================= */
+/* FORMS */
 
 .form-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:15px;
-
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
 }
 
 .form-group{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-
+display:flex;
+flex-direction:column;
+gap:6px
 }
 
 .form-group.full{
-
-    grid-column:1/-1;
-
+grid-column:1/-1
 }
 
 label{
-
-    font-size:12px;
-
-    font-weight:700;
-
-    color:var(--texto);
-
+font-size:12px;
+font-weight:700;
+color:var(--texto)
 }
 
-input,
-select,
-textarea{
-
-    width:100%;
-
-    border:1px solid var(--borda);
-
-    background:var(--card);
-
-    color:var(--texto);
-
-    border-radius:7px;
-
-    padding:10px 11px;
-
-    outline:none;
-
-    font-size:13px;
-
+input,select,textarea{
+width:100%;
+border:1px solid var(--borda);
+background:var(--card);
+color:var(--texto);
+border-radius:7px;
+padding:10px 11px;
+outline:none;
+font-size:13px;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-
-    border-color:var(--azul);
-
-    box-shadow:0 0 0 2px rgba(7,86,163,.10);
-
+input:focus,select:focus,textarea:focus{
+border-color:var(--azul);
+box-shadow:0 0 0 2px rgba(7,86,163,.10);
 }
 
 textarea{
-
-    min-height:90px;
-
-    resize:vertical;
-
+min-height:90px;
+resize:vertical
 }
-
-/* =========================
-   DATA/HORA EM TEMPO REAL
-========================= */
 
 .campo-tempo-real{
-
-    background:#f1f5f8 !important;
-
-    font-weight:700;
-
-    color:#0756a3 !important;
-
-    cursor:not-allowed;
-
+background:#f1f5f8!important;
+font-weight:700;
+color:#0756a3!important;
+cursor:not-allowed;
 }
 
 body.dark .campo-tempo-real{
-
-    background:#202c37 !important;
-
-    color:#69aef0 !important;
-
+background:#202c37!important;
+color:#69aef0!important
 }
 
-/* =========================
-   RESULTADO AUTOMÁTICO
-========================= */
-
-#resultadoLancamento{
-
-    font-weight:800;
-
-    cursor:not-allowed;
-
-    background:#f1f5f8;
-
+#resultadoLancamento,#resultadoPecas{
+font-weight:800;
+cursor:not-allowed;
+background:#f1f5f8;
 }
 
-body.dark #resultadoLancamento{
-
-    background:#202c37;
-
-    color:#ffffff;
-
-}
-
-#resultadoPecas{
-
-    font-weight:800;
-
-    cursor:not-allowed;
-
-    background:#f1f5f8;
-
-}
-
+body.dark #resultadoLancamento,
 body.dark #resultadoPecas{
-
-    background:#202c37;
-
-    color:#ffffff;
-
+background:#202c37;
+color:#ffffff;
 }
 
 .form-actions{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:18px;
-
+display:flex;
+gap:10px;
+margin-top:18px
 }
 
 .btn{
-
-    border:none;
-
-    border-radius:7px;
-
-    padding:10px 15px;
-
-    font-size:12px;
-
-    font-weight:700;
-
+border:none;
+border-radius:7px;
+padding:10px 15px;
+font-size:12px;
+font-weight:700;
 }
 
 .btn-primary{
-
-    background:var(--azul);
-
-    color:white;
-
+background:var(--azul);
+color:white
 }
 
 .btn-primary:hover{
-
-    background:var(--azul-escuro);
-
+background:var(--azul-escuro)
 }
 
 .btn-secondary{
-
-    background:#eef2f5;
-
-    color:#344054;
-
+background:#eef2f5;
+color:#344054
 }
 
 body.dark .btn-secondary{
-
-    background:#25313c;
-
-    color:#dce4ea;
-
+background:#25313c;
+color:#dce4ea
 }
 
 .btn-danger{
-
-    background:var(--vermelho);
-
-    color:white;
-
+background:var(--vermelho);
+color:white
 }
 
 .btn-success{
-
-    background:var(--verde);
-
-    color:white;
-
+background:var(--verde);
+color:white
 }
 
-/* =========================
-   TABLE
-========================= */
+/* 5 OPÇÕES DE MEDIÇÃO */
+
+.medicoes-container{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.medicao-item{
+border:1px solid var(--borda);
+border-radius:10px;
+padding:15px;
+background:rgba(7,86,163,.025);
+transition:.2s;
+}
+
+body.dark .medicao-item{
+background:rgba(255,255,255,.025);
+}
+
+.medicao-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-bottom:12px;
+}
+
+.medicao-numero{
+font-size:13px;
+font-weight:800;
+color:var(--azul);
+}
+
+.medicao-status{
+font-size:10px;
+font-weight:800;
+color:var(--texto-sec);
+}
+
+.medicao-grid{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1.5fr;
+gap:12px;
+align-items:end;
+}
+
+.resultado-medicao{
+font-weight:800!important;
+cursor:not-allowed;
+}
+
+.resultado-dentro{
+border-color:var(--verde)!important;
+background:var(--verde-bg)!important;
+color:var(--verde)!important;
+}
+
+.resultado-acima{
+border-color:var(--amarelo)!important;
+background:var(--amarelo-bg)!important;
+color:var(--amarelo)!important;
+}
+
+.resultado-abaixo{
+border-color:var(--vermelho)!important;
+background:var(--vermelho-bg)!important;
+color:var(--vermelho)!important;
+}
+
+.resultado-nao-utilizado{
+border-color:#667085!important;
+background:#eef2f5!important;
+color:#667085!important;
+}
+
+body.dark .resultado-nao-utilizado{
+background:#25313c!important;
+color:#b7c2cc!important;
+border-color:#667085!important;
+}
+
+.medicao-vazia{
+opacity:.75;
+}
+
+/* BOTÃO OPÇÃO 4 */
+
+.btn-nao-utilizar{
+border:1px solid var(--borda);
+background:var(--card);
+color:var(--texto-sec);
+border-radius:6px;
+padding:6px 10px;
+font-size:10px;
+font-weight:800;
+transition:.2s;
+}
+
+.btn-nao-utilizar:hover{
+background:var(--vermelho-bg);
+color:var(--vermelho);
+border-color:var(--vermelho);
+}
+
+.btn-nao-utilizar.ativo{
+background:var(--verde-bg);
+color:var(--verde);
+border-color:var(--verde);
+}
+
+.opcao4-desativada{
+opacity:.72;
+border-color:#98a2b3;
+}
+
+.opcao4-desativada input:disabled,
+.opcao4-desativada select:disabled{
+cursor:not-allowed;
+opacity:.65;
+}
+
+/* TABLE */
 
 .table-wrapper{
-
-    overflow-x:auto;
-
+overflow-x:auto
 }
 
 table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    min-width:700px;
-
+width:100%;
+border-collapse:collapse;
+min-width:700px
 }
 
 th{
-
-    text-align:left;
-
-    padding:11px;
-
-    background:#f1f5f8;
-
-    color:#52606d;
-
-    font-size:11px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.4px;
-
-    border-bottom:1px solid var(--borda);
-
+text-align:left;
+padding:11px;
+background:#f1f5f8;
+color:#52606d;
+font-size:11px;
+text-transform:uppercase;
+letter-spacing:.4px;
+border-bottom:1px solid var(--borda);
 }
 
 body.dark th{
-
-    background:#202c37;
-
-    color:#b7c2cc;
-
+background:#202c37;
+color:#b7c2cc
 }
 
 td{
-
-    padding:11px;
-
-    border-bottom:1px solid var(--borda);
-
-    font-size:12px;
-
-    color:var(--texto);
-
+padding:11px;
+border-bottom:1px solid var(--borda);
+font-size:12px;
+color:var(--texto);
 }
 
 tr:hover td{
-
-    background:rgba(7,86,163,.035);
-
+background:rgba(7,86,163,.035)
 }
 
-/* =========================
-   BADGES
-========================= */
+/* BADGES */
 
 .badge{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    padding:5px 8px;
-
-    border-radius:20px;
-
-    font-size:10px;
-
-    font-weight:800;
-
+display:inline-flex;
+align-items:center;
+padding:5px 8px;
+border-radius:20px;
+font-size:10px;
+font-weight:800;
 }
 
 .badge-green{
-
-    background:var(--verde-bg);
-
-    color:var(--verde);
-
+background:var(--verde-bg);
+color:var(--verde)
 }
 
 .badge-red{
-
-    background:var(--vermelho-bg);
-
-    color:var(--vermelho);
-
+background:var(--vermelho-bg);
+color:var(--vermelho)
 }
 
 .badge-yellow{
-
-    background:var(--amarelo-bg);
-
-    color:var(--amarelo);
-
+background:var(--amarelo-bg);
+color:var(--amarelo)
 }
 
 .badge-blue{
-
-    background:#e8f1fc;
-
-    color:var(--azul);
-
+background:#e8f1fc;
+color:var(--azul)
 }
 
 body.dark .badge-blue{
-
-    background:#142f4a;
-
-    color:#69aef0;
-
+background:#142f4a;
+color:#69aef0
 }
 
-/* =========================
-   ACTIONS
-========================= */
+/* ACTIONS */
 
 .actions{
-
-    display:flex;
-
-    gap:6px;
-
-    flex-wrap:wrap;
-
+display:flex;
+gap:6px;
+flex-wrap:wrap
 }
 
 .btn-small{
-
-    padding:6px 9px;
-
-    border:none;
-
-    border-radius:5px;
-
-    font-size:10px;
-
-    font-weight:700;
-
+padding:6px 9px;
+border:none;
+border-radius:5px;
+font-size:10px;
+font-weight:700;
 }
 
 .btn-edit{
-
-    background:#e8f1fc;
-
-    color:var(--azul);
-
+background:#e8f1fc;
+color:var(--azul)
 }
 
 .btn-delete{
-
-    background:var(--vermelho-bg);
-
-    color:var(--vermelho);
-
+background:var(--vermelho-bg);
+color:var(--vermelho)
 }
 
 body.dark .btn-edit{
-
-    background:#142f4a;
-
-    color:#69aef0;
-
+background:#142f4a;
+color:#69aef0
 }
 
-/* =========================
-   RESUMO PEÇAS
-========================= */
+/* RESUMO PEÇAS */
 
 .summary-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:12px;
-
-    margin-bottom:20px;
-
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-bottom:20px;
 }
 
 .summary-card{
-
-    background:var(--card);
-
-    border:1px solid var(--borda);
-
-    border-radius:10px;
-
-    padding:15px;
-
+background:var(--card);
+border:1px solid var(--borda);
+border-radius:10px;
+padding:15px;
 }
 
 .summary-label{
-
-    font-size:11px;
-
-    color:var(--texto-sec);
-
+font-size:11px;
+color:var(--texto-sec)
 }
 
 .summary-value{
-
-    font-size:22px;
-
-    font-weight:800;
-
-    margin-top:5px;
-
+font-size:22px;
+font-weight:800;
+margin-top:5px
 }
 
-/* =========================
-   EMPTY
-========================= */
+/* EMPTY */
 
 .empty{
-
-    padding:35px 20px;
-
-    text-align:center;
-
-    color:var(--texto-sec);
-
-    font-size:13px;
-
+padding:35px 20px;
+text-align:center;
+color:var(--texto-sec);
+font-size:13px
 }
 
-/* =========================
-   MACHINE
-========================= */
+/* MACHINE */
 
 .machine-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:15px;
-
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px
 }
 
 .machine-card{
-
-    border:1px solid var(--borda);
-
-    border-radius:10px;
-
-    padding:15px;
-
-    background:var(--card);
-
+border:1px solid var(--borda);
+border-radius:10px;
+padding:15px;
+background:var(--card);
 }
 
 .machine-name{
-
-    font-weight:800;
-
-    font-size:15px;
-
+font-weight:800;
+font-size:15px
 }
 
 .machine-value{
-
-    font-size:24px;
-
-    font-weight:800;
-
-    margin-top:10px;
-
+font-size:24px;
+font-weight:800;
+margin-top:10px
 }
 
 .machine-label{
-
-    font-size:11px;
-
-    color:var(--texto-sec);
-
+font-size:11px;
+color:var(--texto-sec)
 }
 
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 .search-box{
-
-    max-width:350px;
-
-    margin-bottom:15px;
-
+max-width:350px;
+margin-bottom:15px
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 .footer{
-
-    margin-top:30px;
-
-    padding:20px;
-
-    text-align:center;
-
-    color:var(--texto-sec);
-
-    font-size:11px;
-
-    border-top:1px solid var(--borda);
-
+margin-top:30px;
+padding:20px;
+text-align:center;
+color:var(--texto-sec);
+font-size:11px;
+border-top:1px solid var(--borda);
 }
 
 .footer strong{
-
-    color:var(--azul);
-
+color:var(--azul)
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
+/* RESPONSIVO */
 
 @media(max-width:1200px){
 
-    .kpis{
+.kpis{
+grid-template-columns:repeat(2,1fr)
+}
 
-        grid-template-columns:repeat(2,1fr);
+.machine-grid{
+grid-template-columns:repeat(3,1fr)
+}
 
-    }
+.dashboard-grid{
+grid-template-columns:1fr
+}
 
-    .machine-grid{
+.form-grid{
+grid-template-columns:repeat(2,1fr)
+}
 
-        grid-template-columns:repeat(3,1fr);
-
-    }
-
-    .dashboard-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .form-grid{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
+.medicao-grid{
+grid-template-columns:2fr 1fr 1fr 1.5fr
+}
 
 }
 
 @media(max-width:800px){
 
-    .sidebar{
+.sidebar{
+transform:translateX(-100%)
+}
 
-        transform:translateX(-100%);
+.sidebar.mobile-open{
+transform:translateX(0)
+}
 
-    }
+.main{
+margin-left:0
+}
 
-    .sidebar.mobile-open{
+.content{
+padding:16px
+}
 
-        transform:translateX(0);
+.top-right .status{
+display:none
+}
 
-    }
+.brand-subtitle{
+display:none
+}
 
-    .main{
+.summary-grid{
+grid-template-columns:repeat(2,1fr)
+}
 
-        margin-left:0;
+.machine-grid{
+grid-template-columns:repeat(2,1fr)
+}
 
-    }
-
-    .content{
-
-        padding:16px;
-
-    }
-
-    .top-right .status{
-
-        display:none;
-
-    }
-
-    .brand-subtitle{
-
-        display:none;
-
-    }
-
-    .summary-grid{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
-
-    .machine-grid{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
+.medicao-grid{
+grid-template-columns:1fr 1fr
+}
 
 }
 
 @media(max-width:520px){
 
-    .brand-name{
-
-        font-size:16px;
-
-    }
-
-    .logo-symbol,
-    .logo-symbol svg{
-
-        width:34px;
-        height:34px;
-
-    }
-
-    .kpis{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .form-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .summary-grid{
-
-        grid-template-columns:1fr 1fr;
-
-    }
-
-    .machine-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .page-title{
-
-        font-size:21px;
-
-    }
-
-    .topbar{
-
-        padding:0 10px;
-
-    }
-
-    .theme-btn{
-
-        padding:8px;
-
-        font-size:11px;
-
-    }
-
+.brand-name{
+font-size:16px
 }
 
-</style>
+.logo-symbol,
+.logo-symbol svg{
+width:34px;
+height:34px
+}
 
+.kpis{
+grid-template-columns:1fr
+}
+
+.form-grid{
+grid-template-columns:1fr
+}
+
+.summary-grid{
+grid-template-columns:1fr 1fr
+}
+
+.machine-grid{
+grid-template-columns:1fr
+}
+
+.page-title{
+font-size:21px
+}
+
+.topbar{
+padding:0 10px
+}
+
+.theme-btn{
+padding:8px;
+font-size:11px
+}
+
+.medicao-grid{
+grid-template-columns:1fr
+}
+
+}
+</style>
 </head>
 
 <body>
 
 <header class="topbar">
 
-    <div class="top-left">
+<div class="top-left">
 
-        <button
-            class="menu-btn"
-            onclick="alternarMenu()"
-            title="Abrir menu">
+<button class="menu-btn" onclick="alternarMenu()" title="Abrir menu">☰</button>
 
-            ☰
+<div class="brand">
 
-        </button>
+<div class="logo-symbol">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
 
-        <div class="brand">
+<circle cx="50" cy="50" r="40" fill="none" stroke="#16b8d4" stroke-width="6"/>
+<circle cx="50" cy="50" r="31" fill="none" stroke="#b9c5ce" stroke-width="5" stroke-dasharray="8 5"/>
 
-            <div class="logo-symbol">
+<path d="M25 39 H47 L55 47 H77"
+fill="none"
+stroke="#16b8d4"
+stroke-width="6"
+stroke-linecap="round"/>
 
-                <svg
-                    viewBox="0 0 100 100"
-                    xmlns="http://www.w3.org/2000/svg">
+<path d="M25 52 H42 L49 59 H72"
+fill="none"
+stroke="#16b8d4"
+stroke-width="5"
+stroke-linecap="round"/>
 
-                    <circle
-                        cx="50"
-                        cy="50"
-                        r="40"
-                        fill="none"
-                        stroke="#16b8d4"
-                        stroke-width="6"/>
+<rect x="43" y="30" width="14" height="40" rx="2"
+fill="#d9e0e5"
+stroke="#263746"
+stroke-width="3"/>
 
-                    <circle
-                        cx="50"
-                        cy="50"
-                        r="31"
-                        fill="none"
-                        stroke="#b9c5ce"
-                        stroke-width="5"
-                        stroke-dasharray="8 5"/>
+<rect x="47" y="47" width="7" height="13" fill="#16b8d4"/>
 
-                    <path
-                        d="M25 39 H47 L55 47 H77"
-                        fill="none"
-                        stroke="#16b8d4"
-                        stroke-width="6"
-                        stroke-linecap="round"/>
+<path d="M50 69 V87"
+stroke="#16b8d4"
+stroke-width="5"
+stroke-linecap="round"/>
 
-                    <path
-                        d="M25 52 H42 L49 59 H72"
-                        fill="none"
-                        stroke="#16b8d4"
-                        stroke-width="5"
-                        stroke-linecap="round"/>
+<path d="M42 80 L50 89 L58 80"
+fill="none"
+stroke="#16b8d4"
+stroke-width="5"
+stroke-linecap="round"
+stroke-linejoin="round"/>
 
-                    <rect
-                        x="43"
-                        y="30"
-                        width="14"
-                        height="40"
-                        rx="2"
-                        fill="#d9e0e5"
-                        stroke="#263746"
-                        stroke-width="3"/>
+<circle cx="76" cy="38" r="5" fill="#16b8d4"/>
+<circle cx="76" cy="52" r="5" fill="#16b8d4"/>
+<circle cx="76" cy="66" r="5" fill="#16b8d4"/>
 
-                    <rect
-                        x="47"
-                        y="47"
-                        width="7"
-                        height="13"
-                        fill="#16b8d4"/>
+</svg>
+</div>
 
-                    <path
-                        d="M50 69 V87"
-                        stroke="#16b8d4"
-                        stroke-width="5"
-                        stroke-linecap="round"/>
+<div class="brand-text">
+<div class="brand-name">GraviUnit MES</div>
+<div class="brand-subtitle">MANUFACTURING EXECUTION SYSTEM</div>
+</div>
 
-                    <path
-                        d="M42 80 L50 89 L58 80"
-                        fill="none"
-                        stroke="#16b8d4"
-                        stroke-width="5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"/>
+</div>
+</div>
 
-                    <circle
-                        cx="76"
-                        cy="38"
-                        r="5"
-                        fill="#16b8d4"/>
+<div class="top-right">
 
-                    <circle
-                        cx="76"
-                        cy="52"
-                        r="5"
-                        fill="#16b8d4"/>
+<div class="status">
+<span class="status-dot"></span>
+Sistema online
+</div>
 
-                    <circle
-                        cx="76"
-                        cy="66"
-                        r="5"
-                        fill="#16b8d4"/>
+<button class="theme-btn" onclick="alternarTema()">🌙 Tema</button>
 
-                </svg>
-
-            </div>
-
-            <div class="brand-text">
-
-                <div class="brand-name">
-                    GraviUnit MES
-                </div>
-
-                <div class="brand-subtitle">
-                    MANUFACTURING EXECUTION SYSTEM
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="top-right">
-
-        <div class="status">
-
-            <span class="status-dot"></span>
-
-            Sistema online
-
-        </div>
-
-        <button
-            class="theme-btn"
-            onclick="alternarTema()">
-
-            🌙 Tema
-
-        </button>
-
-    </div>
-
+</div>
 </header>
 
 <aside class="sidebar" id="sidebar">
 
-    <div class="menu-title">
-        Sistema
-    </div>
+<div class="menu-title">Sistema</div>
 
-    <div
-        class="menu-item active"
-        onclick="mostrarPagina('dashboard',this)">
+<div class="menu-item active" onclick="mostrarPagina('dashboard',this)">
+<span class="menu-icon">📊</span>Dashboard
+</div>
 
-        <span class="menu-icon">📊</span>
+<div class="menu-item" onclick="mostrarPagina('cadastro',this)">
+<span class="menu-icon">🧪</span>Cadastro de Químicos
+</div>
 
-        Dashboard
+<div class="menu-item" onclick="mostrarPagina('lancamento',this)">
+<span class="menu-icon">📝</span>Lançamento
+</div>
 
-    </div>
+<div class="menu-item" onclick="mostrarPagina('pecas',this)">
+<span class="menu-icon">📦</span>Peças em Produção
+</div>
 
-    <div
-        class="menu-item"
-        onclick="mostrarPagina('cadastro',this)">
+<div class="menu-item" onclick="mostrarPagina('maquinas',this)">
+<span class="menu-icon">⚙️</span>Padrão de Máquinas
+</div>
 
-        <span class="menu-icon">🧪</span>
+<div class="menu-item" onclick="mostrarPagina('historico',this)">
+<span class="menu-icon">📋</span>Histórico
+</div>
 
-        Cadastro de Químicos
+<div class="menu-title">Relatórios</div>
 
-    </div>
-
-    <div
-        class="menu-item"
-        onclick="mostrarPagina('lancamento',this)">
-
-        <span class="menu-icon">📝</span>
-
-        Lançamento
-
-    </div>
-
-    <div
-        class="menu-item"
-        onclick="mostrarPagina('pecas',this)">
-
-        <span class="menu-icon">📦</span>
-
-        Peças em Produção
-
-    </div>
-
-    <div
-        class="menu-item"
-        onclick="mostrarPagina('maquinas',this)">
-
-        <span class="menu-icon">⚙️</span>
-
-        Padrão de Máquinas
-
-    </div>
-
-    <div
-        class="menu-item"
-        onclick="mostrarPagina('historico',this)">
-
-        <span class="menu-icon">📋</span>
-
-        Histórico
-
-    </div>
-
-    <div class="menu-title">
-        Relatórios
-    </div>
-
-    <div
-        class="menu-item"
-        onclick="exportarExcel()">
-
-        <span class="menu-icon">📥</span>
-
-        Exportar Excel
-
-    </div>
+<div class="menu-item" onclick="exportarExcel()">
+<span class="menu-icon">📥</span>Exportar Excel
+</div>
 
 </aside>
 
@@ -1591,4739 +1029,4084 @@ body.dark .btn-edit{
 
 <div class="content">
 
+<!-- DASHBOARD -->
+
 <section class="page active" id="dashboard">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
+<div>
 
-            <div class="page-title">
-                Dashboard
-            </div>
+<div class="page-title">Dashboard</div>
 
-            <div class="page-description">
-                Visão geral do processo produtivo e controle de qualidade.
-            </div>
+<div class="page-description">
+Visão geral do processo produtivo e controle de qualidade.
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="filters">
+<div class="filters">
 
-        <button
-            class="filter-btn active"
-            onclick="filtrarPeriodo('todos',this)">
-            Todos
-        </button>
+<button class="filter-btn active"
+onclick="filtrarPeriodo('todos',this)">
+Todos
+</button>
 
-        <button
-            class="filter-btn"
-            onclick="filtrarPeriodo('hoje',this)">
-            Hoje
-        </button>
+<button class="filter-btn"
+onclick="filtrarPeriodo('hoje',this)">
+Hoje
+</button>
 
-        <button
-            class="filter-btn"
-            onclick="filtrarPeriodo('7',this)">
-            7 dias
-        </button>
+<button class="filter-btn"
+onclick="filtrarPeriodo('7',this)">
+7 dias
+</button>
 
-        <button
-            class="filter-btn"
-            onclick="filtrarPeriodo('30',this)">
-            30 dias
-        </button>
+<button class="filter-btn"
+onclick="filtrarPeriodo('30',this)">
+30 dias
+</button>
 
-    </div>
+</div>
 
-    <div class="kpis">
+<div class="kpis">
 
-        <div class="kpi">
+<div class="kpi">
 
-            <div class="kpi-top">
+<div class="kpi-top">
+<span class="kpi-label">Avaliações</span>
+<span class="kpi-icon">📋</span>
+</div>
 
-                <span class="kpi-label">
-                    Avaliações
-                </span>
+<div class="kpi-value" id="kpiAvaliacoes">0</div>
 
-                <span class="kpi-icon">
-                    📋
-                </span>
+<div class="kpi-info">
+Total de lançamentos
+</div>
 
-            </div>
+</div>
 
-            <div class="kpi-value" id="kpiAvaliacoes">
-                0
-            </div>
+<div class="kpi">
 
-            <div class="kpi-info">
-                Total de lançamentos
-            </div>
+<div class="kpi-top">
+<span class="kpi-label">Conformidade</span>
+<span class="kpi-icon">✅</span>
+</div>
 
-        </div>
+<div class="kpi-value" id="kpiConformidade">0%</div>
 
-        <div class="kpi">
+<div class="kpi-info">
+Dentro do padrão
+</div>
 
-            <div class="kpi-top">
+</div>
 
-                <span class="kpi-label">
-                    Conformidade
-                </span>
+<div class="kpi">
 
-                <span class="kpi-icon">
-                    ✅
-                </span>
+<div class="kpi-top">
+<span class="kpi-label">Fora do padrão</span>
+<span class="kpi-icon">⚠️</span>
+</div>
 
-            </div>
+<div class="kpi-value" id="kpiFora">0</div>
 
-            <div class="kpi-value" id="kpiConformidade">
-                0%
-            </div>
+<div class="kpi-info">
+Avaliações fora do padrão
+</div>
 
-            <div class="kpi-info">
-                Dentro do padrão
-            </div>
+</div>
 
-        </div>
+<div class="kpi">
 
-        <div class="kpi">
+<div class="kpi-top">
+<span class="kpi-label">Máquinas avaliadas</span>
+<span class="kpi-icon">⚙️</span>
+</div>
 
-            <div class="kpi-top">
+<div class="kpi-value" id="kpiMaquinas">0</div>
 
-                <span class="kpi-label">
-                    Fora do padrão
-                </span>
+<div class="kpi-info">
+Máquinas com registros
+</div>
 
-                <span class="kpi-icon">
-                    ⚠️
-                </span>
+</div>
 
-            </div>
+</div>
 
-            <div class="kpi-value" id="kpiFora">
-                0
-            </div>
+<div class="dashboard-grid">
 
-            <div class="kpi-info">
-                Avaliações fora do padrão
-            </div>
+<div class="card">
 
-        </div>
+<div class="card-title">
+Desempenho das Avaliações
+</div>
 
-        <div class="kpi">
+<div class="card-description">
+Distribuição dos resultados registrados.
+</div>
 
-            <div class="kpi-top">
+<div class="chart-container">
 
-                <span class="kpi-label">
-                    Máquinas avaliadas
-                </span>
+<canvas id="graficoResultados"></canvas>
 
-                <span class="kpi-icon">
-                    ⚙️
-                </span>
+</div>
 
-            </div>
+</div>
 
-            <div class="kpi-value" id="kpiMaquinas">
-                0
-            </div>
+<div class="card">
 
-            <div class="kpi-info">
-                Máquinas com registros
-            </div>
+<div class="card-title">
+Avaliações por Máquina
+</div>
 
-        </div>
+<div class="card-description">
+Quantidade de avaliações realizadas.
+</div>
 
-    </div>
+<div id="rankingMaquinas">
 
-    <div class="dashboard-grid">
+<div class="empty">
+Nenhum registro encontrado.
+</div>
 
-        <div class="card">
+</div>
 
-            <div class="card-title">
-                Desempenho das Avaliações
-            </div>
+</div>
 
-            <div class="card-description">
-                Distribuição dos resultados registrados.
-            </div>
+</div>
 
-            <div class="chart-container">
+<div class="card">
 
-                <canvas id="graficoResultados"></canvas>
+<div class="card-title">
+Atividade Recente
+</div>
 
-            </div>
+<div class="card-description">
+Últimos lançamentos registrados no sistema.
+</div>
 
-        </div>
+<div class="table-wrapper" id="atividadeRecente">
 
-        <div class="card">
+<div class="empty">
+Nenhuma atividade registrada.
+</div>
 
-            <div class="card-title">
-                Avaliações por Máquina
-            </div>
+</div>
 
-            <div class="card-description">
-                Quantidade de avaliações realizadas.
-            </div>
-
-            <div id="rankingMaquinas">
-
-                <div class="empty">
-                    Nenhum registro encontrado.
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="card">
-
-        <div class="card-title">
-            Atividade Recente
-        </div>
-
-        <div class="card-description">
-            Últimos lançamentos registrados no sistema.
-        </div>
-
-        <div class="table-wrapper" id="atividadeRecente">
-
-            <div class="empty">
-                Nenhuma atividade registrada.
-            </div>
-
-        </div>
-
-    </div>
+</div>
 
 </section>
+
+<!-- CADASTRO -->
 
 <section class="page" id="cadastro">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
+<div>
 
-            <div class="page-title">
-                Cadastro de Químicos
-            </div>
+<div class="page-title">
+Cadastro de Químicos
+</div>
 
-            <div class="page-description">
-                Cadastre os produtos químicos utilizados no processo.
-            </div>
+<div class="page-description">
+Cadastre os produtos químicos utilizados no processo.
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <div class="card-title">
-            Novo Químico
-        </div>
+<div class="card-title">
+Novo Químico
+</div>
 
-        <div class="card-description">
-            Informe o nome, código e demais informações do produto.
-        </div>
+<div class="card-description">
+Informe o nome, código e demais informações do produto.
+</div>
 
-        <form id="formQuimico" onsubmit="salvarQuimico(event)">
+<form id="formQuimico" onsubmit="salvarQuimico(event)">
 
-            <input type="hidden" id="idQuimico">
+<input type="hidden" id="idQuimico">
 
-            <div class="form-grid">
+<div class="form-grid">
 
-                <div class="form-group">
+<div class="form-group">
 
-                    <label>Nome do químico *</label>
+<label>Nome do químico *</label>
 
-                    <input
-                        type="text"
-                        id="nomeQuimico"
-                        required
-                        placeholder="Ex.: Primer Branco">
+<input type="text"
+id="nomeQuimico"
+required
+placeholder="Ex.: Primer Branco">
 
-                </div>
+</div>
 
-                <div class="form-group">
+<div class="form-group">
 
-                    <label>Código *</label>
+<label>Código *</label>
 
-                    <input
-                        type="text"
-                        id="codigoQuimico"
-                        required
-                        placeholder="Ex.: 307507-002">
+<input type="text"
+id="codigoQuimico"
+required
+placeholder="Ex.: 307507-002">
 
-                </div>
+</div>
 
-                <div class="form-group">
+<div class="form-group">
 
-                    <label>Cor</label>
+<label>Cor</label>
 
-                    <input
-                        type="text"
-                        id="corQuimico"
-                        placeholder="Ex.: Branco">
+<input type="text"
+id="corQuimico"
+placeholder="Ex.: Branco">
 
-                </div>
+</div>
 
-                <div class="form-group">
+<div class="form-group">
 
-                    <label>Tipo</label>
+<label>Tipo</label>
 
-                    <select id="tipoQuimico">
+<select id="tipoQuimico">
 
-                        <option value="">
-                            Selecione
-                        </option>
+<option value="">Selecione</option>
+<option>Massa</option>
+<option>Primer</option>
+<option>Impressão</option>
+<option>Base</option>
+<option>Verniz</option>
+<option>Outro</option>
 
-                        <option>Massa</option>
-                        <option>Primer</option>
-                        <option>Impressão</option>
-                        <option>Base</option>
-                        <option>Verniz</option>
-                        <option>Outro</option>
+</select>
 
-                    </select>
+</div>
 
-                </div>
+<div class="form-group full">
 
-                <div class="form-group full">
+<label>Observação</label>
 
-                    <label>Observação</label>
+<textarea
+id="observacaoQuimico"
+placeholder="Informações adicionais..."></textarea>
 
-                    <textarea
-                        id="observacaoQuimico"
-                        placeholder="Informações adicionais..."></textarea>
+</div>
 
-                </div>
+</div>
 
-            </div>
+<div class="form-actions">
 
-            <div class="form-actions">
+<button type="submit"
+class="btn btn-primary">
+💾 Salvar Químico
+</button>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary">
+<button type="button"
+class="btn btn-secondary"
+onclick="limparFormularioQuimico()">
+Limpar
+</button>
 
-                    💾 Salvar Químico
+</div>
 
-                </button>
+</form>
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="limparFormularioQuimico()">
+</div>
 
-                    Limpar
+<div class="card">
 
-                </button>
+<div class="card-title">
+Químicos cadastrados
+</div>
 
-            </div>
+<div class="card-description">
+Produtos disponíveis para lançamento.
+</div>
 
-        </form>
+<input
+class="search-box"
+id="buscaQuimico"
+type="text"
+placeholder="🔎 Pesquisar químico..."
+oninput="renderizarQuimicos()">
 
-    </div>
+<div class="table-wrapper"
+id="tabelaQuimicos"></div>
 
-    <div class="card">
-
-        <div class="card-title">
-            Químicos cadastrados
-        </div>
-
-        <div class="card-description">
-            Produtos disponíveis para lançamento.
-        </div>
-
-        <input
-            class="search-box"
-            id="buscaQuimico"
-            type="text"
-            placeholder="🔎 Pesquisar químico..."
-            oninput="renderizarQuimicos()">
-
-        <div class="table-wrapper" id="tabelaQuimicos"></div>
-
-    </div>
+</div>
 
 </section>
+
+<!-- LANÇAMENTO -->
 
 <section class="page" id="lancamento">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
+<div>
 
-            <div class="page-title">
-                Lançamento
-            </div>
+<div class="page-title">
+Lançamento
+</div>
 
-            <div class="page-description">
-                Registre avaliações e medições do processo produtivo.
-            </div>
+<div class="page-description">
+Registre até 5 avaliações químicas no mesmo lançamento.
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <div class="card-title">
-            Novo lançamento
-        </div>
+<div class="card-title">
+Novo lançamento
+</div>
 
-        <div class="card-description">
-            O resultado será calculado automaticamente conforme o padrão e o valor medido.
-        </div>
+<div class="card-description">
 
-        <form id="formLancamento" onsubmit="salvarLancamento(event)">
+Selecione os químicos utilizados, informe o padrão e o valor medido.
+O resultado de cada opção será calculado automaticamente.
 
-            <input type="hidden" id="idLancamento">
+</div>
 
-            <div class="form-grid">
+<form id="formLancamento"
+onsubmit="salvarLancamento(event)">
 
-                <div class="form-group">
+<input type="hidden" id="idLancamento">
 
-                    <label>Máquina *</label>
+<div class="form-grid">
 
-                    <select id="maquinaLancamento" required>
+<div class="form-group">
 
-                        <option value="">
-                            Selecione a máquina
-                        </option>
+<label>Máquina *</label>
 
-                        <option value="701e">701 - Externo</option>
-                        <option value="701i">701 - Interno</option>
-                        <option value="703e">703 - Externo</option>
-                        <option value="703i">703 - Interno</option>
-                        <option value="705">705</option>
-                        <option value="706">706</option>
-                        <option value="707">707</option>
-                        <option value="708">708</option>
-                        <option value="710e">710 - Externo</option>
-                        <option value="710i">710 - Interno</option>
-                        <option value="712e">712 - Externo</option>
-                        <option value="712i">712 - Interno</option>
+<select id="maquinaLancamento" required>
 
-                    </select>
+<option value="">
+Selecione a máquina
+</option>
 
-                </div>
+<option value="701e">
+701 - Externo
+</option>
 
-                <div class="form-group">
+<option value="701i">
+701 - Interno
+</option>
 
-                    <label>Responsável</label>
+<option value="703e">
+703 - Externo
+</option>
 
-                    <input
-                        type="text"
-                        id="responsavelLancamento"
-                        placeholder="Nome do responsável">
+<option value="703i">
+703 - Interno
+</option>
 
-                </div>
+<option value="705">
+705
+</option>
 
-                <div class="form-group">
+<option value="706">
+706
+</option>
 
-                    <label>Data e hora em tempo real</label>
+<option value="707">
+707
+</option>
 
-                    <input
-                        type="text"
-                        id="dataHoraLancamento"
-                        class="campo-tempo-real"
-                        readonly
-                        aria-readonly="true">
+<option value="708">
+708
+</option>
 
-                </div>
+<option value="710e">
+710 - Externo
+</option>
 
-                <div class="form-group">
+<option value="710i">
+710 - Interno
+</option>
 
-                    <label>Químico *</label>
+<option value="712e">
+712 - Externo
+</option>
 
-                    <select id="quimicoLancamento" required>
+<option value="712i">
+712 - Interno
+</option>
 
-                        <option value="">
-                            Selecione o químico
-                        </option>
+</select>
 
-                    </select>
+</div>
 
-                </div>
+<div class="form-group">
 
-                <div class="form-group">
+<label>Responsável</label>
 
-                    <label>Valor medido *</label>
+<input
+type="text"
+id="responsavelLancamento"
+placeholder="Nome do responsável">
 
-                    <input
-                        type="number"
-                        step="any"
-                        id="valorLancamento"
-                        required
-                        oninput="calcularResultadoAutomatico()"
-                        placeholder="Digite o valor">
+</div>
 
-                </div>
+<div class="form-group">
 
-                <div class="form-group">
+<label>Data e hora em tempo real</label>
 
-                    <label>Padrão *</label>
+<input
+type="text"
+id="dataHoraLancamento"
+class="campo-tempo-real"
+readonly
+aria-readonly="true">
 
-                    <input
-                        type="number"
-                        step="any"
-                        id="padraoLancamento"
-                        required
-                        oninput="calcularResultadoAutomatico()"
-                        placeholder="Ex.: 100">
+</div>
 
-                </div>
+</div>
 
-                <div class="form-group full">
+<div style="margin-top:25px;margin-bottom:12px">
 
-                    <label>Resultado automático</label>
+<div class="card-title"
+style="margin-bottom:4px">
 
-                    <select id="resultadoLancamento" disabled>
+🧪 Avaliações químicas
 
-                        <option value="DENTRO DO PADRÃO">
-                            DENTRO DO PADRÃO
-                        </option>
+</div>
 
-                        <option value="ACIMA DO PADRÃO">
-                            ACIMA DO PADRÃO
-                        </option>
+<div class="card-description"
+style="margin-bottom:0">
 
-                        <option value="ABAIXO DO PADRÃO">
-                            ABAIXO DO PADRÃO
-                        </option>
+Preencha uma ou mais das 5 opções abaixo.
 
-                    </select>
+</div>
 
-                </div>
+</div>
 
-                <div class="form-group full">
+<div class="medicoes-container">
 
-                    <label>Observação</label>
+<!-- MEDIÇÃO 1 -->
 
-                    <textarea
-                        id="observacaoLancamento"
-                        placeholder="Observações da avaliação..."></textarea>
+<div class="medicao-item">
 
-                </div>
+<div class="medicao-header">
 
-            </div>
+<span class="medicao-numero">
+OPÇÃO 1
+</span>
 
-            <div class="form-actions">
+<span class="medicao-status"
+id="statusMedicao1">
+Aguardando preenchimento
+</span>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary">
+</div>
 
-                    💾 Salvar Lançamento
+<div class="medicao-grid">
 
-                </button>
+<div class="form-group">
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="limparFormularioLancamento()">
+<label>Químico</label>
 
-                    Limpar
+<select
+id="quimicoLancamento1"
+onchange="calcularResultadoMedicao(1)">
 
-                </button>
+<option value="">
+Selecione o químico
+</option>
 
-            </div>
+</select>
 
-        </form>
+</div>
 
-    </div>
+<div class="form-group">
 
-    <div class="card">
+<label>Padrão</label>
 
-        <div class="card-title">
-            Lançamentos recentes
-        </div>
+<input
+type="number"
+step="any"
+id="padraoLancamento1"
+oninput="calcularResultadoMedicao(1)"
+placeholder="Ex.: 100">
 
-        <div class="table-wrapper" id="tabelaLancamentos"></div>
+</div>
 
-    </div>
+<div class="form-group">
+
+<label>Valor medido</label>
+
+<input
+type="number"
+step="any"
+id="valorLancamento1"
+oninput="calcularResultadoMedicao(1)"
+placeholder="Valor">
+
+</div>
+
+<div class="form-group">
+
+<label>Resultado</label>
+
+<select
+id="resultadoLancamento1"
+class="resultado-medicao"
+disabled>
+
+<option value="DENTRO DO PADRÃO">
+DENTRO DO PADRÃO
+</option>
+
+<option value="ACIMA DO PADRÃO">
+ACIMA DO PADRÃO
+</option>
+
+<option value="ABAIXO DO PADRÃO">
+ABAIXO DO PADRÃO
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MEDIÇÃO 2 -->
+
+<div class="medicao-item">
+
+<div class="medicao-header">
+
+<span class="medicao-numero">
+OPÇÃO 2
+</span>
+
+<span class="medicao-status"
+id="statusMedicao2">
+Aguardando preenchimento
+</span>
+
+</div>
+
+<div class="medicao-grid">
+
+<div class="form-group">
+
+<label>Químico</label>
+
+<select
+id="quimicoLancamento2"
+onchange="calcularResultadoMedicao(2)">
+
+<option value="">
+Selecione o químico
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Padrão</label>
+
+<input
+type="number"
+step="any"
+id="padraoLancamento2"
+oninput="calcularResultadoMedicao(2)"
+placeholder="Ex.: 100">
+
+</div>
+
+<div class="form-group">
+
+<label>Valor medido</label>
+
+<input
+type="number"
+step="any"
+id="valorLancamento2"
+oninput="calcularResultadoMedicao(2)"
+placeholder="Valor">
+
+</div>
+
+<div class="form-group">
+
+<label>Resultado</label>
+
+<select
+id="resultadoLancamento2"
+class="resultado-medicao"
+disabled>
+
+<option value="DENTRO DO PADRÃO">
+DENTRO DO PADRÃO
+</option>
+
+<option value="ACIMA DO PADRÃO">
+ACIMA DO PADRÃO
+</option>
+
+<option value="ABAIXO DO PADRÃO">
+ABAIXO DO PADRÃO
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MEDIÇÃO 3 -->
+
+<div class="medicao-item">
+
+<div class="medicao-header">
+
+<span class="medicao-numero">
+OPÇÃO 3
+</span>
+
+<span class="medicao-status"
+id="statusMedicao3">
+Aguardando preenchimento
+</span>
+
+</div>
+
+<div class="medicao-grid">
+
+<div class="form-group">
+
+<label>Químico</label>
+
+<select
+id="quimicoLancamento3"
+onchange="calcularResultadoMedicao(3)">
+
+<option value="">
+Selecione o químico
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Padrão</label>
+
+<input
+type="number"
+step="any"
+id="padraoLancamento3"
+oninput="calcularResultadoMedicao(3)"
+placeholder="Ex.: 100">
+
+</div>
+
+<div class="form-group">
+
+<label>Valor medido</label>
+
+<input
+type="number"
+step="any"
+id="valorLancamento3"
+oninput="calcularResultadoMedicao(3)"
+placeholder="Valor">
+
+</div>
+
+<div class="form-group">
+
+<label>Resultado</label>
+
+<select
+id="resultadoLancamento3"
+class="resultado-medicao"
+disabled>
+
+<option value="DENTRO DO PADRÃO">
+DENTRO DO PADRÃO
+</option>
+
+<option value="ACIMA DO PADRÃO">
+ACIMA DO PADRÃO
+</option>
+
+<option value="ABAIXO DO PADRÃO">
+ABAIXO DO PADRÃO
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MEDIÇÃO 4 ALTERADA -->
+
+<div class="medicao-item"
+id="medicaoItem4">
+
+<div class="medicao-header">
+
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+
+<span class="medicao-numero">
+OPÇÃO 4
+</span>
+
+<button
+type="button"
+id="btnOpcao4"
+class="btn-nao-utilizar"
+onclick="alternarOpcao4()">
+
+Não utilizar
+
+</button>
+
+</div>
+
+<span
+class="medicao-status"
+id="statusMedicao4">
+
+Aguardando preenchimento
+
+</span>
+
+</div>
+
+<div class="medicao-grid">
+
+<div class="form-group">
+
+<label>Químico</label>
+
+<select
+id="quimicoLancamento4"
+onchange="calcularResultadoMedicao(4)">
+
+<option value="">
+Selecione o químico
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Padrão</label>
+
+<input
+type="number"
+step="any"
+id="padraoLancamento4"
+oninput="calcularResultadoMedicao(4)"
+placeholder="Ex.: 100">
+
+</div>
+
+<div class="form-group">
+
+<label>Valor medido</label>
+
+<input
+type="number"
+step="any"
+id="valorLancamento4"
+oninput="calcularResultadoMedicao(4)"
+placeholder="Valor">
+
+</div>
+
+<div class="form-group">
+
+<label>Resultado</label>
+
+<select
+id="resultadoLancamento4"
+class="resultado-medicao"
+disabled>
+
+<option value="DENTRO DO PADRÃO">
+DENTRO DO PADRÃO
+</option>
+
+<option value="ACIMA DO PADRÃO">
+ACIMA DO PADRÃO
+</option>
+
+<option value="ABAIXO DO PADRÃO">
+ABAIXO DO PADRÃO
+</option>
+
+<option value="NAO UTILIZADO">
+NÃO UTILIZADO
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- MEDIÇÃO 5 -->
+
+<div class="medicao-item">
+
+<div class="medicao-header">
+
+<span class="medicao-numero">
+OPÇÃO 5
+</span>
+
+<span class="medicao-status"
+id="statusMedicao5">
+Aguardando preenchimento
+</span>
+
+</div>
+
+<div class="medicao-grid">
+
+<div class="form-group">
+
+<label>Químico</label>
+
+<select
+id="quimicoLancamento5"
+onchange="calcularResultadoMedicao(5)">
+
+<option value="">
+Selecione o químico
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Padrão</label>
+
+<input
+type="number"
+step="any"
+id="padraoLancamento5"
+oninput="calcularResultadoMedicao(5)"
+placeholder="Ex.: 100">
+
+</div>
+
+<div class="form-group">
+
+<label>Valor medido</label>
+
+<input
+type="number"
+step="any"
+id="valorLancamento5"
+oninput="calcularResultadoMedicao(5)"
+placeholder="Valor">
+
+</div>
+
+<div class="form-group">
+
+<label>Resultado</label>
+
+<select
+id="resultadoLancamento5"
+class="resultado-medicao"
+disabled>
+
+<option value="DENTRO DO PADRÃO">
+DENTRO DO PADRÃO
+</option>
+
+<option value="ACIMA DO PADRÃO">
+ACIMA DO PADRÃO
+</option>
+
+<option value="ABAIXO DO PADRÃO">
+ABAIXO DO PADRÃO
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="form-group full"
+style="margin-top:18px">
+
+<label>Observação</label>
+
+<textarea
+id="observacaoLancamento"
+placeholder="Observações da avaliação..."></textarea>
+
+</div>
+
+<div class="form-actions">
+
+<button
+type="submit"
+class="btn btn-primary">
+
+💾 Salvar Lançamento
+
+</button>
+
+<button
+type="button"
+class="btn btn-secondary"
+onclick="limparFormularioLancamento()">
+
+Limpar
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+Lançamentos recentes
+</div>
+
+<div class="table-wrapper"
+id="tabelaLancamentos"></div>
+
+</div>
 
 </section>
+
+<!-- PEÇAS -->
 
 <section class="page" id="pecas">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
+<div>
 
-            <div class="page-title">
-                Peças em Produção
-            </div>
+<div class="page-title">
+Peças em Produção
+</div>
 
-            <div class="page-description">
-                Controle da quantidade de peças que estão passando em cada máquina.
-            </div>
+<div class="page-description">
+Controle da quantidade de peças que estão passando em cada máquina.
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="summary-grid">
+<div class="summary-grid">
 
-        <div class="summary-card">
+<div class="summary-card">
 
-            <div class="summary-label">
-                Total de peças
-            </div>
+<div class="summary-label">
+Total de peças
+</div>
 
-            <div class="summary-value" id="totalPecas">
-                0
-            </div>
+<div class="summary-value"
+id="totalPecas">
+0
+</div>
 
-        </div>
+</div>
 
-        <div class="summary-card">
+<div class="summary-card">
 
-            <div class="summary-label">
-                Total padrão
-            </div>
+<div class="summary-label">
+Total padrão
+</div>
 
-            <div class="summary-value" id="totalPadraoPecas">
-                0
-            </div>
+<div class="summary-value"
+id="totalPadraoPecas">
+0
+</div>
 
-        </div>
+</div>
 
-        <div class="summary-card">
+<div class="summary-card">
 
-            <div class="summary-label">
-                Dentro do padrão
-            </div>
+<div class="summary-label">
+Dentro do padrão
+</div>
 
-            <div class="summary-value" id="pecasDentro">
-                0
-            </div>
+<div class="summary-value"
+id="pecasDentro">
+0
+</div>
 
-        </div>
+</div>
 
-        <div class="summary-card">
+<div class="summary-card">
 
-            <div class="summary-label">
-                Fora do padrão
-            </div>
+<div class="summary-label">
+Fora do padrão
+</div>
 
-            <div class="summary-value" id="pecasFora">
-                0
-            </div>
+<div class="summary-value"
+id="pecasFora">
+0
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <div class="card-title">
-            Registro de peças
-        </div>
+<div class="card-title">
+Registro de peças
+</div>
 
-        <div class="card-description">
-            Informe o padrão esperado e a quantidade que está passando.
-        </div>
+<div class="card-description">
+Informe o padrão esperado e a quantidade que está passando.
+</div>
 
-        <form id="formPecas" onsubmit="salvarPecas(event)">
+<form id="formPecas"
+onsubmit="salvarPecas(event)">
 
-            <input type="hidden" id="idPecas">
+<input type="hidden" id="idPecas">
 
-            <div class="form-grid">
+<div class="form-grid">
 
-                <div class="form-group">
+<div class="form-group">
 
-                    <label>Máquina *</label>
+<label>Máquina *</label>
 
-                    <select id="maquinaPecas" required>
+<select id="maquinaPecas" required>
 
-                        <option value="">
-                            Selecione a máquina
-                        </option>
+<option value="">
+Selecione a máquina
+</option>
 
-                        <option value="701e">701 - Externo</option>
-                        <option value="701i">701 - Interno</option>
-                        <option value="703e">703 - Externo</option>
-                        <option value="703i">703 - Interno</option>
-                        <option value="705">705</option>
-                        <option value="706">706</option>
-                        <option value="707">707</option>
-                        <option value="708">708</option>
-                        <option value="710e">710 - Externo</option>
-                        <option value="710i">710 - Interno</option>
-                        <option value="712e">712 - Externo</option>
-                        <option value="712i">712 - Interno</option>
+<option value="701e">
+701 - Externo
+</option>
 
-                    </select>
+<option value="701i">
+701 - Interno
+</option>
 
-                </div>
+<option value="703e">
+703 - Externo
+</option>
 
-                <div class="form-group">
+<option value="703i">
+703 - Interno
+</option>
 
-                    <label>Responsável</label>
+<option value="705">
+705
+</option>
 
-                    <input
-                        type="text"
-                        id="responsavelPecas"
-                        placeholder="Nome do responsável">
+<option value="706">
+706
+</option>
 
-                </div>
+<option value="707">
+707
+</option>
 
-                <div class="form-group">
+<option value="708">
+708
+</option>
 
-                    <label>Data e hora em tempo real</label>
+<option value="710e">
+710 - Externo
+</option>
 
-                    <input
-                        type="text"
-                        id="dataHoraPecas"
-                        class="campo-tempo-real"
-                        readonly
-                        aria-readonly="true">
+<option value="710i">
+710 - Interno
+</option>
 
-                </div>
+<option value="712e">
+712 - Externo
+</option>
 
-                <div class="form-group">
+<option value="712i">
+712 - Interno
+</option>
 
-                    <label>Padrão de peças *</label>
+</select>
 
-                    <input
-                        type="number"
-                        id="padraoPecas"
-                        min="0"
-                        step="1"
-                        required
-                        oninput="atualizarResultadoPecas()"
-                        placeholder="Quantidade padrão">
+</div>
 
-                </div>
+<div class="form-group">
 
-                <div class="form-group">
+<label>Responsável</label>
 
-                    <label>Quantidade passando *</label>
+<input
+type="text"
+id="responsavelPecas"
+placeholder="Nome do responsável">
 
-                    <input
-                        type="number"
-                        id="quantidadePecas"
-                        min="0"
-                        step="1"
-                        required
-                        oninput="atualizarResultadoPecas()"
-                        placeholder="Quantidade atual">
+</div>
 
-                </div>
+<div class="form-group">
 
-                <div class="form-group">
+<label>Data e hora em tempo real</label>
 
-                    <label>Resultado</label>
+<input
+type="text"
+id="dataHoraPecas"
+class="campo-tempo-real"
+readonly>
 
-                    <select id="resultadoPecas" disabled>
+</div>
 
-                        <option value="DENTRO DO PADRÃO">
-                            DENTRO DO PADRÃO
-                        </option>
+<div class="form-group">
 
-                        <option value="ACIMA DO PADRÃO">
-                            ACIMA DO PADRÃO
-                        </option>
+<label>Padrão de peças *</label>
 
-                        <option value="ABAIXO DO PADRÃO">
-                            ABAIXO DO PADRÃO
-                        </option>
+<input
+type="number"
+id="padraoPecas"
+min="0"
+step="1"
+required
+oninput="atualizarResultadoPecas()"
+placeholder="Quantidade padrão">
 
-                    </select>
+</div>
 
-                </div>
+<div class="form-group">
 
-                <div class="form-group full">
+<label>Quantidade passando *</label>
 
-                    <label>Observação</label>
+<input
+type="number"
+id="quantidadePecas"
+min="0"
+step="1"
+required
+oninput="atualizarResultadoPecas()"
+placeholder="Quantidade atual">
 
-                    <textarea
-                        id="observacaoPecas"
-                        placeholder="Observações da produção..."></textarea>
+</div>
 
-                </div>
+<div class="form-group">
 
-            </div>
+<label>Resultado</label>
 
-            <div class="form-actions">
+<select
+id="resultadoPecas"
+disabled>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary">
+<option value="DENTRO DO PADRÃO">
+DENTRO DO PADRÃO
+</option>
 
-                    💾 Salvar Registro
+<option value="ACIMA DO PADRÃO">
+ACIMA DO PADRÃO
+</option>
 
-                </button>
+<option value="ABAIXO DO PADRÃO">
+ABAIXO DO PADRÃO
+</option>
 
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    onclick="limparFormularioPecas()">
+</select>
 
-                    Limpar
+</div>
 
-                </button>
+<div class="form-group full">
 
-            </div>
+<label>Observação</label>
 
-        </form>
+<textarea
+id="observacaoPecas"
+placeholder="Observações da produção..."></textarea>
 
-    </div>
+</div>
 
-    <div class="card">
+</div>
 
-        <div class="card-title">
-            Registros de produção
-        </div>
+<div class="form-actions">
 
-        <div class="table-wrapper" id="tabelaPecas"></div>
+<button
+type="submit"
+class="btn btn-primary">
 
-    </div>
+💾 Salvar Registro
+
+</button>
+
+<button
+type="button"
+class="btn btn-secondary"
+onclick="limparFormularioPecas()">
+
+Limpar
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+Registros de produção
+</div>
+
+<div class="table-wrapper"
+id="tabelaPecas"></div>
+
+</div>
 
 </section>
+
+<!-- MAQUINAS -->
 
 <section class="page" id="maquinas">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
+<div>
 
-            <div class="page-title">
-                Padrão de Máquinas
-            </div>
+<div class="page-title">
+Padrão de Máquinas
+</div>
 
-            <div class="page-description">
-                Visualização dos padrões registrados por máquina.
-            </div>
+<div class="page-description">
+Visualização dos padrões registrados por máquina.
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <div class="card-title">
-            Máquinas do processo
-        </div>
+<div class="card-title">
+Máquinas do processo
+</div>
 
-        <div class="card-description">
-            Indicadores técnicos de cada equipamento.
-        </div>
+<div class="card-description">
+Indicadores técnicos de cada equipamento.
+</div>
 
-        <div class="machine-grid" id="gridMaquinas"></div>
+<div class="machine-grid"
+id="gridMaquinas"></div>
 
-    </div>
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <div class="card-title">
-            Detalhamento por máquina
-        </div>
+<div class="card-title">
+Detalhamento por máquina
+</div>
 
-        <div class="table-wrapper" id="tabelaMaquinas"></div>
+<div class="table-wrapper"
+id="tabelaMaquinas"></div>
 
-    </div>
+</div>
 
 </section>
 
+<!-- HISTORICO -->
+
 <section class="page" id="historico">
 
-    <div class="page-header">
+<div class="page-header">
 
-        <div>
+<div>
 
-            <div class="page-title">
-                Histórico
-            </div>
+<div class="page-title">
+Histórico
+</div>
 
-            <div class="page-description">
-                Consulte todos os lançamentos realizados.
-            </div>
+<div class="page-description">
+Consulte todos os lançamentos realizados.
+</div>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <div class="card">
+<div class="card">
 
-        <div class="card-title">
-            Histórico de avaliações
-        </div>
+<div class="card-title">
+Histórico de avaliações
+</div>
 
-        <div class="card-description">
-            Todos os registros armazenados no sistema.
-        </div>
+<div class="card-description">
+Todos os registros armazenados no sistema.
+</div>
 
-        <input
-            class="search-box"
-            id="buscaHistorico"
-            type="text"
-            placeholder="🔎 Pesquisar histórico..."
-            oninput="renderizarHistorico()">
+<input
+class="search-box"
+id="buscaHistorico"
+type="text"
+placeholder="🔎 Pesquisar histórico..."
+oninput="renderizarHistorico()">
 
-        <div
-            class="table-wrapper"
-            id="tabelaHistorico">
-        </div>
+<div class="table-wrapper"
+id="tabelaHistorico"></div>
 
-    </div>
+</div>
 
 </section>
 
 <footer class="footer">
 
-    <div>
-        <strong>GraviUnit MES</strong>
-    </div>
+<div>
+<strong>GraviUnit MES</strong>
+</div>
 
-    <div style="margin-top:6px;">
-        Manufacturing Execution System
-    </div>
+<div style="margin-top:6px;">
+Manufacturing Execution System
+</div>
 
-    <div style="margin-top:8px;">
-        Desenvolvido por
-        <strong>Samuel Torres Garcia</strong>
-    </div>
+<div style="margin-top:8px;">
+Desenvolvido por <strong>Samuel Torres Garcia</strong>
+</div>
 
-    <div style="margin-top:5px;">
-        © 2026 GraviUnit MES — Sistema de Controle de Produção
-    </div>
+<div style="margin-top:5px;">
+© 2026 GraviUnit MES — Sistema de Controle de Produção
+</div>
 
 </footer>
 
 </div>
-
 </main>
 
 <script>
 
-/* =========================================================
-   CONFIGURAÇÕES
-========================================================= */
+/* CONFIGURAÇÕES */
 
-const STORAGE_QUIMICOS = "graviunit_quimicos_v1";
-const STORAGE_LANCAMENTOS = "graviunit_lancamentos_v1";
-const STORAGE_PECAS = "erp_pecas_v1";
-const THEME_KEY = "graviunit_theme";
+const STORAGE_QUIMICOS="graviunit_quimicos_v1";
+const STORAGE_LANCAMENTOS="graviunit_lancamentos_v1";
+const STORAGE_PECAS="erp_pecas_v1";
+const THEME_KEY="graviunit_theme";
+const TEMPO_ATUALIZACAO=50000;
 
-const TEMPO_ATUALIZACAO = 50000;
+let quimicos=[];
+let lancamentos=[];
+let registrosPecas=[];
+let graficoResultados=null;
+let periodoAtual="todos";
 
+/* CONTROLE DA OPÇÃO 4 */
 
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
+let opcao4NaoUtilizada=false;
 
-let quimicos = [];
-let lancamentos = [];
-let registrosPecas = [];
-let graficoResultados = null;
-let periodoAtual = "todos";
-
-
-/* =========================================================
-   MÁQUINAS
-========================================================= */
-
-const maquinas = [
-
-    "701e",
-    "701i",
-    "703e",
-    "703i",
-    "705",
-    "706",
-    "707",
-    "708",
-    "710e",
-    "710i",
-    "712e",
-    "712i"
-
+const maquinas=[
+"701e",
+"701i",
+"703e",
+"703i",
+"705",
+"706",
+"707",
+"708",
+"710e",
+"710i",
+"712e",
+"712i"
 ];
 
-
-/* =========================================================
-   NOME DAS MÁQUINAS
-========================================================= */
+/* MÁQUINAS */
 
 function nomeMaquina(maquina){
 
-    const nomes = {
+const nomes={
 
-        "701e":"701 - Externo",
-        "701i":"701 - Interno",
-        "703e":"703 - Externo",
-        "703i":"703 - Interno",
-        "705":"705",
-        "706":"706",
-        "707":"707",
-        "708":"708",
-        "710e":"710 - Externo",
-        "710i":"710 - Interno",
-        "712e":"712 - Externo",
-        "712i":"712 - Interno"
+"701e":"701 - Externo",
+"701i":"701 - Interno",
+"703e":"703 - Externo",
+"703i":"703 - Interno",
+"705":"705",
+"706":"706",
+"707":"707",
+"708":"708",
+"710e":"710 - Externo",
+"710i":"710 - Interno",
+"712e":"712 - Externo",
+"712i":"712 - Interno"
 
-    };
+};
 
-    return nomes[maquina] || maquina || "-";
+return nomes[maquina]||maquina||"-";
 
 }
 
+/* QUÍMICOS PADRÃO */
 
-/* =========================================================
-   QUÍMICOS PADRÃO
-========================================================= */
+const quimicosPadrao=[
 
-const quimicosPadrao = [
-
-    {
-        nome:"MASSA ESPATULADEIRA",
-        codigo:"314001-000",
-        cor:"",
-        tipo:"Massa"
-    },
-
-    {
-        nome:"MASSA ALISADORA",
-        codigo:"314002-000",
-        cor:"",
-        tipo:"Massa"
-    },
-
-    {
-        nome:"ESMALTE BRANCO FOSCO",
-        codigo:"311281-000",
-        cor:"Branco",
-        tipo:"Base"
-    },
-
-    {
-        nome:"ESMALTE BRANCO BRILHANTE",
-        codigo:"311276-000",
-        cor:"Branco",
-        tipo:"Base"
-    },
-
-    {
-        nome:"VERNIZ UV PRETO FOSCO 10",
-        codigo:"310081-000",
-        cor:"Preto",
-        tipo:"Verniz"
-    },
-
-    {
-        nome:"VERNIZ UV (ALTA RESIS) 100",
-        codigo:"310082-000",
-        cor:"",
-        tipo:"Verniz"
-    },
-
-    {
-        nome:"VERNIZ UV ACETINADO (GRAFITE) 25",
-        codigo:"310084-000",
-        cor:"Grafite",
-        tipo:"Verniz"
-    },
-
-    {
-        nome:"PRIMER DAMASCO 1",
-        codigo:"307502-004",
-        cor:"Damasco",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER BRANCO NOVO",
-        codigo:"307507-002",
-        cor:"Branco",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER AVELA",
-        codigo:"307503-004",
-        cor:"Avelã",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER CAFE",
-        codigo:"307305-004",
-        cor:"Café",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER CASTANHO NEW (CAPUCCINO)",
-        codigo:"307264-002",
-        cor:"Capuccino",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER GRAPIA",
-        codigo:"307261-004",
-        cor:"Grapia",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER GRAFITE",
-        codigo:"307272-004",
-        cor:"Grafite",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER VERDE MENTA",
-        codigo:"307506-002",
-        cor:"Verde Menta",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER CHAMPANHE",
-        codigo:"307231-002",
-        cor:"Champanhe",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER UV PLATINA",
-        codigo:"307505-004",
-        cor:"Platinha",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER IMBUIA",
-        codigo:"307302-004",
-        cor:"Imbuia",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER CINZA",
-        codigo:"307303-004",
-        cor:"Cinza",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER AMEIXA",
-        codigo:"307229-002",
-        cor:"Ameixa",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"PRIMER UV PRETO",
-        codigo:"307205-002",
-        cor:"Preto",
-        tipo:"Primer"
-    },
-
-    {
-        nome:"TEXTURA PARA IMPRESSAO DIRETA",
-        codigo:"307323-008",
-        cor:"",
-        tipo:"Impressão"
-    },
-
-    {
-        nome:"IMPRESSAO DIRETA DAMASCO",
-        codigo:"307403-006",
-        cor:"Damasco",
-        tipo:"Impressão"
-    },
-
-    {
-        nome:"IMPRESSAO AVELA",
-        codigo:"307335-006",
-        cor:"Avelã",
-        tipo:"Impressão"
-    },
-
-    {
-        nome:"IMPRESSAO CAFÉ",
-        codigo:"307400-006",
-        cor:"Café",
-        tipo:"Impressão"
-    },
-
-    {
-        nome:"IMPRESSAO GRAPIA",
-        codigo:"307301-006",
-        cor:"Grapia",
-        tipo:"Impressão"
-    }
+{nome:"MASSA ESPATULADEIRA",codigo:"314001-000",cor:"",tipo:"Massa"},
+{nome:"MASSA ALISADORA",codigo:"314002-000",cor:"",tipo:"Massa"},
+{nome:"ESMALTE BRANCO FOSCO",codigo:"311281-000",cor:"Branco",tipo:"Base"},
+{nome:"ESMALTE BRANCO BRILHANTE",codigo:"311276-000",cor:"Branco",tipo:"Base"},
+{nome:"VERNIZ UV PRETO FOSCO 10",codigo:"310081-000",cor:"Preto",tipo:"Verniz"},
+{nome:"VERNIZ UV (ALTA RESIS) 100",codigo:"310082-000",cor:"",tipo:"Verniz"},
+{nome:"VERNIZ UV ACETINADO (GRAFITE) 25",codigo:"310084-000",cor:"Grafite",tipo:"Verniz"},
+{nome:"PRIMER DAMASCO 1",codigo:"307502-004",cor:"Damasco",tipo:"Primer"},
+{nome:"PRIMER BRANCO NOVO",codigo:"307507-002",cor:"Branco",tipo:"Primer"},
+{nome:"PRIMER AVELA",codigo:"307503-004",cor:"Avelã",tipo:"Primer"},
+{nome:"PRIMER CAFE",codigo:"307305-004",cor:"Café",tipo:"Primer"},
+{nome:"PRIMER CASTANHO NEW (CAPUCCINO)",codigo:"307264-002",cor:"Capuccino",tipo:"Primer"},
+{nome:"PRIMER GRAPIA",codigo:"307261-004",cor:"Grapia",tipo:"Primer"},
+{nome:"PRIMER GRAFITE",codigo:"307272-004",cor:"Grafite",tipo:"Primer"},
+{nome:"PRIMER VERDE MENTA",codigo:"307506-002",cor:"Verde Menta",tipo:"Primer"},
+{nome:"PRIMER CHAMPANHE",codigo:"307231-002",cor:"Champanhe",tipo:"Primer"},
+{nome:"PRIMER UV PLATINA",codigo:"307505-004",cor:"Platinha",tipo:"Primer"},
+{nome:"PRIMER IMBUIA",codigo:"307302-004",cor:"Imbuia",tipo:"Primer"},
+{nome:"PRIMER CINZA",codigo:"307303-004",cor:"Cinza",tipo:"Primer"},
+{nome:"PRIMER AMEIXA",codigo:"307229-002",cor:"Ameixa",tipo:"Primer"},
+{nome:"PRIMER UV PRETO",codigo:"307205-002",cor:"Preto",tipo:"Primer"},
+{nome:"TEXTURA PARA IMPRESSAO DIRETA",codigo:"307323-008",cor:"",tipo:"Impressão"},
+{nome:"IMPRESSAO DIRETA DAMASCO",codigo:"307403-006",cor:"Damasco",tipo:"Impressão"},
+{nome:"IMPRESSAO AVELA",codigo:"307335-006",cor:"Avelã",tipo:"Impressão"},
+{nome:"IMPRESSAO CAFÉ",codigo:"307400-006",cor:"Café",tipo:"Impressão"},
+{nome:"IMPRESSAO GRAPIA",codigo:"307301-006",cor:"Grapia",tipo:"Impressão"}
 
 ];
 
-
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
+/* INICIALIZAÇÃO */
 
 document.addEventListener("DOMContentLoaded",function(){
 
-    carregarDados();
-
-    carregarTema();
-
-    renderizarQuimicos();
-
-    preencherSelectQuimicos();
-
-    renderizarLancamentos();
-
-    renderizarHistorico();
-
-    renderizarMaquinas();
-
-    renderizarPecas();
-
-    atualizarResumoPecas();
-
-    atualizarDashboard();
-
-    atualizarDataHoraTempoReal();
+carregarDados();
+carregarTema();
+renderizarQuimicos();
+preencherTodosSelectsQuimicos();
+renderizarLancamentos();
+renderizarHistorico();
+renderizarMaquinas();
+renderizarPecas();
+atualizarResumoPecas();
+atualizarDashboard();
+atualizarDataHoraTempoReal();
+resetarOpcao4();
 
 });
 
-
-/* =========================================================
-   DATA/HORA EM TEMPO REAL
-========================================================= */
+/* DATA E HORA */
 
 function gerarDataHoraAtual(){
 
-    const agora = new Date();
+const agora=new Date();
 
-    const dia =
-        String(
-            agora.getDate()
-        ).padStart(2,"0");
+const dia=String(agora.getDate()).padStart(2,"0");
+const mes=String(agora.getMonth()+1).padStart(2,"0");
+const ano=agora.getFullYear();
 
-    const mes =
-        String(
-            agora.getMonth()+1
-        ).padStart(2,"0");
+const hora=String(agora.getHours()).padStart(2,"0");
+const minuto=String(agora.getMinutes()).padStart(2,"0");
+const segundo=String(agora.getSeconds()).padStart(2,"0");
 
-    const ano =
-        agora.getFullYear();
-
-    const hora =
-        String(
-            agora.getHours()
-        ).padStart(2,"0");
-
-    const minuto =
-        String(
-            agora.getMinutes()
-        ).padStart(2,"0");
-
-    const segundo =
-        String(
-            agora.getSeconds()
-        ).padStart(2,"0");
-
-    return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
 
 }
-
-
-/* =========================================================
-   FORMATO PARA SALVAR NO BANCO LOCAL
-========================================================= */
 
 function formatoDataHora(){
 
-    const agora = new Date();
+const agora=new Date();
 
-    const ano =
-        agora.getFullYear();
+const ano=agora.getFullYear();
+const mes=String(agora.getMonth()+1).padStart(2,"0");
+const dia=String(agora.getDate()).padStart(2,"0");
 
-    const mes =
-        String(
-            agora.getMonth()+1
-        ).padStart(2,"0");
+const hora=String(agora.getHours()).padStart(2,"0");
+const minuto=String(agora.getMinutes()).padStart(2,"0");
+const segundo=String(agora.getSeconds()).padStart(2,"0");
 
-    const dia =
-        String(
-            agora.getDate()
-        ).padStart(2,"0");
-
-    const hora =
-        String(
-            agora.getHours()
-        ).padStart(2,"0");
-
-    const minuto =
-        String(
-            agora.getMinutes()
-        ).padStart(2,"0");
-
-    const segundo =
-        String(
-            agora.getSeconds()
-        ).padStart(2,"0");
-
-    return `${ano}-${mes}-${dia}T${hora}:${minuto}:${segundo}`;
+return `${ano}-${mes}-${dia}T${hora}:${minuto}:${segundo}`;
 
 }
-
-
-/* =========================================================
-   ATUALIZA OS DOIS CAMPOS EM TEMPO REAL
-========================================================= */
 
 function atualizarDataHoraTempoReal(){
 
-    const agora =
-        gerarDataHoraAtual();
+const agora=gerarDataHoraAtual();
 
-    const campoLancamento =
-        document.getElementById(
-            "dataHoraLancamento"
-        );
+const campoLancamento=document.getElementById("dataHoraLancamento");
+const campoPecas=document.getElementById("dataHoraPecas");
 
-    const campoPecas =
-        document.getElementById(
-            "dataHoraPecas"
-        );
-
-    if(campoLancamento){
-
-        campoLancamento.value =
-            agora;
-
-    }
-
-    if(campoPecas){
-
-        campoPecas.value =
-            agora;
-
-    }
+if(campoLancamento)campoLancamento.value=agora;
+if(campoPecas)campoPecas.value=agora;
 
 }
 
+setInterval(atualizarDataHoraTempoReal,1000);
 
-/* ATUALIZA A CADA 1 SEGUNDO */
-
-setInterval(
-    atualizarDataHoraTempoReal,
-    1000
-);
-
-
-/* =========================================================
-   CARREGAR DADOS
-========================================================= */
+/* CARREGAR DADOS */
 
 function carregarDados(){
 
-    try{
+try{
 
-        const dadosQuimicos =
-            JSON.parse(
-                localStorage.getItem(
-                    STORAGE_QUIMICOS
-                )
-            );
+const dadosQuimicos=JSON.parse(
+localStorage.getItem(STORAGE_QUIMICOS)
+);
 
-        if(Array.isArray(dadosQuimicos)){
+if(Array.isArray(dadosQuimicos)){
 
-            quimicos = dadosQuimicos;
+quimicos=dadosQuimicos;
 
-        }else{
+}else{
 
-            quimicos =
-                quimicosPadrao.map(
-                    q => ({
-                        ...q,
-                        id:gerarID()
-                    })
-                );
+quimicos=quimicosPadrao.map(q=>({...q,id:gerarID()}));
 
-            localStorage.setItem(
-                STORAGE_QUIMICOS,
-                JSON.stringify(quimicos)
-            );
-
-        }
-
-    }catch(e){
-
-        quimicos =
-            quimicosPadrao.map(
-                q => ({
-                    ...q,
-                    id:gerarID()
-                })
-            );
-
-    }
-
-
-    try{
-
-        const dadosLancamentos =
-            JSON.parse(
-                localStorage.getItem(
-                    STORAGE_LANCAMENTOS
-                )
-            );
-
-        const ids = new Set();
-
-        lancamentos =
-            Array.isArray(dadosLancamentos)
-            ?
-            dadosLancamentos.map(l => {
-
-                let id =
-                    l.id
-                    ?
-                    String(l.id)
-                    :
-                    gerarID();
-
-                while(ids.has(id)){
-
-                    id = gerarID();
-
-                }
-
-                ids.add(id);
-
-                return {
-                    ...l,
-                    id
-                };
-
-            })
-            :
-            [];
-
-        localStorage.setItem(
-            STORAGE_LANCAMENTOS,
-            JSON.stringify(lancamentos)
-        );
-
-    }catch(e){
-
-        lancamentos=[];
-
-    }
-
-
-    try{
-
-        const dadosPecas =
-            JSON.parse(
-                localStorage.getItem(
-                    STORAGE_PECAS
-                )
-            );
-
-        registrosPecas =
-            Array.isArray(dadosPecas)
-            ?
-            dadosPecas
-            :
-            [];
-
-    }catch(e){
-
-        registrosPecas=[];
-
-    }
+localStorage.setItem(
+STORAGE_QUIMICOS,
+JSON.stringify(quimicos)
+);
 
 }
 
+}catch(e){
 
-/* =========================================================
-   ID
-========================================================= */
+quimicos=quimicosPadrao.map(q=>({...q,id:gerarID()}));
+
+}
+
+try{
+
+const dadosLancamentos=JSON.parse(
+localStorage.getItem(STORAGE_LANCAMENTOS)
+);
+
+const ids=new Set();
+
+lancamentos=Array.isArray(dadosLancamentos)
+?dadosLancamentos.map(l=>{
+
+let id=l.id?String(l.id):gerarID();
+
+while(ids.has(id))id=gerarID();
+
+ids.add(id);
+
+return {...l,id};
+
+})
+:[];
+
+localStorage.setItem(
+STORAGE_LANCAMENTOS,
+JSON.stringify(lancamentos)
+);
+
+}catch(e){
+
+lancamentos=[];
+
+}
+
+try{
+
+const dadosPecas=JSON.parse(
+localStorage.getItem(STORAGE_PECAS)
+);
+
+registrosPecas=Array.isArray(dadosPecas)
+?dadosPecas
+:[];
+
+}catch(e){
+
+registrosPecas=[];
+
+}
+
+}
+
+/* ID */
 
 function gerarID(){
 
-    return Date.now().toString(36)
-        +
-        Math.random()
-        .toString(36)
-        .substring(2,9);
+return Date.now().toString(36)+
+Math.random().toString(36).substring(2,9);
 
 }
 
-
-/* =========================================================
-   MENU
-========================================================= */
+/* MENU */
 
 function alternarMenu(){
 
-    const sidebar =
-        document.getElementById("sidebar");
+const sidebar=document.getElementById("sidebar");
+const main=document.getElementById("main");
 
-    const main =
-        document.getElementById("main");
+if(window.innerWidth<=800){
 
-    if(window.innerWidth <= 800){
+sidebar.classList.toggle("mobile-open");
 
-        sidebar.classList.toggle(
-            "mobile-open"
-        );
+}else{
 
-    }else{
-
-        sidebar.classList.toggle(
-            "hidden"
-        );
-
-        main.classList.toggle(
-            "expanded"
-        );
-
-    }
+sidebar.classList.toggle("hidden");
+main.classList.toggle("expanded");
 
 }
 
+}
 
-/* =========================================================
-   PÁGINAS
-========================================================= */
+/* PÁGINAS */
 
 function mostrarPagina(id,elemento){
 
-    document.querySelectorAll(".page")
-        .forEach(page => {
+document.querySelectorAll(".page").forEach(page=>{
+page.classList.remove("active");
+});
 
-            page.classList.remove(
-                "active"
-            );
+const pagina=document.getElementById(id);
 
-        });
+if(pagina)pagina.classList.add("active");
 
+document.querySelectorAll(".menu-item").forEach(item=>{
+item.classList.remove("active");
+});
 
-    const pagina =
-        document.getElementById(id);
+if(elemento)elemento.classList.add("active");
 
-    if(pagina){
+if(window.innerWidth<=800){
 
-        pagina.classList.add(
-            "active"
-        );
-
-    }
-
-
-    document.querySelectorAll(".menu-item")
-        .forEach(item => {
-
-            item.classList.remove(
-                "active"
-            );
-
-        });
-
-
-    if(elemento){
-
-        elemento.classList.add(
-            "active"
-        );
-
-    }
-
-
-    if(window.innerWidth <= 800){
-
-        document
-            .getElementById("sidebar")
-            .classList.remove(
-                "mobile-open"
-            );
-
-    }
+document.getElementById("sidebar")
+.classList.remove("mobile-open");
 
 }
 
+}
 
-/* =========================================================
-   TEMA
-========================================================= */
+/* TEMA */
 
 function carregarTema(){
 
-    const tema =
-        localStorage.getItem(
-            THEME_KEY
-        );
+const tema=localStorage.getItem(THEME_KEY);
 
-    if(tema === "dark"){
-
-        document.body.classList.add(
-            "dark"
-        );
-
-    }
-
+if(tema==="dark"){
+document.body.classList.add("dark");
 }
 
+}
 
 function alternarTema(){
 
-    document.body.classList.toggle(
-        "dark"
-    );
+document.body.classList.toggle("dark");
 
-    localStorage.setItem(
+localStorage.setItem(
+THEME_KEY,
+document.body.classList.contains("dark")
+?"dark"
+:"light"
+);
 
-        THEME_KEY,
-
-        document.body.classList.contains(
-            "dark"
-        )
-        ?
-        "dark"
-        :
-        "light"
-
-    );
-
-    atualizarGrafico();
+atualizarGrafico();
 
 }
 
-
-/* =========================================================
-   QUÍMICOS
-========================================================= */
+/* QUÍMICOS */
 
 function salvarQuimico(event){
 
-    event.preventDefault();
+event.preventDefault();
 
-    const id =
-        document.getElementById(
-            "idQuimico"
-        ).value;
+const id=document.getElementById("idQuimico").value;
 
-    const objeto = {
+const objeto={
 
-        id:
-            id ||
-            gerarID(),
+id:id||gerarID(),
 
-        nome:
-            document.getElementById(
-                "nomeQuimico"
-            ).value.trim(),
+nome:document.getElementById("nomeQuimico").value.trim(),
 
-        codigo:
-            document.getElementById(
-                "codigoQuimico"
-            ).value.trim(),
+codigo:document.getElementById("codigoQuimico").value.trim(),
 
-        cor:
-            document.getElementById(
-                "corQuimico"
-            ).value.trim(),
+cor:document.getElementById("corQuimico").value.trim(),
 
-        tipo:
-            document.getElementById(
-                "tipoQuimico"
-            ).value,
+tipo:document.getElementById("tipoQuimico").value,
 
-        observacao:
-            document.getElementById(
-                "observacaoQuimico"
-            ).value.trim()
+observacao:document.getElementById("observacaoQuimico").value.trim()
 
-    };
+};
 
+if(id){
 
-    if(id){
+const index=quimicos.findIndex(
+q=>String(q.id)===String(id)
+);
 
-        const index =
-            quimicos.findIndex(
-                q =>
-                String(q.id)
-                ===
-                String(id)
-            );
+if(index>=0)quimicos[index]=objeto;
 
-        if(index >= 0){
+}else{
 
-            quimicos[index] =
-                objeto;
-
-        }
-
-    }else{
-
-        quimicos.push(objeto);
-
-    }
-
-
-    localStorage.setItem(
-
-        STORAGE_QUIMICOS,
-
-        JSON.stringify(quimicos)
-
-    );
-
-
-    limparFormularioQuimico();
-
-    renderizarQuimicos();
-
-    preencherSelectQuimicos();
-
-    alert(
-        "Químico salvo com sucesso!"
-    );
+quimicos.push(objeto);
 
 }
 
+localStorage.setItem(
+STORAGE_QUIMICOS,
+JSON.stringify(quimicos)
+);
+
+limparFormularioQuimico();
+renderizarQuimicos();
+preencherTodosSelectsQuimicos();
+
+alert("Químico salvo com sucesso!");
+
+}
 
 function limparFormularioQuimico(){
 
-    document
-        .getElementById("formQuimico")
-        .reset();
+document.getElementById("formQuimico").reset();
 
-    document
-        .getElementById("idQuimico")
-        .value="";
+document.getElementById("idQuimico").value="";
 
 }
 
-
-/* =========================================================
-   RENDER QUÍMICOS
-========================================================= */
+/* RENDER QUÍMICOS */
 
 function renderizarQuimicos(){
 
-    const container =
-        document.getElementById(
-            "tabelaQuimicos"
-        );
+const container=document.getElementById("tabelaQuimicos");
 
-    if(!container)return;
+if(!container)return;
 
-    const busca =
-        (
-            document.getElementById(
-                "buscaQuimico"
-            )?.value
-            ||
-            ""
-        )
-        .toLowerCase();
+const busca=(
+document.getElementById("buscaQuimico")?.value||""
+).toLowerCase();
 
+const lista=quimicos.filter(q=>
+String(q.nome||"").toLowerCase().includes(busca)||
+String(q.codigo||"").toLowerCase().includes(busca)||
+String(q.cor||"").toLowerCase().includes(busca)
+);
 
-    const lista =
-        quimicos.filter(q => {
+if(lista.length===0){
 
-            return (
+container.innerHTML=
+`<div class="empty">Nenhum químico encontrado.</div>`;
 
-                String(q.nome || "")
-                    .toLowerCase()
-                    .includes(busca)
-
-                ||
-
-                String(q.codigo || "")
-                    .toLowerCase()
-                    .includes(busca)
-
-                ||
-
-                String(q.cor || "")
-                    .toLowerCase()
-                    .includes(busca)
-
-            );
-
-        });
-
-
-    if(lista.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                Nenhum químico encontrado.
-            </div>`;
-
-        return;
-
-    }
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Nome</th>
-                    <th>Código</th>
-                    <th>Cor</th>
-                    <th>Tipo</th>
-                    <th>Ações</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-    `;
-
-
-    lista.forEach(q => {
-
-        html += `
-
-            <tr>
-
-                <td>
-                    <strong>
-                        ${esc(q.nome)}
-                    </strong>
-                </td>
-
-                <td>
-                    ${esc(q.codigo)}
-                </td>
-
-                <td>
-                    ${esc(q.cor || "-")}
-                </td>
-
-                <td>
-                    ${esc(q.tipo || "-")}
-                </td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <button
-                            class="btn-small btn-edit"
-                            onclick="editarQuimico('${q.id}')">
-
-                            Editar
-
-                        </button>
-
-                        <button
-                            class="btn-small btn-delete"
-                            onclick="excluirQuimico('${q.id}')">
-
-                            Excluir
-
-                        </button>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    });
-
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    container.innerHTML =
-        html;
+return;
 
 }
 
+let html=`
 
-/* =========================================================
-   SELECT QUÍMICOS
-========================================================= */
+<table>
 
-function preencherSelectQuimicos(){
+<thead>
 
-    const select =
-        document.getElementById(
-            "quimicoLancamento"
-        );
+<tr>
+<th>Nome</th>
+<th>Código</th>
+<th>Cor</th>
+<th>Tipo</th>
+<th>Ações</th>
+</tr>
 
-    if(!select)return;
+</thead>
 
+<tbody>
+`;
 
-    const valorAtual =
-        select.value;
+lista.forEach(q=>{
 
+html+=`
 
-    select.innerHTML = `
+<tr>
 
-        <option value="">
-            Selecione o químico
-        </option>
+<td><strong>${esc(q.nome)}</strong></td>
 
-    `;
+<td>${esc(q.codigo)}</td>
 
+<td>${esc(q.cor||"-")}</td>
 
-    quimicos.forEach(q => {
+<td>${esc(q.tipo||"-")}</td>
 
-        const option =
-            document.createElement(
-                "option"
-            );
+<td>
 
-        option.value =
-            q.codigo;
+<div class="actions">
 
-        option.textContent =
-            `${q.codigo} — ${q.nome}`;
+<button
+class="btn-small btn-edit"
+onclick="editarQuimico('${q.id}')">
 
-        select.appendChild(
-            option
-        );
+Editar
 
-    });
+</button>
 
+<button
+class="btn-small btn-delete"
+onclick="excluirQuimico('${q.id}')">
 
-    if(
-        valorAtual &&
-        quimicos.some(
-            q =>
-            q.codigo === valorAtual
-        )
-    ){
+Excluir
 
-        select.value =
-            valorAtual;
+</button>
 
-    }
+</div>
+
+</td>
+
+</tr>
+`;
+
+});
+
+html+=`</tbody></table>`;
+
+container.innerHTML=html;
 
 }
 
+/* PREENCHER OS 5 SELECTS */
 
-/* =========================================================
-   EDITAR QUÍMICO
-========================================================= */
+function preencherTodosSelectsQuimicos(){
+
+for(let i=1;i<=5;i++){
+
+const select=document.getElementById(
+`quimicoLancamento${i}`
+);
+
+if(!select)continue;
+
+const valorAtual=select.value;
+
+select.innerHTML=`
+<option value="">Selecione o químico</option>
+`;
+
+quimicos.forEach(q=>{
+
+const option=document.createElement("option");
+
+option.value=q.codigo;
+
+option.textContent=
+`${q.codigo} — ${q.nome}`;
+
+select.appendChild(option);
+
+});
+
+if(
+valorAtual &&
+quimicos.some(q=>q.codigo===valorAtual)
+){
+
+select.value=valorAtual;
+
+}
+
+}
+
+}
+
+/* EDITAR QUÍMICO */
 
 function editarQuimico(id){
 
-    const q =
-        quimicos.find(
-            item =>
-            String(item.id)
-            ===
-            String(id)
-        );
+const q=quimicos.find(
+item=>String(item.id)===String(id)
+);
 
-    if(!q)return;
+if(!q)return;
 
+document.getElementById("idQuimico").value=q.id;
+document.getElementById("nomeQuimico").value=q.nome||"";
+document.getElementById("codigoQuimico").value=q.codigo||"";
+document.getElementById("corQuimico").value=q.cor||"";
+document.getElementById("tipoQuimico").value=q.tipo||"";
+document.getElementById("observacaoQuimico").value=q.observacao||"";
 
-    document.getElementById(
-        "idQuimico"
-    ).value=q.id;
+mostrarPagina("cadastro");
 
-    document.getElementById(
-        "nomeQuimico"
-    ).value=q.nome || "";
-
-    document.getElementById(
-        "codigoQuimico"
-    ).value=q.codigo || "";
-
-    document.getElementById(
-        "corQuimico"
-    ).value=q.cor || "";
-
-    document.getElementById(
-        "tipoQuimico"
-    ).value=q.tipo || "";
-
-    document.getElementById(
-        "observacaoQuimico"
-    ).value=q.observacao || "";
-
-
-    mostrarPagina(
-        "cadastro"
-    );
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 }
 
-
-/* =========================================================
-   EXCLUIR QUÍMICO
-========================================================= */
+/* EXCLUIR QUÍMICO */
 
 function excluirQuimico(id){
 
-    const q =
-        quimicos.find(
-            item =>
-            String(item.id)
-            ===
-            String(id)
-        );
+const q=quimicos.find(
+item=>String(item.id)===String(id)
+);
 
-    if(!q)return;
+if(!q)return;
 
+if(!confirm(
+"Deseja realmente excluir o químico?\n\n"+
+q.nome+"\n"+q.codigo
+))return;
 
-    if(
-        !confirm(
-            "Deseja realmente excluir o químico?\n\n"
-            +
-            q.nome
-            +
-            "\n"
-            +
-            q.codigo
-        )
-    ){
+quimicos=quimicos.filter(
+item=>String(item.id)!==String(id)
+);
 
-        return;
+localStorage.setItem(
+STORAGE_QUIMICOS,
+JSON.stringify(quimicos)
+);
 
-    }
-
-
-    quimicos =
-        quimicos.filter(
-            item =>
-            String(item.id)
-            !==
-            String(id)
-        );
-
-
-    localStorage.setItem(
-
-        STORAGE_QUIMICOS,
-
-        JSON.stringify(
-            quimicos
-        )
-
-    );
-
-
-    renderizarQuimicos();
-
-    preencherSelectQuimicos();
+renderizarQuimicos();
+preencherTodosSelectsQuimicos();
 
 }
 
+/* OPÇÃO 4 */
 
-/* =========================================================
-   RESULTADO AUTOMÁTICO
-========================================================= */
+function alternarOpcao4(){
+
+const item=document.getElementById("medicaoItem4");
+
+const select=document.getElementById(
+"quimicoLancamento4"
+);
+
+const padrao=document.getElementById(
+"padraoLancamento4"
+);
+
+const valor=document.getElementById(
+"valorLancamento4"
+);
+
+const resultado=document.getElementById(
+"resultadoLancamento4"
+);
+
+const status=document.getElementById(
+"statusMedicao4"
+);
+
+const botao=document.getElementById(
+"btnOpcao4"
+);
+
+opcao4NaoUtilizada=!opcao4NaoUtilizada;
+
+if(opcao4NaoUtilizada){
+
+if(select){
+select.value="";
+select.disabled=true;
+}
+
+if(padrao){
+padrao.value="";
+padrao.disabled=true;
+}
+
+if(valor){
+valor.value="";
+valor.disabled=true;
+}
+
+if(resultado){
+
+resultado.value="NAO UTILIZADO";
+
+resultado.classList.remove(
+"resultado-dentro",
+"resultado-acima",
+"resultado-abaixo"
+);
+
+resultado.classList.add(
+"resultado-nao-utilizado"
+);
+
+}
+
+if(status){
+status.textContent="✓ Opção não utilizada";
+}
+
+if(botao){
+
+botao.textContent="Utilizar opção 4";
+botao.classList.add("ativo");
+
+}
+
+if(item){
+item.classList.add("opcao4-desativada");
+}
+
+}else{
+
+if(select){
+select.disabled=false;
+}
+
+if(padrao){
+padrao.disabled=false;
+}
+
+if(valor){
+valor.disabled=false;
+}
+
+if(resultado){
+
+resultado.value="DENTRO DO PADRÃO";
+
+resultado.classList.remove(
+"resultado-nao-utilizado",
+"resultado-acima",
+"resultado-abaixo",
+"resultado-dentro"
+);
+
+}
+
+if(status){
+status.textContent="Aguardando preenchimento";
+}
+
+if(botao){
+
+botao.textContent="Não utilizar";
+botao.classList.remove("ativo");
+
+}
+
+if(item){
+item.classList.remove("opcao4-desativada");
+}
+
+calcularResultadoMedicao(4);
+
+}
+
+}
+
+/* RESETAR OPÇÃO 4 */
+
+function resetarOpcao4(){
+
+opcao4NaoUtilizada=false;
+
+const select=document.getElementById(
+"quimicoLancamento4"
+);
+
+const padrao=document.getElementById(
+"padraoLancamento4"
+);
+
+const valor=document.getElementById(
+"valorLancamento4"
+);
+
+const resultado=document.getElementById(
+"resultadoLancamento4"
+);
+
+const status=document.getElementById(
+"statusMedicao4"
+);
+
+const botao=document.getElementById(
+"btnOpcao4"
+);
+
+const item=document.getElementById(
+"medicaoItem4"
+);
+
+if(select){
+select.disabled=false;
+select.value="";
+}
+
+if(padrao){
+padrao.disabled=false;
+padrao.value="";
+}
+
+if(valor){
+valor.disabled=false;
+valor.value="";
+}
+
+if(resultado){
+
+resultado.disabled=true;
+resultado.value="DENTRO DO PADRÃO";
+
+resultado.classList.remove(
+"resultado-dentro",
+"resultado-acima",
+"resultado-abaixo",
+"resultado-nao-utilizado"
+);
+
+}
+
+if(status){
+status.textContent="Aguardando preenchimento";
+}
+
+if(botao){
+
+botao.textContent="Não utilizar";
+botao.classList.remove("ativo");
+
+}
+
+if(item){
+item.classList.remove("opcao4-desativada");
+}
+
+}
+
+/* RESULTADO DAS 5 MEDIÇÕES */
+
+function calcularResultadoMedicao(numero){
+
+if(numero===4 && opcao4NaoUtilizada){
+
+return;
+
+}
+
+const padraoCampo=document.getElementById(
+`padraoLancamento${numero}`
+);
+
+const valorCampo=document.getElementById(
+`valorLancamento${numero}`
+);
+
+const resultado=document.getElementById(
+`resultadoLancamento${numero}`
+);
+
+const status=document.getElementById(
+`statusMedicao${numero}`
+);
+
+if(!padraoCampo||!valorCampo||!resultado)return;
+
+const padraoTexto=padraoCampo.value.trim();
+
+const valorTexto=valorCampo.value.trim();
+
+resultado.classList.remove(
+"resultado-dentro",
+"resultado-acima",
+"resultado-abaixo",
+"resultado-nao-utilizado"
+);
+
+if(
+padraoTexto==="" ||
+valorTexto===""
+){
+
+resultado.value="DENTRO DO PADRÃO";
+
+status.textContent="Aguardando preenchimento";
+
+return;
+
+}
+
+const padrao=Number(
+padraoTexto.replace(",",".")
+);
+
+const valor=Number(
+valorTexto.replace(",",".")
+);
+
+if(
+!Number.isFinite(padrao)||
+!Number.isFinite(valor)
+){
+
+resultado.value="DENTRO DO PADRÃO";
+
+status.textContent="Valor inválido";
+
+return;
+
+}
+
+if(valor>padrao){
+
+resultado.value="ACIMA DO PADRÃO";
+
+resultado.classList.add(
+"resultado-acima"
+);
+
+status.textContent="⚠ Acima do padrão";
+
+}else if(valor<padrao){
+
+resultado.value="ABAIXO DO PADRÃO";
+
+resultado.classList.add(
+"resultado-abaixo"
+);
+
+status.textContent="✕ Abaixo do padrão";
+
+}else{
+
+resultado.value="DENTRO DO PADRÃO";
+
+resultado.classList.add(
+"resultado-dentro"
+);
+
+status.textContent="✓ Dentro do padrão";
+
+}
+
+}
+
+/* COMPATIBILIDADE COM FUNÇÃO ANTIGA */
 
 function calcularResultadoAutomatico(){
 
-    const campoPadrao =
-        document.getElementById(
-            "padraoLancamento"
-        );
+for(let i=1;i<=5;i++){
 
-    const campoValor =
-        document.getElementById(
-            "valorLancamento"
-        );
-
-    const resultado =
-        document.getElementById(
-            "resultadoLancamento"
-        );
-
-
-    if(
-        !campoPadrao ||
-        !campoValor ||
-        !resultado
-    ){
-
-        return;
-
-    }
-
-
-    const textoPadrao =
-        campoPadrao.value.trim();
-
-    const textoValor =
-        campoValor.value.trim();
-
-
-    if(
-        textoPadrao === ""
-        ||
-        textoValor === ""
-    ){
-
-        resultado.value =
-            "DENTRO DO PADRÃO";
-
-        return;
-
-    }
-
-
-    const padrao =
-        Number(
-            textoPadrao.replace(",",".")
-        );
-
-    const valor =
-        Number(
-            textoValor.replace(",",".")
-        );
-
-
-    if(
-        !Number.isFinite(padrao)
-        ||
-        !Number.isFinite(valor)
-    ){
-
-        resultado.value =
-            "DENTRO DO PADRÃO";
-
-        return;
-
-    }
-
-
-    if(valor > padrao){
-
-        resultado.value =
-            "ACIMA DO PADRÃO";
-
-    }else if(valor < padrao){
-
-        resultado.value =
-            "ABAIXO DO PADRÃO";
-
-    }else{
-
-        resultado.value =
-            "DENTRO DO PADRÃO";
-
-    }
+calcularResultadoMedicao(i);
 
 }
 
+}
 
-/* =========================================================
-   SALVAR LANÇAMENTO
-========================================================= */
+/* SALVAR LANÇAMENTOS */
 
 function salvarLancamento(event){
 
-    event.preventDefault();
+event.preventDefault();
 
-    calcularResultadoAutomatico();
+calcularResultadoAutomatico();
 
-    const id =
-        document.getElementById(
-            "idLancamento"
-        ).value;
+const idEdicao=document.getElementById(
+"idLancamento"
+).value;
 
+let medicoes=[];
 
-    const codigo =
-        document.getElementById(
-            "quimicoLancamento"
-        ).value.trim();
+for(let i=1;i<=5;i++){
 
+/* OPÇÃO 4 NÃO UTILIZADA */
 
-    const quimico =
-        quimicos.find(
-            q =>
-            String(q.codigo || "").trim()
-            ===
-            codigo
-        );
+if(i===4 && opcao4NaoUtilizada){
 
+medicoes.push({
 
-    const resultado =
-        document.getElementById(
-            "resultadoLancamento"
-        ).value;
+numero:4,
 
+codigo:"",
 
-    const objeto = {
+padrao:"",
 
-        id:
-            id
-            ||
-            gerarID(),
+valor:"",
 
-        timestamp:
-            Date.now(),
+resultado:"NAO UTILIZADO",
 
-        data:
-            formatoDataHora(),
+naoUtilizada:true
 
-        maquina:
-            document.getElementById(
-                "maquinaLancamento"
-            ).value,
+});
 
-        responsavel:
-            document.getElementById(
-                "responsavelLancamento"
-            ).value.trim(),
-
-        quimico:
-            quimico
-            ?
-            quimico.nome
-            :
-            codigo,
-
-        quimicoId:
-            quimico
-            ?
-            quimico.id
-            :
-            "",
-
-        codigo:
-            codigo,
-
-        valor:
-            document.getElementById(
-                "valorLancamento"
-            ).value,
-
-        padrao:
-            document.getElementById(
-                "padraoLancamento"
-            ).value,
-
-        resultado:
-            resultado,
-
-        observacao:
-            document.getElementById(
-                "observacaoLancamento"
-            ).value.trim()
-
-    };
-
-
-    if(id){
-
-        const index =
-            lancamentos.findIndex(
-                l =>
-                String(l.id)
-                ===
-                String(id)
-            );
-
-        if(index >= 0){
-
-            lancamentos[index] =
-                objeto;
-
-        }
-
-    }else{
-
-        lancamentos.push(
-            objeto
-        );
-
-    }
-
-
-    localStorage.setItem(
-
-        STORAGE_LANCAMENTOS,
-
-        JSON.stringify(
-            lancamentos
-        )
-
-    );
-
-
-    limparFormularioLancamento();
-
-    renderizarLancamentos();
-
-    renderizarHistorico();
-
-    renderizarMaquinas();
-
-    atualizarDashboard();
-
-
-    alert(
-        "Lançamento salvo com sucesso!"
-    );
+continue;
 
 }
 
+const codigo=document.getElementById(
+`quimicoLancamento${i}`
+).value.trim();
 
-/* =========================================================
-   LIMPAR LANÇAMENTO
-========================================================= */
+const padrao=document.getElementById(
+`padraoLancamento${i}`
+).value.trim();
+
+const valor=document.getElementById(
+`valorLancamento${i}`
+).value.trim();
+
+const resultado=document.getElementById(
+`resultadoLancamento${i}`
+).value;
+
+if(
+codigo!=="" ||
+padrao!=="" ||
+valor!==""
+){
+
+if(
+codigo===""||
+padrao===""||
+valor===""
+){
+
+alert(
+`Preencha Químico, Padrão e Valor Medido da Opção ${i}.`
+);
+
+return;
+
+}
+
+medicoes.push({
+
+numero:i,
+codigo:codigo,
+padrao:padrao,
+valor:valor,
+resultado:resultado,
+naoUtilizada:false
+
+});
+
+}
+
+}
+
+if(medicoes.length===0){
+
+alert(
+"Preencha pelo menos uma das 5 opções de avaliação."
+);
+
+return;
+
+}
+
+const maquina=document.getElementById(
+"maquinaLancamento"
+).value;
+
+const responsavel=document.getElementById(
+"responsavelLancamento"
+).value.trim();
+
+const observacao=document.getElementById(
+"observacaoLancamento"
+).value.trim();
+
+const dataHora=formatoDataHora();
+
+const timestamp=Date.now();
+
+/* EDIÇÃO */
+
+if(idEdicao){
+
+/*
+Na edição, se a opção 4 estiver marcada como
+não utilizada, o sistema aceita a edição.
+*/
+
+let medicao=medicoes.find(
+m=>m.numero===4 && m.naoUtilizada
+);
+
+if(!medicao){
+
+medicao=medicoes[0];
+
+}
+
+if(!medicao){
+
+alert("Nenhuma avaliação encontrada.");
+
+return;
+
+}
+
+const quimico=medicao.naoUtilizada
+?null
+:quimicos.find(
+q=>String(q.codigo||"").trim()===medicao.codigo
+);
+
+const index=lancamentos.findIndex(
+l=>String(l.id)===String(idEdicao)
+);
+
+if(index>=0){
+
+lancamentos[index]={
+
+...lancamentos[index],
+
+timestamp:timestamp,
+data:dataHora,
+maquina:maquina,
+responsavel:responsavel,
+
+quimico:medicao.naoUtilizada
+?"Não utilizado"
+:(quimico
+?quimico.nome
+:medicao.codigo),
+
+quimicoId:quimico
+?quimico.id
+:"",
+
+codigo:medicao.codigo,
+valor:medicao.valor,
+padrao:medicao.padrao,
+resultado:medicao.resultado,
+naoUtilizada:!!medicao.naoUtilizada,
+observacao:observacao,
+numeroOpcao:medicao.numero
+
+};
+
+}
+
+}else{
+
+/*
+NOVO LANÇAMENTO:
+cada opção preenchida é salva como
+uma avaliação individual.
+*/
+
+medicoes.forEach(medicao=>{
+
+const quimico=medicao.naoUtilizada
+?null
+:quimicos.find(
+q=>String(q.codigo||"").trim()===medicao.codigo
+);
+
+lancamentos.push({
+
+id:gerarID(),
+
+timestamp:timestamp,
+
+data:dataHora,
+
+maquina:maquina,
+
+responsavel:responsavel,
+
+quimico:medicao.naoUtilizada
+?"Não utilizado"
+:(quimico
+?quimico.nome
+:medicao.codigo),
+
+quimicoId:quimico
+?quimico.id
+:"",
+
+codigo:medicao.codigo,
+
+valor:medicao.valor,
+
+padrao:medicao.padrao,
+
+resultado:medicao.resultado,
+
+naoUtilizada:!!medicao.naoUtilizada,
+
+observacao:observacao,
+
+numeroOpcao:medicao.numero
+
+});
+
+});
+
+}
+
+localStorage.setItem(
+STORAGE_LANCAMENTOS,
+JSON.stringify(lancamentos)
+);
+
+limparFormularioLancamento();
+
+renderizarLancamentos();
+renderizarHistorico();
+renderizarMaquinas();
+atualizarDashboard();
+
+const quantidadeUtilizada=medicoes.filter(
+m=>!m.naoUtilizada
+).length;
+
+const quantidadeNaoUtilizada=medicoes.filter(
+m=>m.naoUtilizada
+).length;
+
+alert(
+idEdicao
+?"Lançamento atualizado com sucesso!"
+:
+`${quantidadeUtilizada} avaliação(ões) salva(s)`+
+(quantidadeNaoUtilizada
+?` e ${quantidadeNaoUtilizada} opção(ões) não utilizada(s)!`
+:" com sucesso!")
+);
+
+}
+
+/* LIMPAR LANÇAMENTO */
 
 function limparFormularioLancamento(){
 
-    document
-        .getElementById(
-            "formLancamento"
-        )
-        .reset();
+document.getElementById(
+"formLancamento"
+).reset();
 
-    document
-        .getElementById(
-            "idLancamento"
-        )
-        .value="";
+document.getElementById(
+"idLancamento"
+).value="";
 
+for(let i=1;i<=5;i++){
 
-    document
-        .getElementById(
-            "resultadoLancamento"
-        )
-        .value=
-            "DENTRO DO PADRÃO";
+const resultado=document.getElementById(
+`resultadoLancamento${i}`
+);
 
+const status=document.getElementById(
+`statusMedicao${i}`
+);
 
-    atualizarDataHoraTempoReal();
+if(resultado){
+
+resultado.value="DENTRO DO PADRÃO";
+
+resultado.classList.remove(
+"resultado-dentro",
+"resultado-acima",
+"resultado-abaixo",
+"resultado-nao-utilizado"
+);
 
 }
 
+if(status){
 
-/* =========================================================
-   RENDER LANÇAMENTOS
-========================================================= */
+status.textContent=
+"Aguardando preenchimento";
+
+}
+
+}
+
+resetarOpcao4();
+
+atualizarDataHoraTempoReal();
+
+}
+
+/* RENDER LANÇAMENTOS */
 
 function renderizarLancamentos(){
 
-    const container =
-        document.getElementById(
-            "tabelaLancamentos"
-        );
+const container=document.getElementById(
+"tabelaLancamentos"
+);
 
-    if(!container)return;
+if(!container)return;
 
+const lista=[...lancamentos]
+.sort(
+(a,b)=>
+Number(b.timestamp||0)-
+Number(a.timestamp||0)
+)
+.slice(0,50);
 
-    const lista =
-        [...lancamentos]
-        .sort(
-            (a,b) =>
-            Number(b.timestamp || 0)
-            -
-            Number(a.timestamp || 0)
-        )
-        .slice(0,30);
+if(lista.length===0){
 
+container.innerHTML=
+`<div class="empty">Nenhum lançamento registrado.</div>`;
 
-    if(lista.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                Nenhum lançamento registrado.
-            </div>`;
-
-        return;
-
-    }
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Data</th>
-                    <th>Máquina</th>
-                    <th>Químico</th>
-                    <th>Valor</th>
-                    <th>Padrão</th>
-                    <th>Resultado</th>
-                    <th>Ações</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-    `;
-
-
-    lista.forEach(l => {
-
-        html += `
-
-            <tr>
-
-                <td>
-                    ${formatarData(l.data)}
-                </td>
-
-                <td>
-                    <strong>
-                        ${esc(
-                            nomeMaquina(
-                                l.maquina
-                            )
-                        )}
-                    </strong>
-                </td>
-
-                <td>
-
-                    ${esc(
-                        l.quimico || "-"
-                    )}
-
-                    <br>
-
-                    <small>
-                        ${esc(
-                            l.codigo || ""
-                        )}
-                    </small>
-
-                </td>
-
-                <td>
-                    ${esc(
-                        l.valor || "-"
-                    )}
-                </td>
-
-                <td>
-                    ${esc(
-                        l.padrao || "-"
-                    )}
-                </td>
-
-                <td>
-                    ${badgeResultado(
-                        l.resultado
-                    )}
-                </td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <button
-                            class="btn-small btn-edit"
-                            onclick="editarLancamento('${l.id}')">
-
-                            Editar
-
-                        </button>
-
-                        <button
-                            class="btn-small btn-delete"
-                            onclick="excluirLancamento('${l.id}')">
-
-                            Excluir
-
-                        </button>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    });
-
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    container.innerHTML =
-        html;
+return;
 
 }
 
+let html=`
 
-/* =========================================================
-   EDITAR LANÇAMENTO
-========================================================= */
+<table>
+
+<thead>
+
+<tr>
+<th>Data</th>
+<th>Máquina</th>
+<th>Químico</th>
+<th>Valor</th>
+<th>Padrão</th>
+<th>Resultado</th>
+<th>Ações</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+lista.forEach(l=>{
+
+html+=`
+
+<tr>
+
+<td>${formatarData(l.data)}</td>
+
+<td>
+<strong>
+${esc(nomeMaquina(l.maquina))}
+</strong>
+</td>
+
+<td>
+${esc(l.quimico||"-")}
+<br>
+<small>${esc(l.codigo||"")}</small>
+</td>
+
+<td>${esc(l.valor||"-")}</td>
+
+<td>${esc(l.padrao||"-")}</td>
+
+<td>${badgeResultado(l.resultado)}</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="btn-small btn-edit"
+onclick="editarLancamento('${l.id}')">
+
+Editar
+
+</button>
+
+<button
+class="btn-small btn-delete"
+onclick="excluirLancamento('${l.id}')">
+
+Excluir
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`;
+
+});
+
+html+=`</tbody></table>`;
+
+container.innerHTML=html;
+
+}
+
+/* EDITAR LANÇAMENTO */
 
 function editarLancamento(id){
 
-    const l =
-        lancamentos.find(
-            item =>
-            String(item.id)
-            ===
-            String(id)
-        );
+const l=lancamentos.find(
+item=>String(item.id)===String(id)
+);
 
-    if(!l)return;
+if(!l)return;
 
+limparFormularioLancamento();
 
-    document.getElementById(
-        "idLancamento"
-    ).value=l.id;
+document.getElementById(
+"idLancamento"
+).value=l.id;
 
-    document.getElementById(
-        "maquinaLancamento"
-    ).value=l.maquina || "";
+document.getElementById(
+"maquinaLancamento"
+).value=l.maquina||"";
 
-    document.getElementById(
-        "responsavelLancamento"
-    ).value=l.responsavel || "";
+document.getElementById(
+"responsavelLancamento"
+).value=l.responsavel||"";
 
-    document.getElementById(
-        "quimicoLancamento"
-    ).value=l.codigo || "";
+let numero=Number(l.numeroOpcao||1);
 
-    document.getElementById(
-        "valorLancamento"
-    ).value=l.valor || "";
+if(numero<1||numero>5)numero=1;
 
-    document.getElementById(
-        "padraoLancamento"
-    ).value=l.padrao || "";
+/* EDIÇÃO DA OPÇÃO 4 NÃO UTILIZADA */
 
+if(
+numero===4 &&
+(
+l.naoUtilizada===true ||
+l.resultado==="NAO UTILIZADO"
+)
+){
 
-    calcularResultadoAutomatico();
+alternarOpcao4();
 
+}else{
 
-    document.getElementById(
-        "observacaoLancamento"
-    ).value=l.observacao || "";
+document.getElementById(
+`quimicoLancamento${numero}`
+).value=l.codigo||"";
 
+document.getElementById(
+`valorLancamento${numero}`
+).value=l.valor||"";
 
-    mostrarPagina(
-        "lancamento"
-    );
+document.getElementById(
+`padraoLancamento${numero}`
+).value=l.padrao||"";
 
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+calcularResultadoMedicao(numero);
 
 }
 
+document.getElementById(
+"observacaoLancamento"
+).value=l.observacao||"";
 
-/* =========================================================
-   EXCLUIR LANÇAMENTO
-========================================================= */
+mostrarPagina("lancamento");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+/* EXCLUIR LANÇAMENTO */
 
 function excluirLancamento(id){
 
-    const lancamento =
-        lancamentos.find(
-            l =>
-            String(l.id)
-            ===
-            String(id)
-        );
+const lancamento=lancamentos.find(
+l=>String(l.id)===String(id)
+);
 
+if(!lancamento){
 
-    if(!lancamento){
+alert("Lançamento não encontrado.");
 
-        alert(
-            "Lançamento não encontrado."
-        );
-
-        return;
-
-    }
-
-
-    const confirmacao =
-        confirm(
-
-            "Deseja realmente excluir este lançamento?\n\n"
-            +
-            "Máquina: "
-            +
-            nomeMaquina(
-                lancamento.maquina
-            )
-            +
-            "\n"
-            +
-            "Químico: "
-            +
-            (
-                lancamento.quimico
-                ||
-                "-"
-            )
-            +
-            "\n"
-            +
-            "Data: "
-            +
-            (
-                lancamento.data
-                ||
-                "-"
-            )
-
-        );
-
-
-    if(!confirmacao)return;
-
-
-    lancamentos =
-        lancamentos.filter(
-            l =>
-            String(l.id)
-            !==
-            String(id)
-        );
-
-
-    localStorage.setItem(
-
-        STORAGE_LANCAMENTOS,
-
-        JSON.stringify(
-            lancamentos
-        )
-
-    );
-
-
-    renderizarLancamentos();
-
-    renderizarHistorico();
-
-    renderizarMaquinas();
-
-    atualizarDashboard();
-
-
-    alert(
-        "Lançamento excluído com sucesso!"
-    );
+return;
 
 }
 
-
-/* =========================================================
-   RESULTADO PEÇAS
-========================================================= */
-
-function atualizarResultadoPecas(){
-
-    const campoPadrao =
-        document.getElementById(
-            "padraoPecas"
-        );
-
-    const campoQuantidade =
-        document.getElementById(
-            "quantidadePecas"
-        );
-
-    const resultado =
-        document.getElementById(
-            "resultadoPecas"
-        );
-
-
-    if(
-        campoPadrao.value === ""
-        ||
-        campoQuantidade.value === ""
-    ){
-
-        resultado.value =
-            "DENTRO DO PADRÃO";
-
-        return;
-
-    }
-
-
-    const padrao =
-        Number(
-            campoPadrao.value
-        );
-
-    const quantidade =
-        Number(
-            campoQuantidade.value
-        );
-
-
-    if(quantidade > padrao){
-
-        resultado.value =
-            "ACIMA DO PADRÃO";
-
-    }else if(quantidade < padrao){
-
-        resultado.value =
-            "ABAIXO DO PADRÃO";
-
-    }else{
-
-        resultado.value =
-            "DENTRO DO PADRÃO";
-
-    }
-
-}
-
-
-/* =========================================================
-   SALVAR PEÇAS
-========================================================= */
-
-function salvarPecas(event){
-
-    event.preventDefault();
-
-    atualizarResultadoPecas();
-
-
-    const id =
-        document.getElementById(
-            "idPecas"
-        ).value;
-
-
-    const objeto = {
-
-        id:
-            id
-            ||
-            gerarID(),
-
-        timestamp:
-            Date.now(),
-
-        data:
-            formatoDataHora(),
-
-        maquina:
-            document.getElementById(
-                "maquinaPecas"
-            ).value,
-
-        responsavel:
-            document.getElementById(
-                "responsavelPecas"
-            ).value.trim(),
-
-        padrao:
-            Number(
-                document.getElementById(
-                    "padraoPecas"
-                ).value
-            ),
-
-        quantidade:
-            Number(
-                document.getElementById(
-                    "quantidadePecas"
-                ).value
-            ),
-
-        resultado:
-            document.getElementById(
-                "resultadoPecas"
-            ).value,
-
-        observacao:
-            document.getElementById(
-                "observacaoPecas"
-            ).value.trim()
-
-    };
-
-
-    if(id){
-
-        const index =
-            registrosPecas.findIndex(
-                r =>
-                String(r.id)
-                ===
-                String(id)
-            );
-
-        if(index >= 0){
-
-            registrosPecas[index] =
-                objeto;
-
-        }
-
-    }else{
-
-        registrosPecas.push(
-            objeto
-        );
-
-    }
-
-
-    localStorage.setItem(
-
-        STORAGE_PECAS,
-
-        JSON.stringify(
-            registrosPecas
-        )
-
-    );
-
-
-    limparFormularioPecas();
-
-    renderizarPecas();
-
-    atualizarResumoPecas();
-
-
-    alert(
-        "Registro de peças salvo com sucesso!"
-    );
-
-}
-
-
-/* =========================================================
-   LIMPAR PEÇAS
-========================================================= */
-
-function limparFormularioPecas(){
-
-    document
-        .getElementById(
-            "formPecas"
-        )
-        .reset();
-
-    document
-        .getElementById(
-            "idPecas"
-        )
-        .value="";
-
-    document
-        .getElementById(
-            "resultadoPecas"
-        )
-        .value=
-            "DENTRO DO PADRÃO";
-
-    atualizarDataHoraTempoReal();
-
-}
-
-
-/* =========================================================
-   RENDER PEÇAS
-========================================================= */
-
-function renderizarPecas(){
-
-    const container =
-        document.getElementById(
-            "tabelaPecas"
-        );
-
-    if(!container)return;
-
-
-    const lista =
-        [...registrosPecas]
-        .sort(
-            (a,b) =>
-            Number(b.timestamp || 0)
-            -
-            Number(a.timestamp || 0)
-        );
-
-
-    if(lista.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                Nenhum registro de produção.
-            </div>`;
-
-        return;
-
-    }
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Data</th>
-                    <th>Máquina</th>
-                    <th>Responsável</th>
-                    <th>Padrão</th>
-                    <th>Quantidade</th>
-                    <th>Resultado</th>
-                    <th>Ações</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-    `;
-
-
-    lista.forEach(r => {
-
-        html += `
-
-            <tr>
-
-                <td>
-                    ${formatarData(r.data)}
-                </td>
-
-                <td>
-                    <strong>
-                        ${esc(
-                            nomeMaquina(
-                                r.maquina
-                            )
-                        )}
-                    </strong>
-                </td>
-
-                <td>
-                    ${esc(
-                        r.responsavel
-                        ||
-                        "-"
-                    )}
-                </td>
-
-                <td>
-                    ${Number(
-                        r.padrao || 0
-                    ).toLocaleString(
-                        "pt-BR"
-                    )}
-                </td>
-
-                <td>
-                    <strong>
-                        ${Number(
-                            r.quantidade || 0
-                        ).toLocaleString(
-                            "pt-BR"
-                        )}
-                    </strong>
-                </td>
-
-                <td>
-                    ${badgeResultado(
-                        r.resultado
-                    )}
-                </td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <button
-                            class="btn-small btn-edit"
-                            onclick="editarPecas('${r.id}')">
-
-                            Editar
-
-                        </button>
-
-                        <button
-                            class="btn-small btn-delete"
-                            onclick="excluirPecas('${r.id}')">
-
-                            Excluir
-
-                        </button>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    });
-
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   EDITAR PEÇAS
-========================================================= */
-
-function editarPecas(id){
-
-    const registro =
-        registrosPecas.find(
-            r =>
-            String(r.id)
-            ===
-            String(id)
-        );
-
-
-    if(!registro)return;
-
-
-    document.getElementById(
-        "idPecas"
-    ).value=registro.id;
-
-    document.getElementById(
-        "maquinaPecas"
-    ).value=registro.maquina || "";
-
-    document.getElementById(
-        "responsavelPecas"
-    ).value=registro.responsavel || "";
-
-    document.getElementById(
-        "padraoPecas"
-    ).value=registro.padrao ?? "";
-
-    document.getElementById(
-        "quantidadePecas"
-    ).value=registro.quantidade ?? "";
-
-    atualizarResultadoPecas();
-
-    document.getElementById(
-        "observacaoPecas"
-    ).value=
-        registro.observacao || "";
-
-
-    mostrarPagina(
-        "pecas"
-    );
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================================================
-   EXCLUIR PEÇAS
-========================================================= */
-
-function excluirPecas(id){
-
-    const registro =
-        registrosPecas.find(
-            r =>
-            String(r.id)
-            ===
-            String(id)
-        );
-
-
-    if(!registro)return;
-
-
-    if(
-        !confirm(
-
-            "Deseja realmente excluir este registro?\n\n"
-            +
-            "Máquina: "
-            +
-            nomeMaquina(
-                registro.maquina
-            )
-            +
-            "\nQuantidade: "
-            +
-            registro.quantidade
-
-        )
-    ){
-
-        return;
-
-    }
-
-
-    registrosPecas =
-        registrosPecas.filter(
-            r =>
-            String(r.id)
-            !==
-            String(id)
-        );
-
-
-    localStorage.setItem(
-
-        STORAGE_PECAS,
-
-        JSON.stringify(
-            registrosPecas
-        )
-
-    );
-
-
-    renderizarPecas();
-
-    atualizarResumoPecas();
-
-}
-
-
-/* =========================================================
-   RESUMO PEÇAS
-========================================================= */
-
-function atualizarResumoPecas(){
-
-    const total =
-        registrosPecas.reduce(
-            (soma,r) =>
-            soma
-            +
-            Number(
-                r.quantidade || 0
-            ),
-            0
-        );
-
-
-    const padrao =
-        registrosPecas.reduce(
-            (soma,r) =>
-            soma
-            +
-            Number(
-                r.padrao || 0
-            ),
-            0
-        );
-
-
-    const dentro =
-        registrosPecas.filter(
-            r =>
-            r.resultado
-            ===
-            "DENTRO DO PADRÃO"
-        ).length;
-
-
-    const fora =
-        registrosPecas.filter(
-            r =>
-            r.resultado
-            !==
-            "DENTRO DO PADRÃO"
-        ).length;
-
-
-    document.getElementById(
-        "totalPecas"
-    ).textContent =
-        total.toLocaleString(
-            "pt-BR"
-        );
-
-
-    document.getElementById(
-        "totalPadraoPecas"
-    ).textContent =
-        padrao.toLocaleString(
-            "pt-BR"
-        );
-
-
-    document.getElementById(
-        "pecasDentro"
-    ).textContent =
-        dentro.toLocaleString(
-            "pt-BR"
-        );
-
-
-    document.getElementById(
-        "pecasFora"
-    ).textContent =
-        fora.toLocaleString(
-            "pt-BR"
-        );
-
-}
-
-
-/* =========================================================
-   HISTÓRICO
-========================================================= */
-
-function renderizarHistorico(){
-
-    const container =
-        document.getElementById(
-            "tabelaHistorico"
-        );
-
-    if(!container)return;
-
-
-    const busca =
-        (
-            document.getElementById(
-                "buscaHistorico"
-            )?.value
-            ||
-            ""
-        )
-        .toLowerCase();
-
-
-    const lista =
-        [...lancamentos]
-        .filter(l => {
-
-            const texto = (
-
-                String(
-                    l.quimico || ""
-                )
-                +
-                " "
-                +
-                String(
-                    l.codigo || ""
-                )
-                +
-                " "
-                +
-                String(
-                    l.maquina || ""
-                )
-                +
-                " "
-                +
-                nomeMaquina(
-                    l.maquina
-                )
-                +
-                " "
-                +
-                String(
-                    l.responsavel || ""
-                )
-                +
-                " "
-                +
-                String(
-                    l.resultado || ""
-                )
-
-            ).toLowerCase();
-
-
-            return texto.includes(
-                busca
-            );
-
-        })
-        .sort(
-            (a,b) =>
-            Number(
-                b.timestamp || 0
-            )
-            -
-            Number(
-                a.timestamp || 0
-            )
-        );
-
-
-    if(lista.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                Nenhum registro encontrado.
-            </div>`;
-
-        return;
-
-    }
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Data</th>
-                    <th>Máquina</th>
-                    <th>Responsável</th>
-                    <th>Químico</th>
-                    <th>Valor</th>
-                    <th>Resultado</th>
-                    <th>Ações</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-    `;
-
-
-    lista.forEach(l => {
-
-        html += `
-
-            <tr>
-
-                <td>
-                    ${formatarData(l.data)}
-                </td>
-
-                <td>
-                    ${esc(
-                        nomeMaquina(
-                            l.maquina
-                        )
-                    )}
-                </td>
-
-                <td>
-                    ${esc(
-                        l.responsavel
-                        ||
-                        "-"
-                    )}
-                </td>
-
-                <td>
-
-                    ${esc(
-                        l.quimico
-                        ||
-                        "-"
-                    )}
-
-                    <br>
-
-                    <small>
-                        ${esc(
-                            l.codigo
-                            ||
-                            ""
-                        )}
-                    </small>
-
-                </td>
-
-                <td>
-                    ${esc(
-                        l.valor
-                        ||
-                        "-"
-                    )}
-                </td>
-
-                <td>
-                    ${badgeResultado(
-                        l.resultado
-                    )}
-                </td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <button
-                            class="btn-small btn-edit"
-                            onclick="editarLancamento('${l.id}')">
-
-                            Editar
-
-                        </button>
-
-                        <button
-                            class="btn-small btn-delete"
-                            onclick="excluirLancamento('${l.id}')">
-
-                            Excluir
-
-                        </button>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    });
-
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   MÁQUINAS
-========================================================= */
-
-function renderizarMaquinas(){
-
-    const grid =
-        document.getElementById(
-            "gridMaquinas"
-        );
-
-    const tabela =
-        document.getElementById(
-            "tabelaMaquinas"
-        );
-
-
-    if(!grid || !tabela)return;
-
-
-    let cards = "";
-
-    let rows = "";
-
-
-    maquinas.forEach(
-        maquina => {
-
-            const registros =
-                lancamentos.filter(
-                    l =>
-                    l.maquina
-                    ===
-                    maquina
-                );
-
-
-            const total =
-                registros.length;
-
-
-            const dentro =
-                registros.filter(
-                    r =>
-                    r.resultado
-                    ===
-                    "DENTRO DO PADRÃO"
-                ).length;
-
-
-            const conformidade =
-                total
-                ?
-                Math.round(
-                    (
-                        dentro
-                        /
-                        total
-                    )
-                    *
-                    100
-                )
-                :
-                0;
-
-
-            cards += `
-
-                <div class="machine-card">
-
-                    <div class="machine-name">
-
-                        ${esc(
-                            nomeMaquina(
-                                maquina
-                            )
-                        )}
-
-                    </div>
-
-                    <div class="machine-value">
-
-                        ${total}
-
-                    </div>
-
-                    <div class="machine-label">
-
-                        avaliações
-
-                    </div>
-
-                    <div style="margin-top:10px;">
-
-                        ${badgeConformidade(
-                            conformidade
-                        )}
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            rows += `
-
-                <tr>
-
-                    <td>
-                        <strong>
-                            ${esc(
-                                nomeMaquina(
-                                    maquina
-                                )
-                            )}
-                        </strong>
-                    </td>
-
-                    <td>
-                        ${total}
-                    </td>
-
-                    <td>
-                        ${dentro}
-                    </td>
-
-                    <td>
-                        ${total-dentro}
-                    </td>
-
-                    <td>
-                        ${conformidade}%
-                    </td>
-
-                </tr>
-
-            `;
-
-        }
-    );
-
-
-    grid.innerHTML =
-        cards;
-
-
-    tabela.innerHTML = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Máquina</th>
-                    <th>Avaliações</th>
-                    <th>Dentro</th>
-                    <th>Fora</th>
-                    <th>Conformidade</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                ${rows}
-
-            </tbody>
-
-        </table>
-
-    `;
-
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-function filtrarPeriodo(
-    periodo,
-    elemento
-){
-
-    periodoAtual =
-        periodo;
-
-
-    document
-        .querySelectorAll(
-            ".filter-btn"
-        )
-        .forEach(btn => {
-
-            btn.classList.remove(
-                "active"
-            );
-
-        });
-
-
-    if(elemento){
-
-        elemento.classList.add(
-            "active"
-        );
-
-    }
-
-
-    atualizarDashboard();
-
-}
-
-
-function obterLancamentosFiltrados(){
-
-    if(periodoAtual === "todos"){
-
-        return [...lancamentos];
-
-    }
-
-
-    const agora =
-        new Date();
-
-
-    let inicio =
-        new Date();
-
-
-    if(periodoAtual === "hoje"){
-
-        inicio.setHours(
-            0,0,0,0
-        );
-
-    }else{
-
-        inicio.setDate(
-            agora.getDate()
-            -
-            Number(
-                periodoAtual
-            )
-        );
-
-    }
-
-
-    return lancamentos.filter(
-        l => {
-
-            const data =
-                l.data
-                ?
-                new Date(l.data)
-                :
-                new Date(
-                    Number(
-                        l.timestamp || 0
-                    )
-                );
-
-
-            return data >= inicio;
-
-        }
-    );
-
-}
-
-
-function atualizarDashboard(){
-
-    const dados =
-        obterLancamentosFiltrados();
-
-
-    const total =
-        dados.length;
-
-
-    const dentro =
-        dados.filter(
-            r =>
-            r.resultado
-            ===
-            "DENTRO DO PADRÃO"
-        ).length;
-
-
-    const fora =
-        dados.filter(
-            r =>
-            r.resultado
-            !==
-            "DENTRO DO PADRÃO"
-        ).length;
-
-
-    const maquinasUsadas =
-        new Set(
-            dados
-                .map(
-                    r =>
-                    r.maquina
-                )
-                .filter(Boolean)
-        );
-
-
-    const conformidade =
-        total
-        ?
-        Math.round(
-            (
-                dentro
-                /
-                total
-            )
-            *
-            100
-        )
-        :
-        0;
-
-
-    document.getElementById(
-        "kpiAvaliacoes"
-    ).textContent =
-        total.toLocaleString(
-            "pt-BR"
-        );
-
-
-    document.getElementById(
-        "kpiConformidade"
-    ).textContent =
-        conformidade
-        +
-        "%";
-
-
-    document.getElementById(
-        "kpiFora"
-    ).textContent =
-        fora.toLocaleString(
-            "pt-BR"
-        );
-
-
-    document.getElementById(
-        "kpiMaquinas"
-    ).textContent =
-        maquinasUsadas.size;
-
-
-    atualizarGrafico();
-
-    atualizarRanking(
-        dados
-    );
-
-    atualizarAtividade(
-        dados
-    );
-
-}
-
-
-/* =========================================================
-   GRÁFICO
-========================================================= */
-
-function atualizarGrafico(){
-
-    const canvas =
-        document.getElementById(
-            "graficoResultados"
-        );
-
-    if(!canvas)return;
-
-
-    const dados =
-        obterLancamentosFiltrados();
-
-
-    const dentro =
-        dados.filter(
-            r =>
-            r.resultado
-            ===
-            "DENTRO DO PADRÃO"
-        ).length;
-
-
-    const acima =
-        dados.filter(
-            r =>
-            r.resultado
-            ===
-            "ACIMA DO PADRÃO"
-        ).length;
-
-
-    const abaixo =
-        dados.filter(
-            r =>
-            r.resultado
-            ===
-            "ABAIXO DO PADRÃO"
-        ).length;
-
-
-    if(graficoResultados){
-
-        graficoResultados.destroy();
-
-    }
-
-
-    const corTexto =
-        document.body.classList.contains(
-            "dark"
-        )
-        ?
-        "#dbe4ea"
-        :
-        "#344054";
-
-
-    graficoResultados =
-        new Chart(
-            canvas,
-            {
-
-                type:"doughnut",
-
-                data:{
-
-                    labels:[
-
-                        "Dentro do padrão",
-
-                        "Acima do padrão",
-
-                        "Abaixo do padrão"
-
-                    ],
-
-                    datasets:[{
-
-                        data:[
-
-                            dentro,
-                            acima,
-                            abaixo
-
-                        ],
-
-                        backgroundColor:[
-
-                            "#159957",
-                            "#b7791f",
-                            "#d92d20"
-
-                        ],
-
-                        borderWidth:0
-
-                    }]
-
-                },
-
-                options:{
-
-                    responsive:true,
-
-                    maintainAspectRatio:false,
-
-                    plugins:{
-
-                        legend:{
-
-                            position:"bottom",
-
-                            labels:{
-
-                                color:
-                                    corTexto
-
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   RANKING
-========================================================= */
-
-function atualizarRanking(dados){
-
-    const container =
-        document.getElementById(
-            "rankingMaquinas"
-        );
-
-    if(!container)return;
-
-
-    const contagem={};
-
-
-    dados.forEach(
-        r => {
-
-            const maquina =
-                r.maquina
-                ||
-                "Não informado";
-
-
-            contagem[maquina] =
-                (
-                    contagem[maquina]
-                    ||
-                    0
-                )
-                +
-                1;
-
-        }
-    );
-
-
-    const lista =
-        Object.entries(
-            contagem
-        )
-        .sort(
-            (a,b) =>
-            b[1]-a[1]
-        );
-
-
-    if(lista.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                Nenhum registro encontrado.
-            </div>`;
-
-        return;
-
-    }
-
-
-    let html="";
-
-
-    lista.forEach(
-        ([maquina,total]) => {
-
-            html += `
-
-                <div
-                    style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;
-                        padding:12px 0;
-                        border-bottom:1px solid var(--borda);
-                    ">
-
-                    <div>
-
-                        <strong>
-
-                            ${esc(
-                                nomeMaquina(
-                                    maquina
-                                )
-                            )}
-
-                        </strong>
-
-                    </div>
-
-                    <span
-                        class="badge badge-blue">
-
-                        ${total}
-
-                    </span>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   ATIVIDADE
-========================================================= */
-
-function atualizarAtividade(dados){
-
-    const container =
-        document.getElementById(
-            "atividadeRecente"
-        );
-
-    if(!container)return;
-
-
-    const lista =
-        [...dados]
-        .sort(
-            (a,b) =>
-            Number(
-                b.timestamp || 0
-            )
-            -
-            Number(
-                a.timestamp || 0
-            )
-        )
-        .slice(
-            0,
-            10
-        );
-
-
-    if(lista.length === 0){
-
-        container.innerHTML =
-            `<div class="empty">
-                Nenhuma atividade registrada.
-            </div>`;
-
-        return;
-
-    }
-
-
-    let html = `
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Data</th>
-                    <th>Máquina</th>
-                    <th>Químico</th>
-                    <th>Resultado</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-    `;
-
-
-    lista.forEach(
-        r => {
-
-            html += `
-
-                <tr>
-
-                    <td>
-                        ${formatarData(
-                            r.data
-                        )}
-                    </td>
-
-                    <td>
-                        ${esc(
-                            nomeMaquina(
-                                r.maquina
-                            )
-                        )}
-                    </td>
-
-                    <td>
-                        ${esc(
-                            r.quimico
-                            ||
-                            "-"
-                        )}
-                    </td>
-
-                    <td>
-                        ${badgeResultado(
-                            r.resultado
-                        )}
-                    </td>
-
-                </tr>
-
-            `;
-
-        }
-    );
-
-
-    html += `
-
-            </tbody>
-
-        </table>
-
-    `;
-
-
-    container.innerHTML =
-        html;
-
-}
-
-
-/* =========================================================
-   EXPORTAÇÃO EXCEL
-========================================================= */
-
-function exportarExcel(){
-
-    if(
-        typeof XLSX
-        ===
-        "undefined"
-    ){
-
-        alert(
-            "Biblioteca Excel não carregada."
-        );
-
-        return;
-
-    }
-
-
-    const wb =
-        XLSX.utils.book_new();
-
-
-    const dadosQuimicos =
-        quimicos.map(
-            q => ({
-
-                "Nome":
-                    q.nome || "",
-
-                "Código":
-                    q.codigo || "",
-
-                "Cor":
-                    q.cor || "",
-
-                "Tipo":
-                    q.tipo || "",
-
-                "Observação":
-                    q.observacao || ""
-
-            })
-        );
-
-
-    const wsQuimicos =
-        XLSX.utils.json_to_sheet(
-            dadosQuimicos
-        );
-
-
-    XLSX.utils.book_append_sheet(
-
-        wb,
-
-        wsQuimicos,
-
-        "Químicos"
-
-    );
-
-
-    const dadosLancamentos =
-        lancamentos.map(
-            l => ({
-
-                "Data":
-                    formatarData(
-                        l.data
-                    ),
-
-                "Máquina":
-                    nomeMaquina(
-                        l.maquina
-                    ),
-
-                "Responsável":
-                    l.responsavel
-                    ||
-                    "",
-
-                "Químico":
-                    l.quimico
-                    ||
-                    "",
-
-                "Código":
-                    l.codigo
-                    ||
-                    "",
-
-                "Valor":
-                    l.valor
-                    ||
-                    "",
-
-                "Padrão":
-                    l.padrao
-                    ||
-                    "",
-
-                "Resultado":
-                    l.resultado
-                    ||
-                    "",
-
-                "Observação":
-                    l.observacao
-                    ||
-                    ""
-
-            })
-        );
-
-
-    const wsLancamentos =
-        XLSX.utils.json_to_sheet(
-            dadosLancamentos
-        );
-
-
-    XLSX.utils.book_append_sheet(
-
-        wb,
-
-        wsLancamentos,
-
-        "Lançamentos"
-
-    );
-
-
-    const dadosPecas =
-        registrosPecas.map(
-            r => ({
-
-                "Data":
-                    formatarData(
-                        r.data
-                    ),
-
-                "Máquina":
-                    nomeMaquina(
-                        r.maquina
-                    ),
-
-                "Responsável":
-                    r.responsavel
-                    ||
-                    "",
-
-                "Padrão":
-                    r.padrao
-                    ||
-                    0,
-
-                "Quantidade":
-                    r.quantidade
-                    ||
-                    0,
-
-                "Resultado":
-                    r.resultado
-                    ||
-                    "",
-
-                "Observação":
-                    r.observacao
-                    ||
-                    ""
-
-            })
-        );
-
-
-    const wsPecas =
-        XLSX.utils.json_to_sheet(
-            dadosPecas
-        );
-
-
-    XLSX.utils.book_append_sheet(
-
-        wb,
-
-        wsPecas,
-
-        "Peças em Produção"
-
-    );
-
-
-    const dadosMaquinas =
-        maquinas.map(
-            maquina => {
-
-                const registros =
-                    lancamentos.filter(
-                        l =>
-                        l.maquina
-                        ===
-                        maquina
-                    );
-
-
-                const dentro =
-                    registros.filter(
-                        r =>
-                        r.resultado
-                        ===
-                        "DENTRO DO PADRÃO"
-                    ).length;
-
-
-                return {
-
-                    "Máquina":
-                        nomeMaquina(
-                            maquina
-                        ),
-
-                    "Avaliações":
-                        registros.length,
-
-                    "Dentro do padrão":
-                        dentro,
-
-                    "Fora do padrão":
-                        registros.length
-                        -
-                        dentro,
-
-                    "Conformidade":
-                        registros.length
-                        ?
-                        (
-                            (
-                                dentro
-                                /
-                                registros.length
-                            )
-                            *
-                            100
-                        ).toFixed(1)
-                        +
-                        "%"
-                        :
-                        "0%"
-
-                };
-
-            }
-        );
-
-
-    const wsMaquinas =
-        XLSX.utils.json_to_sheet(
-            dadosMaquinas
-        );
-
-
-    XLSX.utils.book_append_sheet(
-
-        wb,
-
-        wsMaquinas,
-
-        "Máquinas"
-
-    );
-
-
-    const agora =
-        new Date();
-
-
-    const nomeArquivo =
-        "GraviUnit_MES_"
-        +
-        agora.getFullYear()
-        +
-        "-"
-        +
-        String(
-            agora.getMonth()+1
-        ).padStart(
-            2,
-            "0"
-        )
-        +
-        "-"
-        +
-        String(
-            agora.getDate()
-        ).padStart(
-            2,
-            "0"
-        )
-        +
-        ".xlsx";
-
-
-    XLSX.writeFile(
-        wb,
-        nomeArquivo
-    );
-
-}
-
-
-/* =========================================================
-   ATUALIZAÇÃO AUTOMÁTICA
-========================================================= */
-
-function atualizarSistemaAutomaticamente(){
-
-    carregarDados();
-
-    renderizarQuimicos();
-
-    preencherSelectQuimicos();
-
-    renderizarLancamentos();
-
-    renderizarHistorico();
-
-    renderizarMaquinas();
-
-    renderizarPecas();
-
-    atualizarResumoPecas();
-
-    atualizarDashboard();
-
-    atualizarDataHoraTempoReal();
-
-}
-
-
-setInterval(
-
-    atualizarSistemaAutomaticamente,
-
-    TEMPO_ATUALIZACAO
+const confirmacao=confirm(
+
+"Deseja realmente excluir este lançamento?\n\n"+
+"Máquina: "+nomeMaquina(lancamento.maquina)+
+"\nQuímico: "+(lancamento.quimico||"-")+
+"\nData: "+(lancamento.data||"-")
 
 );
 
+if(!confirmacao)return;
 
-/* =========================================================
-   FORMATAÇÃO DA DATA
-========================================================= */
+lancamentos=lancamentos.filter(
+l=>String(l.id)!==String(id)
+);
+
+localStorage.setItem(
+STORAGE_LANCAMENTOS,
+JSON.stringify(lancamentos)
+);
+
+renderizarLancamentos();
+renderizarHistorico();
+renderizarMaquinas();
+atualizarDashboard();
+
+alert("Lançamento excluído com sucesso!");
+
+}
+
+/* RESULTADO PEÇAS */
+
+function atualizarResultadoPecas(){
+
+const campoPadrao=document.getElementById(
+"padraoPecas"
+);
+
+const campoQuantidade=document.getElementById(
+"quantidadePecas"
+);
+
+const resultado=document.getElementById(
+"resultadoPecas"
+);
+
+if(
+campoPadrao.value===""||
+campoQuantidade.value===""
+){
+
+resultado.value="DENTRO DO PADRÃO";
+
+return;
+
+}
+
+const padrao=Number(campoPadrao.value);
+const quantidade=Number(campoQuantidade.value);
+
+if(quantidade>padrao){
+
+resultado.value="ACIMA DO PADRÃO";
+
+}else if(quantidade<padrao){
+
+resultado.value="ABAIXO DO PADRÃO";
+
+}else{
+
+resultado.value="DENTRO DO PADRÃO";
+
+}
+
+}
+
+/* SALVAR PEÇAS */
+
+function salvarPecas(event){
+
+event.preventDefault();
+
+atualizarResultadoPecas();
+
+const id=document.getElementById(
+"idPecas"
+).value;
+
+const objeto={
+
+id:id||gerarID(),
+
+timestamp:Date.now(),
+
+data:formatoDataHora(),
+
+maquina:document.getElementById(
+"maquinaPecas"
+).value,
+
+responsavel:document.getElementById(
+"responsavelPecas"
+).value.trim(),
+
+padrao:Number(
+document.getElementById(
+"padraoPecas"
+).value
+),
+
+quantidade:Number(
+document.getElementById(
+"quantidadePecas"
+).value
+),
+
+resultado:document.getElementById(
+"resultadoPecas"
+).value,
+
+observacao:document.getElementById(
+"observacaoPecas"
+).value.trim()
+
+};
+
+if(id){
+
+const index=registrosPecas.findIndex(
+r=>String(r.id)===String(id)
+);
+
+if(index>=0)registrosPecas[index]=objeto;
+
+}else{
+
+registrosPecas.push(objeto);
+
+}
+
+localStorage.setItem(
+STORAGE_PECAS,
+JSON.stringify(registrosPecas)
+);
+
+limparFormularioPecas();
+renderizarPecas();
+atualizarResumoPecas();
+
+alert("Registro de peças salvo com sucesso!");
+
+}
+
+/* LIMPAR PEÇAS */
+
+function limparFormularioPecas(){
+
+document.getElementById(
+"formPecas"
+).reset();
+
+document.getElementById(
+"idPecas"
+).value="";
+
+document.getElementById(
+"resultadoPecas"
+).value="DENTRO DO PADRÃO";
+
+atualizarDataHoraTempoReal();
+
+}
+
+/* RENDER PEÇAS */
+
+function renderizarPecas(){
+
+const container=document.getElementById(
+"tabelaPecas"
+);
+
+if(!container)return;
+
+const lista=[...registrosPecas].sort(
+(a,b)=>
+Number(b.timestamp||0)-
+Number(a.timestamp||0)
+);
+
+if(lista.length===0){
+
+container.innerHTML=
+`<div class="empty">Nenhum registro de produção.</div>`;
+
+return;
+
+}
+
+let html=`
+
+<table>
+
+<thead>
+
+<tr>
+<th>Data</th>
+<th>Máquina</th>
+<th>Responsável</th>
+<th>Padrão</th>
+<th>Quantidade</th>
+<th>Resultado</th>
+<th>Ações</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+lista.forEach(r=>{
+
+html+=`
+
+<tr>
+
+<td>${formatarData(r.data)}</td>
+
+<td>
+<strong>${esc(nomeMaquina(r.maquina))}</strong>
+</td>
+
+<td>${esc(r.responsavel||"-")}</td>
+
+<td>
+${Number(r.padrao||0).toLocaleString("pt-BR")}
+</td>
+
+<td>
+<strong>
+${Number(r.quantidade||0).toLocaleString("pt-BR")}
+</strong>
+</td>
+
+<td>${badgeResultado(r.resultado)}</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="btn-small btn-edit"
+onclick="editarPecas('${r.id}')">
+
+Editar
+
+</button>
+
+<button
+class="btn-small btn-delete"
+onclick="excluirPecas('${r.id}')">
+
+Excluir
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`;
+
+});
+
+html+=`</tbody></table>`;
+
+container.innerHTML=html;
+
+}
+
+/* EDITAR PEÇAS */
+
+function editarPecas(id){
+
+const registro=registrosPecas.find(
+r=>String(r.id)===String(id)
+);
+
+if(!registro)return;
+
+document.getElementById(
+"idPecas"
+).value=registro.id;
+
+document.getElementById(
+"maquinaPecas"
+).value=registro.maquina||"";
+
+document.getElementById(
+"responsavelPecas"
+).value=registro.responsavel||"";
+
+document.getElementById(
+"padraoPecas"
+).value=registro.padrao??"";
+
+document.getElementById(
+"quantidadePecas"
+).value=registro.quantidade??"";
+
+atualizarResultadoPecas();
+
+document.getElementById(
+"observacaoPecas"
+).value=registro.observacao||"";
+
+mostrarPagina("pecas");
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+/* EXCLUIR PEÇAS */
+
+function excluirPecas(id){
+
+const registro=registrosPecas.find(
+r=>String(r.id)===String(id)
+);
+
+if(!registro)return;
+
+if(!confirm(
+"Deseja realmente excluir este registro?\n\n"+
+"Máquina: "+nomeMaquina(registro.maquina)+
+"\nQuantidade: "+registro.quantidade
+))return;
+
+registrosPecas=registrosPecas.filter(
+r=>String(r.id)!==String(id)
+);
+
+localStorage.setItem(
+STORAGE_PECAS,
+JSON.stringify(registrosPecas)
+);
+
+renderizarPecas();
+atualizarResumoPecas();
+
+}
+
+/* RESUMO PEÇAS */
+
+function atualizarResumoPecas(){
+
+const total=registrosPecas.reduce(
+(soma,r)=>
+soma+Number(r.quantidade||0),
+0
+);
+
+const padrao=registrosPecas.reduce(
+(soma,r)=>
+soma+Number(r.padrao||0),
+0
+);
+
+const dentro=registrosPecas.filter(
+r=>r.resultado==="DENTRO DO PADRÃO"
+).length;
+
+const fora=registrosPecas.filter(
+r=>r.resultado!=="DENTRO DO PADRÃO"
+).length;
+
+document.getElementById(
+"totalPecas"
+).textContent=
+total.toLocaleString("pt-BR");
+
+document.getElementById(
+"totalPadraoPecas"
+).textContent=
+padrao.toLocaleString("pt-BR");
+
+document.getElementById(
+"pecasDentro"
+).textContent=
+dentro.toLocaleString("pt-BR");
+
+document.getElementById(
+"pecasFora"
+).textContent=
+fora.toLocaleString("pt-BR");
+
+}
+
+/* HISTÓRICO */
+
+function renderizarHistorico(){
+
+const container=document.getElementById(
+"tabelaHistorico"
+);
+
+if(!container)return;
+
+const busca=(
+document.getElementById(
+"buscaHistorico"
+)?.value||""
+).toLowerCase();
+
+const lista=[...lancamentos]
+.filter(l=>{
+
+const texto=(
+
+String(l.quimico||"")+
+" "+
+String(l.codigo||"")+
+" "+
+String(l.maquina||"")+
+" "+
+nomeMaquina(l.maquina)+
+" "+
+String(l.responsavel||"")+
+" "+
+String(l.resultado||"")
+
+).toLowerCase();
+
+return texto.includes(busca);
+
+})
+.sort(
+(a,b)=>
+Number(b.timestamp||0)-
+Number(a.timestamp||0)
+);
+
+if(lista.length===0){
+
+container.innerHTML=
+`<div class="empty">Nenhum registro encontrado.</div>`;
+
+return;
+
+}
+
+let html=`
+
+<table>
+
+<thead>
+
+<tr>
+<th>Data</th>
+<th>Máquina</th>
+<th>Responsável</th>
+<th>Químico</th>
+<th>Valor</th>
+<th>Padrão</th>
+<th>Resultado</th>
+<th>Ações</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+lista.forEach(l=>{
+
+html+=`
+
+<tr>
+
+<td>${formatarData(l.data)}</td>
+
+<td>${esc(nomeMaquina(l.maquina))}</td>
+
+<td>${esc(l.responsavel||"-")}</td>
+
+<td>
+${esc(l.quimico||"-")}
+<br>
+<small>${esc(l.codigo||"")}</small>
+</td>
+
+<td>${esc(l.valor||"-")}</td>
+
+<td>${esc(l.padrao||"-")}</td>
+
+<td>${badgeResultado(l.resultado)}</td>
+
+<td>
+
+<div class="actions">
+
+<button
+class="btn-small btn-edit"
+onclick="editarLancamento('${l.id}')">
+
+Editar
+
+</button>
+
+<button
+class="btn-small btn-delete"
+onclick="excluirLancamento('${l.id}')">
+
+Excluir
+
+</button>
+
+</div>
+
+</td>
+
+</tr>
+`;
+
+});
+
+html+=`</tbody></table>`;
+
+container.innerHTML=html;
+
+}
+
+/* MÁQUINAS */
+
+function renderizarMaquinas(){
+
+const grid=document.getElementById(
+"gridMaquinas"
+);
+
+const tabela=document.getElementById(
+"tabelaMaquinas"
+);
+
+if(!grid||!tabela)return;
+
+let cards="";
+let rows="";
+
+maquinas.forEach(maquina=>{
+
+const registros=lancamentos.filter(
+l=>l.maquina===maquina
+);
+
+const total=registros.length;
+
+const dentro=registros.filter(
+r=>r.resultado==="DENTRO DO PADRÃO"
+).length;
+
+const conformidade=total
+?Math.round((dentro/total)*100)
+:0;
+
+cards+=`
+
+<div class="machine-card">
+
+<div class="machine-name">
+${esc(nomeMaquina(maquina))}
+</div>
+
+<div class="machine-value">
+${total}
+</div>
+
+<div class="machine-label">
+avaliações
+</div>
+
+<div style="margin-top:10px;">
+${badgeConformidade(conformidade)}
+</div>
+
+</div>
+`;
+
+rows+=`
+
+<tr>
+
+<td>
+<strong>${esc(nomeMaquina(maquina))}</strong>
+</td>
+
+<td>${total}</td>
+<td>${dentro}</td>
+<td>${total-dentro}</td>
+<td>${conformidade}%</td>
+
+</tr>
+`;
+
+});
+
+grid.innerHTML=cards;
+
+tabela.innerHTML=`
+
+<table>
+
+<thead>
+
+<tr>
+<th>Máquina</th>
+<th>Avaliações</th>
+<th>Dentro</th>
+<th>Fora</th>
+<th>Conformidade</th>
+</tr>
+
+</thead>
+
+<tbody>
+${rows}
+</tbody>
+
+</table>
+`;
+
+}
+
+/* DASHBOARD */
+
+function filtrarPeriodo(periodo,elemento){
+
+periodoAtual=periodo;
+
+document.querySelectorAll(
+".filter-btn"
+).forEach(btn=>{
+btn.classList.remove("active");
+});
+
+if(elemento)elemento.classList.add("active");
+
+atualizarDashboard();
+
+}
+
+function obterLancamentosFiltrados(){
+
+if(periodoAtual==="todos"){
+
+return [...lancamentos];
+
+}
+
+const agora=new Date();
+
+let inicio=new Date();
+
+if(periodoAtual==="hoje"){
+
+inicio.setHours(0,0,0,0);
+
+}else{
+
+inicio.setDate(
+agora.getDate()-Number(periodoAtual)
+);
+
+}
+
+return lancamentos.filter(l=>{
+
+const data=l.timestamp
+?new Date(Number(l.timestamp))
+:new Date(l.data);
+
+return data>=inicio;
+
+});
+
+}
+
+function atualizarDashboard(){
+
+const dados=obterLancamentosFiltrados();
+
+const total=dados.length;
+
+const dentro=dados.filter(
+r=>r.resultado==="DENTRO DO PADRÃO"
+).length;
+
+const fora=dados.filter(
+r=>r.resultado!=="DENTRO DO PADRÃO"
+).length;
+
+const maquinasUsadas=new Set(
+dados.map(r=>r.maquina).filter(Boolean)
+);
+
+const conformidade=total
+?Math.round((dentro/total)*100)
+:0;
+
+document.getElementById(
+"kpiAvaliacoes"
+).textContent=
+total.toLocaleString("pt-BR");
+
+document.getElementById(
+"kpiConformidade"
+).textContent=
+conformidade+"%";
+
+document.getElementById(
+"kpiFora"
+).textContent=
+fora.toLocaleString("pt-BR");
+
+document.getElementById(
+"kpiMaquinas"
+).textContent=
+maquinasUsadas.size;
+
+atualizarGrafico();
+atualizarRanking(dados);
+atualizarAtividade(dados);
+
+}
+
+/* GRÁFICO */
+
+function atualizarGrafico(){
+
+const canvas=document.getElementById(
+"graficoResultados"
+);
+
+if(!canvas)return;
+
+const dados=obterLancamentosFiltrados();
+
+const dentro=dados.filter(
+r=>r.resultado==="DENTRO DO PADRÃO"
+).length;
+
+const acima=dados.filter(
+r=>r.resultado==="ACIMA DO PADRÃO"
+).length;
+
+const abaixo=dados.filter(
+r=>r.resultado==="ABAIXO DO PADRÃO"
+).length;
+
+if(graficoResultados){
+
+graficoResultados.destroy();
+
+}
+
+const corTexto=document.body.classList.contains("dark")
+?"#dbe4ea"
+:"#344054";
+
+graficoResultados=new Chart(
+canvas,
+{
+
+type:"doughnut",
+
+data:{
+
+labels:[
+"Dentro do padrão",
+"Acima do padrão",
+"Abaixo do padrão"
+],
+
+datasets:[{
+
+data:[
+dentro,
+acima,
+abaixo
+],
+
+backgroundColor:[
+"#159957",
+"#b7791f",
+"#d92d20"
+],
+
+borderWidth:0
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+maintainAspectRatio:false,
+
+plugins:{
+legend:{
+position:"bottom",
+labels:{
+color:corTexto
+}
+}
+}
+
+}
+
+}
+);
+
+}
+
+/* RANKING */
+
+function atualizarRanking(dados){
+
+const container=document.getElementById(
+"rankingMaquinas"
+);
+
+if(!container)return;
+
+const contagem={};
+
+dados.forEach(r=>{
+
+const maquina=r.maquina||"Não informado";
+
+contagem[maquina]=(
+contagem[maquina]||0
+)+1;
+
+});
+
+const lista=Object.entries(contagem)
+.sort((a,b)=>b[1]-a[1]);
+
+if(lista.length===0){
+
+container.innerHTML=
+`<div class="empty">Nenhum registro encontrado.</div>`;
+
+return;
+
+}
+
+let html="";
+
+lista.forEach(([maquina,total])=>{
+
+html+=`
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 0;
+border-bottom:1px solid var(--borda);
+">
+
+<div>
+<strong>${esc(nomeMaquina(maquina))}</strong>
+</div>
+
+<span class="badge badge-blue">
+${total}
+</span>
+
+</div>
+`;
+
+});
+
+container.innerHTML=html;
+
+}
+
+/* ATIVIDADE */
+
+function atualizarAtividade(dados){
+
+const container=document.getElementById(
+"atividadeRecente"
+);
+
+if(!container)return;
+
+const lista=[...dados]
+.sort(
+(a,b)=>
+Number(b.timestamp||0)-
+Number(a.timestamp||0)
+)
+.slice(0,10);
+
+if(lista.length===0){
+
+container.innerHTML=
+`<div class="empty">Nenhuma atividade registrada.</div>`;
+
+return;
+
+}
+
+let html=`
+
+<table>
+
+<thead>
+
+<tr>
+<th>Data</th>
+<th>Máquina</th>
+<th>Químico</th>
+<th>Resultado</th>
+</tr>
+
+</thead>
+
+<tbody>
+`;
+
+lista.forEach(r=>{
+
+html+=`
+
+<tr>
+
+<td>${formatarData(r.data)}</td>
+
+<td>${esc(nomeMaquina(r.maquina))}</td>
+
+<td>${esc(r.quimico||"-")}</td>
+
+<td>${badgeResultado(r.resultado)}</td>
+
+</tr>
+`;
+
+});
+
+html+=`</tbody></table>`;
+
+container.innerHTML=html;
+
+}
+
+/* EXPORTAR EXCEL */
+
+function exportarExcel(){
+
+if(typeof XLSX==="undefined"){
+
+alert("Biblioteca Excel não carregada.");
+
+return;
+
+}
+
+const wb=XLSX.utils.book_new();
+
+const dadosQuimicos=quimicos.map(q=>({
+
+"Nome":q.nome||"",
+"Código":q.codigo||"",
+"Cor":q.cor||"",
+"Tipo":q.tipo||"",
+"Observação":q.observacao||""
+
+}));
+
+const wsQuimicos=XLSX.utils.json_to_sheet(
+dadosQuimicos
+);
+
+XLSX.utils.book_append_sheet(
+wb,
+wsQuimicos,
+"Químicos"
+);
+
+const dadosLancamentos=lancamentos.map(l=>({
+
+"Data":formatarData(l.data),
+
+"Máquina":nomeMaquina(l.maquina),
+
+"Responsável":l.responsavel||"",
+
+"Opção":l.numeroOpcao||1,
+
+"Químico":l.quimico||"",
+
+"Código":l.codigo||"",
+
+"Valor":l.valor||"",
+
+"Padrão":l.padrao||"",
+
+"Resultado":l.resultado==="NAO UTILIZADO"
+?"NÃO UTILIZADO"
+:(l.resultado||""),
+
+"Não utilizada":l.naoUtilizada
+?"SIM"
+:"NÃO",
+
+"Observação":l.observacao||""
+
+}));
+
+const wsLancamentos=XLSX.utils.json_to_sheet(
+dadosLancamentos
+);
+
+XLSX.utils.book_append_sheet(
+wb,
+wsLancamentos,
+"Lançamentos"
+);
+
+const dadosPecas=registrosPecas.map(r=>({
+
+"Data":formatarData(r.data),
+
+"Máquina":nomeMaquina(r.maquina),
+
+"Responsável":r.responsavel||"",
+
+"Padrão":r.padrao||0,
+
+"Quantidade":r.quantidade||0,
+
+"Resultado":r.resultado||"",
+
+"Observação":r.observacao||""
+
+}));
+
+const wsPecas=XLSX.utils.json_to_sheet(
+dadosPecas
+);
+
+XLSX.utils.book_append_sheet(
+wb,
+wsPecas,
+"Peças em Produção"
+);
+
+const dadosMaquinas=maquinas.map(maquina=>{
+
+const registros=lancamentos.filter(
+l=>l.maquina===maquina
+);
+
+const dentro=registros.filter(
+r=>r.resultado==="DENTRO DO PADRÃO"
+).length;
+
+return{
+
+"Máquina":nomeMaquina(maquina),
+
+"Avaliações":registros.length,
+
+"Dentro do padrão":dentro,
+
+"Fora do padrão":
+registros.length-dentro,
+
+"Conformidade":
+registros.length
+?((dentro/registros.length)*100).toFixed(1)+"%"
+:"0%"
+
+};
+
+});
+
+const wsMaquinas=XLSX.utils.json_to_sheet(
+dadosMaquinas
+);
+
+XLSX.utils.book_append_sheet(
+wb,
+wsMaquinas,
+"Máquinas"
+);
+
+const agora=new Date();
+
+const nomeArquivo=
+"GraviUnit_MES_"+
+agora.getFullYear()+
+"-"+
+String(agora.getMonth()+1).padStart(2,"0")+
+"-"+
+String(agora.getDate()).padStart(2,"0")+
+".xlsx";
+
+XLSX.writeFile(
+wb,
+nomeArquivo
+);
+
+}
+
+/* ATUALIZAÇÃO AUTOMÁTICA */
+
+function atualizarSistemaAutomaticamente(){
+
+carregarDados();
+
+renderizarQuimicos();
+
+preencherTodosSelectsQuimicos();
+
+renderizarLancamentos();
+
+renderizarHistorico();
+
+renderizarMaquinas();
+
+renderizarPecas();
+
+atualizarResumoPecas();
+
+atualizarDashboard();
+
+atualizarDataHoraTempoReal();
+
+}
+
+setInterval(
+atualizarSistemaAutomaticamente,
+TEMPO_ATUALIZACAO
+);
+
+/* FORMATAÇÃO DATA */
 
 function formatarData(valor){
 
-    if(!valor)return "-";
+if(!valor)return "-";
 
+let data=new Date(valor);
 
-    const data =
-        new Date(valor);
+if(Number.isNaN(data.getTime())){
 
-
-    if(
-        Number.isNaN(
-            data.getTime()
-        )
-    ){
-
-        return valor;
-
-    }
-
-
-    return data.toLocaleString(
-        "pt-BR"
-    );
+return valor;
 
 }
 
+return data.toLocaleString("pt-BR");
 
-/* =========================================================
-   BADGE RESULTADO
-========================================================= */
+}
+
+/* BADGE RESULTADO */
 
 function badgeResultado(resultado){
 
-    if(
-        resultado
-        ===
-        "DENTRO DO PADRÃO"
-    ){
+if(resultado==="DENTRO DO PADRÃO"){
 
-        return `
-            <span class="badge badge-green">
-                ✓ DENTRO DO PADRÃO
-            </span>
-        `;
-
-    }
-
-
-    if(
-        resultado
-        ===
-        "ACIMA DO PADRÃO"
-    ){
-
-        return `
-            <span class="badge badge-yellow">
-                ⚠ ACIMA DO PADRÃO
-            </span>
-        `;
-
-    }
-
-
-    if(
-        resultado
-        ===
-        "ABAIXO DO PADRÃO"
-    ){
-
-        return `
-            <span class="badge badge-red">
-                ✕ ABAIXO DO PADRÃO
-            </span>
-        `;
-
-    }
-
-
-    return `
-        <span class="badge badge-blue">
-            ${esc(resultado || "-")}
-        </span>
-    `;
+return `
+<span class="badge badge-green">
+✓ DENTRO DO PADRÃO
+</span>
+`;
 
 }
 
+if(resultado==="ACIMA DO PADRÃO"){
 
-/* =========================================================
-   BADGE CONFORMIDADE
-========================================================= */
+return `
+<span class="badge badge-yellow">
+⚠ ACIMA DO PADRÃO
+</span>
+`;
+
+}
+
+if(resultado==="ABAIXO DO PADRÃO"){
+
+return `
+<span class="badge badge-red">
+✕ ABAIXO DO PADRÃO
+</span>
+`;
+
+}
+
+if(
+resultado==="NAO UTILIZADO" ||
+resultado==="NÃO UTILIZADO"
+){
+
+return `
+<span class="badge badge-blue">
+— NÃO UTILIZADO
+</span>
+`;
+
+}
+
+return `
+<span class="badge badge-blue">
+${esc(resultado||"-")}
+</span>
+`;
+
+}
+
+/* BADGE CONFORMIDADE */
 
 function badgeConformidade(valor){
 
-    if(valor >= 90){
+if(valor>=90){
 
-        return `
-            <span class="badge badge-green">
-                ${valor}% conformidade
-            </span>
-        `;
-
-    }
-
-
-    if(valor >= 70){
-
-        return `
-            <span class="badge badge-yellow">
-                ${valor}% conformidade
-            </span>
-        `;
-
-    }
-
-
-    return `
-        <span class="badge badge-red">
-            ${valor}% conformidade
-        </span>
-    `;
+return `
+<span class="badge badge-green">
+${valor}% conformidade
+</span>
+`;
 
 }
 
+if(valor>=70){
 
-/* =========================================================
-   SEGURANÇA HTML
-========================================================= */
+return `
+<span class="badge badge-yellow">
+${valor}% conformidade
+</span>
+`;
+
+}
+
+return `
+<span class="badge badge-red">
+${valor}% conformidade
+</span>
+`;
+
+}
+
+/* SEGURANÇA HTML */
 
 function esc(valor){
 
-    return String(
-        valor ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+return String(valor??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 </script>
 
 </body>
-
 </html>
