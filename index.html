@@ -115,9 +115,7 @@ gap:10px;
 .logo{
 width:58px;
 height:52px;
-
 object-fit:contain;
-
 border-radius:9px;
 background:#fff;
 }
@@ -678,17 +676,48 @@ font-size:12px;
 color:var(--texto-sec);
 }
 
-.same td{
-background:rgba(7,86,163,.035);
+/* =========================
+EXPORTAÇÃO
+========================= */
+
+.export-info{
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:10px;
+
+margin-top:15px;
+}
+
+.export-item{
+padding:12px;
+
+border-radius:10px;
+
+background:var(--fundo);
+
+border:1px solid var(--borda);
+}
+
+.export-item strong{
+display:block;
+
+font-size:18px;
+
+margin-bottom:3px;
+}
+
+.export-item span{
+font-size:11px;
+
+color:var(--texto-sec);
 }
 
 /* =========================
 PEÇAS
 ========================= */
-
-#page-pecas .page-head{
-margin-bottom:10px;
-}
 
 #page-pecas .card{
 padding:13px;
@@ -700,88 +729,14 @@ grid-template-columns:
 repeat(4,1fr);
 
 gap:8px;
-
-margin-bottom:10px;
 }
 
 #page-pecas .stat{
 padding:9px;
-
-border-radius:9px;
 }
 
 #page-pecas .stat-value{
 font-size:19px;
-}
-
-#page-pecas .grid{
-gap:9px;
-}
-
-#page-pecas input,
-#page-pecas select{
-padding:8px;
-}
-
-#page-pecas textarea{
-min-height:55px;
-padding:8px;
-}
-
-#page-pecas .resultado{
-min-height:34px;
-padding:7px;
-margin-top:8px;
-}
-
-#page-pecas .actions{
-margin-top:9px;
-}
-
-#page-pecas .btn{
-padding:8px 11px;
-font-size:12px;
-}
-
-/* =========================
-EXPORTAÇÃO
-========================= */
-
-.export-box{
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-gap:15px;
-
-flex-wrap:wrap;
-}
-
-.export-info{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
-margin-top:15px;
-}
-
-.export-item{
-padding:12px;
-border-radius:10px;
-background:var(--fundo);
-border:1px solid var(--borda);
-}
-
-.export-item strong{
-display:block;
-font-size:18px;
-margin-bottom:3px;
-}
-
-.export-item span{
-font-size:11px;
-color:var(--texto-sec);
 }
 
 /* =========================
@@ -790,8 +745,76 @@ VAZIO
 
 .empty{
 text-align:center;
+
 padding:25px!important;
+
 color:var(--texto-sec);
+}
+
+/* =========================
+TOAST
+========================= */
+
+.toast{
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+z-index:9999;
+
+background:var(--card);
+
+border:1px solid var(--borda);
+
+box-shadow:var(--sombra);
+
+border-left:5px solid var(--verde);
+
+padding:14px 17px;
+
+border-radius:10px;
+
+font-size:13px;
+
+font-weight:700;
+
+transform:translateY(120px);
+
+opacity:0;
+
+transition:.3s;
+}
+
+.toast.show{
+transform:translateY(0);
+
+opacity:1;
+}
+
+/* =========================
+CRÉDITO
+========================= */
+
+.footer{
+text-align:center;
+
+padding:25px 15px;
+
+margin-top:10px;
+
+color:var(--texto-sec);
+
+font-size:13px;
+
+border-top:1px solid var(--borda);
+}
+
+.footer strong{
+color:var(--azul-claro);
+
+font-weight:900;
 }
 
 /* =========================
@@ -821,14 +844,14 @@ grid-template-columns:
 repeat(2,1fr);
 }
 
-.brand-subtitle,
-.online{
-display:none;
-}
-
 #page-pecas .stats{
 grid-template-columns:
 repeat(2,1fr);
+}
+
+.online,
+.brand-subtitle{
+display:none;
 }
 
 .export-info{
@@ -864,55 +887,15 @@ padding:13px;
 }
 
 .page-head{
-align-items:flex-start;
-
 flex-direction:column;
+align-items:flex-start;
 }
 
 .search{
-max-width:100%;
 width:100%;
+max-width:100%;
 }
 
-}
-
-/* =========================
-TOAST
-========================= */
-
-.toast{
-position:fixed;
-right:20px;
-bottom:20px;
-
-z-index:9999;
-
-background:var(--card);
-
-border:1px solid var(--borda);
-
-box-shadow:var(--sombra);
-
-border-left:5px solid var(--verde);
-
-padding:14px 17px;
-
-border-radius:10px;
-
-font-size:13px;
-
-font-weight:700;
-
-transform:translateY(120px);
-
-opacity:0;
-
-transition:.3s;
-}
-
-.toast.show{
-transform:translateY(0);
-opacity:1;
 }
 
 </style>
@@ -920,9 +903,9 @@ opacity:1;
 
 <body>
 
-<!-- =========================
+<!-- =====================================================
 TOPO
-========================= -->
+===================================================== -->
 
 <header class="topbar">
 
@@ -933,12 +916,6 @@ onclick="toggleMenu()">
 </button>
 
 <div class="brand">
-
-<!--
-SE QUISER USAR NOVAMENTE O LOGO BASE64
-QUE VOCÊ ENVIOU, PODE COLOCAR A TAG IMG
-AQUI.
--->
 
 <div class="logo-fake">
 GU
@@ -974,9 +951,10 @@ onclick="toggleTheme()">
 
 </header>
 
-<!-- =========================
+
+<!-- =====================================================
 SIDEBAR
-========================= -->
+===================================================== -->
 
 <aside
 class="sidebar"
@@ -1018,13 +996,19 @@ onclick="showPage('excel',this)">
 
 </aside>
 
+
+<!-- =====================================================
+MAIN
+===================================================== -->
+
 <main
 class="main"
 id="main">
 
-<!-- =========================
-CADASTRO
-========================= -->
+
+<!-- =====================================================
+CADASTRO DE QUÍMICOS
+===================================================== -->
 
 <section
 class="page active"
@@ -1046,6 +1030,7 @@ Cadastre os produtos químicos utilizados no processo.
 
 </div>
 
+
 <div class="card">
 
 <div class="grid">
@@ -1062,6 +1047,7 @@ placeholder="Digite o nome do químico">
 
 </div>
 
+
 <div class="field">
 
 <label>
@@ -1073,6 +1059,7 @@ id="qCodigo"
 placeholder="Digite o código">
 
 </div>
+
 
 <div class="field">
 
@@ -1086,6 +1073,7 @@ placeholder="Ex.: Branco">
 
 </div>
 
+
 <div class="field">
 
 <label>
@@ -1095,15 +1083,21 @@ Tipo / Categoria
 <select id="qTipo">
 
 <option>Massa</option>
+
 <option>Primer</option>
+
 <option>Impressão</option>
+
 <option>Base</option>
+
 <option>Verniz</option>
+
 <option>Outro</option>
 
 </select>
 
 </div>
+
 
 <div
 class="field"
@@ -1121,23 +1115,29 @@ placeholder="Informações adicionais">
 
 </div>
 
+
 <div class="actions">
 
 <button
 class="btn btn-primary"
 onclick="salvarQuimico()">
+
 Salvar químico
+
 </button>
 
 <button
 class="btn btn-secondary"
 onclick="limparQuimico()">
+
 Limpar
+
 </button>
 
 </div>
 
 </div>
+
 
 <div class="card">
 
@@ -1155,6 +1155,7 @@ placeholder="Pesquisar químico, código ou categoria">
 
 </div>
 
+
 <div class="table-wrap">
 
 <table>
@@ -1162,12 +1163,19 @@ placeholder="Pesquisar químico, código ou categoria">
 <thead>
 
 <tr>
+
 <th>Nome</th>
+
 <th>Código</th>
+
 <th>Cor</th>
+
 <th>Categoria</th>
+
 <th>Observação</th>
+
 <th>Ações</th>
+
 </tr>
 
 </thead>
@@ -1182,9 +1190,10 @@ placeholder="Pesquisar químico, código ou categoria">
 
 </section>
 
-<!-- =========================
+
+<!-- =====================================================
 LANÇAMENTO
-========================= -->
+===================================================== -->
 
 <section
 class="page"
@@ -1206,6 +1215,7 @@ Registre Massa, Primer, Impressão, Base e Verniz.
 
 </div>
 
+
 <div class="card">
 
 <div class="grid">
@@ -1220,6 +1230,7 @@ Máquina
 
 </div>
 
+
 <div class="field">
 
 <label>
@@ -1232,6 +1243,7 @@ placeholder="Nome do responsável">
 
 </div>
 
+
 <div class="field">
 
 <label>
@@ -1241,15 +1253,15 @@ Data e hora
 <input
 id="dataHoraLancamento"
 class="readonly"
-type="text"
-readonly
-tabindex="-1">
+readonly>
 
 </div>
 
 </div>
+
 
 <div id="avaliacoes"></div>
+
 
 <div
 class="field"
@@ -1265,18 +1277,23 @@ placeholder="Observações do lançamento"></textarea>
 
 </div>
 
+
 <div class="actions">
 
 <button
 class="btn btn-primary"
 onclick="salvarLancamento()">
+
 💾 Salvar lançamento
+
 </button>
 
 <button
 class="btn btn-secondary"
 onclick="limparLancamento()">
+
 Limpar
+
 </button>
 
 </div>
@@ -1285,9 +1302,10 @@ Limpar
 
 </section>
 
-<!-- =========================
-PEÇAS
-========================= -->
+
+<!-- =====================================================
+PEÇAS EM PRODUÇÃO
+===================================================== -->
 
 <section
 class="page"
@@ -1302,12 +1320,13 @@ Peças em Produção
 </h1>
 
 <div class="subtitle">
-Controle rápido da produção.
+Controle da produção.
 </div>
 
 </div>
 
 </div>
+
 
 <div class="stats">
 
@@ -1325,6 +1344,7 @@ id="stTotal">
 
 </div>
 
+
 <div class="stat">
 
 <div class="stat-label">
@@ -1340,6 +1360,7 @@ id="stOk">
 
 </div>
 
+
 <div class="stat">
 
 <div class="stat-label">
@@ -1354,6 +1375,7 @@ id="stBad">
 </div>
 
 </div>
+
 
 <div class="stat">
 
@@ -1371,6 +1393,7 @@ id="stQtd">
 
 </div>
 
+
 <div class="card">
 
 <div class="grid">
@@ -1385,6 +1408,7 @@ Máquina
 
 </div>
 
+
 <div class="field">
 
 <label>
@@ -1396,6 +1420,7 @@ id="respPeca"
 placeholder="Responsável">
 
 </div>
+
 
 <div class="field">
 
@@ -1411,6 +1436,7 @@ oninput="calcularPeca()">
 
 </div>
 
+
 <div class="field">
 
 <label>
@@ -1425,6 +1451,7 @@ oninput="calcularPeca()">
 
 </div>
 
+
 <div class="field">
 
 <label>
@@ -1434,11 +1461,10 @@ Data e hora
 <input
 id="dataPeca"
 class="readonly"
-type="text"
-readonly
-tabindex="-1">
+readonly>
 
 </div>
+
 
 <div class="field">
 
@@ -1454,6 +1480,7 @@ placeholder="Comentário da produção">
 
 </div>
 
+
 <div
 id="resPeca"
 class="resultado neutral">
@@ -1462,23 +1489,29 @@ Aguardando preenchimento
 
 </div>
 
+
 <div class="actions">
 
 <button
 class="btn btn-primary"
 onclick="salvarPeca()">
+
 💾 Salvar
+
 </button>
 
 <button
 class="btn btn-secondary"
 onclick="limparPeca()">
+
 Limpar
+
 </button>
 
 </div>
 
 </div>
+
 
 <div class="card">
 
@@ -1496,6 +1529,7 @@ placeholder="Pesquisar">
 
 </div>
 
+
 <div class="table-wrap">
 
 <table>
@@ -1503,14 +1537,23 @@ placeholder="Pesquisar">
 <thead>
 
 <tr>
+
 <th>Data/Hora</th>
+
 <th>Máquina</th>
+
 <th>Responsável</th>
+
 <th>Padrão</th>
+
 <th>Quantidade produzindo</th>
+
 <th>Resultado</th>
+
 <th>Comentário</th>
+
 <th>Ações</th>
+
 </tr>
 
 </thead>
@@ -1525,9 +1568,10 @@ placeholder="Pesquisar">
 
 </section>
 
-<!-- =========================
+
+<!-- =====================================================
 HISTÓRICO
-========================= -->
+===================================================== -->
 
 <section
 class="page"
@@ -1542,19 +1586,22 @@ Histórico de Lançamentos
 </h1>
 
 <div class="subtitle">
-Todos os lançamentos realizados no sistema.
+Todos os lançamentos realizados.
 </div>
 
 </div>
 
 </div>
+
 
 <div class="card">
 
 <div class="page-head">
 
 <div class="notice">
-Lançamentos feitos no mesmo momento permanecem agrupados por categoria.
+
+Histórico dos lançamentos de gramaturas.
+
 </div>
 
 <input
@@ -1565,6 +1612,7 @@ placeholder="Pesquisar máquina, químico, código...">
 
 </div>
 
+
 <div class="table-wrap">
 
 <table>
@@ -1572,16 +1620,27 @@ placeholder="Pesquisar máquina, químico, código...">
 <thead>
 
 <tr>
+
 <th>Data/Hora</th>
+
 <th>Máquina</th>
+
 <th>Responsável</th>
+
 <th>Categoria</th>
+
 <th>Químico</th>
+
 <th>Código</th>
+
 <th>Padrão</th>
-<th>Gramatura feita</th>
+
+<th>Gramatura</th>
+
 <th>Resultado</th>
+
 <th>Observação</th>
+
 </tr>
 
 </thead>
@@ -1596,9 +1655,10 @@ placeholder="Pesquisar máquina, químico, código...">
 
 </section>
 
-<!-- =========================
-EXCEL
-========================= -->
+
+<!-- =====================================================
+EXPORTAR EXCEL
+===================================================== -->
 
 <section
 class="page"
@@ -1613,35 +1673,145 @@ Exportar Excel
 </h1>
 
 <div class="subtitle">
-Exporte todos os dados operacionais do GraviUnit MES.
+Selecione o mês que deseja exportar.
 </div>
 
 </div>
 
 </div>
 
-<div class="card export-box">
 
-<div>
+<div class="card">
 
 <h2>
-Exportação operacional
+📅 Importar mês
 </h2>
 
-<div class="notice">
 
-O arquivo Excel terá agora <b>3 abas</b>:
+<div class="grid">
+
+<div class="field">
+
+<label>
+Selecione o mês
+</label>
+
+<select id="mesExportacao">
+
+<option value="todos">
+Todos os meses
+</option>
+
+<option value="0">
+Janeiro
+</option>
+
+<option value="1">
+Fevereiro
+</option>
+
+<option value="2">
+Março
+</option>
+
+<option value="3">
+Abril
+</option>
+
+<option value="4">
+Maio
+</option>
+
+<option value="5">
+Junho
+</option>
+
+<option value="6">
+Julho
+</option>
+
+<option value="7">
+Agosto
+</option>
+
+<option value="8">
+Setembro
+</option>
+
+<option value="9">
+Outubro
+</option>
+
+<option value="10">
+Novembro
+</option>
+
+<option value="11">
+Dezembro
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div
+class="notice"
+style="margin-top:15px">
+
+O mês selecionado será aplicado às três abas do Excel:
+
 <br><br>
 
 <b>1.</b> Média Máquina Químico
+
 <br>
 
 <b>2.</b> Gramaturas Feitas
+
 <br>
 
 <b>3.</b> Peças em Produção
 
+<br><br>
+
+Os dados são filtrados pela data em que o lançamento foi realizado.
+
 </div>
+
+
+<div class="actions">
+
+<button
+class="btn btn-success"
+onclick="exportarExcelMes()">
+
+📊 Exportar mês selecionado
+
+</button>
+
+
+<button
+class="btn btn-primary"
+onclick="exportarExcel()">
+
+📥 Exportar tudo
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>
+Resumo dos dados
+</h2>
+
 
 <div class="export-info">
 
@@ -1657,6 +1827,7 @@ Lançamentos
 
 </div>
 
+
 <div class="export-item">
 
 <strong id="totalExcelPecas">
@@ -1664,10 +1835,11 @@ Lançamentos
 </strong>
 
 <span>
-Registros de produção
+Peças em Produção
 </span>
 
 </div>
+
 
 <div class="export-item">
 
@@ -1685,30 +1857,36 @@ Químicos cadastrados
 
 </div>
 
-<button
-class="btn btn-success"
-onclick="exportarExcel()">
-
-📊 Exportar Excel
-
-</button>
-
-</div>
-
 </section>
 
 </main>
 
+
+<!-- =====================================================
+CRÉDITO FINAL
+===================================================== -->
+
+<footer class="footer">
+
+© 2026 GraviUnit MES — Desenvolvido por
+<strong>Samuel Torres Garcia</strong>
+
+</footer>
+
+
 <div
 id="toast"
 class="toast">
+
 Operação realizada com sucesso.
+
 </div>
+
 
 <script>
 
 /* =====================================================
-CONFIGURAÇÕES
+ARMAZENAMENTO
 ===================================================== */
 
 const STORAGE_QUIMICOS =
@@ -1723,6 +1901,7 @@ const STORAGE_PECAS =
 const STORAGE_TEMA =
 'graviunit_theme';
 
+
 let quimicos = [];
 
 let lancamentos = [];
@@ -1731,13 +1910,17 @@ let registrosPecas = [];
 
 let editandoQuimico = null;
 
+
 let opcoesNaoUtilizadas = {
+
 1:false,
 2:false,
 3:false,
 4:false,
 5:false
+
 };
+
 
 const categorias = {
 
@@ -1748,6 +1931,7 @@ const categorias = {
 5:'Verniz'
 
 };
+
 
 const maquinas = [
 
@@ -1770,6 +1954,7 @@ const maquinas = [
 
 ];
 
+
 const nomesMaquinas = {
 
 '701e':'701 - Externo',
@@ -1790,6 +1975,7 @@ const nomesMaquinas = {
 '712i':'712 - Interno'
 
 };
+
 
 /* =====================================================
 QUÍMICOS PADRÃO
@@ -1981,6 +2167,7 @@ tipo:'Impressão'
 
 ];
 
+
 /* =====================================================
 UTILITÁRIOS
 ===================================================== */
@@ -1991,6 +2178,7 @@ return document.getElementById(id);
 
 }
 
+
 function gerarId(){
 
 return Date.now() +
@@ -2000,6 +2188,7 @@ Math.random()
 .substring(2);
 
 }
+
 
 function escapar(valor){
 
@@ -2013,11 +2202,13 @@ return String(valor ?? '')
 
 }
 
+
 function nomeMaquina(codigo){
 
 return nomesMaquinas[codigo] || codigo;
 
 }
+
 
 function normalizarTipo(valor){
 
@@ -2031,55 +2222,69 @@ return String(valor || '')
 
 }
 
+
 function gerarDataHoraAtual(){
 
-const agora = new Date();
+const agora =
+new Date();
 
 const dia =
-String(agora.getDate())
-.padStart(2,'0');
+String(
+agora.getDate()
+).padStart(2,'0');
 
 const mes =
-String(agora.getMonth()+1)
-.padStart(2,'0');
+String(
+agora.getMonth()+1
+).padStart(2,'0');
 
 const ano =
 agora.getFullYear();
 
 const hora =
-String(agora.getHours())
-.padStart(2,'0');
+String(
+agora.getHours()
+).padStart(2,'0');
 
 const minuto =
-String(agora.getMinutes())
-.padStart(2,'0');
+String(
+agora.getMinutes()
+).padStart(2,'0');
 
 const segundo =
-String(agora.getSeconds())
-.padStart(2,'0');
+String(
+agora.getSeconds()
+).padStart(2,'0');
 
 return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
 
 }
 
+
 function mostrarToast(mensagem){
 
-const toast = $('toast');
+const toast =
+$('toast');
 
-toast.textContent = mensagem;
+toast.textContent =
+mensagem;
 
 toast.classList.add('show');
 
-setTimeout(()=>{
+setTimeout(
+() => {
 
 toast.classList.remove('show');
 
-},2500);
+},
+2500
+);
 
 }
 
+
 /* =====================================================
-DADOS
+SALVAR / CARREGAR
 ===================================================== */
 
 function salvarDados(){
@@ -2101,6 +2306,7 @@ JSON.stringify(registrosPecas)
 
 }
 
+
 function carregarDados(){
 
 try{
@@ -2121,21 +2327,34 @@ STORAGE_PECAS
 );
 
 quimicos =
-q ? JSON.parse(q) : [];
+q
+?
+JSON.parse(q)
+:
+[];
 
 lancamentos =
-l ? JSON.parse(l) : [];
+l
+?
+JSON.parse(l)
+:
+[];
 
 registrosPecas =
-p ? JSON.parse(p) : [];
+p
+?
+JSON.parse(p)
+:
+[];
 
 }catch(e){
 
-quimicos = [];
-lancamentos = [];
-registrosPecas = [];
+quimicos=[];
+lancamentos=[];
+registrosPecas=[];
 
 }
+
 
 if(!quimicos.length){
 
@@ -2143,15 +2362,20 @@ quimicos =
 quimicosPadrao.map(
 (q,index)=>({
 
-id:'quimico-' + index,
+id:
+'quimico-' + index,
 
-nome:q.nome,
+nome:
+q.nome,
 
-codigo:q.codigo,
+codigo:
+q.codigo,
 
-cor:q.cor,
+cor:
+q.cor,
 
-tipo:q.tipo,
+tipo:
+q.tipo,
 
 observacao:''
 
@@ -2163,6 +2387,7 @@ salvarDados();
 }
 
 }
+
 
 /* =====================================================
 TEMA
@@ -2188,6 +2413,7 @@ document.body.classList.contains('dark')
 
 }
 
+
 /* =====================================================
 MENU
 ===================================================== */
@@ -2197,7 +2423,9 @@ function toggleMenu(){
 const sidebar =
 $('sidebar');
 
-if(window.innerWidth <= 900){
+if(
+window.innerWidth <= 900
+){
 
 sidebar
 .classList
@@ -2219,6 +2447,7 @@ $('main')
 
 }
 
+
 /* =====================================================
 PÁGINAS
 ===================================================== */
@@ -2236,6 +2465,7 @@ $('page-' + nome)
 .classList
 .add('active');
 
+
 document
 .querySelectorAll('.nav-btn')
 .forEach(
@@ -2245,7 +2475,10 @@ b.classList.remove('active')
 
 botao.classList.add('active');
 
-if(window.innerWidth <= 900){
+
+if(
+window.innerWidth <= 900
+){
 
 $('sidebar')
 .classList
@@ -2253,17 +2486,20 @@ $('sidebar')
 
 }
 
+
 if(nome === 'historico'){
 
 renderHistorico();
 
 }
 
+
 if(nome === 'pecas'){
 
 renderPecas();
 
 }
+
 
 if(nome === 'excel'){
 
@@ -2273,6 +2509,7 @@ atualizarResumoExcel();
 
 }
 
+
 /* =====================================================
 MÁQUINAS
 ===================================================== */
@@ -2280,6 +2517,7 @@ MÁQUINAS
 function preencherMaquinas(){
 
 const html =
+
 maquinas
 .map(
 m =>
@@ -2299,8 +2537,9 @@ html;
 
 }
 
+
 /* =====================================================
-CADASTRO
+CADASTRO DE QUÍMICOS
 ===================================================== */
 
 function salvarQuimico(){
@@ -2315,7 +2554,10 @@ $('qCodigo')
 .value
 .trim();
 
-if(!nome || !codigo){
+if(
+!nome ||
+!codigo
+){
 
 alert(
 'Informe o nome e o código do químico.'
@@ -2324,6 +2566,7 @@ alert(
 return;
 
 }
+
 
 const quimico = {
 
@@ -2338,22 +2581,29 @@ codigo:
 codigo,
 
 cor:
-$('qCor').value.trim(),
+$('qCor')
+.value
+.trim(),
 
 tipo:
-$('qTipo').value,
+$('qTipo')
+.value,
 
 observacao:
-$('qObs').value.trim()
+$('qObs')
+.value
+.trim()
 
 };
+
 
 if(editandoQuimico){
 
 quimicos =
 quimicos.map(
 q =>
-q.id === editandoQuimico
+q.id ===
+editandoQuimico
 ?
 quimico
 :
@@ -2368,9 +2618,11 @@ quimicos.push(quimico);
 
 }
 
+
 salvarDados();
 
-editandoQuimico = null;
+editandoQuimico =
+null;
 
 limparQuimico();
 
@@ -2384,27 +2636,31 @@ mostrarToast(
 
 }
 
+
 function limparQuimico(){
 
-editandoQuimico = null;
+editandoQuimico =
+null;
 
-$('qNome').value = '';
+$('qNome').value='';
 
-$('qCodigo').value = '';
+$('qCodigo').value='';
 
-$('qCor').value = '';
+$('qCor').value='';
 
-$('qTipo').value = 'Massa';
+$('qTipo').value='Massa';
 
-$('qObs').value = '';
+$('qObs').value='';
 
 }
+
 
 function renderQuimicos(){
 
 const busca =
 (
-$('buscaQ').value || ''
+$('buscaQ').value ||
+''
 )
 .toLowerCase();
 
@@ -2426,6 +2682,7 @@ q.observacao
 .toLowerCase()
 .includes(busca)
 );
+
 
 $('tabelaQ').innerHTML =
 
@@ -2465,13 +2722,17 @@ ${escapar(q.observacao)}
 <button
 class="btn btn-secondary"
 onclick="editarQuimico('${q.id}')">
+
 Editar
+
 </button>
 
 <button
 class="btn btn-danger"
 onclick="excluirQuimico('${q.id}')">
+
 Excluir
+
 </button>
 
 </td>
@@ -2496,6 +2757,7 @@ Nenhum químico encontrado.
 
 }
 
+
 function editarQuimico(id){
 
 const q =
@@ -2506,15 +2768,20 @@ x.id === id
 
 if(!q)return;
 
-editandoQuimico = id;
+editandoQuimico =
+id;
 
-$('qNome').value = q.nome;
+$('qNome').value =
+q.nome;
 
-$('qCodigo').value = q.codigo;
+$('qCodigo').value =
+q.codigo;
 
-$('qCor').value = q.cor || '';
+$('qCor').value =
+q.cor || '';
 
-$('qTipo').value = q.tipo || 'Outro';
+$('qTipo').value =
+q.tipo || 'Outro';
 
 $('qObs').value =
 q.observacao || '';
@@ -2530,6 +2797,7 @@ behavior:'smooth'
 });
 
 }
+
 
 function excluirQuimico(id){
 
@@ -2559,13 +2827,14 @@ mostrarToast(
 
 }
 
+
 /* =====================================================
 AVALIAÇÕES
 ===================================================== */
 
 function criarAvaliacoes(){
 
-let html = '';
+let html='';
 
 for(
 let numero=1;
@@ -2580,8 +2849,10 @@ class="eval"
 id="eval${numero}">
 
 <h3>
+
 ${numero}.
 ${categorias[numero].toUpperCase()}
+
 </h3>
 
 <div class="grid">
@@ -2629,7 +2900,7 @@ oninput="calcularResultado(${numero})">
 <div class="field">
 
 <label>
-Valor medido / Gramatura feita
+Valor medido / Gramatura
 </label>
 
 <input
@@ -2679,14 +2950,16 @@ Não utilizar
 
 }
 
-$('avaliacoes').innerHTML = html;
+$('avaliacoes').innerHTML =
+html;
 
 preencherTodosSelectsQuimicos();
 
 }
 
+
 /* =====================================================
-SELECTS
+PREENCHER QUÍMICOS
 ===================================================== */
 
 function preencherTodosSelectsQuimicos(){
@@ -2713,6 +2986,7 @@ normalizarTipo(q.tipo)
 normalizarTipo(categoria)
 );
 
+
 select.innerHTML =
 
 `<option value="">
@@ -2735,8 +3009,9 @@ ${escapar(q.nome)}
 
 }
 
+
 /* =====================================================
-CÓDIGO DO QUÍMICO
+CÓDIGO
 ===================================================== */
 
 function atualizarCodigo(numero){
@@ -2759,6 +3034,7 @@ calcularResultado(numero);
 
 }
 
+
 /* =====================================================
 RESULTADO
 ===================================================== */
@@ -2773,12 +3049,14 @@ const resultado =
 $('r'+numero);
 
 resultado.className =
-'resultado ' + classe;
+'resultado ' +
+classe;
 
 resultado.textContent =
 mensagem;
 
 }
+
 
 function calcularResultado(numero){
 
@@ -2796,6 +3074,7 @@ return 'NAO UTILIZADO';
 
 }
 
+
 const padrao =
 parseFloat(
 $('p'+numero).value
@@ -2805,6 +3084,7 @@ const valor =
 parseFloat(
 $('v'+numero).value
 );
+
 
 if(
 !Number.isFinite(padrao)
@@ -2822,7 +3102,11 @@ return '';
 
 }
 
-if(valor > padrao){
+
+if(
+valor >
+padrao
+){
 
 mostrarResultado(
 numero,
@@ -2834,7 +3118,11 @@ return 'ACIMA DO PADRÃO';
 
 }
 
-if(valor < padrao){
+
+if(
+valor <
+padrao
+){
 
 mostrarResultado(
 numero,
@@ -2846,6 +3134,7 @@ return 'ABAIXO DO PADRÃO';
 
 }
 
+
 mostrarResultado(
 numero,
 'green',
@@ -2855,6 +3144,7 @@ numero,
 return 'DENTRO DO PADRÃO';
 
 }
+
 
 /* =====================================================
 NÃO UTILIZAR
@@ -2868,6 +3158,7 @@ opcoesNaoUtilizadas[numero] =
 const ativo =
 opcoesNaoUtilizadas[numero];
 
+
 [
 'q',
 'p',
@@ -2875,12 +3166,15 @@ opcoesNaoUtilizadas[numero];
 'c'
 ]
 .forEach(
-prefixo =>
+prefixo => {
 
 $(prefixo+numero)
 .disabled =
-ativo
+ativo;
+
+}
 );
+
 
 $('eval'+numero)
 .style.opacity =
@@ -2890,6 +3184,7 @@ ativo
 :
 '1';
 
+
 $('b'+numero)
 .textContent =
 ativo
@@ -2898,9 +3193,11 @@ ativo
 :
 'Não utilizar';
 
+
 calcularResultado(numero);
 
 }
+
 
 /* =====================================================
 LIMPAR LANÇAMENTO
@@ -2917,6 +3214,7 @@ numero++
 opcoesNaoUtilizadas[numero] =
 false;
 
+
 [
 'q',
 'p',
@@ -2924,28 +3222,34 @@ false;
 'c'
 ]
 .forEach(
-prefixo =>
+prefixo => {
 
 $(prefixo+numero)
 .disabled =
-false
+false;
+
+}
 );
 
-$('q'+numero).value = '';
 
-$('c'+numero).value = '';
+$('q'+numero).value='';
 
-$('p'+numero).value = '';
+$('c'+numero).value='';
 
-$('v'+numero).value = '';
+$('p'+numero).value='';
+
+$('v'+numero).value='';
+
 
 $('b'+numero)
 .textContent =
 'Não utilizar';
 
+
 $('eval'+numero)
 .style.opacity =
 '1';
+
 
 mostrarResultado(
 numero,
@@ -2955,13 +3259,15 @@ numero,
 
 }
 
-$('responsavel').value = '';
 
-$('obsLanc').value = '';
+$('responsavel').value='';
+
+$('obsLanc').value='';
 
 atualizarDataHora();
 
 }
+
 
 /* =====================================================
 SALVAR LANÇAMENTO
@@ -2977,6 +3283,7 @@ $('responsavel')
 .value
 .trim();
 
+
 if(!responsavel){
 
 alert(
@@ -2986,6 +3293,7 @@ alert(
 return;
 
 }
+
 
 const timestamp =
 Date.now();
@@ -2998,7 +3306,9 @@ $('obsLanc')
 .value
 .trim();
 
-let quantidade = 0;
+let quantidade =
+0;
+
 
 for(
 let numero=1;
@@ -3014,6 +3324,7 @@ continue;
 
 }
 
+
 const quimicoId =
 $('q'+numero).value;
 
@@ -3022,6 +3333,7 @@ $('p'+numero).value;
 
 const valor =
 $('v'+numero).value;
+
 
 if(
 !quimicoId &&
@@ -3032,6 +3344,7 @@ if(
 continue;
 
 }
+
 
 if(
 !quimicoId
@@ -3051,11 +3364,14 @@ return;
 
 }
 
+
 const quimico =
 quimicos.find(
 q =>
-q.id === quimicoId
+q.id ===
+quimicoId
 );
+
 
 lancamentos.push({
 
@@ -3114,9 +3430,11 @@ observacao
 
 });
 
+
 quantidade++;
 
 }
+
 
 if(!quantidade){
 
@@ -3127,6 +3445,7 @@ alert(
 return;
 
 }
+
 
 salvarDados();
 
@@ -3139,7 +3458,10 @@ limparLancamento();
 
 renderHistorico();
 
+atualizarResumoExcel();
+
 }
+
 
 /* =====================================================
 BADGE
@@ -3147,14 +3469,17 @@ BADGE
 
 function badgeResultado(resultado){
 
-let classe = 'gray';
+let classe =
+'gray';
+
 
 if(
 resultado ===
 'DENTRO DO PADRÃO'
 ){
 
-classe = 'green';
+classe =
+'green';
 
 }
 
@@ -3163,7 +3488,8 @@ resultado ===
 'ACIMA DO PADRÃO'
 ){
 
-classe = 'red';
+classe =
+'red';
 
 }
 
@@ -3172,9 +3498,11 @@ resultado ===
 'ABAIXO DO PADRÃO'
 ){
 
-classe = 'yellow';
+classe =
+'yellow';
 
 }
+
 
 return `
 
@@ -3189,6 +3517,7 @@ ${escapar(resultado)}
 
 }
 
+
 /* =====================================================
 HISTÓRICO
 ===================================================== */
@@ -3197,9 +3526,11 @@ function renderHistorico(){
 
 const busca =
 (
-$('buscaHistorico').value || ''
+$('buscaHistorico').value ||
+''
 )
 .toLowerCase();
+
 
 const lista =
 
@@ -3233,14 +3564,12 @@ x.resultado +
 ' ' +
 x.observacao
 )
-
 .toLowerCase()
 .includes(busca)
 
 )
 
 .sort(
-
 (a,b) => {
 
 if(
@@ -3261,8 +3590,8 @@ b.categoriaNumero || 0
 );
 
 }
-
 );
+
 
 $('tabelaHistorico').innerHTML =
 
@@ -3271,19 +3600,9 @@ lista.length
 ?
 
 lista.map(
+x =>
 
-(x,index) =>
-
-`<tr
-class="${
-index &&
-lista[index-1].timestamp ===
-x.timestamp
-?
-'same'
-:
-''
-}">
+`<tr>
 
 <td>
 ${escapar(x.data)}
@@ -3300,9 +3619,7 @@ ${escapar(x.responsavel)}
 </td>
 
 <td>
-<b>
 ${escapar(x.categoria)}
-</b>
 </td>
 
 <td>
@@ -3349,6 +3666,7 @@ Nenhum lançamento encontrado.
 
 }
 
+
 /* =====================================================
 PEÇAS EM PRODUÇÃO
 ===================================================== */
@@ -3364,6 +3682,7 @@ const quantidade =
 parseFloat(
 $('valPeca').value
 );
+
 
 if(
 !Number.isFinite(padrao)
@@ -3387,6 +3706,7 @@ return;
 
 }
 
+
 if(
 quantidade ===
 padrao
@@ -3403,6 +3723,7 @@ $('resPeca')
 return;
 
 }
+
 
 if(
 quantidade >
@@ -3421,6 +3742,7 @@ return;
 
 }
 
+
 $('resPeca')
 .className =
 'resultado yellow';
@@ -3430,6 +3752,7 @@ $('resPeca')
 'ABAIXO DO PADRÃO';
 
 }
+
 
 function salvarPeca(){
 
@@ -3449,6 +3772,7 @@ $('comentarioPeca')
 .value
 .trim();
 
+
 if(
 !responsavel
 ||
@@ -3465,7 +3789,9 @@ return;
 
 }
 
+
 let resultado;
+
 
 if(
 quantidade ===
@@ -3494,6 +3820,7 @@ resultado =
 
 }
 
+
 registrosPecas.push({
 
 id:
@@ -3503,7 +3830,7 @@ timestamp:
 Date.now(),
 
 data:
-$('dataPeca').value,
+gerarDataHoraAtual(),
 
 maquina:
 $('maquinaPeca').value,
@@ -3525,6 +3852,7 @@ comentario
 
 });
 
+
 salvarDados();
 
 mostrarToast(
@@ -3539,15 +3867,16 @@ atualizarResumoExcel();
 
 }
 
+
 function limparPeca(){
 
-$('respPeca').value = '';
+$('respPeca').value='';
 
-$('padPeca').value = '';
+$('padPeca').value='';
 
-$('valPeca').value = '';
+$('valPeca').value='';
 
-$('comentarioPeca').value = '';
+$('comentarioPeca').value='';
 
 calcularPeca();
 
@@ -3555,13 +3884,16 @@ atualizarDataHora();
 
 }
 
+
 function renderPecas(){
 
 const busca =
 (
-$('buscaPeca').value || ''
+$('buscaPeca').value ||
+''
 )
 .toLowerCase();
+
 
 const lista =
 
@@ -3581,7 +3913,6 @@ x.resultado +
 ' ' +
 (x.comentario || '')
 )
-
 .toLowerCase()
 .includes(busca)
 
@@ -3592,6 +3923,7 @@ x.resultado +
 b.timestamp -
 a.timestamp
 );
+
 
 $('tabelaPecas').innerHTML =
 
@@ -3666,12 +3998,15 @@ Nenhum registro encontrado.
 
 </tr>`;
 
+
 const dentro =
+
 registrosPecas.filter(
 x =>
 x.resultado ===
 'DENTRO DO PADRÃO'
 ).length;
+
 
 $('stTotal').textContent =
 registrosPecas.length;
@@ -3683,15 +4018,21 @@ $('stBad').textContent =
 registrosPecas.length -
 dentro;
 
+
 $('stQtd').textContent =
+
 registrosPecas.reduce(
+
 (s,x) =>
 s +
 (+x.valor || 0),
+
 0
+
 );
 
 }
+
 
 function excluirPeca(id){
 
@@ -3721,8 +4062,9 @@ mostrarToast(
 
 }
 
+
 /* =====================================================
-DATA/HORA
+DATA E HORA
 ===================================================== */
 
 function atualizarDataHora(){
@@ -3730,6 +4072,7 @@ function atualizarDataHora(){
 const agora =
 gerarDataHoraAtual();
 
+
 if(
 $('dataHoraLancamento')
 ){
@@ -3739,6 +4082,7 @@ $('dataHoraLancamento')
 agora;
 
 }
+
 
 if(
 $('dataPeca')
@@ -3751,79 +4095,75 @@ agora;
 }
 
 }
+
 
 /* =====================================================
-RESUMO EXCEL
+RESUMO DO EXCEL
 ===================================================== */
 
 function atualizarResumoExcel(){
 
-if($('totalExcelLanc')){
+if(
+$('totalExcelLanc')
+){
 
-$('totalExcelLanc').textContent =
+$('totalExcelLanc')
+.textContent =
 lancamentos.length;
 
 }
 
-if($('totalExcelPecas')){
 
-$('totalExcelPecas').textContent =
+if(
+$('totalExcelPecas')
+){
+
+$('totalExcelPecas')
+.textContent =
 registrosPecas.length;
 
 }
 
-if($('totalExcelQuimicos')){
 
-$('totalExcelQuimicos').textContent =
+if(
+$('totalExcelQuimicos')
+){
+
+$('totalExcelQuimicos')
+.textContent =
 quimicos.length;
 
 }
 
 }
 
+
 /* =====================================================
-EXPORTAÇÃO EXCEL
+PREPARAR DADOS DO EXCEL
 ===================================================== */
 
-function exportarExcel(){
-
-if(
-typeof XLSX ===
-'undefined'
+function prepararDadosExcel(
+lancamentosFiltrados,
+pecasFiltradas
 ){
-
-alert(
-'A biblioteca Excel não foi carregada.'
-);
-
-return;
-
-}
-
-/* -----------------------------------------
-ABA 1
-MÉDIA MÁQUINA QUÍMICO
------------------------------------------ */
 
 const validos =
 
-lancamentos.filter(
+lancamentosFiltrados.filter(
 
 x =>
-
-!x.naoUtilizada
-&&
+!x.naoUtilizada &&
 x.resultado !==
-'NAO UTILIZADO'
-&&
+'NAO UTILIZADO' &&
 x.quimico
 
 );
 
+
 const grupos = {};
 
-validos.forEach(
-x => {
+
+validos.forEach(x => {
 
 const chave =
 
@@ -3833,7 +4173,10 @@ x.codigo +
 '|' +
 x.quimico;
 
-if(!grupos[chave]){
+
+if(
+!grupos[chave]
+){
 
 grupos[chave] = {
 
@@ -3859,15 +4202,17 @@ soma:
 
 }
 
+
 grupos[chave]
 .quantidade++;
 
+
 grupos[chave]
 .soma +=
-+x.valor || 0;
+Number(x.valor) || 0;
 
-}
-);
+});
+
 
 const mediaMaquinaQuimico =
 
@@ -3902,10 +4247,11 @@ x.quantidade
 })
 );
 
-/* -----------------------------------------
+
+/* =====================================================
 ABA 2
 GRAMATURAS FEITAS
------------------------------------------ */
+===================================================== */
 
 const gramaturasFeitas =
 
@@ -3915,15 +4261,11 @@ validos
 
 (a,b) =>
 
-a.timestamp -
-b.timestamp
-
-||
-
-(a.categoriaNumero || 0) -
-(b.categoriaNumero || 0)
+(a.timestamp || 0) -
+(b.timestamp || 0)
 
 )
+
 .map(
 x => ({
 
@@ -3955,25 +4297,30 @@ x.valor,
 x.resultado,
 
 'Observação':
-x.observacao
+x.observacao || ''
 
 })
 );
 
-/* -----------------------------------------
+
+/* =====================================================
 ABA 3
 PEÇAS EM PRODUÇÃO
------------------------------------------ */
+===================================================== */
 
 const pecasEmProducao =
 
-registrosPecas
+pecasFiltradas
 .slice()
 .sort(
+
 (a,b) =>
-a.timestamp -
-b.timestamp
+
+(a.timestamp || 0) -
+(b.timestamp || 0)
+
 )
+
 .map(
 x => ({
 
@@ -4001,26 +4348,25 @@ x.comentario || ''
 })
 );
 
-/* -----------------------------------------
+
+/* =====================================================
 CRIAR WORKBOOK
------------------------------------------ */
+===================================================== */
 
 const workbook =
 XLSX.utils.book_new();
 
-/* -----------------------------------------
-SHEET MÉDIA
------------------------------------------ */
 
 const sheetMedia =
 XLSX.utils.json_to_sheet(
 mediaMaquinaQuimico
 );
 
+
 sheetMedia['!cols'] = [
 
 {wch:22},
-{wch:14},
+{wch:15},
 {wch:40},
 {wch:18},
 {wch:22},
@@ -4028,121 +4374,271 @@ sheetMedia['!cols'] = [
 
 ];
 
-/* -----------------------------------------
-SHEET GRAMATURAS
------------------------------------------ */
 
 const sheetGramaturas =
 XLSX.utils.json_to_sheet(
 gramaturasFeitas
 );
 
+
 sheetGramaturas['!cols'] = [
 
 {wch:20},
+{wch:20},
+{wch:22},
 {wch:18},
-{wch:20},
-{wch:20},
 {wch:40},
 {wch:18},
 {wch:15},
-{wch:20},
+{wch:22},
 {wch:22},
 {wch:35}
 
 ];
 
-/* -----------------------------------------
-SHEET PEÇAS
------------------------------------------ */
 
 const sheetPecas =
 XLSX.utils.json_to_sheet(
 pecasEmProducao
 );
 
+
 sheetPecas['!cols'] = [
 
 {wch:20},
 {wch:20},
 {wch:25},
-{wch:25},
+{wch:28},
 {wch:25},
 {wch:22},
 {wch:40}
 
 ];
 
-/* -----------------------------------------
-ADICIONAR ABAS
------------------------------------------ */
 
 XLSX.utils.book_append_sheet(
-
 workbook,
-
 sheetMedia,
-
 'Média Máquina Químico'
-
 );
 
+
 XLSX.utils.book_append_sheet(
-
 workbook,
-
 sheetGramaturas,
-
 'Gramaturas Feitas'
-
 );
+
 
 XLSX.utils.book_append_sheet(
-
 workbook,
-
 sheetPecas,
-
 'Peças em Produção'
+);
+
+
+return workbook;
+
+}
+
+
+/* =====================================================
+EXPORTAR TUDO
+===================================================== */
+
+function exportarExcel(){
+
+const workbook =
+
+prepararDadosExcel(
+
+lancamentos,
+
+registrosPecas
 
 );
 
-/* -----------------------------------------
-NOME DO ARQUIVO
------------------------------------------ */
 
-const d =
+const agora =
 new Date();
 
+
 const dois =
-numero =>
-String(numero)
+n =>
+String(n)
 .padStart(2,'0');
+
 
 const nomeArquivo =
 
-`GraviUnit_Gramaturas_${
-d.getFullYear()
+`GraviUnit_MES_Todos_${
+agora.getFullYear()
 }-${
-dois(d.getMonth()+1)
+dois(agora.getMonth()+1)
 }-${
-dois(d.getDate())
+dois(agora.getDate())
 }.xlsx`;
 
-/* -----------------------------------------
-DOWNLOAD
------------------------------------------ */
 
 XLSX.writeFile(
+
 workbook,
+
 nomeArquivo
+
 );
 
+
 mostrarToast(
-'Excel exportado com as Peças em Produção.'
+'Todos os dados foram exportados.'
 );
 
 }
+
+
+/* =====================================================
+EXPORTAR MÊS SELECIONADO
+===================================================== */
+
+function exportarExcelMes(){
+
+const mes =
+$('mesExportacao').value;
+
+
+if(
+mes === 'todos'
+){
+
+exportarExcel();
+
+return;
+
+}
+
+
+const mesNumero =
+Number(mes);
+
+
+const lancamentosFiltrados =
+
+lancamentos.filter(
+x => {
+
+if(!x.timestamp){
+
+return false;
+
+}
+
+
+const data =
+new Date(x.timestamp);
+
+
+return (
+
+data.getMonth() ===
+mesNumero
+
+);
+
+}
+);
+
+
+const pecasFiltradas =
+
+registrosPecas.filter(
+x => {
+
+if(!x.timestamp){
+
+return false;
+
+}
+
+
+const data =
+new Date(x.timestamp);
+
+
+return (
+
+data.getMonth() ===
+mesNumero
+
+);
+
+}
+);
+
+
+const workbook =
+
+prepararDadosExcel(
+
+lancamentosFiltrados,
+
+pecasFiltradas
+
+);
+
+
+const nomesMeses = [
+
+'Janeiro',
+'Fevereiro',
+'Março',
+'Abril',
+'Maio',
+'Junho',
+'Julho',
+'Agosto',
+'Setembro',
+'Outubro',
+'Novembro',
+'Dezembro'
+
+];
+
+
+const agora =
+new Date();
+
+const ano =
+agora.getFullYear();
+
+
+const nomeArquivo =
+
+`GraviUnit_MES_${
+nomesMeses[mesNumero]
+}_${
+ano
+}.xlsx`;
+
+
+XLSX.writeFile(
+
+workbook,
+
+nomeArquivo
+
+);
+
+
+mostrarToast(
+
+`Excel de ${
+nomesMeses[mesNumero]
+} exportado com sucesso.`
+
+);
+
+}
+
 
 /* =====================================================
 INICIALIZAÇÃO
@@ -4154,7 +4650,6 @@ function(){
 
 carregarDados();
 
-/* Tema */
 
 if(
 localStorage.getItem(
@@ -4168,15 +4663,10 @@ document.body
 
 }
 
-/* Máquinas */
 
 preencherMaquinas();
 
-/* Avaliações */
-
 criarAvaliacoes();
-
-/* Renderizações */
 
 renderQuimicos();
 
@@ -4186,24 +4676,25 @@ renderPecas();
 
 atualizarResumoExcel();
 
-/* Data e hora */
-
 atualizarDataHora();
-
-/* Formulário inicial */
 
 limparLancamento();
 
 });
+
 
 /* =====================================================
 RELÓGIO
 ===================================================== */
 
 setInterval(
+
 atualizarDataHora,
+
 1000
+
 );
+
 
 /* =====================================================
 ATUALIZAÇÃO
