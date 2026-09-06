@@ -18,7 +18,7 @@
 --cyan:#16b8d4;
 
 --fundo:#f3f6f9;
---card:#fff;
+--card:#ffffff;
 --texto:#17202a;
 --texto-sec:#667085;
 --borda:#dce3ea;
@@ -50,6 +50,7 @@ margin:0;
 font-family:Arial,Helvetica,sans-serif;
 background:var(--fundo);
 color:var(--texto);
+transition:.25s;
 }
 
 body.dark{
@@ -58,17 +59,18 @@ body.dark{
 --texto:#f2f5f8;
 --texto-sec:#aab5c1;
 --borda:#2d3a47;
+
 --verde-bg:#123827;
 --vermelho-bg:#401d1a;
 --amarelo-bg:#403617;
 --cinza-bg:#29333d;
+
 --sombra:0 5px 20px rgba(0,0,0,.28);
 }
 
-
-/* ================================
+/* =========================
 TOPO
-================================ */
+========================= */
 
 .topbar{
 position:fixed;
@@ -101,6 +103,7 @@ border-radius:9px;
 font-size:21px;
 
 margin-right:10px;
+cursor:pointer;
 }
 
 .brand{
@@ -115,8 +118,33 @@ height:52px;
 
 object-fit:contain;
 
-border-radius:8px;
+border-radius:9px;
 background:#fff;
+}
+
+.logo-fake{
+width:58px;
+height:52px;
+
+border-radius:9px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:linear-gradient(
+135deg,
+#0756a3,
+#0d74d5,
+#16b8d4
+);
+
+color:#fff;
+
+font-size:19px;
+font-weight:900;
+
+box-shadow:0 4px 12px rgba(7,86,163,.3);
 }
 
 .brand-title{
@@ -148,14 +176,16 @@ color:var(--verde);
 border:1px solid var(--borda);
 background:var(--card);
 color:var(--texto);
+
 padding:9px 12px;
+
 border-radius:9px;
+cursor:pointer;
 }
 
-
-/* ================================
+/* =========================
 SIDEBAR
-================================ */
+========================= */
 
 .sidebar{
 position:fixed;
@@ -210,6 +240,10 @@ border-radius:10px;
 margin:3px 0;
 
 font-weight:700;
+
+cursor:pointer;
+
+transition:.2s;
 }
 
 .nav-btn:hover,
@@ -223,10 +257,9 @@ body.dark .nav-btn.active{
 background:#1d354a;
 }
 
-
-/* ================================
+/* =========================
 MAIN
-================================ */
+========================= */
 
 .main{
 margin-left:var(--sidebar);
@@ -275,10 +308,9 @@ font-size:14px;
 color:var(--texto-sec);
 }
 
-
-/* ================================
-CARD
-================================ */
+/* =========================
+CARDS
+========================= */
 
 .card{
 background:var(--card);
@@ -331,12 +363,16 @@ border-radius:9px;
 padding:10px;
 
 outline:none;
+
+font-family:inherit;
 }
 
 input:focus,
 select:focus,
 textarea:focus{
 border-color:var(--azul);
+
+box-shadow:0 0 0 3px rgba(7,86,163,.08);
 }
 
 textarea{
@@ -350,10 +386,9 @@ cursor:not-allowed!important;
 user-select:none;
 }
 
-
-/* ================================
+/* =========================
 BOTÕES
-================================ */
+========================= */
 
 .actions{
 display:flex;
@@ -373,10 +408,23 @@ border-radius:9px;
 padding:10px 14px;
 
 font-weight:800;
+
+cursor:pointer;
+
+transition:.2s;
+}
+
+.btn:hover{
+transform:translateY(-1px);
+filter:brightness(1.05);
 }
 
 .btn-primary{
-background:var(--azul);
+background:linear-gradient(
+135deg,
+var(--azul),
+var(--azul-claro)
+);
 color:#fff;
 }
 
@@ -400,10 +448,9 @@ background:#d69e2e;
 color:#fff;
 }
 
-
-/* ================================
+/* =========================
 TABELAS
-================================ */
+========================= */
 
 .table-wrap{
 overflow:auto;
@@ -442,6 +489,8 @@ font-size:11px;
 text-transform:uppercase;
 
 color:var(--texto-sec);
+
+white-space:nowrap;
 }
 
 tr:last-child td{
@@ -452,10 +501,9 @@ border-bottom:0;
 max-width:420px;
 }
 
-
-/* ================================
+/* =========================
 AVALIAÇÕES
-================================ */
+========================= */
 
 .eval{
 border:1px solid var(--borda);
@@ -467,6 +515,8 @@ border-radius:12px;
 padding:14px;
 
 margin-top:12px;
+
+transition:.2s;
 }
 
 .eval h3{
@@ -475,10 +525,9 @@ margin:0 0 12px;
 font-size:15px;
 }
 
-
-/* ================================
+/* =========================
 RESULTADOS
-================================ */
+========================= */
 
 .resultado{
 margin-top:7px;
@@ -534,10 +583,9 @@ color:var(--cinza);
 border:1px solid var(--borda);
 }
 
-
-/* ================================
+/* =========================
 BADGES
-================================ */
+========================= */
 
 .badge{
 display:inline-flex;
@@ -573,10 +621,9 @@ background:var(--cinza-bg);
 color:var(--cinza);
 }
 
-
-/* ================================
+/* =========================
 ESTATÍSTICAS
-================================ */
+========================= */
 
 .stats{
 display:grid;
@@ -635,10 +682,9 @@ color:var(--texto-sec);
 background:rgba(7,86,163,.035);
 }
 
-
-/* ================================
-PEÇAS EM PRODUÇÃO COMPACTA
-================================ */
+/* =========================
+PEÇAS
+========================= */
 
 #page-pecas .page-head{
 margin-bottom:10px;
@@ -697,10 +743,9 @@ padding:8px 11px;
 font-size:12px;
 }
 
-
-/* ================================
+/* =========================
 EXPORTAÇÃO
-================================ */
+========================= */
 
 .export-box{
 display:flex;
@@ -714,10 +759,44 @@ gap:15px;
 flex-wrap:wrap;
 }
 
+.export-info{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:15px;
+}
 
-/* ================================
+.export-item{
+padding:12px;
+border-radius:10px;
+background:var(--fundo);
+border:1px solid var(--borda);
+}
+
+.export-item strong{
+display:block;
+font-size:18px;
+margin-bottom:3px;
+}
+
+.export-item span{
+font-size:11px;
+color:var(--texto-sec);
+}
+
+/* =========================
+VAZIO
+========================= */
+
+.empty{
+text-align:center;
+padding:25px!important;
+color:var(--texto-sec);
+}
+
+/* =========================
 RESPONSIVO
-================================ */
+========================= */
 
 @media(max-width:900px){
 
@@ -752,6 +831,10 @@ grid-template-columns:
 repeat(2,1fr);
 }
 
+.export-info{
+grid-template-columns:1fr;
+}
+
 }
 
 @media(max-width:560px){
@@ -764,7 +847,7 @@ padding:7px;
 font-size:15px;
 }
 
-.logo{
+.logo-fake{
 width:48px;
 height:45px;
 }
@@ -786,42 +869,80 @@ align-items:flex-start;
 flex-direction:column;
 }
 
+.search{
+max-width:100%;
+width:100%;
 }
 
+}
 
-/* ================================
-LOGO
-================================ */
+/* =========================
+TOAST
+========================= */
+
+.toast{
+position:fixed;
+right:20px;
+bottom:20px;
+
+z-index:9999;
+
+background:var(--card);
+
+border:1px solid var(--borda);
+
+box-shadow:var(--sombra);
+
+border-left:5px solid var(--verde);
+
+padding:14px 17px;
+
+border-radius:10px;
+
+font-size:13px;
+
+font-weight:700;
+
+transform:translateY(120px);
+
+opacity:0;
+
+transition:.3s;
+}
+
+.toast.show{
+transform:translateY(0);
+opacity:1;
+}
 
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- ================================
+<!-- =========================
 TOPO
-================================ -->
+========================= -->
 
 <header class="topbar">
 
 <button
 class="menu-btn"
 onclick="toggleMenu()">
-
 ☰
-
 </button>
-
 
 <div class="brand">
 
-<img
-class="logo"
-alt="GraviUnit MES"
-src="data:image/jpeg;base64,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">
+<!--
+SE QUISER USAR NOVAMENTE O LOGO BASE64
+QUE VOCÊ ENVIOU, PODE COLOCAR A TAG IMG
+AQUI.
+-->
+
+<div class="logo-fake">
+GU
+</div>
 
 <div>
 
@@ -836,7 +957,6 @@ Manufacturing Execution System
 </div>
 
 </div>
-
 
 <div class="top-actions">
 
@@ -854,10 +974,9 @@ onclick="toggleTheme()">
 
 </header>
 
-
-<!-- ================================
+<!-- =========================
 SIDEBAR
-================================ -->
+========================= -->
 
 <aside
 class="sidebar"
@@ -867,13 +986,11 @@ id="sidebar">
 Módulos
 </div>
 
-
 <button
 class="nav-btn active"
 onclick="showPage('cadastro',this)">
 🧪 Cadastro de Químicos
 </button>
-
 
 <button
 class="nav-btn"
@@ -881,20 +998,17 @@ onclick="showPage('lancamento',this)">
 📋 Lançamento
 </button>
 
-
 <button
 class="nav-btn"
 onclick="showPage('pecas',this)">
 🏭 Peças em Produção
 </button>
 
-
 <button
 class="nav-btn"
 onclick="showPage('historico',this)">
 🕘 Histórico
 </button>
-
 
 <button
 class="nav-btn"
@@ -904,15 +1018,13 @@ onclick="showPage('excel',this)">
 
 </aside>
 
-
 <main
 class="main"
 id="main">
 
-
-<!-- ================================
-CADASTRO DE QUÍMICOS
-================================ -->
+<!-- =========================
+CADASTRO
+========================= -->
 
 <section
 class="page active"
@@ -934,11 +1046,9 @@ Cadastre os produtos químicos utilizados no processo.
 
 </div>
 
-
 <div class="card">
 
 <div class="grid">
-
 
 <div class="field">
 
@@ -952,7 +1062,6 @@ placeholder="Digite o nome do químico">
 
 </div>
 
-
 <div class="field">
 
 <label>
@@ -964,7 +1073,6 @@ id="qCodigo"
 placeholder="Digite o código">
 
 </div>
-
 
 <div class="field">
 
@@ -978,7 +1086,6 @@ placeholder="Ex.: Branco">
 
 </div>
 
-
 <div class="field">
 
 <label>
@@ -987,34 +1094,16 @@ Tipo / Categoria
 
 <select id="qTipo">
 
-<option>
-Massa
-</option>
-
-<option>
-Primer
-</option>
-
-<option>
-Impressão
-</option>
-
-<option>
-Base
-</option>
-
-<option>
-Verniz
-</option>
-
-<option>
-Outro
-</option>
+<option>Massa</option>
+<option>Primer</option>
+<option>Impressão</option>
+<option>Base</option>
+<option>Verniz</option>
+<option>Outro</option>
 
 </select>
 
 </div>
-
 
 <div
 class="field"
@@ -1031,7 +1120,6 @@ placeholder="Informações adicionais">
 </div>
 
 </div>
-
 
 <div class="actions">
 
@@ -1051,7 +1139,6 @@ Limpar
 
 </div>
 
-
 <div class="card">
 
 <div class="page-head">
@@ -1068,7 +1155,6 @@ placeholder="Pesquisar químico, código ou categoria">
 
 </div>
 
-
 <div class="table-wrap">
 
 <table>
@@ -1076,20 +1162,17 @@ placeholder="Pesquisar químico, código ou categoria">
 <thead>
 
 <tr>
-
 <th>Nome</th>
 <th>Código</th>
 <th>Cor</th>
 <th>Categoria</th>
 <th>Observação</th>
 <th>Ações</th>
-
 </tr>
 
 </thead>
 
-<tbody id="tabelaQ">
-</tbody>
+<tbody id="tabelaQ"></tbody>
 
 </table>
 
@@ -1099,10 +1182,9 @@ placeholder="Pesquisar químico, código ou categoria">
 
 </section>
 
-
-<!-- ================================
+<!-- =========================
 LANÇAMENTO
-================================ -->
+========================= -->
 
 <section
 class="page"
@@ -1124,11 +1206,9 @@ Registre Massa, Primer, Impressão, Base e Verniz.
 
 </div>
 
-
 <div class="card">
 
 <div class="grid">
-
 
 <div class="field">
 
@@ -1136,11 +1216,9 @@ Registre Massa, Primer, Impressão, Base e Verniz.
 Máquina
 </label>
 
-<select id="maquina">
-</select>
+<select id="maquina"></select>
 
 </div>
-
 
 <div class="field">
 
@@ -1153,7 +1231,6 @@ id="responsavel"
 placeholder="Nome do responsável">
 
 </div>
-
 
 <div class="field">
 
@@ -1172,10 +1249,7 @@ tabindex="-1">
 
 </div>
 
-
-<div id="avaliacoes">
-</div>
-
+<div id="avaliacoes"></div>
 
 <div
 class="field"
@@ -1187,11 +1261,9 @@ Observação geral
 
 <textarea
 id="obsLanc"
-placeholder="Observações do lançamento">
-</textarea>
+placeholder="Observações do lançamento"></textarea>
 
 </div>
-
 
 <div class="actions">
 
@@ -1213,10 +1285,9 @@ Limpar
 
 </section>
 
-
-<!-- ================================
-PEÇAS EM PRODUÇÃO
-================================ -->
+<!-- =========================
+PEÇAS
+========================= -->
 
 <section
 class="page"
@@ -1238,9 +1309,7 @@ Controle rápido da produção.
 
 </div>
 
-
 <div class="stats">
-
 
 <div class="stat">
 
@@ -1255,7 +1324,6 @@ id="stTotal">
 </div>
 
 </div>
-
 
 <div class="stat">
 
@@ -1272,7 +1340,6 @@ id="stOk">
 
 </div>
 
-
 <div class="stat">
 
 <div class="stat-label">
@@ -1287,7 +1354,6 @@ id="stBad">
 </div>
 
 </div>
-
 
 <div class="stat">
 
@@ -1305,11 +1371,9 @@ id="stQtd">
 
 </div>
 
-
 <div class="card">
 
 <div class="grid">
-
 
 <div class="field">
 
@@ -1317,11 +1381,9 @@ id="stQtd">
 Máquina
 </label>
 
-<select id="maquinaPeca">
-</select>
+<select id="maquinaPeca"></select>
 
 </div>
-
 
 <div class="field">
 
@@ -1334,7 +1396,6 @@ id="respPeca"
 placeholder="Responsável">
 
 </div>
-
 
 <div class="field">
 
@@ -1350,7 +1411,6 @@ oninput="calcularPeca()">
 
 </div>
 
-
 <div class="field">
 
 <label>
@@ -1364,7 +1424,6 @@ step="any"
 oninput="calcularPeca()">
 
 </div>
-
 
 <div class="field">
 
@@ -1381,7 +1440,6 @@ tabindex="-1">
 
 </div>
 
-
 <div class="field">
 
 <label>
@@ -1396,7 +1454,6 @@ placeholder="Comentário da produção">
 
 </div>
 
-
 <div
 id="resPeca"
 class="resultado neutral">
@@ -1404,7 +1461,6 @@ class="resultado neutral">
 Aguardando preenchimento
 
 </div>
-
 
 <div class="actions">
 
@@ -1424,7 +1480,6 @@ Limpar
 
 </div>
 
-
 <div class="card">
 
 <div class="page-head">
@@ -1441,7 +1496,6 @@ placeholder="Pesquisar">
 
 </div>
 
-
 <div class="table-wrap">
 
 <table>
@@ -1449,7 +1503,6 @@ placeholder="Pesquisar">
 <thead>
 
 <tr>
-
 <th>Data/Hora</th>
 <th>Máquina</th>
 <th>Responsável</th>
@@ -1458,13 +1511,11 @@ placeholder="Pesquisar">
 <th>Resultado</th>
 <th>Comentário</th>
 <th>Ações</th>
-
 </tr>
 
 </thead>
 
-<tbody id="tabelaPecas">
-</tbody>
+<tbody id="tabelaPecas"></tbody>
 
 </table>
 
@@ -1474,10 +1525,9 @@ placeholder="Pesquisar">
 
 </section>
 
-
-<!-- ================================
+<!-- =========================
 HISTÓRICO
-================================ -->
+========================= -->
 
 <section
 class="page"
@@ -1492,13 +1542,12 @@ Histórico de Lançamentos
 </h1>
 
 <div class="subtitle">
-Todos os lançamentos de Massa, Primer, Impressão, Base e Verniz.
+Todos os lançamentos realizados no sistema.
 </div>
 
 </div>
 
 </div>
-
 
 <div class="card">
 
@@ -1516,7 +1565,6 @@ placeholder="Pesquisar máquina, químico, código...">
 
 </div>
 
-
 <div class="table-wrap">
 
 <table>
@@ -1524,7 +1572,6 @@ placeholder="Pesquisar máquina, químico, código...">
 <thead>
 
 <tr>
-
 <th>Data/Hora</th>
 <th>Máquina</th>
 <th>Responsável</th>
@@ -1535,13 +1582,11 @@ placeholder="Pesquisar máquina, químico, código...">
 <th>Gramatura feita</th>
 <th>Resultado</th>
 <th>Observação</th>
-
 </tr>
 
 </thead>
 
-<tbody id="tabelaHistorico">
-</tbody>
+<tbody id="tabelaHistorico"></tbody>
 
 </table>
 
@@ -1551,10 +1596,9 @@ placeholder="Pesquisar máquina, químico, código...">
 
 </section>
 
-
-<!-- ================================
+<!-- =========================
 EXCEL
-================================ -->
+========================= -->
 
 <section
 class="page"
@@ -1569,13 +1613,12 @@ Exportar Excel
 </h1>
 
 <div class="subtitle">
-Exporte os dados do GraviUnit MES.
+Exporte todos os dados operacionais do GraviUnit MES.
 </div>
 
 </div>
 
 </div>
-
 
 <div class="card export-box">
 
@@ -1587,15 +1630,60 @@ Exportação operacional
 
 <div class="notice">
 
-O arquivo terá somente duas abas:
-<b>Média Máquina Químico</b>
-e
-<b>Gramaturas Feitas</b>.
+O arquivo Excel terá agora <b>3 abas</b>:
+<br><br>
+
+<b>1.</b> Média Máquina Químico
+<br>
+
+<b>2.</b> Gramaturas Feitas
+<br>
+
+<b>3.</b> Peças em Produção
+
+</div>
+
+<div class="export-info">
+
+<div class="export-item">
+
+<strong id="totalExcelLanc">
+0
+</strong>
+
+<span>
+Lançamentos
+</span>
+
+</div>
+
+<div class="export-item">
+
+<strong id="totalExcelPecas">
+0
+</strong>
+
+<span>
+Registros de produção
+</span>
+
+</div>
+
+<div class="export-item">
+
+<strong id="totalExcelQuimicos">
+0
+</strong>
+
+<span>
+Químicos cadastrados
+</span>
 
 </div>
 
 </div>
 
+</div>
 
 <button
 class="btn btn-success"
@@ -1609,16 +1697,19 @@ onclick="exportarExcel()">
 
 </section>
 
-
 </main>
 
+<div
+id="toast"
+class="toast">
+Operação realizada com sucesso.
+</div>
 
 <script>
 
-
-/* ================================
+/* =====================================================
 CONFIGURAÇÕES
-================================ */
+===================================================== */
 
 const STORAGE_QUIMICOS =
 'graviunit_quimicos_v1';
@@ -1632,7 +1723,6 @@ const STORAGE_PECAS =
 const STORAGE_TEMA =
 'graviunit_theme';
 
-
 let quimicos = [];
 
 let lancamentos = [];
@@ -1641,17 +1731,13 @@ let registrosPecas = [];
 
 let editandoQuimico = null;
 
-
 let opcoesNaoUtilizadas = {
-
 1:false,
 2:false,
 3:false,
 4:false,
 5:false
-
 };
-
 
 const categorias = {
 
@@ -1662,7 +1748,6 @@ const categorias = {
 5:'Verniz'
 
 };
-
 
 const maquinas = [
 
@@ -1685,7 +1770,6 @@ const maquinas = [
 
 ];
 
-
 const nomesMaquinas = {
 
 '701e':'701 - Externo',
@@ -1707,10 +1791,9 @@ const nomesMaquinas = {
 
 };
 
-
-/* ================================
+/* =====================================================
 QUÍMICOS PADRÃO
-================================ */
+===================================================== */
 
 const quimicosPadrao = [
 
@@ -1898,17 +1981,15 @@ tipo:'Impressão'
 
 ];
 
-
-/* ================================
+/* =====================================================
 UTILITÁRIOS
-================================ */
+===================================================== */
 
 function $(id){
 
 return document.getElementById(id);
 
 }
-
 
 function gerarId(){
 
@@ -1920,30 +2001,23 @@ Math.random()
 
 }
 
-
 function escapar(valor){
 
 return String(valor ?? '')
 
 .replace(/&/g,'&amp;')
-
 .replace(/</g,'&lt;')
-
 .replace(/>/g,'&gt;')
-
 .replace(/"/g,'&quot;')
-
 .replace(/'/g,'&#039;');
 
 }
-
 
 function nomeMaquina(codigo){
 
 return nomesMaquinas[codigo] || codigo;
 
 }
-
 
 function normalizarTipo(valor){
 
@@ -1957,11 +2031,9 @@ return String(valor || '')
 
 }
 
-
 function gerarDataHoraAtual(){
 
-const agora =
-new Date();
+const agora = new Date();
 
 const dia =
 String(agora.getDate())
@@ -1990,10 +2062,25 @@ return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
 
 }
 
+function mostrarToast(mensagem){
 
-/* ================================
+const toast = $('toast');
+
+toast.textContent = mensagem;
+
+toast.classList.add('show');
+
+setTimeout(()=>{
+
+toast.classList.remove('show');
+
+},2500);
+
+}
+
+/* =====================================================
 DADOS
-================================ */
+===================================================== */
 
 function salvarDados(){
 
@@ -2014,8 +2101,9 @@ JSON.stringify(registrosPecas)
 
 }
 
-
 function carregarDados(){
+
+try{
 
 const q =
 localStorage.getItem(
@@ -2032,30 +2120,22 @@ localStorage.getItem(
 STORAGE_PECAS
 );
 
-
 quimicos =
-q
-?
-JSON.parse(q)
-:
-[];
-
+q ? JSON.parse(q) : [];
 
 lancamentos =
-l
-?
-JSON.parse(l)
-:
-[];
-
+l ? JSON.parse(l) : [];
 
 registrosPecas =
-p
-?
-JSON.parse(p)
-:
-[];
+p ? JSON.parse(p) : [];
 
+}catch(e){
+
+quimicos = [];
+lancamentos = [];
+registrosPecas = [];
+
+}
 
 if(!quimicos.length){
 
@@ -2084,10 +2164,9 @@ salvarDados();
 
 }
 
-
-/* ================================
+/* =====================================================
 TEMA
-================================ */
+===================================================== */
 
 function toggleTheme(){
 
@@ -2109,16 +2188,14 @@ document.body.classList.contains('dark')
 
 }
 
-
-/* ================================
+/* =====================================================
 MENU
-================================ */
+===================================================== */
 
 function toggleMenu(){
 
 const sidebar =
 $('sidebar');
-
 
 if(window.innerWidth <= 900){
 
@@ -2142,10 +2219,9 @@ $('main')
 
 }
 
-
-/* ================================
+/* =====================================================
 PÁGINAS
-================================ */
+===================================================== */
 
 function showPage(nome,botao){
 
@@ -2153,28 +2229,21 @@ document
 .querySelectorAll('.page')
 .forEach(
 p =>
-p.classList
-.remove('active')
+p.classList.remove('active')
 );
-
 
 $('page-' + nome)
 .classList
 .add('active');
 
-
 document
 .querySelectorAll('.nav-btn')
 .forEach(
 b =>
-b.classList
-.remove('active')
+b.classList.remove('active')
 );
 
-
-botao.classList
-.add('active');
-
+botao.classList.add('active');
 
 if(window.innerWidth <= 900){
 
@@ -2196,12 +2265,17 @@ renderPecas();
 
 }
 
+if(nome === 'excel'){
+
+atualizarResumoExcel();
+
 }
 
+}
 
-/* ================================
+/* =====================================================
 MÁQUINAS
-================================ */
+===================================================== */
 
 function preencherMaquinas(){
 
@@ -2217,7 +2291,6 @@ ${nomeMaquina(m)}
 )
 .join('');
 
-
 $('maquina').innerHTML =
 html;
 
@@ -2226,10 +2299,9 @@ html;
 
 }
 
-
-/* ================================
-CADASTRO QUÍMICOS
-================================ */
+/* =====================================================
+CADASTRO
+===================================================== */
 
 function salvarQuimico(){
 
@@ -2243,7 +2315,6 @@ $('qCodigo')
 .value
 .trim();
 
-
 if(!nome || !codigo){
 
 alert(
@@ -2253,7 +2324,6 @@ alert(
 return;
 
 }
-
 
 const quimico = {
 
@@ -2268,21 +2338,15 @@ codigo:
 codigo,
 
 cor:
-$('qCor')
-.value
-.trim(),
+$('qCor').value.trim(),
 
 tipo:
-$('qTipo')
-.value,
+$('qTipo').value,
 
 observacao:
-$('qObs')
-.value
-.trim()
+$('qObs').value.trim()
 
 };
-
 
 if(editandoQuimico){
 
@@ -2300,17 +2364,13 @@ q
 
 else{
 
-quimicos.push(
-quimico
-);
+quimicos.push(quimico);
 
 }
 
-
 salvarDados();
 
-editandoQuimico =
-null;
+editandoQuimico = null;
 
 limparQuimico();
 
@@ -2318,35 +2378,27 @@ renderQuimicos();
 
 preencherTodosSelectsQuimicos();
 
-alert(
+mostrarToast(
 'Químico salvo com sucesso.'
 );
 
 }
 
-
 function limparQuimico(){
 
-editandoQuimico =
-null;
+editandoQuimico = null;
 
-$('qNome').value =
-'';
+$('qNome').value = '';
 
-$('qCodigo').value =
-'';
+$('qCodigo').value = '';
 
-$('qCor').value =
-'';
+$('qCor').value = '';
 
-$('qTipo').value =
-'Massa';
+$('qTipo').value = 'Massa';
 
-$('qObs').value =
-'';
+$('qObs').value = '';
 
 }
-
 
 function renderQuimicos(){
 
@@ -2355,7 +2407,6 @@ const busca =
 $('buscaQ').value || ''
 )
 .toLowerCase();
-
 
 const lista =
 quimicos.filter(
@@ -2374,9 +2425,7 @@ q.observacao
 )
 .toLowerCase()
 .includes(busca)
-
 );
-
 
 $('tabelaQ').innerHTML =
 
@@ -2447,7 +2496,6 @@ Nenhum químico encontrado.
 
 }
 
-
 function editarQuimico(id){
 
 const q =
@@ -2458,42 +2506,30 @@ x.id === id
 
 if(!q)return;
 
+editandoQuimico = id;
 
-editandoQuimico =
-id;
+$('qNome').value = q.nome;
 
-$('qNome').value =
-q.nome;
+$('qCodigo').value = q.codigo;
 
-$('qCodigo').value =
-q.codigo;
+$('qCor').value = q.cor || '';
 
-$('qCor').value =
-q.cor || '';
-
-$('qTipo').value =
-q.tipo || 'Outro';
+$('qTipo').value = q.tipo || 'Outro';
 
 $('qObs').value =
 q.observacao || '';
 
-
 showPage(
 'cadastro',
-document.querySelector(
-'.nav-btn'
-)
+document.querySelector('.nav-btn')
 );
 
 window.scrollTo({
-
 top:0,
 behavior:'smooth'
-
 });
 
 }
-
 
 function excluirQuimico(id){
 
@@ -2515,20 +2551,21 @@ renderQuimicos();
 
 preencherTodosSelectsQuimicos();
 
-}
+mostrarToast(
+'Químico excluído.'
+);
 
 }
 
+}
 
-/* ================================
+/* =====================================================
 AVALIAÇÕES
-================================ */
+===================================================== */
 
 function criarAvaliacoes(){
 
-let html =
-'';
-
+let html = '';
 
 for(
 let numero=1;
@@ -2547,9 +2584,7 @@ ${numero}.
 ${categorias[numero].toUpperCase()}
 </h3>
 
-
 <div class="grid">
-
 
 <div class="field">
 
@@ -2564,7 +2599,6 @@ onchange="atualizarCodigo(${numero})">
 
 </div>
 
-
 <div class="field">
 
 <label>
@@ -2577,7 +2611,6 @@ class="readonly"
 readonly>
 
 </div>
-
 
 <div class="field">
 
@@ -2593,7 +2626,6 @@ oninput="calcularResultado(${numero})">
 
 </div>
 
-
 <div class="field">
 
 <label>
@@ -2607,7 +2639,6 @@ step="any"
 oninput="calcularResultado(${numero})">
 
 </div>
-
 
 <div class="field">
 
@@ -2625,7 +2656,6 @@ Aguardando preenchimento
 
 </div>
 
-
 <div
 class="field"
 style="display:flex;align-items:end">
@@ -2641,7 +2671,6 @@ Não utilizar
 
 </div>
 
-
 </div>
 
 </div>
@@ -2650,19 +2679,15 @@ Não utilizar
 
 }
 
-
-$('avaliacoes').innerHTML =
-html;
-
+$('avaliacoes').innerHTML = html;
 
 preencherTodosSelectsQuimicos();
 
 }
 
-
-/* ================================
-QUÍMICOS NOS SELECTS
-================================ */
+/* =====================================================
+SELECTS
+===================================================== */
 
 function preencherTodosSelectsQuimicos(){
 
@@ -2677,10 +2702,8 @@ $('q'+numero);
 
 if(!select)continue;
 
-
 const categoria =
 categorias[numero];
-
 
 const lista =
 quimicos.filter(
@@ -2689,7 +2712,6 @@ normalizarTipo(q.tipo)
 ===
 normalizarTipo(categoria)
 );
-
 
 select.innerHTML =
 
@@ -2704,8 +2726,7 @@ q =>
 
 `<option value="${q.id}">
 ${escapar(q.nome)}
-—
-${escapar(q.codigo)}
+— ${escapar(q.codigo)}
 </option>`
 
 ).join('');
@@ -2714,10 +2735,9 @@ ${escapar(q.codigo)}
 
 }
 
-
-/* ================================
-CÓDIGO
-================================ */
+/* =====================================================
+CÓDIGO DO QUÍMICO
+===================================================== */
 
 function atualizarCodigo(numero){
 
@@ -2728,7 +2748,6 @@ x.id ===
 $('q'+numero).value
 );
 
-
 $('c'+numero).value =
 q
 ?
@@ -2736,15 +2755,13 @@ q.codigo
 :
 '';
 
-
 calcularResultado(numero);
 
 }
 
-
-/* ================================
+/* =====================================================
 RESULTADO
-================================ */
+===================================================== */
 
 function mostrarResultado(
 numero,
@@ -2763,7 +2780,6 @@ mensagem;
 
 }
 
-
 function calcularResultado(numero){
 
 if(
@@ -2780,7 +2796,6 @@ return 'NAO UTILIZADO';
 
 }
 
-
 const padrao =
 parseFloat(
 $('p'+numero).value
@@ -2790,7 +2805,6 @@ const valor =
 parseFloat(
 $('v'+numero).value
 );
-
 
 if(
 !Number.isFinite(padrao)
@@ -2808,7 +2822,6 @@ return '';
 
 }
 
-
 if(valor > padrao){
 
 mostrarResultado(
@@ -2820,7 +2833,6 @@ numero,
 return 'ACIMA DO PADRÃO';
 
 }
-
 
 if(valor < padrao){
 
@@ -2834,7 +2846,6 @@ return 'ABAIXO DO PADRÃO';
 
 }
 
-
 mostrarResultado(
 numero,
 'green',
@@ -2845,20 +2856,17 @@ return 'DENTRO DO PADRÃO';
 
 }
 
-
-/* ================================
+/* =====================================================
 NÃO UTILIZAR
-================================ */
+===================================================== */
 
 function alternarNaoUtilizado(numero){
 
 opcoesNaoUtilizadas[numero] =
 !opcoesNaoUtilizadas[numero];
 
-
 const ativo =
 opcoesNaoUtilizadas[numero];
-
 
 [
 'q',
@@ -2872,9 +2880,7 @@ prefixo =>
 $(prefixo+numero)
 .disabled =
 ativo
-
 );
-
 
 $('eval'+numero)
 .style.opacity =
@@ -2884,7 +2890,6 @@ ativo
 :
 '1';
 
-
 $('b'+numero)
 .textContent =
 ativo
@@ -2893,15 +2898,13 @@ ativo
 :
 'Não utilizar';
 
-
 calcularResultado(numero);
 
 }
 
-
-/* ================================
+/* =====================================================
 LIMPAR LANÇAMENTO
-================================ */
+===================================================== */
 
 function limparLancamento(){
 
@@ -2913,7 +2916,6 @@ numero++
 
 opcoesNaoUtilizadas[numero] =
 false;
-
 
 [
 'q',
@@ -2927,32 +2929,23 @@ prefixo =>
 $(prefixo+numero)
 .disabled =
 false
-
 );
 
+$('q'+numero).value = '';
 
-$('q'+numero).value =
-'';
+$('c'+numero).value = '';
 
-$('c'+numero).value =
-'';
+$('p'+numero).value = '';
 
-$('p'+numero).value =
-'';
-
-$('v'+numero).value =
-'';
-
+$('v'+numero).value = '';
 
 $('b'+numero)
 .textContent =
 'Não utilizar';
 
-
 $('eval'+numero)
 .style.opacity =
 '1';
-
 
 mostrarResultado(
 numero,
@@ -2962,22 +2955,17 @@ numero,
 
 }
 
+$('responsavel').value = '';
 
-$('responsavel').value =
-'';
-
-$('obsLanc').value =
-'';
-
+$('obsLanc').value = '';
 
 atualizarDataHora();
 
 }
 
-
-/* ================================
+/* =====================================================
 SALVAR LANÇAMENTO
-================================ */
+===================================================== */
 
 function salvarLancamento(){
 
@@ -2989,7 +2977,6 @@ $('responsavel')
 .value
 .trim();
 
-
 if(!responsavel){
 
 alert(
@@ -2999,7 +2986,6 @@ alert(
 return;
 
 }
-
 
 const timestamp =
 Date.now();
@@ -3012,9 +2998,7 @@ $('obsLanc')
 .value
 .trim();
 
-let quantidade =
-0;
-
+let quantidade = 0;
 
 for(
 let numero=1;
@@ -3030,7 +3014,6 @@ continue;
 
 }
 
-
 const quimicoId =
 $('q'+numero).value;
 
@@ -3039,7 +3022,6 @@ $('p'+numero).value;
 
 const valor =
 $('v'+numero).value;
-
 
 if(
 !quimicoId &&
@@ -3050,7 +3032,6 @@ if(
 continue;
 
 }
-
 
 if(
 !quimicoId
@@ -3070,13 +3051,11 @@ return;
 
 }
 
-
 const quimico =
 quimicos.find(
 q =>
 q.id === quimicoId
 );
-
 
 lancamentos.push({
 
@@ -3135,11 +3114,9 @@ observacao
 
 });
 
-
 quantidade++;
 
 }
-
 
 if(!quantidade){
 
@@ -3151,12 +3128,11 @@ return;
 
 }
 
-
 salvarDados();
 
-alert(
+mostrarToast(
 quantidade +
-' lançamento(s) salvo(s) com sucesso.'
+' lançamento(s) salvo(s).'
 );
 
 limparLancamento();
@@ -3165,24 +3141,20 @@ renderHistorico();
 
 }
 
-
-/* ================================
+/* =====================================================
 BADGE
-================================ */
+===================================================== */
 
 function badgeResultado(resultado){
 
-let classe =
-'gray';
-
+let classe = 'gray';
 
 if(
 resultado ===
 'DENTRO DO PADRÃO'
 ){
 
-classe =
-'green';
+classe = 'green';
 
 }
 
@@ -3191,8 +3163,7 @@ resultado ===
 'ACIMA DO PADRÃO'
 ){
 
-classe =
-'red';
+classe = 'red';
 
 }
 
@@ -3201,11 +3172,9 @@ resultado ===
 'ABAIXO DO PADRÃO'
 ){
 
-classe =
-'yellow';
+classe = 'yellow';
 
 }
-
 
 return `
 
@@ -3220,10 +3189,9 @@ ${escapar(resultado)}
 
 }
 
-
-/* ================================
+/* =====================================================
 HISTÓRICO
-================================ */
+===================================================== */
 
 function renderHistorico(){
 
@@ -3232,7 +3200,6 @@ const busca =
 $('buscaHistorico').value || ''
 )
 .toLowerCase();
-
 
 const lista =
 
@@ -3296,7 +3263,6 @@ b.categoriaNumero || 0
 }
 
 );
-
 
 $('tabelaHistorico').innerHTML =
 
@@ -3383,10 +3349,9 @@ Nenhum lançamento encontrado.
 
 }
 
-
-/* ================================
-PEÇAS
-================================ */
+/* =====================================================
+PEÇAS EM PRODUÇÃO
+===================================================== */
 
 function calcularPeca(){
 
@@ -3399,7 +3364,6 @@ const quantidade =
 parseFloat(
 $('valPeca').value
 );
-
 
 if(
 !Number.isFinite(padrao)
@@ -3423,7 +3387,6 @@ return;
 
 }
 
-
 if(
 quantidade ===
 padrao
@@ -3440,7 +3403,6 @@ $('resPeca')
 return;
 
 }
-
 
 if(
 quantidade >
@@ -3459,7 +3421,6 @@ return;
 
 }
 
-
 $('resPeca')
 .className =
 'resultado yellow';
@@ -3469,11 +3430,6 @@ $('resPeca')
 'ABAIXO DO PADRÃO';
 
 }
-
-
-/* ================================
-SALVAR PEÇA
-================================ */
 
 function salvarPeca(){
 
@@ -3493,7 +3449,6 @@ $('comentarioPeca')
 .value
 .trim();
 
-
 if(
 !responsavel
 ||
@@ -3510,9 +3465,7 @@ return;
 
 }
 
-
 let resultado;
-
 
 if(
 quantidade ===
@@ -3540,7 +3493,6 @@ resultado =
 'ABAIXO DO PADRÃO';
 
 }
-
 
 registrosPecas.push({
 
@@ -3573,10 +3525,9 @@ comentario
 
 });
 
-
 salvarDados();
 
-alert(
+mostrarToast(
 'Registro de produção salvo com sucesso.'
 );
 
@@ -3584,38 +3535,25 @@ limparPeca();
 
 renderPecas();
 
+atualizarResumoExcel();
+
 }
-
-
-/* ================================
-LIMPAR PEÇA
-================================ */
 
 function limparPeca(){
 
-$('respPeca').value =
-'';
+$('respPeca').value = '';
 
-$('padPeca').value =
-'';
+$('padPeca').value = '';
 
-$('valPeca').value =
-'';
+$('valPeca').value = '';
 
-$('comentarioPeca').value =
-'';
-
+$('comentarioPeca').value = '';
 
 calcularPeca();
 
 atualizarDataHora();
 
 }
-
-
-/* ================================
-RENDER PEÇAS
-================================ */
 
 function renderPecas(){
 
@@ -3624,7 +3562,6 @@ const busca =
 $('buscaPeca').value || ''
 )
 .toLowerCase();
-
 
 const lista =
 
@@ -3655,7 +3592,6 @@ x.resultado +
 b.timestamp -
 a.timestamp
 );
-
 
 $('tabelaPecas').innerHTML =
 
@@ -3730,7 +3666,6 @@ Nenhum registro encontrado.
 
 </tr>`;
 
-
 const dentro =
 registrosPecas.filter(
 x =>
@@ -3738,19 +3673,15 @@ x.resultado ===
 'DENTRO DO PADRÃO'
 ).length;
 
-
 $('stTotal').textContent =
 registrosPecas.length;
-
 
 $('stOk').textContent =
 dentro;
 
-
 $('stBad').textContent =
 registrosPecas.length -
 dentro;
-
 
 $('stQtd').textContent =
 registrosPecas.reduce(
@@ -3761,11 +3692,6 @@ s +
 );
 
 }
-
-
-/* ================================
-EXCLUIR PEÇA
-================================ */
 
 function excluirPeca(id){
 
@@ -3785,21 +3711,25 @@ salvarDados();
 
 renderPecas();
 
-}
+atualizarResumoExcel();
+
+mostrarToast(
+'Registro excluído.'
+);
 
 }
 
+}
 
-/* ================================
+/* =====================================================
 DATA/HORA
-================================ */
+===================================================== */
 
 function atualizarDataHora(){
 
 const agora =
 gerarDataHoraAtual();
 
-
 if(
 $('dataHoraLancamento')
 ){
@@ -3809,7 +3739,6 @@ $('dataHoraLancamento')
 agora;
 
 }
-
 
 if(
 $('dataPeca')
@@ -3823,10 +3752,38 @@ agora;
 
 }
 
+/* =====================================================
+RESUMO EXCEL
+===================================================== */
 
-/* ================================
-EXCEL
-================================ */
+function atualizarResumoExcel(){
+
+if($('totalExcelLanc')){
+
+$('totalExcelLanc').textContent =
+lancamentos.length;
+
+}
+
+if($('totalExcelPecas')){
+
+$('totalExcelPecas').textContent =
+registrosPecas.length;
+
+}
+
+if($('totalExcelQuimicos')){
+
+$('totalExcelQuimicos').textContent =
+quimicos.length;
+
+}
+
+}
+
+/* =====================================================
+EXPORTAÇÃO EXCEL
+===================================================== */
 
 function exportarExcel(){
 
@@ -3843,6 +3800,10 @@ return;
 
 }
 
+/* -----------------------------------------
+ABA 1
+MÉDIA MÁQUINA QUÍMICO
+----------------------------------------- */
 
 const validos =
 
@@ -3859,9 +3820,7 @@ x.quimico
 
 );
 
-
 const grupos = {};
-
 
 validos.forEach(
 x => {
@@ -3873,7 +3832,6 @@ x.maquina +
 x.codigo +
 '|' +
 x.quimico;
-
 
 if(!grupos[chave]){
 
@@ -3901,7 +3859,6 @@ soma:
 
 }
 
-
 grupos[chave]
 .quantidade++;
 
@@ -3911,7 +3868,6 @@ grupos[chave]
 
 }
 );
-
 
 const mediaMaquinaQuimico =
 
@@ -3936,12 +3892,20 @@ x.codigo,
 x.quantidade,
 
 'Média':
+x.quantidade
+?
 x.soma /
 x.quantidade
+:
+0
 
 })
 );
 
+/* -----------------------------------------
+ABA 2
+GRAMATURAS FEITAS
+----------------------------------------- */
 
 const gramaturasFeitas =
 
@@ -3996,34 +3960,82 @@ x.observacao
 })
 );
 
+/* -----------------------------------------
+ABA 3
+PEÇAS EM PRODUÇÃO
+----------------------------------------- */
+
+const pecasEmProducao =
+
+registrosPecas
+.slice()
+.sort(
+(a,b) =>
+a.timestamp -
+b.timestamp
+)
+.map(
+x => ({
+
+'Data/Hora':
+x.data,
+
+'Máquina':
+nomeMaquina(x.maquina),
+
+'Responsável':
+x.responsavel,
+
+'Padrão / Quantidade prevista':
+x.padrao,
+
+'Quantidade produzindo':
+x.valor,
+
+'Resultado':
+x.resultado,
+
+'Comentário':
+x.comentario || ''
+
+})
+);
+
+/* -----------------------------------------
+CRIAR WORKBOOK
+----------------------------------------- */
 
 const workbook =
 XLSX.utils.book_new();
 
+/* -----------------------------------------
+SHEET MÉDIA
+----------------------------------------- */
 
 const sheetMedia =
 XLSX.utils.json_to_sheet(
 mediaMaquinaQuimico
 );
 
-
-const sheetGramaturas =
-XLSX.utils.json_to_sheet(
-gramaturasFeitas
-);
-
-
 sheetMedia['!cols'] = [
 
 {wch:22},
 {wch:14},
-{wch:38},
+{wch:40},
 {wch:18},
 {wch:22},
 {wch:15}
 
 ];
 
+/* -----------------------------------------
+SHEET GRAMATURAS
+----------------------------------------- */
+
+const sheetGramaturas =
+XLSX.utils.json_to_sheet(
+gramaturasFeitas
+);
 
 sheetGramaturas['!cols'] = [
 
@@ -4031,15 +4043,39 @@ sheetGramaturas['!cols'] = [
 {wch:18},
 {wch:20},
 {wch:20},
-{wch:38},
+{wch:40},
 {wch:18},
-{wch:12},
-{wch:18},
+{wch:15},
+{wch:20},
 {wch:22},
 {wch:35}
 
 ];
 
+/* -----------------------------------------
+SHEET PEÇAS
+----------------------------------------- */
+
+const sheetPecas =
+XLSX.utils.json_to_sheet(
+pecasEmProducao
+);
+
+sheetPecas['!cols'] = [
+
+{wch:20},
+{wch:20},
+{wch:25},
+{wch:25},
+{wch:25},
+{wch:22},
+{wch:40}
+
+];
+
+/* -----------------------------------------
+ADICIONAR ABAS
+----------------------------------------- */
 
 XLSX.utils.book_append_sheet(
 
@@ -4051,7 +4087,6 @@ sheetMedia,
 
 );
 
-
 XLSX.utils.book_append_sheet(
 
 workbook,
@@ -4062,16 +4097,27 @@ sheetGramaturas,
 
 );
 
+XLSX.utils.book_append_sheet(
+
+workbook,
+
+sheetPecas,
+
+'Peças em Produção'
+
+);
+
+/* -----------------------------------------
+NOME DO ARQUIVO
+----------------------------------------- */
 
 const d =
 new Date();
-
 
 const dois =
 numero =>
 String(numero)
 .padStart(2,'0');
-
 
 const nomeArquivo =
 
@@ -4083,18 +4129,24 @@ dois(d.getMonth()+1)
 dois(d.getDate())
 }.xlsx`;
 
+/* -----------------------------------------
+DOWNLOAD
+----------------------------------------- */
 
 XLSX.writeFile(
 workbook,
 nomeArquivo
 );
 
+mostrarToast(
+'Excel exportado com as Peças em Produção.'
+);
+
 }
 
-
-/* ================================
+/* =====================================================
 INICIALIZAÇÃO
-================================ */
+===================================================== */
 
 document.addEventListener(
 'DOMContentLoaded',
@@ -4102,8 +4154,7 @@ function(){
 
 carregarDados();
 
-
-// Tema
+/* Tema */
 
 if(
 localStorage.getItem(
@@ -4117,18 +4168,15 @@ document.body
 
 }
 
-
-// Máquinas
+/* Máquinas */
 
 preencherMaquinas();
 
-
-// Avaliações
+/* Avaliações */
 
 criarAvaliacoes();
 
-
-// Renderizações
+/* Renderizações */
 
 renderQuimicos();
 
@@ -4136,34 +4184,30 @@ renderHistorico();
 
 renderPecas();
 
+atualizarResumoExcel();
 
-// Data e hora
+/* Data e hora */
 
 atualizarDataHora();
 
-
-// Formulário inicial
+/* Formulário inicial */
 
 limparLancamento();
 
-}
+});
 
-);
-
-
-/* ================================
+/* =====================================================
 RELÓGIO
-================================ */
+===================================================== */
 
 setInterval(
 atualizarDataHora,
 1000
 );
 
-
-/* ================================
+/* =====================================================
 ATUALIZAÇÃO
-================================ */
+===================================================== */
 
 setInterval(
 function(){
@@ -4173,6 +4217,8 @@ renderQuimicos();
 renderHistorico();
 
 renderPecas();
+
+atualizarResumoExcel();
 
 },
 50000
