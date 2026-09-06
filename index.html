@@ -1,1389 +1,932 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>GraviUnit MES | Manufacturing Execution System</title>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+
 :root{
 --azul:#0756a3;
 --azul-escuro:#063b70;
 --azul-claro:#0d74d5;
 --cyan:#16b8d4;
+
 --fundo:#f3f6f9;
 --card:#fff;
 --texto:#17202a;
 --texto-sec:#667085;
 --borda:#dce3ea;
+
 --verde:#159957;
 --verde-bg:#e8f8ef;
+
 --vermelho:#d92d20;
 --vermelho-bg:#fdeceb;
+
 --amarelo:#b7791f;
 --amarelo-bg:#fff7df;
+
+--cinza:#667085;
+--cinza-bg:#eef2f6;
+
 --sombra:0 5px 18px rgba(15,23,42,.08);
+
 --sidebar:245px;
---topbar:64px
+--topbar:68px;
 }
 
 *{
 box-sizing:border-box;
-margin:0;
-padding:0
 }
 
 body{
-font-family:Inter,Arial,Helvetica,sans-serif;
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
 background:var(--fundo);
 color:var(--texto);
-min-height:100vh
-}
-
-button,input,select,textarea{
-font-family:inherit
-}
-
-button{
-cursor:pointer
 }
 
 body.dark{
---fundo:#0d141b;
---card:#151e27;
---texto:#f2f5f7;
---texto-sec:#9ca9b5;
---borda:#2a3744;
---verde-bg:#123c2b;
---vermelho-bg:#401d1b;
---amarelo-bg:#40331a;
---sombra:0 5px 18px rgba(0,0,0,.25)
+--fundo:#0f1720;
+--card:#17212b;
+--texto:#f2f5f8;
+--texto-sec:#aab5c1;
+--borda:#2d3a47;
+--verde-bg:#123827;
+--vermelho-bg:#401d1a;
+--amarelo-bg:#403617;
+--cinza-bg:#29333d;
+--sombra:0 5px 20px rgba(0,0,0,.28);
 }
 
-/* TOPBAR */
+
+/* ================================
+TOPO
+================================ */
 
 .topbar{
 position:fixed;
+z-index:100;
 top:0;
 left:0;
 right:0;
 height:var(--topbar);
-background:#071a2a;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 18px;
-z-index:1000;
-border-bottom:1px solid rgba(255,255,255,.08)
-}
 
-.top-left{
+background:var(--card);
+border-bottom:1px solid var(--borda);
+
 display:flex;
 align-items:center;
-gap:14px
+
+padding:7px 14px;
+
+box-shadow:var(--sombra);
 }
 
 .menu-btn{
 width:42px;
 height:42px;
-border:none;
-border-radius:9px;
-background:rgba(255,255,255,.08);
-color:#fff;
-font-size:22px;
-display:flex;
-align-items:center;
-justify-content:center
-}
 
-.menu-btn:hover{
-background:rgba(255,255,255,.15)
+border:1px solid var(--borda);
+background:var(--fundo);
+color:var(--texto);
+
+border-radius:9px;
+font-size:21px;
+
+margin-right:10px;
 }
 
 .brand{
 display:flex;
 align-items:center;
 gap:10px;
-white-space:nowrap
 }
 
-.logo-symbol{
-width:40px;
-height:40px;
-display:flex;
-align-items:center;
-justify-content:center
+.logo{
+width:58px;
+height:52px;
+
+object-fit:contain;
+
+border-radius:8px;
+background:#fff;
 }
 
-.logo-symbol svg{
-width:40px;
-height:40px
-}
-
-.brand-text{
-display:flex;
-flex-direction:column;
-line-height:1
-}
-
-.brand-name{
-font-size:20px;
+.brand-title{
+font-size:19px;
 font-weight:800;
-letter-spacing:.4px
+color:var(--azul);
 }
 
 .brand-subtitle{
-font-size:8px;
-margin-top:5px;
-color:#aebdca;
-letter-spacing:1.3px;
-font-weight:600
+font-size:10px;
+color:var(--texto-sec);
+margin-top:2px;
 }
 
-.top-right{
+.top-actions{
+margin-left:auto;
 display:flex;
 align-items:center;
-gap:12px
+gap:12px;
 }
 
-.status{
-font-size:12px;
-color:#c7d2da;
-display:flex;
-align-items:center;
-gap:6px
-}
-
-.status-dot{
-width:8px;
-height:8px;
-background:#27c46b;
-border-radius:50%
+.online{
+font-size:11px;
+font-weight:800;
+color:var(--verde);
 }
 
 .theme-btn{
-border:1px solid rgba(255,255,255,.12);
-background:rgba(255,255,255,.07);
-color:#fff;
-border-radius:8px;
+border:1px solid var(--borda);
+background:var(--card);
+color:var(--texto);
 padding:9px 12px;
-font-size:13px
+border-radius:9px;
 }
 
-.theme-btn:hover{
-background:rgba(255,255,255,.14)
-}
 
-/* SIDEBAR */
+/* ================================
+SIDEBAR
+================================ */
 
 .sidebar{
 position:fixed;
+z-index:90;
+
 top:var(--topbar);
-bottom:0;
 left:0;
+bottom:0;
+
 width:var(--sidebar);
-background:#0a2337;
-color:#fff;
-z-index:900;
+
+background:var(--card);
+border-right:1px solid var(--borda);
+
+padding:15px 12px;
+
 overflow-y:auto;
-transition:.25s
+
+transition:.25s;
 }
 
-.sidebar.hidden{
-transform:translateX(-100%)
+.sidebar.closed{
+transform:translateX(-100%);
 }
 
 .menu-title{
-padding:22px 18px 10px;
-font-size:10px;
-color:#8ea5b7;
+font-size:11px;
+font-weight:800;
+
+color:var(--texto-sec);
+
 text-transform:uppercase;
-letter-spacing:1.2px;
-font-weight:700
+
+padding:8px 12px;
 }
 
-.menu-item{
-margin:4px 10px;
-padding:12px 13px;
-border-radius:8px;
-color:#d7e1e8;
-display:flex;
-align-items:center;
-gap:11px;
-font-size:13px;
-transition:.2s;
-user-select:none
+.nav-btn{
+width:100%;
+
+border:0;
+
+background:transparent;
+
+color:var(--texto);
+
+text-align:left;
+
+padding:12px;
+
+border-radius:10px;
+
+margin:3px 0;
+
+font-weight:700;
 }
 
-.menu-item:hover{
-background:rgba(255,255,255,.08);
-color:#fff
+.nav-btn:hover,
+.nav-btn.active{
+background:#eaf3fb;
+color:var(--azul);
 }
 
-.menu-item.active{
-background:var(--azul);
-color:#fff;
-box-shadow:0 4px 10px rgba(0,0,0,.15)
+body.dark .nav-btn:hover,
+body.dark .nav-btn.active{
+background:#1d354a;
 }
 
-.menu-icon{
-width:20px;
-text-align:center;
-font-size:16px
-}
 
-/* MAIN */
+/* ================================
+MAIN
+================================ */
 
 .main{
 margin-left:var(--sidebar);
-padding-top:var(--topbar);
-min-height:100vh;
-transition:.25s
+
+padding:
+calc(var(--topbar) + 20px)
+20px
+30px;
+
+transition:.25s;
 }
 
 .main.expanded{
-margin-left:0
+margin-left:0;
 }
-
-.content{
-padding:25px;
-max-width:1600px;
-margin:auto
-}
-
-/* PAGES */
 
 .page{
-display:none
+display:none;
 }
 
 .page.active{
-display:block
+display:block;
 }
 
-.page-header{
+.page-head{
 display:flex;
 justify-content:space-between;
-align-items:flex-start;
+align-items:center;
 gap:15px;
-margin-bottom:22px
+
+margin-bottom:18px;
 }
 
-.page-title{
+h1{
 font-size:25px;
-font-weight:800;
-color:var(--texto)
+margin:0 0 5px;
 }
 
-.page-description{
-margin-top:5px;
+h2{
+font-size:18px;
+margin:0 0 12px;
+}
+
+.subtitle{
+font-size:14px;
 color:var(--texto-sec);
-font-size:13px
 }
 
-/* CARDS */
+
+/* ================================
+CARD
+================================ */
 
 .card{
 background:var(--card);
+
 border:1px solid var(--borda);
-border-radius:12px;
+
+border-radius:14px;
+
 box-shadow:var(--sombra);
-padding:20px;
-margin-bottom:20px
-}
 
-.card-title{
-font-size:16px;
-font-weight:750;
-margin-bottom:5px
-}
-
-.card-description{
-color:var(--texto-sec);
-font-size:12px;
-margin-bottom:18px
-}
-
-/* KPIS */
-
-.kpis{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-bottom:20px
-}
-
-.kpi{
-background:var(--card);
-border:1px solid var(--borda);
-border-radius:12px;
 padding:18px;
-box-shadow:var(--sombra)
+
+margin-bottom:18px;
 }
 
-.kpi-top{
-display:flex;
-justify-content:space-between;
-align-items:center
+.grid{
+display:grid;
+
+grid-template-columns:
+repeat(3,minmax(0,1fr));
+
+gap:14px;
 }
 
-.kpi-label{
-color:var(--texto-sec);
+.field label{
+display:block;
+
 font-size:12px;
-font-weight:600
-}
 
-.kpi-icon{
-font-size:20px
-}
-
-.kpi-value{
-font-size:28px;
 font-weight:800;
-margin-top:10px
-}
 
-.kpi-info{
-font-size:11px;
 color:var(--texto-sec);
-margin-top:5px
+
+margin-bottom:6px;
 }
 
-/* DASHBOARD */
-
-.dashboard-grid{
-display:grid;
-grid-template-columns:1.5fr 1fr;
-gap:20px
-}
-
-.chart-container{
-position:relative;
-height:310px
-}
-
-/* FILTROS */
-
-.filters{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-margin-bottom:18px
-}
-
-.filter-btn{
-border:1px solid var(--borda);
-background:var(--card);
-color:var(--texto);
-padding:8px 13px;
-border-radius:7px;
-font-size:12px
-}
-
-.filter-btn.active{
-background:var(--azul);
-color:#fff;
-border-color:var(--azul)
-}
-
-/* FORMS */
-
-.form-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px
-}
-
-.form-group{
-display:flex;
-flex-direction:column;
-gap:6px
-}
-
-.form-group.full{
-grid-column:1/-1
-}
-
-label{
-font-size:12px;
-font-weight:700;
-color:var(--texto)
-}
-
-input,select,textarea{
+input,
+select,
+textarea{
 width:100%;
+
 border:1px solid var(--borda);
+
 background:var(--card);
+
 color:var(--texto);
-border-radius:7px;
-padding:10px 11px;
+
+border-radius:9px;
+
+padding:10px;
+
 outline:none;
-font-size:13px
 }
 
-input:focus,select:focus,textarea:focus{
+input:focus,
+select:focus,
+textarea:focus{
 border-color:var(--azul);
-box-shadow:0 0 0 2px rgba(7,86,163,.10)
 }
 
 textarea{
-min-height:90px;
-resize:vertical
+min-height:80px;
+resize:vertical;
 }
 
-.campo-tempo-real{
-background:#f1f5f8!important;
-font-weight:700;
-color:#0756a3!important;
-cursor:not-allowed
+.readonly{
+background:var(--cinza-bg)!important;
+cursor:not-allowed!important;
+user-select:none;
 }
 
-body.dark .campo-tempo-real{
-background:#202c37!important;
-color:#69aef0!important
-}
 
-#resultadoLancamento,
-#resultadoPecas{
-font-weight:800;
-cursor:not-allowed;
-background:#f1f5f8
-}
+/* ================================
+BOTÕES
+================================ */
 
-body.dark #resultadoLancamento,
-body.dark #resultadoPecas{
-background:#202c37;
-color:#fff
-}
-
-.form-actions{
+.actions{
 display:flex;
-gap:10px;
-margin-top:18px
+
+gap:8px;
+
+flex-wrap:wrap;
+
+margin-top:14px;
 }
 
 .btn{
-border:none;
-border-radius:7px;
-padding:10px 15px;
-font-size:12px;
-font-weight:700
+border:0;
+
+border-radius:9px;
+
+padding:10px 14px;
+
+font-weight:800;
 }
 
 .btn-primary{
 background:var(--azul);
-color:#fff
-}
-
-.btn-primary:hover{
-background:var(--azul-escuro)
+color:#fff;
 }
 
 .btn-secondary{
-background:#eef2f5;
-color:#344054
-}
-
-body.dark .btn-secondary{
-background:#25313c;
-color:#dce4ea
+background:var(--cinza-bg);
+color:var(--texto);
 }
 
 .btn-danger{
 background:var(--vermelho);
-color:#fff
+color:#fff;
 }
 
 .btn-success{
 background:var(--verde);
-color:#fff
+color:#fff;
 }
 
-/* MEDIÇÕES */
-
-.medicoes-container{
-display:flex;
-flex-direction:column;
-gap:12px
+.btn-warning{
+background:#d69e2e;
+color:#fff;
 }
 
-.medicao-item{
+
+/* ================================
+TABELAS
+================================ */
+
+.table-wrap{
+overflow:auto;
+
 border:1px solid var(--borda);
+
 border-radius:10px;
-padding:15px;
-background:rgba(7,86,163,.025);
-transition:.2s
-}
-
-body.dark .medicao-item{
-background:rgba(255,255,255,.025)
-}
-
-.medicao-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-margin-bottom:12px
-}
-
-.medicao-numero{
-font-size:13px;
-font-weight:800;
-color:var(--azul)
-}
-
-.medicao-status{
-font-size:10px;
-font-weight:800;
-color:var(--texto-sec)
-}
-
-.medicao-grid{
-display:grid;
-grid-template-columns:2fr 1fr 1fr 1.5fr;
-gap:12px;
-align-items:end
-}
-
-.resultado-medicao{
-font-weight:800!important;
-cursor:not-allowed
-}
-
-.resultado-dentro{
-border-color:var(--verde)!important;
-background:var(--verde-bg)!important;
-color:var(--verde)!important
-}
-
-.resultado-acima{
-border-color:var(--amarelo)!important;
-background:var(--amarelo-bg)!important;
-color:var(--amarelo)!important
-}
-
-.resultado-abaixo{
-border-color:var(--vermelho)!important;
-background:var(--vermelho-bg)!important;
-color:var(--vermelho)!important
-}
-
-.resultado-nao-utilizado{
-border-color:#667085!important;
-background:#eef2f5!important;
-color:#667085!important
-}
-
-body.dark .resultado-nao-utilizado{
-background:#25313c!important;
-color:#b7c2cc!important;
-border-color:#667085!important
-}
-
-/* BOTÃO NÃO UTILIZAR */
-
-.btn-nao-utilizar{
-border:1px solid var(--borda);
-background:var(--card);
-color:var(--texto-sec);
-border-radius:6px;
-padding:6px 10px;
-font-size:10px;
-font-weight:800;
-transition:.2s
-}
-
-.btn-nao-utilizar:hover{
-background:var(--vermelho-bg);
-color:var(--vermelho);
-border-color:var(--vermelho)
-}
-
-.btn-nao-utilizar.ativo{
-background:var(--verde-bg);
-color:var(--verde);
-border-color:var(--verde)
-}
-
-.medicao-desativada{
-opacity:.72;
-border-color:#98a2b3
-}
-
-.medicao-desativada input:disabled,
-.medicao-desativada select:disabled{
-cursor:not-allowed;
-opacity:.65
-}
-
-/* TABLE */
-
-.table-wrapper{
-overflow-x:auto
 }
 
 table{
 width:100%;
+
 border-collapse:collapse;
-min-width:700px
+
+min-width:720px;
+}
+
+th,
+td{
+padding:9px 10px;
+
+border-bottom:1px solid var(--borda);
+
+font-size:12px;
+
+text-align:left;
+
+vertical-align:middle;
 }
 
 th{
-text-align:left;
-padding:11px;
-background:#f1f5f8;
-color:#52606d;
+background:var(--fundo);
+
 font-size:11px;
+
 text-transform:uppercase;
-letter-spacing:.4px;
-border-bottom:1px solid var(--borda)
+
+color:var(--texto-sec);
 }
 
-body.dark th{
-background:#202c37;
-color:#b7c2cc
+tr:last-child td{
+border-bottom:0;
 }
 
-td{
-padding:11px;
-border-bottom:1px solid var(--borda);
-font-size:12px;
-color:var(--texto)
+.search{
+max-width:420px;
 }
 
-tr:hover td{
-background:rgba(7,86,163,.035)
+
+/* ================================
+AVALIAÇÕES
+================================ */
+
+.eval{
+border:1px solid var(--borda);
+
+border-left:5px solid var(--azul);
+
+border-radius:12px;
+
+padding:14px;
+
+margin-top:12px;
 }
 
-/* BADGES */
+.eval h3{
+margin:0 0 12px;
+
+font-size:15px;
+}
+
+
+/* ================================
+RESULTADOS
+================================ */
+
+.resultado{
+margin-top:7px;
+
+padding:9px;
+
+border-radius:8px;
+
+text-align:center;
+
+font-size:11px;
+
+font-weight:900;
+
+min-height:37px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+}
+
+.resultado.green{
+background:var(--verde-bg);
+
+color:var(--verde);
+
+border:1px solid #9edab9;
+}
+
+.resultado.red{
+background:var(--vermelho-bg);
+
+color:var(--vermelho);
+
+border:1px solid #efaaa5;
+}
+
+.resultado.yellow{
+background:var(--amarelo-bg);
+
+color:var(--amarelo);
+
+border:1px solid #e7ca77;
+}
+
+.resultado.neutral{
+background:var(--cinza-bg);
+
+color:var(--cinza);
+
+border:1px solid var(--borda);
+}
+
+
+/* ================================
+BADGES
+================================ */
 
 .badge{
 display:inline-flex;
-align-items:center;
+
 padding:5px 8px;
-border-radius:20px;
+
+border-radius:999px;
+
 font-size:10px;
-font-weight:800
+
+font-weight:900;
+
+white-space:nowrap;
 }
 
-.badge-green{
+.badge.green{
 background:var(--verde-bg);
-color:var(--verde)
+color:var(--verde);
 }
 
-.badge-red{
+.badge.red{
 background:var(--vermelho-bg);
-color:var(--vermelho)
+color:var(--vermelho);
 }
 
-.badge-yellow{
+.badge.yellow{
 background:var(--amarelo-bg);
-color:var(--amarelo)
+color:var(--amarelo);
 }
 
-.badge-blue{
-background:#e8f1fc;
-color:var(--azul)
+.badge.gray{
+background:var(--cinza-bg);
+color:var(--cinza);
 }
 
-body.dark .badge-blue{
-background:#142f4a;
-color:#69aef0
-}
 
-/* ACTIONS */
+/* ================================
+ESTATÍSTICAS
+================================ */
 
-.actions{
-display:flex;
-gap:6px;
-flex-wrap:wrap
-}
-
-.btn-small{
-padding:6px 9px;
-border:none;
-border-radius:5px;
-font-size:10px;
-font-weight:700
-}
-
-.btn-edit{
-background:#e8f1fc;
-color:var(--azul)
-}
-
-.btn-delete{
-background:var(--vermelho-bg);
-color:var(--vermelho)
-}
-
-body.dark .btn-edit{
-background:#142f4a;
-color:#69aef0
-}
-
-/* RESUMO */
-
-.summary-grid{
+.stats{
 display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-bottom:20px
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:10px;
+
+margin-bottom:14px;
 }
 
-.summary-card{
+.stat{
 background:var(--card);
+
 border:1px solid var(--borda);
+
 border-radius:10px;
-padding:15px
+
+padding:12px;
+
+box-shadow:var(--sombra);
 }
 
-.summary-label{
-font-size:11px;
-color:var(--texto-sec)
+.stat-label{
+font-size:10px;
+
+color:var(--texto-sec);
+
+font-weight:800;
 }
 
-.summary-value{
+.stat-value{
 font-size:22px;
-font-weight:800;
-margin-top:5px
+
+font-weight:900;
+
+margin-top:4px;
 }
 
-.empty{
-padding:35px 20px;
-text-align:center;
-color:var(--texto-sec);
-font-size:13px
-}
+.notice{
+background:var(--fundo);
 
-/* MACHINE */
-
-.machine-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px
-}
-
-.machine-card{
 border:1px solid var(--borda);
-border-radius:10px;
-padding:15px;
-background:var(--card)
-}
 
-.machine-name{
-font-weight:800;
-font-size:15px
-}
+padding:11px;
 
-.machine-value{
-font-size:24px;
-font-weight:800;
-margin-top:10px
-}
+border-radius:9px;
 
-.machine-label{
-font-size:11px;
-color:var(--texto-sec)
-}
+font-size:12px;
 
-.search-box{
-max-width:350px;
-margin-bottom:15px
-}
-
-.footer{
-margin-top:30px;
-padding:20px;
-text-align:center;
 color:var(--texto-sec);
-font-size:11px;
-border-top:1px solid var(--borda)
 }
 
-.footer strong{
-color:var(--azul)
+.same td{
+background:rgba(7,86,163,.035);
 }
 
-@media(max-width:1200px){
 
-.kpis{
-grid-template-columns:repeat(2,1fr)
+/* ================================
+PEÇAS EM PRODUÇÃO COMPACTA
+================================ */
+
+#page-pecas .page-head{
+margin-bottom:10px;
 }
 
-.machine-grid{
-grid-template-columns:repeat(3,1fr)
+#page-pecas .card{
+padding:13px;
+margin-bottom:12px;
 }
 
-.dashboard-grid{
-grid-template-columns:1fr
+#page-pecas .stats{
+grid-template-columns:
+repeat(4,1fr);
+
+gap:8px;
+
+margin-bottom:10px;
 }
 
-.form-grid{
-grid-template-columns:repeat(2,1fr)
+#page-pecas .stat{
+padding:9px;
+
+border-radius:9px;
 }
 
+#page-pecas .stat-value{
+font-size:19px;
 }
 
-@media(max-width:800px){
+#page-pecas .grid{
+gap:9px;
+}
+
+#page-pecas input,
+#page-pecas select{
+padding:8px;
+}
+
+#page-pecas textarea{
+min-height:55px;
+padding:8px;
+}
+
+#page-pecas .resultado{
+min-height:34px;
+padding:7px;
+margin-top:8px;
+}
+
+#page-pecas .actions{
+margin-top:9px;
+}
+
+#page-pecas .btn{
+padding:8px 11px;
+font-size:12px;
+}
+
+
+/* ================================
+EXPORTAÇÃO
+================================ */
+
+.export-box{
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:15px;
+
+flex-wrap:wrap;
+}
+
+
+/* ================================
+RESPONSIVO
+================================ */
+
+@media(max-width:900px){
 
 .sidebar{
-transform:translateX(-100%)
+transform:translateX(-100%);
 }
 
-.sidebar.mobile-open{
-transform:translateX(0)
+.sidebar.open{
+transform:translateX(0);
 }
 
 .main{
-margin-left:0
+margin-left:0;
 }
 
-.content{
-padding:16px
+.grid{
+grid-template-columns:1fr;
 }
 
-.top-right .status{
-display:none
+.stats{
+grid-template-columns:
+repeat(2,1fr);
 }
 
-.brand-subtitle{
-display:none
+.brand-subtitle,
+.online{
+display:none;
 }
 
-.summary-grid{
-grid-template-columns:repeat(2,1fr)
-}
-
-.machine-grid{
-grid-template-columns:repeat(2,1fr)
-}
-
-.medicao-grid{
-grid-template-columns:1fr 1fr
+#page-pecas .stats{
+grid-template-columns:
+repeat(2,1fr);
 }
 
 }
 
-@media(max-width:520px){
-
-.brand-name{
-font-size:16px
-}
-
-.logo-symbol,
-.logo-symbol svg{
-width:34px;
-height:34px
-}
-
-.kpis{
-grid-template-columns:1fr
-}
-
-.form-grid{
-grid-template-columns:1fr
-}
-
-.summary-grid{
-grid-template-columns:1fr 1fr
-}
-
-.machine-grid{
-grid-template-columns:1fr
-}
-
-.page-title{
-font-size:21px
-}
+@media(max-width:560px){
 
 .topbar{
-padding:0 10px
+padding:7px;
 }
 
-.theme-btn{
-padding:8px;
-font-size:11px
+.brand-title{
+font-size:15px;
 }
 
-.medicao-grid{
-grid-template-columns:1fr
+.logo{
+width:48px;
+height:45px;
+}
+
+.main{
+padding:
+calc(var(--topbar) + 14px)
+10px
+25px;
+}
+
+.card{
+padding:13px;
+}
+
+.page-head{
+align-items:flex-start;
+
+flex-direction:column;
 }
 
 }
+
+
+/* ================================
+LOGO
+================================ */
+
 </style>
+
 </head>
+
 
 <body>
 
-<header class="topbar">
 
-<div class="top-left">
+<!-- ================================
+TOPO
+================================ -->
+
+<header class="topbar">
 
 <button
 class="menu-btn"
-onclick="alternarMenu()"
-title="Abrir menu">
+onclick="toggleMenu()">
+
 ☰
+
 </button>
+
 
 <div class="brand">
 
-<div class="logo-symbol">
+<img
+class="logo"
+alt="GraviUnit MES"
+src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0LCQ4NDA0QDw4RFiQXFhQUFiwgIRokNC43NjMuMjI6QVNGOj1OPjIySGJJTlZYXV5dOEVmbWVabFNbXVn/2wBDAQ8QEBYTFioXFypZOzI7WVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVn/wgARCAF+ArwDASIAAhEBAxEB/8QAGgABAQADAQEAAAAAAAAAAAAAAAEDBAUCBv/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/2gAMAwEAAhADEAAAAfoCFQVBSFSgBBUCwVBUFQVKAAEFQVBQAEFShBUoAABLKAEFQVBYFQVAsCwUhUAFQVBYAAAABYAACkWAApAACkUQApFEAURRFgKRRFgAUQAFlEAAKRYACkWAABRAAFgABYACwAAAWAABUAAFSkABUAAFQWAKAAARQlgBUFgALBYACwWAAAsAAAAAAAAACoAAFEsApFAgAUCFgKCWFgFBMKZ5zNXXPs4uL5s6G1zdc+gy/N5U+gcndm9lLnolgKAEAoAQAFEWABQgCkWCoAAAAAAAAACkAAAAKRYAAFEqFxY+PrG3pzcvPVybOHPTOxYZqb/K37mNbNNanndy6xj6Xz+e4+gae5nrFk0AKQApAAAAAWBYpACkWAAAAAoQWAKCAACgQAVKCAFABNTLw7hn8Z9Y9+M/vHXkePEs6mjizmL2xm7g1fRse8PbNfR95zR7Onqa5fSNbZz2CVAWUAIBQQsACgILFJQIAAAAABSLAAUiwAFIsABSKIAUebpJzpg2t8snr3pZ66za3U5e/tZFxcnvcPXLLs4t6a8cz1hmtXcz806uth2TY0cm6a/b+Y7OuXQlY7xYAFEoQBRFEAKJRACkWAAAAAFgAAVAAsFQWABUACwVzubcfQ8GedZ9XzGdni9Krqbvvdm9CdT1nXK94OhZh19zMaW5uyXzobvIs8dTQxnS5vX4srJs8/fL6W6+fHUFqCkLAWCkAFgqCywFCCwAAAAABSLAAolQAKIsACiUJKNXkd/RTjeV3ynos9MXtPO5rej6Xxyt/PTj7unuTTb0spu8adPXPk4voOLNeMmv0NY39XpavPtqc/Yw3PU6HK61kWZ6CiUAIBRKgAoAIAolEAAAAAAAsFgAAWAAAAAsDHk8pyNXPq7558PrpY6c/FM++WGWXIp56XO6GOt0Nwu3u8LXufpONr403LpZbO/i+fzTXq47c5u58135cyzPVYAAFgsUgFgqUgALALAAAAABUABSWCwBSUEAUlgAWC+Pfk5HO7PE1zz9PR10y+MfqzPj8bRreN/FNaW1tac178+qeMmr3bn1w/peVNcrc9bFzuednVzvna+3r3Ox2ub07EM9BSUCAUAIAFAgsUlAgAAAAAALAAAAAAAAAUgBDBxNjnb5X3cdx78X0PDKs8dnm46+9bc09c3Q5+yu3zNzoZ1zNTtcW5vrBtaz3NHocnn22uVvau+fZ2/PrPSCUBYCiAALBYFgKEBYAAAAAAKgAAqAACoLAAqCoBSauzxE52XFl6cMfrH7Dz0lw59zl469ribmlKx7mrrnj2cW0ubrPOduZ45db3Q5OwbXnx4NXoc76LXLITHYACoFgAqCwFlCCoAFgsAAAAAAUiwAKIsACiLAAAsFg8fN/RcG51bs4Nc5j28R785MC9HWxbGdzxs6C7uHNjPPrxiTe0PG8aGbxunT5jOauu6muexvGOqUsWABRFgAURRLAspKgAKJYAAAAAAAAWAAsFgALAAsBYefOQY2QY2QaXD+n17Pm8+xoa57Pjzty89sYtZXMzrNsYE14z4NW53dHL27NfqLjoSqlgAsAAAAABYWAAAAAAAAAKSggCkUIAChLAAsoQWAUCFgJ6hi1d+Jwb3MVfL+trT3w97eznm+B67+xLwuj0fU159WTVlgKAIApKBAKACAFAIAFCWAAAAAAAAABYAACkAAAaHHT6d8sr6l899DAKAAlGro9gkx5eMb238xsXPfvz/0E0mL5c+taW8qA1dngp0d3h+js+/m/pCBRSAFEsFQFEAAAAAAAAUILAAWCwAFgsAUlQYM+ifPZ9Tv3Okww6e7xYZPGvt655dba1ZXvHq6z29DHgl+p9c1npq+dTb1zmPx7XJ9D899Djpq/M/S/NV9DoOcmw3dM38XP2S6meGLcwfQmdE1UAoAgCghUpAUBAAAAAAKRYACkUQABRACk0N/UT5fucf1Z0NO4RnxZLNrucPuJy+PvaVnvHua9zl9OnNcf3q+rjpeOrzM9dL1Nm5x/R/HZc77/wA3k9Gzp9XkH13H7HJl5G3qbdlTMYPpvj+gd9U1FEAURRAFEUQApFgAAAAsFgALBUAAFQAAVAx5BytHtYE5eTp7Jq6vRwnnd1qY+d0vVcr30/KeNnzhXU2M/hNzQvuXFs+9QxYt3wYOh48nrHfJv6mPMYPcGaYvJ42sHs3iKAsFQWAsFQWAsoAgAAAACkWAApFBAKRRLAKQolGnj6BNLNnGvh3ho3dhp3cGnN0a82Bredwad2xh8bMXX87VTVbQxYtqLr+8tNf3lGu2IYPWWiUCApKCUQCglBKARYAAAAAAAAAAAAAAALKAAIACwWABUABYAAAAFgUSwACksFgAAAAAAAAAAAAAAAWWFgAKhYACwWABUogAFhSACyhAAsoIAAUhYAFgWAAsogCkoCBYLAsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYFgAAAAAWAAApAf//EAC0QAAICAgECBgIBBAMBAAAAAAECAAMREgQTIRQiMTIzUBBgIyA0QUQwQpBD/9oACAEBAAEFAv8Aw6LqIbkAPKOVvUoLFMz+oNaqxuQTC5nUWMcr2ZCMV9VYLBFuYRbgf0xnCh7y0JmjtBxxBWBCaxGasHRdK1V5ZxkaGuyuC2JaREsD/pNlgQMxYqrPEULDYqzNjHoEy1ErUNiLYbFrsaktdZF5QMalbAanqKWZlduf0e63QFslU7GYZ5vqQTk8rs7FzEcoRdHcs2czV6oly2y6nBrfMpsz+iu4VWO7KoAEVMyw6r/2JxAHadGwzoWTpWCZZYGB/HlZLqZQxdLagy12ZlNm4/QjL32esbEecnyg3HZrHti8exonGUToVTEqQNZppc1QMs48yVNdhQvfmK/SKWrZLqyjVviA5H6DfZoojDEUS5ltdKq4qhf6BKPmeoPNL4wdZ0P4+9bSnu1iGt+1la+R+O36CZyj56Rko46nIfSvMqfRvFLPEiG26V329aurcIAto5F5gHIslXHVIRLKN50K1NVK1i1ciltX5Kypvv8AkuwUX2GdV5uZ1GgYibEzMDLFrUgVCET/AHKT5c/zcdf4MQsFnUWWXO7p0Mb6FTvXeNHYbJV2lJzX9665ltKpNVmizQTQTQTQ4BbFNuCO4af7dONfN1uN/b2OEDMXbFkT5LPxR8HIXK0HNR7X8Y/fGXLsNHWYeeeDYjZorw+UkSm/WdRWH+3UDga9am1V47FnaqrUMvazjnbFmU4xaAYFo8vHMuGLeP8AJ98ROUcLX71bNlisj9rFIDRTg96zqJswid+TUwx62pW5FFWn5t5J2WpHHWNRRt0f0QMj3eZqnUWffGcv0T31/Iy7L8LuIV3iviaAz+RYux5NXs79boVxqnE3IOzGJ8jz0iswm5nUMVgzOmtlXxfemcoeVITrfuFrdtyjdKMswGmjiZYQWfzV2oJ1ahZZdkg2zp3OSnlsqcNsTEpssgqAVkAFZyblxZSu9n39w7IpMLgTOZ3mBAxrgKv+OQf4cKF66wXpm5AXBNbU2h/xdeqsEczxBrikMt5wlI8lve/ijv8Afv6WPn8Ym349JgE7Osss2QuepX7W9z/NdUGAJrbxDQHNh8sAEo/t+Scle0HduOMVffGcm3vPaIBmZx+ErZylAQcoYhAlftb3cjuQAlhpBhpUB0dXL9kR7Yo6dQ873HWpFyQMD7659V9YgmckDMJzB3Jq1WqyBthy5k9VPa/uvyxppfaGW2ordSrNNwc3vmIsdt7OKnf74zlt+H7LG/FWqFxlUA6gOJyG3bEFbgdNyf8A7wkAXcnM9YOPYYP4zLm1RF2Krqv3zTkHNo9XOXX19TV6nINdmyspRjb5KV8p9ABAe7Po7cwx7Gf8VHWyxwo/yzMoyTOPVov37ellTl1pfPRsytLgdKyOhSpGxMRLMxgGSltSfRYBiX+ijZvDdukwKAVzuzErSCSx49H6FrMTWYmssTaWVFCrTyvPPXG0sjoVOIK2I6TGVKtZa0zfYioxrgo7k8fj4/SMRkzLePDlYrmP0wLsH8J8abGdJprUs64EZ2aV1NZKqFr/AEsiPUDG4sNJFY7H8P8AwV5gyYvHdpXxVEAx+nYjCX1QGcars1AZhx1grAmP1J0zF4mXxHZUUX1k/wDFdetUr5K2OTibA/cX8jpw8m0zrWTrWSi1zd/ycw+WrJs5lh6nEJ68c4GxLcTvR/RylJbi1t1eaxnG+f7axsBm2eukuPCmeFMp4wRrLRWp5bmeJtichun4i2eItg5Ngh5OahyrDK23QnAbkuWaxulXa2/K+Xh/PLvaJxjjj2cpmPVedV5RyCx5bFWqtbbYtAcGh2N32t/tlHl4x5NmfEWSvkWb8ok2InUbwhnh8L0VE6aRhhqu7Eavw37ct8IoyeUNUr9/J+Xh/PLvaJtjiCeFGLqemFPfl++gbW8hAjUja1K1T7a/2ynzUeFEurFYr+S/5eGP5ZyrNVHedN4cg0fNyUwa30e597eImW5npX8nK+XinF8vOEEP9qs/xzPYs5fv43zcz3cb5/trRkOurLYyTxFkdy8qXNvI+XhfKZyxFOp8Q0d9zxvmvXI9DKl0q5npX8nKTME3aZJiKXbkrrSJ/jmewTl+/i/Py1gaUWMbvtTLKdp4WeFMHEMrpWsWcfdqOOKjLK9oeLPCmeElPHWuMMxuNs1XGVTLaepK+KqlkzG4ymeEEHDWJWqB03icasfiyveJxkEagOUpVIybTwqGV0pX9urgv1sqXIC5xWdkS4GvqnpPbrGswXfVlY4Wz+MdWbvo7astjwXd+oxi7RLGZ1ZzZXYTE3Ybt0R1Oqru8NjgI+77N1A7k1szTL9FmZU6u1v2xp2LUnGjaVKUWoeRaMRaTFqIIo7GpmhpGho7qLM9P+PpsStIQrTiLTqqLgitlgqxEqZYtRUirB18/R7CoCLWFfp5OnmWvDdMdPpzprn/AMgv/8QAJxEAAgIABQMEAwEAAAAAAAAAAAECERASITFQAyJBIDAyURNwcUD/2gAIAQMBAT8B/S9j6iM8hM/I/KF1E+GlKjK5biilglrg4JmsBO+DlKiMfL9hrK7QnfBLufo6jpENvTHtdcA5UOYppH5EKSeFWJYWXh1F5FquA1O41P4RleFnzHDTQyPCWx09uAnvhJVqsNyI1ZsZtDOZmOTIaacBJDnQm/JX0ZUbYJ+HhlWEtjp7cBKXg2P6K/GHU2IbDVmV0a4T+haf72IQlZWE1ZFUvTHV3wEtjK6Mro+PsfISrhKa2FIk/ojhmKbEq4aiUaIxMgorg79iLfnhbNWNMp/ZbaE9BakBD4N7ENiZ2kNjbQSpEOIpYV+x/wD/xAAhEQACAQQDAAMBAAAAAAAAAAAAARECEDFQEiAhMEFwUf/aAAgBAgEBPwH8Y4kIg4nHTJSTBPSTxj80aQ38GdHhdKR56v1aBI4kHEa+CnReXavgkmyKs6BWV3bJBxIIHoEQNE/0nrNkVaBLrSVZJJPLU6PF0x9X5oESSZ+DGlyQJDtB4tQmNnInVtabxX+xoY9NUUno7fZV+4//xAAwEAACAQMCBQMDBAIDAQAAAAAAARECITEQEiIyQVFxYGGBA1CREyBCUmKhIzCQM//aAAgBAQAGPwL/AMOsmdNzM+kblrF2dzDLZILyi1R3O3oy5w2Pc/qi9zBxNHA18EjqgsoZZkVKC116K9yWWsu5ZfJ3ZaKTjqbMXLUocjTpmk4KYXuR9SmCUWLWZDz6Ilm6vHREuyP60jpotBJy3L6WOKnTiRu+m7dja7VdiaSHzEP0LLNzN9Xwbqsk1fjRvvpakyZZk4lrYlHF0JVqkf5I9/QkdEXwjd0WDfV8EzcgvbycVzl/2POe5DdWO5Qk6ofd6WIqLYLIdppZCN1IqkT6EX011yeyIlQjO4so/Y/J8CbbUdj+X5OKpz2k4skPGm0306bTb6CS6Ew4Q7OSFlnKTtZy1HLUcNKS9ymmqLje6LstVu4WWppL1bfBOau+sVVwTT10dH4NyFV9/wCFwzmOb9lzCL0ljGlB8s5dvCynS7Mjpp5V2PfruP8Ahbj/AEKruKpdNHT29ATcyzLOZnMznZaslcRPQnSknrLL/wBWUFyXk5Ssp86UeNEeRr0BixynKWRynZm+n5P1KcdTuizKTNpZZ/xZTe5P+iXnSUJRJP1H8ELSpe5T6CRWb6TfSX/JtqyWvQzdQ/gvQygj3ZdRwstBNV3q6aFjqbnW6mQq/wBRdhVd9KuGZEZ9Aor09nk3LB/ksEPJNL2nRlG4+WKXNjEHBX8MhpyYZULzp1g/kfyLnCUz9/YmeTisYsQ70MlYOI4XuRekpb6F6n4JXYWyqC1cib2yj3JpEnTcvwoS0qfuIh+gYRa776WLuS3FSStPkwj/AOZH6ZRbJcjrptSmol17fBH1En7oTWGMXueBv0DFONOL8HtpxW9jsdKiNrQ6ekaU+T6XnS/5OYqk4W1pR4FR3PBVV3PPoDYtJedeH86WPcsOrrGlPko8lG2buM6YG0LycKhd2KnsOv4RHWoVKI+/skl4RL09iES7s4dWum0RT5KEsiq+pVjprESTsIVJsXU9kN9Fg3egI0VPzoqfzp79dKmtFSs6ZpFO0+l50uR9P86/pry3pspyxUoSXoJ6SS+hvp6nsbqRvqbnljFmY7lMTDPp1dmcKg4npSz3J6suoL5JfM/QLaJejnR92exu+mQ7PsQbGMp8FBSQXZHQteruWuzvWS8m+r49ESixezO6P61HNJlkpsuzc5b0tdk1vajb9NfJ3Zurz6KlHEewm8MW3GlRFi9SRxVbjgpg4mWx3Pf0bYhsh6x/OoyWTOxe79IytN7+CWY9Ky8aTURP/WpubYLln94hXZzQczOZlK3P/ups8iSZnWq/UX7VFxVRCEvcp+8NsnoZMiqbwSy1jmK23focxzGRtcxkVWj24NzyIX7GI4LI5mczNtYkjJdyWKVu+8JjucwpYkQZIL1nOWuiBodJC6iSEikX7H+yUIpEhQJMsvvCWtOnxpCy9OUuhEiZ4HV20pEKf2rRiKRCKfvPCzmOIp0+NZRhFxaRolpT5LaZZkhELoLRiKRaWKVu+8ZMmS2SSeutjJknL0kl30uT+3hRc5dLmC5ZX0wWX3eqn+pKpzVFxWplvvYurksdT6dCmqOKroUPpUVWw0NR/HcTVtiJsVOpQ10MUjqe3MEf4tlO7bxLoUThqWQol1NEVQ/BG+nOINnVZJqrXiBVSofSCirq2NOvF8FKThxLZGalVHkfaERVVtvZQbP5U5IdbVXaB1b3mCaXU3u6ooVPL1+7u8XOj45uRs+n4IZ8spl4KZq5VFim8qlsrU5wVOpqXTFjaoXcd3DUM4qlA6Zyxuqq8QJ09oYpcxTtIVV05TG25bLV2nsJzxdX3I3zT2gXG9q6C4ntXQdXcpipprqK7mZkqqX8i9TjMFT7kup1eTZL7l6qnebii0Of/IP/xAArEAEAAgICAQMEAgIDAQEAAAABABEhMUFRYRBxoVCBkbFg8cHRIJDw4TD/2gAIAQEAAT8h/wCjraGKHhCaUdVLYVU0xgHT/ENyz0TRYdn55m39hHWipHMGUwXNbqdT3CO/3TZYeZi3L+GXJVMBggj30Idb5Jduz8w7QhVfdsptGKBTeZfgS6JlS8E2hXTBHK98TNqBWMPX8J+MCXJ/+TIe7T91IxWek3Guye8sM73dmnVYIbuM1AJ1GCM2VxMZ/aJkg+9kwVRjN16hbqeIfF/g4PO6IjPmG6H5E0whxK3PyMasAqvlgs2YiQ8jLB6bBB8H2lg0GqgRV3mHIDNoVT5EfReYr1j5nlfD/BWSajp9g6nEnh3E/COo7Pt9IaXgm4wR0X5huU9iMp/30f8ACZqWG8wBXsqZNKckW81XvGgbAk0XGyYF0/gaoj1/J7z8oJtP/TcRxppH3v2cSkpmZbBG7K/BD+4hnlsNpjNWcOIVQNlk42V24M647lxWWyDjSRFcvjiONlnD6hoSMaf4ECsF+7KG7kpbjUqVLarRF4quhgFF7IMIRZ979zT742gaKqeabVWWtkH3v49ReAsfiGOCcDksiVenU3r7fwFRWgoziMrDsIpVW0UcRs/yVPcmV0VWPQuv8cU3+dIzF+hMgOFXmYH/ABIHdB8TgB4R299yWQ4QLDq5ug8rlvLp9407DMpSg2D9esbB8wWxzzortmKrxFrMR76FYM/xSzUSBgw16BXLL1feZbfYZhK1xCk1UR6cxW7OTDZf7MPuaGLeKpcblyW8wdyV3jH11leAL+wn9j6GTT0uEks1MsUNnJMcfIjBGma+mbKHK+8cFx0UT4kVv4TYBaJ4P5jqzcV+gPxIaTLeqmedJ+6+vCYSK0LQf2JhOeFreZ/VYK4voYX8ElfKtJQ/8kcAencewV5nYtmbhRoNS1srqD3r+IDF49MznA2MePs0AwoNS5So6IuXmOqdn159CxDmLZG8SpyK5O49g5ILW/HSOmhs7l2v8RLsMvlqP6QjuInvHPK+jzLR+6NwzrZSuP0yzuKSpgFS8zzhoaqBpuxs+8EbFLqG1KIzO4eimWGnhBss+vtscMC+8GLd/tIFbVKBmtiWqq5DzFlh9cQ4PtMdApmP/huYVGXjzPJ9jNrMcIJ2QZRNe/CZBS0a5gAxiVnUVXpPF+EoSTu4A0wbl+xX19ZJ5lkOBAjZ1zCyQteMPU8rCKjfnmPpIURgiAVzl0xuAL0WvDuavucROj7IdWQ1A4BTNRW242go3iKWv3wsGiokajvVWBLGbWCGgz9fZc4slp31ONhCla2ws0LjVX+BPjz1DrM9QKiYXsQ6KOoN/WIOC2tEAAGQ1KEvZhtsGJFHHs4InWXAbhXA9ufxNLZZLZK+/KPD0nxP6+wDlLTi/f0K5wPyY2KMdCL92A5L2NxvsvhIc8fmPdRZNJ0v8TIypT0mXvIolQVVqLsVnOV9xtKBaoYLNZ7fSq7559pSzwI/MJXPu+vqiX2ff0oILeiKra2xPA5ZTH8m2L3MW0dszTPJYFPKCaOCaZ8V6SwoZA2uN5IioXBSsYDgRIagGQrrVx2+oLJdhMQAGj6+DoqlbcwM9zFtsZzMBtnsBohai2Yu6TghVe3JAvNzc95kz4Pt6ZV7CDk01F3gdnoE3qc1xDMJZb+Vt6jLl2eiA0GN89vSLk9GD6+pp7vp7uy9MaPeDLUoir5oF3E6wYiKyUMu8o3q0q5Vj8sXCoN4Zv3XpekBM5veMrtZQJR7x0JbXlS7lc3YxeUwtaPr6xPsJMyT2FiEfbLU7MJfULi2Y2JoH/SX5u9+ZghQ4m5XP40cXbrRUzQO2CyXY1G6fdFsr6e+krRlaJyWZWALaL3LC5KY7/wfwGBgphsCiNmgyxQpaUQ1USzPsSj2uIobvch/mCMiUxn08TH2JlbjGYZ2DPnMcjtjXMWGleTMkPI49oYBs2zPs0cpamoc8P4ClykrKdSspK0YjjqON4PU6UB2SvWrANbD5lv/ALzQk3bAt4feX0DqO0UTUt4ogrdExpEeWkw8nA6/hDBmZNDLVD7kFpvpATX8E8HeiaRq5hnUlkxyLES0fkxS1YlhXZDLq+7/AApJbOFhXeHtFl44iU3HoC4OYsRP0QkNom4oyjfuoYx/Da9FpGHkJYS+nG5MLwmqCAP4ikIwLeuR3ABRqKmoIbCt8f8AGzs/5A0KWqIQDFgC0B5gqhX3+sEdjxGf0T++n91GgguR/wDyr0YjQmIJQ4ilAHUeBSU+luxcXyuYmw3l/wCDG4NGBQw5Y6lxC/P9Xs2Mw5mfKjyZ5sYEukaN9o9gH0GnIeieRGM2mjIIEP6zyMQ7mXkC+Jc02cSg4peoIafZ9Ns290Jj2x77Pz6cTgG50zCLmDzaVqZHI5iXKmPZIv1VjzgREBNVS55UYdotS8WCPRh2YlbOdxwfkjApWYHwkn5BJc3jJEZM4R9icSo9GIvzek0+z6bZt7pbG9zQg2W4XQShiK/cnlCUArMDVma7Hv6qzdCHxkbrzLyXcX5I7MsUVUfW4JZUZfQAxVcNxwXiMHLjqL51ge8PynyJhA2YXj0JLfRq+82isIfUB+/PkT5f1ZlrLMdM3CTypslxiHcwMWcaTMPTFHi9MQEa9OKQLOszfmd87feL5egPlsRfZn9lHeTDZ2/qDxQr0uPosYUMvux3JmszUqki6SL9WNw5XwiefGbcxJlzN2qMLqiowp7CQ7MLc47+aytA4DANyNXGBhAZlpqFvNiS3uXM3KGBDw0itofeMHDSJ3VZdBczZnaHtLlsZwx7+rVEUU/IhRNo2qGrix/uhVyPBuJyFp8wHqcX9I1e+iDBF7noj0AgfzMOmnDG1WxP/JWxFTI2Y3iFfUNHvUesf6EvZhcdMRcMzw4zDAaQ6A5lVqxCOhkc0tUNr8cQ3Qipzx5jZ77qPeW4FIceYKFQmnMNMbERwaG00q5ibuB1M1OjRT3nmov31+Yzj3KJXtKko9B3MNIGqX2R8q19XZLkvZ1WSJqHE6VKaSLzxZjJu6NHiVZlf7JlMlrDT1MPUUr8wVRSL6ZQXFD41NDCeBKUbaGGyaDcht8Q2VHRuGf2G+swAJVdGpSQfmS9iLRW5SoEQLzf8VGGqyamyLo3ACRAsOKr/mUC5rJrnNgKlAiegdQTIF65Z7iAjmrtl1KZLZBlcyMHSNygXlzu4YmNAt1KEGRh2/8AUH//2gAMAwEAAgADAAAAEBDDBCADDLDDDCAAjjjgADCjiggAKADDDHjDLLBDPDDHPPPPNPPONPOPPOMvusvsstustvsvvkvvutvuNPPMPPNPPHPLPPPHPPDPPCPvjvvjnuAAAMlvjnvrnvrHPPLPPPPPPPPPJPPMLOMBPMBnolnsi12UDSCFuAjugjvMNPMHOtJPPPPPPPPPOPPPPONvvspFD09uvuMidPOvuvvPPPHGvutPPPPODHOBPPIDPCBvggvnety1rhXXgAHKgjuhHPADmojvvPPPONPONPONPOMPuj7gG6BQL+mRd0NPMovsMPOEvutvvvPPHPPDPLDHPDPLA0L3QInIQrd5uZvDBnrhPLjlujnvvPPPONPMJPMNPMIPBglHeTcXQflCw+NOEgnMJPognukPPPPPPPLHPPHPPPPLG3Bqw55zvIw2sd9LPvrmvrivvntPPPPPJPOLHOIHOLPLFPgyvehjutWT+0XOIjugjvojmojPPPPPPNPPPPPPPPOPKHe+sDjjS33BoCPPLsvvNrrsnrvvvPPPDPPDPPDHPDDOJoTxHbk/18KNBRPPDLvDHKjjvrnPPPPPONPMNPMNPPNLAFdwGQKOc2ob4kNPMNPMMLqpvulPPPPPPPPHPLHPLPLNLPPJIMcJ6KqmilPLPPPPPtnvvvvPPPPOIHOMHPILPKDHMBHtP5P3UvFFugHOIDOAhvghvslPPPPPPPPPNPPOPPON9P8AzzyzdP6Mvhy/sPzjzpabp777zzzzzgxzyxzyxziTBU3GPeWLbOH4ikGHtkwzgJ7oYr4IzzzzzzjTzjDzzDzgFNVS1xBkbhQ/Yb/9mnDD7LL7LL7rb7zzyxzywzzwzzwyh6q7LCmClt4p88+NN8Ty456456opz7zzzjTzjAzjCzjhBGONcMO/MOZtOYqJahAbqJL6JJiDTzzzzzzzzzzzzzzygABzyx7477b7777bKzzixzz777zzzzzzzzzzxRzyRzyxzwhzzQTyo76ob7wRz5xzyhzqIbSyzzzzzzzzzzzzzzzzzzzzzzzzzz7zzzzzzz7bTzzz77bzzjz/xAAgEQEBAQADAQACAwEAAAAAAAABABEQITFQQEEgUWFw/9oACAEDAQE/EP8Ai6DthdHcI+S709wMdV8Yev7jsXwDgRJ++S7v7Izp8PLzG3dnBJvsn6iIafBXIdr4c5MGSUrbZbJpk3X8GimZEYHB5DwjowHROHbIyQdvHQR4P56bIZP6Wj0kPYI79hsHsqsPIek0wvCOolvwPhw6g/s8kP8AUOoPUr1CWaSThhJPkgzMhrHwGcy8herxe9dt6QAy9OpdhBO4DvhYoZr4GXSz9vbN7iXVBzu6x0zkkgbHhHk+gRwH56w27Ot2dZn3ADrhThNg8Ldy4aw7nwAuCOhYYhwbDv8ADtglz2VWHkAw+Gm+z3YT7ZvaWncoSTyO6wDD4uWLZpMGtn9wPhbwHf4oPs9HUqDsuctsO/mHDg2Dv2xHch3HRt9TUslHeRsYv1B+W3lt7cXonp1DUMqHhPlhyXZmIh/Ny6jDyQfb/KAPJG+cdHO/AzjLLLLLLOMss5z/AIn/AP/EACARAQACAwACAwEBAAAAAAAAAAEAERAhMUFQIEBRcGH/2gAIAQIBAT8Q/i4LyC8xLzESjxij06RoRThVKwMwh69HczwHycCGmJTXonhi5cNu5rAYqDUOw9BZBG4tloh3FpyL5Z2UyrwvESmvvjBGX+pp4y/DFMVcKN+Yb2yuOvQnLhjpxsnUGpR0wN1c/wBQP7AD2bl+gdQv2B4n4i5ydwmrIX4lsdRb9B5mdl1oiHmNXqd4CkBfJYwPMW2/vhbHRUdaItIt4IYrbwGAvUVK9BQYi5S4kJXw0S4EoNsW2/RjUE6jSatwU6lLB+YvCLffTWy4m+sFPoqlRPiNQgHIwPhUSvtmNwLYwEvkE/IAUlDUAUQ7jCVLyv3js6nENo6Z3cW46iQ1DDPMT7t4dzctxb/R/wD/xAAsEAEAAgIBAwIGAgIDAQAAAAABABEhMUFRYXGBkVChscHR8GDhEPEgQJAw/9oACAEBAAE/EP8Aw5UC1CP0V6XHnYF4NwNimaJo7xyM0us3fSakecQuwfD/AA9amLt8hlwGOrlhauu9COENd5i4dYChqW8CiI1jQ+pqVNQipa3oUZXiIKvwrqCJY2P8LSHBGmzr8v4lAVbWRYffqsxXd0u5bgB2imp6DC4SMi2wJgAtjrBASyTGNsI9qFx/MPdghXQZgUGnC2T1QV/CFqZs2tG2Pb1aOIyBTvY+PzAquXeVZmvou/6QbX6CtiuQbFr2l1FwCQ3YGrIUQcHIiDoclR9IGzN/CZLLGH+mX5IwjYyzB5vTGxTY5EoHOB4f4MtS3bxByy+EtvTsQBanl8vxAX4Q4n5ZZI9Vx/aZVUN+5cFF1btgEimRxcFVqZK4mohrtKRjXK7wjvwPAlGh6Nx0RVbQniPxgZ5PDLFqGwRkP7FkoD4+p/BaxALluNvoJSXD1XD+IK9zAZ8TvFYL3f7u7FxgG4lJysJhlt6GWOZDqx+UOsO3/Bjlj4RGrQ5jq10dxleF5jCFIxxELTnGwmIjdvZ1hrxaZa4YhegH3gWPX79/4HeMvfn9XRDVwzPr2iVrMR4esPi/T92VOOJwdI9mDRWXvRMieZXyMwY6ir7GfnEdHgPvBqKQFaBa5gI3WBsT8y3wqQwYhDh7Qla2WTcboVhK54BjJ1Su2DZKpyUpMhkaUgvUZxySw6x2fUig2Fn8BWoxnNUd2Oy8vb3WO64lwc/iXBlAU47EFJSsmdjmKUFLaR8syiE7K/xUYNTEfvaC/wBPJLDP5MXN4V3+twKfgyF6XLJvko5p0jhipwvE3C369fyhCUvJ1OSWTBPzBOud9rHRes/wFQS9iLUvPENMN3QLKfApWhCgaKGoZle3BPIlBmH9GQdBT0BOlgDJeYC4ZvA6j5WBQulHYsM1WQmGoTY0NvzBQN94GXfTtbYYSpdiVA5pyzj7CqXayDYiN6z+Yi4dJSWn3S/eEZpL+OrRLchvHDpCNS9tQ50i9kvcgNdVxUVKLqEctnmTrr0j1EHWAxo6RuwX4j+hCijq/RmjyiHJnOwGdBuZxEkLfuYehKTItFu5RwvrHBW1YBeWDWuP6fxBtL3FeLzGMEaDUErNr45h8gqzwxWG8Phmfuc3x0YgsPMXAC5XXeY7KHUKflYpwPqz+2MOAfeVhNdDLsnCqlWWm03EXEQsZti1536MMYkLXKX5iFDbwUWbzFbfvLHqzwNrM88AeDoS50nVjIBkcxs5bUtOKlYboAY+eWA81MuZE/SKo00+Wj46lzBFUFysrOFaqJ4sIOdO8SjegzPJKHKagHEDsMKjRdHx3gMHh/HeCQtvTcJ11mncxleX6MI6FVcTfmC7N5OjZ11KY1Qjd2ysqqi4lIQWX6CIANksgRuyYkLyiOlq71kGoOgaCekJc/XDzGDxrPNA+PC4aZgGqsC+s3xQipaCBGewrwDpAcfmh/MBYvVLv2hO8CcY5OR58GDLRktl4YnRO+ZHTMKoZ5hDaWcq251E8hKFDsZxLN7BeWDczyYB2nYe8KWp7zFq5MO9TlxWO9EDE+D5CGkjMOoRrNTCEJHAJQsV62w7RTdBrNQASxyPx7SXG6IzMdYXqFQTxsgebWr7kUOUNfWZN7onRiKLWDEXk3eygwPu0MXDrxTeKYLM/wC5EqQawpRSX2jHlxmQ72b9YOc8nUOe4x7WyxCpoSYU7yqEFcQQK6QtRiBGvZG6oOgcUUkY6AyNVOcbc/HhiOQOIYjtAZXi4Ltj7mmN4wsOjmUa8jP1Ud5TNHEtBRo6fmaK4B2feNkpTeahbazWesuw15EWkdRkKA+Qj+YwlcbaXxsh2bNiL+kqmJlo+HqQJzHYXEdFrTrMc54NwcDkDKJflCC7lIOCAIsSmAID2squkKFSsdYAAGA+PHEp1cTdwrWhKIIVLPpG7k2sSrc2uA8sa0N3WB4h1Bt8poStvRPJCWJfWUB8XLQMX1XgmQtXiGFgrOC4xkwCrohFhT4+zC4hsnXvCSUZhtah8wVuQQHl5jemoQXmFCsCVWJ2dJQEzX9WDU076sv4wA+P6R5eiCBraU3/AElgSgMpkHzOhGIgtaJQgCmg2x31Ay8ysH0BhIdCtgU1Na2YgaKbas3BFp1goH+6Ci6y+0QKGXSKJ3h6SykKyCxh2f8AYgdukYRZ7yLDXgy9OfQcoAwn+hER5a8EdIpT+H8ABF7hnTpBhuED8d2KlJtZeoh7dH9yujS7/QJyr1YCOs/aIlpcdQwMgMZtitN8V0jvH1+sNJ+1wAFQUNNdJhv3oATvLgLEDpGIXl1pDxLFHpUN579qgsVjZi6nfos6G2ExhKrpf9RjGwJqcAPjzqKFqhZtb7XOk9Y6vBGiy3XQ4IFlUr6BHoBxHj+4MQ+gi17nIO0hh+GaocjpClfTG8tU9EExd/rE/TZmEN+sxDz0kNsqCkstH4OzzC9xDUoGxaaENMmi9SNAAX9hFYbu73Vlf/qvPx+gl9b1vEu2Oj3/AFYZTrMegHmeCWClriISMT0r0EXYKLhLqjj1XMsgjCsIyDiIcC28yFQYwGrX4lRp8i9+IeP9qBRHRRtWUlAcdXxNEFHlWCov4GptnAil8Hgg919YWIuy2DthPZwOx1h5UNefj9DYlfH1oO5Mt/FD6QjesmXFzPpxF7VeqGufdY/MLcLCcqPajIcQK8PSjT1JzZHPQ6RNhu30gFTW71gKIGZvVbigg4OcEvw7qrZYu0cQektAsqJ5lHwWD9xHV9sb7ELLOpP4HeWKW5ftOABns6fwC9pqKDMOgclcsuqhHMqiIAIJA9Yg5V2A0Q8Vby/dzkx9Tsk0zy6HxDnsa6xT6Tm9Yjyn0lnXhd5ajYKmc9iW7n4I+9JQsJmhekfDLpaqCeFfyJfM3hweWKbBsHT8E5w0fsStq9l47sP4Bzpk0TFVQDhFuCUcEBSsy2At9UsSjtfclVgcbwvZlAWLV7PWPviEw+YK1XSKkfWFAAB0cVLZ2XBDI7ZHKU8pQvEEaOtNAR03851SSHL6xSbWoy+JwhHyrMBmzh/tAoo/gVf8El0aCEG+F0kzRroSt78sxlqaUNuJlRal1xKqUJLHLU3meAXBDIE7UTLsOBX+oyNcZH2lwh3cQ9a3Bj0JVFre6AB/CGWQxkgjYljY/ROQxCskSBMXkm4yXKqA5YA85P64lJS31uMUi9CV75DLFRPUzg4ABK/hdXEsT0huJHOLId5k6pMJ0ZW5Tq/WUyt3iePaguF6TSEAP4hcRCJCibLEkEAAoJygE7ls40XyihtCCOkf8pYfcgjpv/kgCBpOaXWJ3MUqnbggPi61BwgrOAdWN246Ywu3+qf7dKZb0WP/AMWUgBFRM9ksaJsWBbYLibEWlUVXMS41/itNhErlG3WKLLYt8/8AB4mRiFEshnaHSCMFDUVG31dvizPFkvmKj0JR+VR3l0C77sap1i8DLmFaG16Rp0IBc/YEQQc4mmYDP2Jd+KDkz0SUVxlbpnt0UggcS+YwTBmJomhrpzM0RRpxzEhQAagj15+26Ri9mfPY1QAjfmBKpaRvui+/cgUT3ZXw4Or5jiXbqczYostajeMlPLmFGFpOJWAgi7x8VUwnaYN7X6xVFtM2GkANE/1koyYhJcxma7y6NNWsuZ9+B1ncsUwE4gZhX5Zfmd3xLlbVk6GLC0+V6UrYYk3xAIHAUSrxY79efpukZ8rH7mNDVcZn2CBGyi1uIUR7o+DIjFdcGhoP0lfCc6g5W9JBR7FZ+K6Qe1Fu8Up85RryGNdrLe5aHJ1jiHTGt9GFb6okRw1jI4uAgKccs/QzhyBmOThv6RwLKv0jl4vPcYuZZ0eWU/w+o/qYz2TQ7Zke6R9KBs9YoliVFsDECWuLVhTvC+c+ggPSJoOk+3BXkj9r6IvbwbdfhEr4rpGJHOUljLupdhLPxEHLfOEMuL6EWD0Zcff/AIGclAYRguReSNGfYgJh0qOz8/SXscR19vHiImuV84bxrb1W4SPCG/E+sYqyWS/eHY7ICUEQZRXdluY28DqwH9cpjk9IfIIT0IxZHEsTvBtGvomF7LCFe1W6RlMOKLs+KsrVGGwbltqOk6PsRoxI5bCpe4xWo6TZXwuA8QwBsiC0jwOIlz7sVZ9+bS4EuvEBRzM0vUJbClhYGGzE6eRqD7s6YGgGMKMdRHrChuO7KlHsQ1K1shRmaBZBiuIWha4gpiZLLhQdNXA+ygzCEF3GhS9Z6C6z7/FkMD8y7vFG/SWEVcSqrFeJZSKuwou2nyhJWdVPeY88cVpB9IV1yBu29PMAT0F8r7BMtWobou4WBNb2Vz84xwCF5RqpmDIGUxeYuiiy7un3XEq6syydHrFMOMDd1T4lEyZL1p+YQigzxrbI8Q60mBu0vxKF5jfIOszrLCUx3OIqa+Z3B63AAKIzD0jq/KpeastAW6u0OpPFkhjyhcVpNKaOIVaQAKN47amEvC3F0AaluUpKDew1Nsi0Mpux9oZK6SOmrqla1nU0E4frTED3e1F5cMnEcDpgxVWzG6hFSGE05DHMEhWxW0k9FZ/6QRPglhZT2rAnmo5pyLUqVTiUtqVFSrd1h9Ja0qw6i8L4jUIrKSuc4hfINqnxcoIaoGzl9okAgZKVV6M24POXcD1PtKp7jDQ5t9ZdG4jJbPWA6kRrBtC9IRoSgre5/qdP0g2bEVdjDgdvmKOosd67OjcCqKM0LdzAXcrS+E5KhvElijBRRKuFxhctpdzM0qDR2J01XSohUN2yWN4v1jA6Zhro7JHzAfCh4ztCBWZbwKv8y2KRRanSOGWgUVlkVmXSjR4BOTzKsnIQomuLgZBpB1QmPeCS22xo70RQEcRKP5JgLEQYfA1C90KaIU37/wDSG/8AD/FiP/gx/9k=">
 
-<svg
-viewBox="0 0 100 100"
-xmlns="http://www.w3.org/2000/svg">
+<div>
 
-<circle
-cx="50"
-cy="50"
-r="40"
-fill="none"
-stroke="#16b8d4"
-stroke-width="6"/>
-
-<circle
-cx="50"
-cy="50"
-r="31"
-fill="none"
-stroke="#b9c5ce"
-stroke-width="5"
-stroke-dasharray="8 5"/>
-
-<path
-d="M25 39 H47 L55 47 H77"
-fill="none"
-stroke="#16b8d4"
-stroke-width="6"
-stroke-linecap="round"/>
-
-<path
-d="M25 52 H42 L49 59 H72"
-fill="none"
-stroke="#16b8d4"
-stroke-width="5"
-stroke-linecap="round"/>
-
-<rect
-x="43"
-y="30"
-width="14"
-height="40"
-rx="2"
-fill="#d9e0e5"
-stroke="#263746"
-stroke-width="3"/>
-
-<rect
-x="47"
-y="47"
-width="7"
-height="13"
-fill="#16b8d4"/>
-
-<path
-d="M50 69 V87"
-stroke="#16b8d4"
-stroke-width="5"
-stroke-linecap="round"/>
-
-<path
-d="M42 80 L50 89 L58 80"
-fill="none"
-stroke="#16b8d4"
-stroke-width="5"
-stroke-linecap="round"
-stroke-linejoin="round"/>
-
-<circle
-cx="76"
-cy="38"
-r="5"
-fill="#16b8d4"/>
-
-<circle
-cx="76"
-cy="52"
-r="5"
-fill="#16b8d4"/>
-
-<circle
-cx="76"
-cy="66"
-r="5"
-fill="#16b8d4"/>
-
-</svg>
-
-</div>
-
-<div class="brand-text">
-
-<div class="brand-name">
+<div class="brand-title">
 GraviUnit MES
 </div>
 
 <div class="brand-subtitle">
-MANUFACTURING EXECUTION SYSTEM
+Manufacturing Execution System
 </div>
 
 </div>
 
 </div>
 
-</div>
 
-<div class="top-right">
+<div class="top-actions">
 
-<div class="status">
-
-<span class="status-dot"></span>
-
-Sistema online
-
-</div>
+<span class="online">
+● SISTEMA ONLINE
+</span>
 
 <button
 class="theme-btn"
-onclick="alternarTema()">
-
-🌙 Tema
-
+onclick="toggleTheme()">
+☀ / ☾
 </button>
 
 </div>
 
 </header>
 
+
+<!-- ================================
+SIDEBAR
+================================ -->
+
 <aside
 class="sidebar"
 id="sidebar">
 
 <div class="menu-title">
-Sistema
+Módulos
 </div>
 
-<div
-class="menu-item active"
-onclick="mostrarPagina('dashboard',this)">
 
-<span class="menu-icon">📊</span>
-Dashboard
+<button
+class="nav-btn active"
+onclick="showPage('cadastro',this)">
+🧪 Cadastro de Químicos
+</button>
 
-</div>
 
-<div
-class="menu-item"
-onclick="mostrarPagina('cadastro',this)">
+<button
+class="nav-btn"
+onclick="showPage('lancamento',this)">
+📋 Lançamento
+</button>
 
-<span class="menu-icon">🧪</span>
-Cadastro de Químicos
 
-</div>
+<button
+class="nav-btn"
+onclick="showPage('pecas',this)">
+🏭 Peças em Produção
+</button>
 
-<div
-class="menu-item"
-onclick="mostrarPagina('lancamento',this)">
 
-<span class="menu-icon">📝</span>
-Lançamento
+<button
+class="nav-btn"
+onclick="showPage('historico',this)">
+🕘 Histórico
+</button>
 
-</div>
 
-<div
-class="menu-item"
-onclick="mostrarPagina('pecas',this)">
-
-<span class="menu-icon">📦</span>
-Peças em Produção
-
-</div>
-
-<div
-class="menu-item"
-onclick="mostrarPagina('maquinas',this)">
-
-<span class="menu-icon">⚙️</span>
-Padrão de Máquinas
-
-</div>
-
-<div
-class="menu-item"
-onclick="mostrarPagina('historico',this)">
-
-<span class="menu-icon">📋</span>
-Histórico
-
-</div>
-
-<div class="menu-title">
-Relatórios
-</div>
-
-<div
-class="menu-item"
-onclick="exportarExcel()">
-
-<span class="menu-icon">📥</span>
-Exportar Excel
-
-</div>
+<button
+class="nav-btn"
+onclick="showPage('excel',this)">
+📊 Exportar Excel
+</button>
 
 </aside>
+
 
 <main
 class="main"
 id="main">
 
-<div class="content">
 
-<!-- DASHBOARD -->
+<!-- ================================
+CADASTRO DE QUÍMICOS
+================================ -->
 
 <section
 class="page active"
-id="dashboard">
+id="page-cadastro">
 
-<div class="page-header">
+<div class="page-head">
 
 <div>
 
-<div class="page-title">
-Dashboard
-</div>
-
-<div class="page-description">
-Visão geral do processo produtivo e controle de qualidade.
-</div>
-
-</div>
-
-</div>
-
-<div class="filters">
-
-<button
-class="filter-btn active"
-onclick="filtrarPeriodo('todos',this)">
-Todos
-</button>
-
-<button
-class="filter-btn"
-onclick="filtrarPeriodo('hoje',this)">
-Hoje
-</button>
-
-<button
-class="filter-btn"
-onclick="filtrarPeriodo('7',this)">
-7 dias
-</button>
-
-<button
-class="filter-btn"
-onclick="filtrarPeriodo('30',this)">
-30 dias
-</button>
-
-</div>
-
-<div class="kpis">
-
-<div class="kpi">
-
-<div class="kpi-top">
-
-<span class="kpi-label">
-Avaliações
-</span>
-
-<span class="kpi-icon">
-📋
-</span>
-
-</div>
-
-<div
-class="kpi-value"
-id="kpiAvaliacoes">
-0
-</div>
-
-<div class="kpi-info">
-Total de lançamentos
-</div>
-
-</div>
-
-<div class="kpi">
-
-<div class="kpi-top">
-
-<span class="kpi-label">
-Conformidade
-</span>
-
-<span class="kpi-icon">
-✅
-</span>
-
-</div>
-
-<div
-class="kpi-value"
-id="kpiConformidade">
-0%
-</div>
-
-<div class="kpi-info">
-Dentro do padrão
-</div>
-
-</div>
-
-<div class="kpi">
-
-<div class="kpi-top">
-
-<span class="kpi-label">
-Fora do padrão
-</span>
-
-<span class="kpi-icon">
-⚠️
-</span>
-
-</div>
-
-<div
-class="kpi-value"
-id="kpiFora">
-0
-</div>
-
-<div class="kpi-info">
-Avaliações fora do padrão
-</div>
-
-</div>
-
-<div class="kpi">
-
-<div class="kpi-top">
-
-<span class="kpi-label">
-Máquinas avaliadas
-</span>
-
-<span class="kpi-icon">
-⚙️
-</span>
-
-</div>
-
-<div
-class="kpi-value"
-id="kpiMaquinas">
-0
-</div>
-
-<div class="kpi-info">
-Máquinas com registros
-</div>
-
-</div>
-
-</div>
-
-<div class="dashboard-grid">
-
-<div class="card">
-
-<div class="card-title">
-Desempenho das Avaliações
-</div>
-
-<div class="card-description">
-Distribuição dos resultados registrados.
-</div>
-
-<div class="chart-container">
-
-<canvas id="graficoResultados"></canvas>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Avaliações por Máquina
-</div>
-
-<div class="card-description">
-Quantidade de avaliações realizadas.
-</div>
-
-<div id="rankingMaquinas">
-
-<div class="empty">
-Nenhum registro encontrado.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Atividade Recente
-</div>
-
-<div class="card-description">
-Últimos lançamentos registrados no sistema.
-</div>
-
-<div
-class="table-wrapper"
-id="atividadeRecente">
-
-<div class="empty">
-Nenhuma atividade registrada.
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- CADASTRO -->
-
-<section
-class="page"
-id="cadastro">
-
-<div class="page-header">
-
-<div>
-
-<div class="page-title">
+<h1>
 Cadastro de Químicos
-</div>
+</h1>
 
-<div class="page-description">
+<div class="subtitle">
 Cadastre os produtos químicos utilizados no processo.
 </div>
 
@@ -1391,100 +934,80 @@ Cadastre os produtos químicos utilizados no processo.
 
 </div>
 
+
 <div class="card">
 
-<div class="card-title">
-Novo Químico
-</div>
+<div class="grid">
 
-<div class="card-description">
-Informe o nome, código e demais informações do produto.
-</div>
 
-<form
-id="formQuimico"
-onsubmit="salvarQuimico(event)">
-
-<input
-type="hidden"
-id="idQuimico">
-
-<div class="form-grid">
-
-<div class="form-group">
+<div class="field">
 
 <label>
-Nome do químico *
+Nome do químico
 </label>
 
 <input
-type="text"
-id="nomeQuimico"
-required
-placeholder="Ex.: Primer Branco">
+id="qNome"
+placeholder="Digite o nome do químico">
 
 </div>
 
-<div class="form-group">
+
+<div class="field">
 
 <label>
-Código *
+Código
 </label>
 
 <input
-type="text"
-id="codigoQuimico"
-required
-placeholder="Ex.: 307507-002">
+id="qCodigo"
+placeholder="Digite o código">
 
 </div>
 
-<div class="form-group">
+
+<div class="field">
 
 <label>
 Cor
 </label>
 
 <input
-type="text"
-id="corQuimico"
+id="qCor"
 placeholder="Ex.: Branco">
 
 </div>
 
-<div class="form-group">
+
+<div class="field">
 
 <label>
-Tipo
+Tipo / Categoria
 </label>
 
-<select id="tipoQuimico">
+<select id="qTipo">
 
-<option value="">
-Selecione
-</option>
-
-<option value="Massa">
+<option>
 Massa
 </option>
 
-<option value="Primer">
+<option>
 Primer
 </option>
 
-<option value="Impressão">
+<option>
 Impressão
 </option>
 
-<option value="Base">
+<option>
 Base
 </option>
 
-<option value="Verniz">
+<option>
 Verniz
 </option>
 
-<option value="Outro">
+<option>
 Outro
 </option>
 
@@ -1492,5304 +1015,3168 @@ Outro
 
 </div>
 
-<div class="form-group full">
+
+<div
+class="field"
+style="grid-column:span 2">
 
 <label>
 Observação
 </label>
 
-<textarea
-id="observacaoQuimico"
-placeholder="Informações adicionais...">
-</textarea>
+<input
+id="qObs"
+placeholder="Informações adicionais">
 
 </div>
 
 </div>
 
-<div class="form-actions">
+
+<div class="actions">
 
 <button
-type="submit"
-class="btn btn-primary">
-
-💾 Salvar Químico
-
+class="btn btn-primary"
+onclick="salvarQuimico()">
+Salvar químico
 </button>
 
 <button
-type="button"
 class="btn btn-secondary"
-onclick="limparFormularioQuimico()">
-
+onclick="limparQuimico()">
 Limpar
-
 </button>
 
 </div>
 
-</form>
-
 </div>
+
 
 <div class="card">
 
-<div class="card-title">
+<div class="page-head">
+
+<h2>
 Químicos cadastrados
-</div>
-
-<div class="card-description">
-Produtos disponíveis para lançamento.
-</div>
+</h2>
 
 <input
-class="search-box"
-id="buscaQuimico"
-type="text"
-placeholder="🔎 Pesquisar químico..."
-oninput="renderizarQuimicos()">
+class="search"
+id="buscaQ"
+oninput="renderQuimicos()"
+placeholder="Pesquisar químico, código ou categoria">
 
-<div
-class="table-wrapper"
-id="tabelaQuimicos">
 </div>
 
-</div>
-
-</section>
-
-<!-- LANÇAMENTO -->
-
-<section
-class="page"
-id="lancamento">
-
-<div class="page-header">
-
-<div>
-
-<div class="page-title">
-Lançamento
-</div>
-
-<div class="page-description">
-Registre até 5 avaliações químicas no mesmo lançamento.
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Novo lançamento
-</div>
-
-<div class="card-description">
-Cada opção possui uma categoria específica. Selecione o químico correspondente, informe o padrão e o valor medido.
-</div>
-
-<form
-id="formLancamento"
-onsubmit="salvarLancamento(event)">
-
-<input
-type="hidden"
-id="idLancamento">
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>
-Máquina *
-</label>
-
-<select
-id="maquinaLancamento"
-required>
-
-<option value="">
-Selecione a máquina
-</option>
-
-<option value="701e">
-701 - Externo
-</option>
-
-<option value="701i">
-701 - Interno
-</option>
-
-<option value="703e">
-703 - Externo
-</option>
-
-<option value="703i">
-703 - Interno
-</option>
-
-<option value="705">
-705
-</option>
-
-<option value="706">
-706
-</option>
-
-<option value="707">
-707
-</option>
-
-<option value="708">
-708
-</option>
-
-<option value="710e">
-710 - Externo
-</option>
-
-<option value="710i">
-710 - Interno
-</option>
-
-<option value="712e">
-712 - Externo
-</option>
-
-<option value="712i">
-712 - Interno
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Responsável
-</label>
-
-<input
-type="text"
-id="responsavelLancamento"
-placeholder="Nome do responsável">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Data e hora em tempo real
-</label>
-
-<input
-type="text"
-id="dataHoraLancamento"
-class="campo-tempo-real"
-readonly>
-
-</div>
-
-</div>
-
-<div
-style="margin-top:25px;margin-bottom:12px">
-
-<div
-class="card-title"
-style="margin-bottom:4px">
-
-🧪 Avaliações químicas
-
-</div>
-
-<div
-class="card-description"
-style="margin-bottom:0">
-
-As opções possuem categorias fixas: Massa, Primer, Impressão, Base e Verniz. Caso uma categoria não seja necessária, clique em "Não utilizar".
-
-</div>
-
-</div>
-
-<div class="medicoes-container">
-
-<!-- OPÇÃO 1 MASSA -->
-
-<div
-class="medicao-item"
-id="medicaoItem1">
-
-<div class="medicao-header">
-
-<div
-style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-
-<span class="medicao-numero">
-OPÇÃO 1 — MASSA
-</span>
-
-<button
-type="button"
-id="btnOpcao1"
-class="btn-nao-utilizar"
-onclick="alternarOpcao(1)">
-
-Não utilizar
-
-</button>
-
-</div>
-
-<span
-class="medicao-status"
-id="statusMedicao1">
-
-Aguardando preenchimento
-
-</span>
-
-</div>
-
-<div class="medicao-grid">
-
-<div class="form-group">
-
-<label>
-Químico — Massa
-</label>
-
-<select
-id="quimicoLancamento1"
-onchange="calcularResultadoMedicao(1)">
-
-<option value="">
-Selecione a Massa
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Padrão
-</label>
-
-<input
-type="number"
-step="any"
-id="padraoLancamento1"
-oninput="calcularResultadoMedicao(1)"
-placeholder="Ex.: 100">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Valor medido
-</label>
-
-<input
-type="number"
-step="any"
-id="valorLancamento1"
-oninput="calcularResultadoMedicao(1)"
-placeholder="Valor">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Resultado
-</label>
-
-<select
-id="resultadoLancamento1"
-class="resultado-medicao"
-disabled>
-
-<option value="DENTRO DO PADRÃO">
-DENTRO DO PADRÃO
-</option>
-
-<option value="ACIMA DO PADRÃO">
-ACIMA DO PADRÃO
-</option>
-
-<option value="ABAIXO DO PADRÃO">
-ABAIXO DO PADRÃO
-</option>
-
-<option value="NAO UTILIZADO">
-NÃO UTILIZADO
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- OPÇÃO 2 PRIMER -->
-
-<div
-class="medicao-item"
-id="medicaoItem2">
-
-<div class="medicao-header">
-
-<div
-style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-
-<span class="medicao-numero">
-OPÇÃO 2 — PRIMER
-</span>
-
-<button
-type="button"
-id="btnOpcao2"
-class="btn-nao-utilizar"
-onclick="alternarOpcao(2)">
-
-Não utilizar
-
-</button>
-
-</div>
-
-<span
-class="medicao-status"
-id="statusMedicao2">
-
-Aguardando preenchimento
-
-</span>
-
-</div>
-
-<div class="medicao-grid">
-
-<div class="form-group">
-
-<label>
-Químico — Primer
-</label>
-
-<select
-id="quimicoLancamento2"
-onchange="calcularResultadoMedicao(2)">
-
-<option value="">
-Selecione o Primer
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Padrão
-</label>
-
-<input
-type="number"
-step="any"
-id="padraoLancamento2"
-oninput="calcularResultadoMedicao(2)"
-placeholder="Ex.: 100">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Valor medido
-</label>
-
-<input
-type="number"
-step="any"
-id="valorLancamento2"
-oninput="calcularResultadoMedicao(2)"
-placeholder="Valor">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Resultado
-</label>
-
-<select
-id="resultadoLancamento2"
-class="resultado-medicao"
-disabled>
-
-<option value="DENTRO DO PADRÃO">
-DENTRO DO PADRÃO
-</option>
-
-<option value="ACIMA DO PADRÃO">
-ACIMA DO PADRÃO
-</option>
-
-<option value="ABAIXO DO PADRÃO">
-ABAIXO DO PADRÃO
-</option>
-
-<option value="NAO UTILIZADO">
-NÃO UTILIZADO
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- OPÇÃO 3 IMPRESSÃO -->
-
-<div
-class="medicao-item"
-id="medicaoItem3">
-
-<div class="medicao-header">
-
-<div
-style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-
-<span class="medicao-numero">
-OPÇÃO 3 — IMPRESSÃO
-</span>
-
-<button
-type="button"
-id="btnOpcao3"
-class="btn-nao-utilizar"
-onclick="alternarOpcao(3)">
-
-Não utilizar
-
-</button>
-
-</div>
-
-<span
-class="medicao-status"
-id="statusMedicao3">
-
-Aguardando preenchimento
-
-</span>
-
-</div>
-
-<div class="medicao-grid">
-
-<div class="form-group">
-
-<label>
-Químico — Impressão
-</label>
-
-<select
-id="quimicoLancamento3"
-onchange="calcularResultadoMedicao(3)">
-
-<option value="">
-Selecione a Impressão
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Padrão
-</label>
-
-<input
-type="number"
-step="any"
-id="padraoLancamento3"
-oninput="calcularResultadoMedicao(3)"
-placeholder="Ex.: 100">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Valor medido
-</label>
-
-<input
-type="number"
-step="any"
-id="valorLancamento3"
-oninput="calcularResultadoMedicao(3)"
-placeholder="Valor">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Resultado
-</label>
-
-<select
-id="resultadoLancamento3"
-class="resultado-medicao"
-disabled>
-
-<option value="DENTRO DO PADRÃO">
-DENTRO DO PADRÃO
-</option>
-
-<option value="ACIMA DO PADRÃO">
-ACIMA DO PADRÃO
-</option>
-
-<option value="ABAIXO DO PADRÃO">
-ABAIXO DO PADRÃO
-</option>
-
-<option value="NAO UTILIZADO">
-NÃO UTILIZADO
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- OPÇÃO 4 BASE -->
-
-<div
-class="medicao-item"
-id="medicaoItem4">
-
-<div class="medicao-header">
-
-<div
-style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-
-<span class="medicao-numero">
-OPÇÃO 4 — BASE
-</span>
-
-<button
-type="button"
-id="btnOpcao4"
-class="btn-nao-utilizar"
-onclick="alternarOpcao(4)">
-
-Não utilizar
-
-</button>
-
-</div>
-
-<span
-class="medicao-status"
-id="statusMedicao4">
-
-Aguardando preenchimento
-
-</span>
-
-</div>
-
-<div class="medicao-grid">
-
-<div class="form-group">
-
-<label>
-Químico — Base
-</label>
-
-<select
-id="quimicoLancamento4"
-onchange="calcularResultadoMedicao(4)">
-
-<option value="">
-Selecione a Base
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Padrão
-</label>
-
-<input
-type="number"
-step="any"
-id="padraoLancamento4"
-oninput="calcularResultadoMedicao(4)"
-placeholder="Ex.: 100">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Valor medido
-</label>
-
-<input
-type="number"
-step="any"
-id="valorLancamento4"
-oninput="calcularResultadoMedicao(4)"
-placeholder="Valor">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Resultado
-</label>
-
-<select
-id="resultadoLancamento4"
-class="resultado-medicao"
-disabled>
-
-<option value="DENTRO DO PADRÃO">
-DENTRO DO PADRÃO
-</option>
-
-<option value="ACIMA DO PADRÃO">
-ACIMA DO PADRÃO
-</option>
-
-<option value="ABAIXO DO PADRÃO">
-ABAIXO DO PADRÃO
-</option>
-
-<option value="NAO UTILIZADO">
-NÃO UTILIZADO
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- OPÇÃO 5 VERNIZ -->
-
-<div
-class="medicao-item"
-id="medicaoItem5">
-
-<div class="medicao-header">
-
-<div
-style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-
-<span class="medicao-numero">
-OPÇÃO 5 — VERNIZ
-</span>
-
-<button
-type="button"
-id="btnOpcao5"
-class="btn-nao-utilizar"
-onclick="alternarOpcao(5)">
-
-Não utilizar
-
-</button>
-
-</div>
-
-<span
-class="medicao-status"
-id="statusMedicao5">
-
-Aguardando preenchimento
-
-</span>
-
-</div>
-
-<div class="medicao-grid">
-
-<div class="form-group">
-
-<label>
-Químico — Verniz
-</label>
-
-<select
-id="quimicoLancamento5"
-onchange="calcularResultadoMedicao(5)">
-
-<option value="">
-Selecione o Verniz
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Padrão
-</label>
-
-<input
-type="number"
-step="any"
-id="padraoLancamento5"
-oninput="calcularResultadoMedicao(5)"
-placeholder="Ex.: 100">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Valor medido
-</label>
-
-<input
-type="number"
-step="any"
-id="valorLancamento5"
-oninput="calcularResultadoMedicao(5)"
-placeholder="Valor">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Resultado
-</label>
-
-<select
-id="resultadoLancamento5"
-class="resultado-medicao"
-disabled>
-
-<option value="DENTRO DO PADRÃO">
-DENTRO DO PADRÃO
-</option>
-
-<option value="ACIMA DO PADRÃO">
-ACIMA DO PADRÃO
-</option>
-
-<option value="ABAIXO DO PADRÃO">
-ABAIXO DO PADRÃO
-</option>
-
-<option value="NAO UTILIZADO">
-NÃO UTILIZADO
-</option>
-
-</select>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div
-class="form-group full"
-style="margin-top:18px">
-
-<label>
-Observação
-</label>
-
-<textarea
-id="observacaoLancamento"
-placeholder="Observações da avaliação...">
-</textarea>
-
-</div>
-
-<div class="form-actions">
-
-<button
-type="submit"
-class="btn btn-primary">
-
-💾 Salvar Lançamento
-
-</button>
-
-<button
-type="button"
-class="btn btn-secondary"
-onclick="limparFormularioLancamento()">
-
-Limpar
-
-</button>
-
-</div>
-
-</form>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Lançamentos recentes
-</div>
-
-<div
-class="table-wrapper"
-id="tabelaLancamentos">
-</div>
-
-</div>
-
-</section>
-
-<!-- PEÇAS -->
-
-<section
-class="page"
-id="pecas">
-
-<div class="page-header">
-
-<div>
-
-<div class="page-title">
-Peças em Produção
-</div>
-
-<div class="page-description">
-Controle da quantidade de peças que estão passando em cada máquina.
-</div>
-
-</div>
-
-</div>
-
-<div class="summary-grid">
-
-<div class="summary-card">
-
-<div class="summary-label">
-Total de peças
-</div>
-
-<div
-class="summary-value"
-id="totalPecas">
-0
-</div>
-
-</div>
-
-<div class="summary-card">
-
-<div class="summary-label">
-Total padrão
-</div>
-
-<div
-class="summary-value"
-id="totalPadraoPecas">
-0
-</div>
-
-</div>
-
-<div class="summary-card">
-
-<div class="summary-label">
-Dentro do padrão
-</div>
-
-<div
-class="summary-value"
-id="pecasDentro">
-0
-</div>
-
-</div>
-
-<div class="summary-card">
-
-<div class="summary-label">
-Fora do padrão
-</div>
-
-<div
-class="summary-value"
-id="pecasFora">
-0
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Registro de peças
-</div>
-
-<div class="card-description">
-Informe o padrão esperado e a quantidade que está passando.
-</div>
-
-<form
-id="formPecas"
-onsubmit="salvarPecas(event)">
-
-<input
-type="hidden"
-id="idPecas">
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>
-Máquina *
-</label>
-
-<select
-id="maquinaPecas"
-required>
-
-<option value="">
-Selecione a máquina
-</option>
-
-<option value="701e">
-701 - Externo
-</option>
-
-<option value="701i">
-701 - Interno
-</option>
-
-<option value="703e">
-703 - Externo
-</option>
-
-<option value="703i">
-703 - Interno
-</option>
-
-<option value="705">
-705
-</option>
-
-<option value="706">
-706
-</option>
-
-<option value="707">
-707
-</option>
-
-<option value="708">
-708
-</option>
-
-<option value="710e">
-710 - Externo
-</option>
-
-<option value="710i">
-710 - Interno
-</option>
-
-<option value="712e">
-712 - Externo
-</option>
-
-<option value="712i">
-712 - Interno
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Responsável
-</label>
-
-<input
-type="text"
-id="responsavelPecas"
-placeholder="Nome do responsável">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Data e hora em tempo real
-</label>
-
-<input
-type="text"
-id="dataHoraPecas"
-class="campo-tempo-real"
-readonly>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Padrão de peças *
-</label>
-
-<input
-type="number"
-id="padraoPecas"
-min="0"
-step="1"
-required
-oninput="atualizarResultadoPecas()"
-placeholder="Quantidade padrão">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Quantidade passando *
-</label>
-
-<input
-type="number"
-id="quantidadePecas"
-min="0"
-step="1"
-required
-oninput="atualizarResultadoPecas()"
-placeholder="Quantidade atual">
-
-</div>
-
-<div class="form-group">
-
-<label>
-Resultado
-</label>
-
-<select
-id="resultadoPecas"
-disabled>
-
-<option value="DENTRO DO PADRÃO">
-DENTRO DO PADRÃO
-</option>
-
-<option value="ACIMA DO PADRÃO">
-ACIMA DO PADRÃO
-</option>
-
-<option value="ABAIXO DO PADRÃO">
-ABAIXO DO PADRÃO
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group full">
-
-<label>
-Observação
-</label>
-
-<textarea
-id="observacaoPecas"
-placeholder="Observações da produção...">
-</textarea>
-
-</div>
-
-</div>
-
-<div class="form-actions">
-
-<button
-type="submit"
-class="btn btn-primary">
-
-💾 Salvar Registro
-
-</button>
-
-<button
-type="button"
-class="btn btn-secondary"
-onclick="limparFormularioPecas()">
-
-Limpar
-
-</button>
-
-</div>
-
-</form>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Registros de produção
-</div>
-
-<div
-class="table-wrapper"
-id="tabelaPecas">
-</div>
-
-</div>
-
-</section>
-
-<!-- MAQUINAS -->
-
-<section
-class="page"
-id="maquinas">
-
-<div class="page-header">
-
-<div>
-
-<div class="page-title">
-Padrão de Máquinas
-</div>
-
-<div class="page-description">
-Visualização dos padrões registrados por máquina.
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Máquinas do processo
-</div>
-
-<div class="card-description">
-Indicadores técnicos de cada equipamento.
-</div>
-
-<div
-class="machine-grid"
-id="gridMaquinas">
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Detalhamento por máquina
-</div>
-
-<div
-class="table-wrapper"
-id="tabelaMaquinas">
-</div>
-
-</div>
-
-</section>
-
-<!-- HISTORICO -->
-
-<section
-class="page"
-id="historico">
-
-<div class="page-header">
-
-<div>
-
-<div class="page-title">
-Histórico
-</div>
-
-<div class="page-description">
-Consulte todos os lançamentos realizados.
-</div>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-Histórico de avaliações
-</div>
-
-<div class="card-description">
-Todos os registros armazenados no sistema.
-</div>
-
-<input
-class="search-box"
-id="buscaHistorico"
-type="text"
-placeholder="🔎 Pesquisar histórico..."
-oninput="renderizarHistorico()">
-
-<div
-class="table-wrapper"
-id="tabelaHistorico">
-</div>
-
-</div>
-
-</section>
-
-<footer class="footer">
-
-<div>
-<strong>GraviUnit MES</strong>
-</div>
-
-<div style="margin-top:6px;">
-Manufacturing Execution System
-</div>
-
-<div style="margin-top:8px;">
-Desenvolvido por <strong>Samuel Torres Garcia</strong>
-</div>
-
-<div style="margin-top:5px;">
-© 2026 GraviUnit MES — Sistema de Controle de Produção
-</div>
-
-</footer>
-
-</div>
-
-</main>
-
-<script>
-
-/* CONFIGURAÇÕES */
-
-const STORAGE_QUIMICOS="graviunit_quimicos_v1";
-const STORAGE_LANCAMENTOS="graviunit_lancamentos_v1";
-const STORAGE_PECAS="erp_pecas_v1";
-const THEME_KEY="graviunit_theme";
-const TEMPO_ATUALIZACAO=50000;
-
-let quimicos=[];
-let lancamentos=[];
-let registrosPecas=[];
-let graficoResultados=null;
-let periodoAtual="todos";
-
-/*
-CONTROLE DAS 5 OPÇÕES
-
-false = opção sendo utilizada
-true = opção não utilizada
-*/
-
-const opcoesNaoUtilizadas={
-1:false,
-2:false,
-3:false,
-4:false,
-5:false
-};
-
-/*
-CATEGORIAS FIXAS DAS OPÇÕES
-
-1 = MASSA
-2 = PRIMER
-3 = IMPRESSÃO
-4 = BASE
-5 = VERNIZ
-*/
-
-const categoriasOpcoes={
-1:"Massa",
-2:"Primer",
-3:"Impressão",
-4:"Base",
-5:"Verniz"
-};
-
-const maquinas=[
-"701e",
-"701i",
-"703e",
-"703i",
-"705",
-"706",
-"707",
-"708",
-"710e",
-"710i",
-"712e",
-"712i"
-];
-
-/* MÁQUINAS */
-
-function nomeMaquina(maquina){
-
-const nomes={
-
-"701e":"701 - Externo",
-"701i":"701 - Interno",
-"703e":"703 - Externo",
-"703i":"703 - Interno",
-"705":"705",
-"706":"706",
-"707":"707",
-"708":"708",
-"710e":"710 - Externo",
-"710i":"710 - Interno",
-"712e":"712 - Externo",
-"712i":"712 - Interno"
-
-};
-
-return nomes[maquina]||maquina||"-";
-
-}
-
-/* QUÍMICOS PADRÃO */
-
-const quimicosPadrao=[
-
-{
-nome:"MASSA ESPATULADEIRA",
-codigo:"314001-000",
-cor:"",
-tipo:"Massa"
-},
-
-{
-nome:"MASSA ALISADORA",
-codigo:"314002-000",
-cor:"",
-tipo:"Massa"
-},
-
-{
-nome:"ESMALTE BRANCO FOSCO",
-codigo:"311281-000",
-cor:"Branco",
-tipo:"Base"
-},
-
-{
-nome:"ESMALTE BRANCO BRILHANTE",
-codigo:"311276-000",
-cor:"Branco",
-tipo:"Base"
-},
-
-{
-nome:"VERNIZ UV PRETO FOSCO 10",
-codigo:"310081-000",
-cor:"Preto",
-tipo:"Verniz"
-},
-
-{
-nome:"VERNIZ UV (ALTA RESIS) 100",
-codigo:"310082-000",
-cor:"",
-tipo:"Verniz"
-},
-
-{
-nome:"VERNIZ UV ACETINADO (GRAFITE) 25",
-codigo:"310084-000",
-cor:"Grafite",
-tipo:"Verniz"
-},
-
-{
-nome:"PRIMER DAMASCO 1",
-codigo:"307502-004",
-cor:"Damasco",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER BRANCO NOVO",
-codigo:"307507-002",
-cor:"Branco",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER AVELA",
-codigo:"307503-004",
-cor:"Avelã",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER CAFE",
-codigo:"307305-004",
-cor:"Café",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER CASTANHO NEW (CAPUCCINO)",
-codigo:"307264-002",
-cor:"Capuccino",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER GRAPIA",
-codigo:"307261-004",
-cor:"Grapia",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER GRAFITE",
-codigo:"307272-004",
-cor:"Grafite",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER VERDE MENTA",
-codigo:"307506-002",
-cor:"Verde Menta",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER CHAMPANHE",
-codigo:"307231-002",
-cor:"Champanhe",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER UV PLATINA",
-codigo:"307505-004",
-cor:"Platinha",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER IMBUIA",
-codigo:"307302-004",
-cor:"Imbuia",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER CINZA",
-codigo:"307303-004",
-cor:"Cinza",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER AMEIXA",
-codigo:"307229-002",
-cor:"Ameixa",
-tipo:"Primer"
-},
-
-{
-nome:"PRIMER UV PRETO",
-codigo:"307205-002",
-cor:"Preto",
-tipo:"Primer"
-},
-
-{
-nome:"TEXTURA PARA IMPRESSAO DIRETA",
-codigo:"307323-008",
-cor:"",
-tipo:"Impressão"
-},
-
-{
-nome:"IMPRESSAO DIRETA DAMASCO",
-codigo:"307403-006",
-cor:"Damasco",
-tipo:"Impressão"
-},
-
-{
-nome:"IMPRESSAO AVELA",
-codigo:"307335-006",
-cor:"Avelã",
-tipo:"Impressão"
-},
-
-{
-nome:"IMPRESSAO CAFÉ",
-codigo:"307400-006",
-cor:"Café",
-tipo:"Impressão"
-},
-
-{
-nome:"IMPRESSAO GRAPIA",
-codigo:"307301-006",
-cor:"Grapia",
-tipo:"Impressão"
-}
-
-];
-
-/* INICIALIZAÇÃO */
-
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-
-carregarDados();
-
-carregarTema();
-
-renderizarQuimicos();
-
-preencherTodosSelectsQuimicos();
-
-renderizarLancamentos();
-
-renderizarHistorico();
-
-renderizarMaquinas();
-
-renderizarPecas();
-
-atualizarResumoPecas();
-
-atualizarDashboard();
-
-atualizarDataHoraTempoReal();
-
-resetarTodasOpcoes();
-
-}
-);
-
-/* DATA E HORA */
-
-function gerarDataHoraAtual(){
-
-const agora=new Date();
-
-const dia=String(
-agora.getDate()
-).padStart(2,"0");
-
-const mes=String(
-agora.getMonth()+1
-).padStart(2,"0");
-
-const ano=agora.getFullYear();
-
-const hora=String(
-agora.getHours()
-).padStart(2,"0");
-
-const minuto=String(
-agora.getMinutes()
-).padStart(2,"0");
-
-const segundo=String(
-agora.getSeconds()
-).padStart(2,"0");
-
-return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
-
-}
-
-function formatoDataHora(){
-
-const agora=new Date();
-
-const ano=agora.getFullYear();
-
-const mes=String(
-agora.getMonth()+1
-).padStart(2,"0");
-
-const dia=String(
-agora.getDate()
-).padStart(2,"0");
-
-const hora=String(
-agora.getHours()
-).padStart(2,"0");
-
-const minuto=String(
-agora.getMinutes()
-).padStart(2,"0");
-
-const segundo=String(
-agora.getSeconds()
-).padStart(2,"0");
-
-return `${ano}-${mes}-${dia}T${hora}:${minuto}:${segundo}`;
-
-}
-
-function atualizarDataHoraTempoReal(){
-
-const agora=gerarDataHoraAtual();
-
-const campoLancamento=document.getElementById(
-"dataHoraLancamento"
-);
-
-const campoPecas=document.getElementById(
-"dataHoraPecas"
-);
-
-if(campoLancamento){
-
-campoLancamento.value=agora;
-
-}
-
-if(campoPecas){
-
-campoPecas.value=agora;
-
-}
-
-}
-
-setInterval(
-atualizarDataHoraTempoReal,
-1000
-);
-
-/* CARREGAR DADOS */
-
-function carregarDados(){
-
-try{
-
-const dadosQuimicos=JSON.parse(
-localStorage.getItem(
-STORAGE_QUIMICOS
-)
-);
-
-if(Array.isArray(dadosQuimicos)){
-
-quimicos=dadosQuimicos;
-
-}else{
-
-quimicos=quimicosPadrao.map(
-q=>({...q,id:gerarID()})
-);
-
-localStorage.setItem(
-STORAGE_QUIMICOS,
-JSON.stringify(quimicos)
-);
-
-}
-
-}catch(e){
-
-quimicos=quimicosPadrao.map(
-q=>({...q,id:gerarID()})
-);
-
-}
-
-try{
-
-const dadosLancamentos=JSON.parse(
-localStorage.getItem(
-STORAGE_LANCAMENTOS
-)
-);
-
-const ids=new Set();
-
-lancamentos=Array.isArray(
-dadosLancamentos
-)
-?dadosLancamentos.map(l=>{
-
-let id=l.id
-?String(l.id)
-:gerarID();
-
-while(ids.has(id)){
-
-id=gerarID();
-
-}
-
-ids.add(id);
-
-return {...l,id};
-
-})
-:[];
-
-localStorage.setItem(
-STORAGE_LANCAMENTOS,
-JSON.stringify(lancamentos)
-);
-
-}catch(e){
-
-lancamentos=[];
-
-}
-
-try{
-
-const dadosPecas=JSON.parse(
-localStorage.getItem(
-STORAGE_PECAS
-)
-);
-
-registrosPecas=Array.isArray(
-dadosPecas
-)
-?dadosPecas
-:[];
-
-}catch(e){
-
-registrosPecas=[];
-
-}
-
-}
-
-/* ID */
-
-function gerarID(){
-
-return Date.now().toString(36)+
-Math.random()
-.toString(36)
-.substring(2,9);
-
-}
-
-/* MENU */
-
-function alternarMenu(){
-
-const sidebar=document.getElementById(
-"sidebar"
-);
-
-const main=document.getElementById(
-"main"
-);
-
-if(window.innerWidth<=800){
-
-sidebar.classList.toggle(
-"mobile-open"
-);
-
-}else{
-
-sidebar.classList.toggle(
-"hidden"
-);
-
-main.classList.toggle(
-"expanded"
-);
-
-}
-
-}
-
-/* PÁGINAS */
-
-function mostrarPagina(
-id,
-elemento
-){
-
-document.querySelectorAll(
-".page"
-).forEach(
-page=>{
-page.classList.remove(
-"active"
-);
-}
-);
-
-const pagina=document.getElementById(
-id
-);
-
-if(pagina){
-
-pagina.classList.add(
-"active"
-);
-
-}
-
-document.querySelectorAll(
-".menu-item"
-).forEach(
-item=>{
-item.classList.remove(
-"active"
-);
-}
-);
-
-if(elemento){
-
-elemento.classList.add(
-"active"
-);
-
-}
-
-if(window.innerWidth<=800){
-
-document.getElementById(
-"sidebar"
-).classList.remove(
-"mobile-open"
-);
-
-}
-
-}
-
-/* TEMA */
-
-function carregarTema(){
-
-const tema=localStorage.getItem(
-THEME_KEY
-);
-
-if(tema==="dark"){
-
-document.body.classList.add(
-"dark"
-);
-
-}
-
-}
-
-function alternarTema(){
-
-document.body.classList.toggle(
-"dark"
-);
-
-localStorage.setItem(
-THEME_KEY,
-document.body.classList.contains(
-"dark"
-)
-?"dark"
-:"light"
-);
-
-atualizarGrafico();
-
-}
-
-/* QUÍMICOS */
-
-function salvarQuimico(event){
-
-event.preventDefault();
-
-const id=document.getElementById(
-"idQuimico"
-).value;
-
-const objeto={
-
-id:id||gerarID(),
-
-nome:document.getElementById(
-"nomeQuimico"
-).value.trim(),
-
-codigo:document.getElementById(
-"codigoQuimico"
-).value.trim(),
-
-cor:document.getElementById(
-"corQuimico"
-).value.trim(),
-
-tipo:document.getElementById(
-"tipoQuimico"
-).value,
-
-observacao:document.getElementById(
-"observacaoQuimico"
-).value.trim()
-
-};
-
-if(id){
-
-const index=quimicos.findIndex(
-q=>String(q.id)===String(id)
-);
-
-if(index>=0){
-
-quimicos[index]=objeto;
-
-}
-
-}else{
-
-quimicos.push(
-objeto
-);
-
-}
-
-localStorage.setItem(
-STORAGE_QUIMICOS,
-JSON.stringify(quimicos)
-);
-
-limparFormularioQuimico();
-
-renderizarQuimicos();
-
-preencherTodosSelectsQuimicos();
-
-alert(
-"Químico salvo com sucesso!"
-);
-
-}
-
-function limparFormularioQuimico(){
-
-document.getElementById(
-"formQuimico"
-).reset();
-
-document.getElementById(
-"idQuimico"
-).value="";
-
-}
-
-/* NORMALIZAR TIPO */
-
-function normalizarTipo(
-valor
-){
-
-return String(
-valor||""
-)
-.normalize("NFD")
-.replace(
-/[\u0300-\u036f]/g,
-""
-)
-.toLowerCase()
-.trim();
-
-}
-
-/*
-RETORNA OS QUÍMICOS DE UMA
-CATEGORIA ESPECÍFICA
-*/
-
-function obterQuimicosPorCategoria(
-categoria
-){
-
-const categoriaNormalizada=
-normalizarTipo(
-categoria
-);
-
-return quimicos.filter(
-q=>
-normalizarTipo(
-q.tipo
-)===categoriaNormalizada
-);
-
-}
-
-/* RENDER QUÍMICOS */
-
-function renderizarQuimicos(){
-
-const container=document.getElementById(
-"tabelaQuimicos"
-);
-
-if(!container)return;
-
-const busca=(
-document.getElementById(
-"buscaQuimico"
-)?.value||""
-).toLowerCase();
-
-const lista=quimicos.filter(
-q=>
-String(
-q.nome||""
-).toLowerCase().includes(
-busca
-)||
-String(
-q.codigo||""
-).toLowerCase().includes(
-busca
-)||
-String(
-q.cor||""
-).toLowerCase().includes(
-busca
-)||
-String(
-q.tipo||""
-).toLowerCase().includes(
-busca
-)
-);
-
-if(lista.length===0){
-
-container.innerHTML=
-`<div class="empty">Nenhum químico encontrado.</div>`;
-
-return;
-
-}
 
-let html=`
+<div class="table-wrap">
 
 <table>
 
 <thead>
 
 <tr>
+
 <th>Nome</th>
 <th>Código</th>
 <th>Cor</th>
-<th>Tipo</th>
+<th>Categoria</th>
+<th>Observação</th>
 <th>Ações</th>
+
 </tr>
 
 </thead>
 
-<tbody>
-`;
+<tbody id="tabelaQ">
+</tbody>
 
-lista.forEach(
-q=>{
+</table>
 
-html+=`
+</div>
 
-<tr>
+</div>
 
-<td>
-<strong>${esc(q.nome)}</strong>
-</td>
+</section>
 
-<td>
-${esc(q.codigo)}
-</td>
 
-<td>
-${esc(q.cor||"-")}
-</td>
+<!-- ================================
+LANÇAMENTO
+================================ -->
 
-<td>
-${esc(q.tipo||"-")}
-</td>
+<section
+class="page"
+id="page-lancamento">
 
-<td>
+<div class="page-head">
+
+<div>
+
+<h1>
+Lançamento de Gramaturas
+</h1>
+
+<div class="subtitle">
+Registre Massa, Primer, Impressão, Base e Verniz.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="grid">
+
+
+<div class="field">
+
+<label>
+Máquina
+</label>
+
+<select id="maquina">
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Responsável
+</label>
+
+<input
+id="responsavel"
+placeholder="Nome do responsável">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Data e hora
+</label>
+
+<input
+id="dataHoraLancamento"
+class="readonly"
+type="text"
+readonly
+tabindex="-1">
+
+</div>
+
+</div>
+
+
+<div id="avaliacoes">
+</div>
+
+
+<div
+class="field"
+style="margin-top:14px">
+
+<label>
+Observação geral
+</label>
+
+<textarea
+id="obsLanc"
+placeholder="Observações do lançamento">
+</textarea>
+
+</div>
+
 
 <div class="actions">
 
 <button
-class="btn-small btn-edit"
-onclick="editarQuimico('${q.id}')">
-
-Editar
-
+class="btn btn-primary"
+onclick="salvarLancamento()">
+💾 Salvar lançamento
 </button>
 
 <button
-class="btn-small btn-delete"
-onclick="excluirQuimico('${q.id}')">
+class="btn btn-secondary"
+onclick="limparLancamento()">
+Limpar
+</button>
 
-Excluir
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================================
+PEÇAS EM PRODUÇÃO
+================================ -->
+
+<section
+class="page"
+id="page-pecas">
+
+<div class="page-head">
+
+<div>
+
+<h1>
+Peças em Produção
+</h1>
+
+<div class="subtitle">
+Controle rápido da produção.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+<div class="stat-label">
+TOTAL
+</div>
+
+<div
+class="stat-value"
+id="stTotal">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+DENTRO DO PADRÃO
+</div>
+
+<div
+class="stat-value"
+style="color:var(--verde)"
+id="stOk">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+FORA DO PADRÃO
+</div>
+
+<div
+class="stat-value"
+style="color:var(--vermelho)"
+id="stBad">
+0
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="stat-label">
+QUANTIDADE
+</div>
+
+<div
+class="stat-value"
+id="stQtd">
+0
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="grid">
+
+
+<div class="field">
+
+<label>
+Máquina
+</label>
+
+<select id="maquinaPeca">
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Responsável
+</label>
+
+<input
+id="respPeca"
+placeholder="Responsável">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Padrão / Quantidade prevista
+</label>
+
+<input
+id="padPeca"
+type="number"
+step="any"
+oninput="calcularPeca()">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Quantidade produzindo
+</label>
+
+<input
+id="valPeca"
+type="number"
+step="any"
+oninput="calcularPeca()">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Data e hora
+</label>
+
+<input
+id="dataPeca"
+class="readonly"
+type="text"
+readonly
+tabindex="-1">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Comentário
+</label>
+
+<input
+id="comentarioPeca"
+placeholder="Comentário da produção">
+
+</div>
+
+</div>
+
+
+<div
+id="resPeca"
+class="resultado neutral">
+
+Aguardando preenchimento
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn btn-primary"
+onclick="salvarPeca()">
+💾 Salvar
+</button>
+
+<button
+class="btn btn-secondary"
+onclick="limparPeca()">
+Limpar
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="page-head">
+
+<h2>
+Registros de produção
+</h2>
+
+<input
+class="search"
+id="buscaPeca"
+oninput="renderPecas()"
+placeholder="Pesquisar">
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Data/Hora</th>
+<th>Máquina</th>
+<th>Responsável</th>
+<th>Padrão</th>
+<th>Quantidade produzindo</th>
+<th>Resultado</th>
+<th>Comentário</th>
+<th>Ações</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelaPecas">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================================
+HISTÓRICO
+================================ -->
+
+<section
+class="page"
+id="page-historico">
+
+<div class="page-head">
+
+<div>
+
+<h1>
+Histórico de Lançamentos
+</h1>
+
+<div class="subtitle">
+Todos os lançamentos de Massa, Primer, Impressão, Base e Verniz.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="page-head">
+
+<div class="notice">
+Lançamentos feitos no mesmo momento permanecem agrupados por categoria.
+</div>
+
+<input
+class="search"
+id="buscaHistorico"
+oninput="renderHistorico()"
+placeholder="Pesquisar máquina, químico, código...">
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Data/Hora</th>
+<th>Máquina</th>
+<th>Responsável</th>
+<th>Categoria</th>
+<th>Químico</th>
+<th>Código</th>
+<th>Padrão</th>
+<th>Gramatura feita</th>
+<th>Resultado</th>
+<th>Observação</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelaHistorico">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================================
+EXCEL
+================================ -->
+
+<section
+class="page"
+id="page-excel">
+
+<div class="page-head">
+
+<div>
+
+<h1>
+Exportar Excel
+</h1>
+
+<div class="subtitle">
+Exporte os dados do GraviUnit MES.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card export-box">
+
+<div>
+
+<h2>
+Exportação operacional
+</h2>
+
+<div class="notice">
+
+O arquivo terá somente duas abas:
+<b>Média Máquina Químico</b>
+e
+<b>Gramaturas Feitas</b>.
+
+</div>
+
+</div>
+
+
+<button
+class="btn btn-success"
+onclick="exportarExcel()">
+
+📊 Exportar Excel
 
 </button>
 
 </div>
 
-</td>
+</section>
 
-</tr>
-`;
+
+</main>
+
+
+<script>
+
+
+/* ================================
+CONFIGURAÇÕES
+================================ */
+
+const STORAGE_QUIMICOS =
+'graviunit_quimicos_v1';
+
+const STORAGE_LANCAMENTOS =
+'graviunit_lancamentos_v1';
+
+const STORAGE_PECAS =
+'graviunit_pecas_v1';
+
+const STORAGE_TEMA =
+'graviunit_theme';
+
+
+let quimicos = [];
+
+let lancamentos = [];
+
+let registrosPecas = [];
+
+let editandoQuimico = null;
+
+
+let opcoesNaoUtilizadas = {
+
+1:false,
+2:false,
+3:false,
+4:false,
+5:false
+
+};
+
+
+const categorias = {
+
+1:'Massa',
+2:'Primer',
+3:'Impressão',
+4:'Base',
+5:'Verniz'
+
+};
+
+
+const maquinas = [
+
+'701e',
+'701i',
+
+'703e',
+'703i',
+
+'705',
+'706',
+'707',
+'708',
+
+'710e',
+'710i',
+
+'712e',
+'712i'
+
+];
+
+
+const nomesMaquinas = {
+
+'701e':'701 - Externo',
+'701i':'701 - Interno',
+
+'703e':'703 - Externo',
+'703i':'703 - Interno',
+
+'705':'705',
+'706':'706',
+'707':'707',
+'708':'708',
+
+'710e':'710 - Externo',
+'710i':'710 - Interno',
+
+'712e':'712 - Externo',
+'712i':'712 - Interno'
+
+};
+
+
+/* ================================
+QUÍMICOS PADRÃO
+================================ */
+
+const quimicosPadrao = [
+
+{
+nome:'MASSA ESPATULADEIRA',
+codigo:'314001-000',
+cor:'',
+tipo:'Massa'
+},
+
+{
+nome:'MASSA ALISADORA',
+codigo:'314002-000',
+cor:'',
+tipo:'Massa'
+},
+
+{
+nome:'ESMALTE BRANCO FOSCO',
+codigo:'311281-000',
+cor:'Branco',
+tipo:'Base'
+},
+
+{
+nome:'ESMALTE BRANCO BRILHANTE',
+codigo:'311276-000',
+cor:'Branco',
+tipo:'Base'
+},
+
+{
+nome:'VERNIZ UV PRETO FOSCO 10',
+codigo:'310081-000',
+cor:'Preto',
+tipo:'Verniz'
+},
+
+{
+nome:'VERNIZ UV (ALTA RESIS) 100',
+codigo:'310082-000',
+cor:'',
+tipo:'Verniz'
+},
+
+{
+nome:'VERNIZ UV ACETINADO (GRAFITE) 25',
+codigo:'310084-000',
+cor:'Grafite',
+tipo:'Verniz'
+},
+
+{
+nome:'PRIMER DAMASCO 1',
+codigo:'307502-004',
+cor:'Damasco',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER BRANCO NOVO',
+codigo:'307507-002',
+cor:'Branco',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER AVELA',
+codigo:'307503-004',
+cor:'Avelã',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER CAFE',
+codigo:'307305-004',
+cor:'Café',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER CASTANHO NEW (CAPUCCINO)',
+codigo:'307264-002',
+cor:'Capuccino',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER GRAPIA',
+codigo:'307261-004',
+cor:'Grapia',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER GRAFITE',
+codigo:'307272-004',
+cor:'Grafite',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER VERDE MENTA',
+codigo:'307506-002',
+cor:'Verde Menta',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER CHAMPANHE',
+codigo:'307231-002',
+cor:'Champanhe',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER UV PLATINA',
+codigo:'307505-004',
+cor:'Platinha',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER IMBUIA',
+codigo:'307302-004',
+cor:'Imbuia',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER CINZA',
+codigo:'307303-004',
+cor:'Cinza',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER AMEIXA',
+codigo:'307229-002',
+cor:'Ameixa',
+tipo:'Primer'
+},
+
+{
+nome:'PRIMER UV PRETO',
+codigo:'307205-002',
+cor:'Preto',
+tipo:'Primer'
+},
+
+{
+nome:'TEXTURA PARA IMPRESSAO DIRETA',
+codigo:'307323-008',
+cor:'',
+tipo:'Impressão'
+},
+
+{
+nome:'IMPRESSAO DIRETA DAMASCO',
+codigo:'307403-006',
+cor:'Damasco',
+tipo:'Impressão'
+},
+
+{
+nome:'IMPRESSAO AVELA',
+codigo:'307335-006',
+cor:'Avelã',
+tipo:'Impressão'
+},
+
+{
+nome:'IMPRESSAO CAFÉ',
+codigo:'307400-006',
+cor:'Café',
+tipo:'Impressão'
+},
+
+{
+nome:'IMPRESSAO GRAPIA',
+codigo:'307301-006',
+cor:'Grapia',
+tipo:'Impressão'
+}
+
+];
+
+
+/* ================================
+UTILITÁRIOS
+================================ */
+
+function $(id){
+
+return document.getElementById(id);
 
 }
-);
 
-html+=`
-</tbody>
-</table>
-`;
 
-container.innerHTML=html;
+function gerarId(){
 
-}
-
-/* PREENCHER SELECTS POR CATEGORIA */
-
-function preencherTodosSelectsQuimicos(){
-
-for(
-let i=1;
-i<=5;
-i++
-){
-
-const select=document.getElementById(
-`quimicoLancamento${i}`
-);
-
-if(!select)continue;
-
-const categoria=
-categoriasOpcoes[i];
-
-const valorAtual=
-select.value;
-
-const lista=
-obterQuimicosPorCategoria(
-categoria
-);
-
-select.innerHTML="";
-
-const primeiraOpcao=
-document.createElement(
-"option"
-);
-
-primeiraOpcao.value="";
-
-primeiraOpcao.textContent=
-`Selecione ${categoria}`;
-
-select.appendChild(
-primeiraOpcao
-);
-
-lista.forEach(
-q=>{
-
-const option=
-document.createElement(
-"option"
-);
-
-option.value=q.codigo;
-
-option.textContent=
-`${q.codigo} — ${q.nome}`;
-
-select.appendChild(
-option
-);
-
-}
-);
-
-if(
-valorAtual &&
-lista.some(
-q=>q.codigo===valorAtual
-)
-){
-
-select.value=
-valorAtual;
+return Date.now() +
+'-' +
+Math.random()
+.toString(16)
+.substring(2);
 
 }
 
-}
+
+function escapar(valor){
+
+return String(valor ?? '')
+
+.replace(/&/g,'&amp;')
+
+.replace(/</g,'&lt;')
+
+.replace(/>/g,'&gt;')
+
+.replace(/"/g,'&quot;')
+
+.replace(/'/g,'&#039;');
 
 }
 
-/* EDITAR QUÍMICO */
 
-function editarQuimico(id){
+function nomeMaquina(codigo){
 
-const q=quimicos.find(
-item=>
-String(item.id)===
-String(id)
-);
-
-if(!q)return;
-
-document.getElementById(
-"idQuimico"
-).value=q.id;
-
-document.getElementById(
-"nomeQuimico"
-).value=q.nome||"";
-
-document.getElementById(
-"codigoQuimico"
-).value=q.codigo||"";
-
-document.getElementById(
-"corQuimico"
-).value=q.cor||"";
-
-document.getElementById(
-"tipoQuimico"
-).value=q.tipo||"";
-
-document.getElementById(
-"observacaoQuimico"
-).value=q.observacao||"";
-
-mostrarPagina(
-"cadastro"
-);
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+return nomesMaquinas[codigo] || codigo;
 
 }
 
-/* EXCLUIR QUÍMICO */
 
-function excluirQuimico(id){
+function normalizarTipo(valor){
 
-const q=quimicos.find(
-item=>
-String(item.id)===
-String(id)
-);
+return String(valor || '')
 
-if(!q)return;
+.normalize('NFD')
 
-if(
-!confirm(
-"Deseja realmente excluir o químico?\n\n"+
-q.nome+"\n"+
-q.codigo
-)
-)return;
+.replace(/[\u0300-\u036f]/g,'')
 
-quimicos=
-quimicos.filter(
-item=>
-String(item.id)!==
-String(id)
-);
+.toLowerCase();
+
+}
+
+
+function gerarDataHoraAtual(){
+
+const agora =
+new Date();
+
+const dia =
+String(agora.getDate())
+.padStart(2,'0');
+
+const mes =
+String(agora.getMonth()+1)
+.padStart(2,'0');
+
+const ano =
+agora.getFullYear();
+
+const hora =
+String(agora.getHours())
+.padStart(2,'0');
+
+const minuto =
+String(agora.getMinutes())
+.padStart(2,'0');
+
+const segundo =
+String(agora.getSeconds())
+.padStart(2,'0');
+
+return `${dia}/${mes}/${ano} ${hora}:${minuto}:${segundo}`;
+
+}
+
+
+/* ================================
+DADOS
+================================ */
+
+function salvarDados(){
 
 localStorage.setItem(
 STORAGE_QUIMICOS,
 JSON.stringify(quimicos)
 );
 
-renderizarQuimicos();
+localStorage.setItem(
+STORAGE_LANCAMENTOS,
+JSON.stringify(lancamentos)
+);
+
+localStorage.setItem(
+STORAGE_PECAS,
+JSON.stringify(registrosPecas)
+);
+
+}
+
+
+function carregarDados(){
+
+const q =
+localStorage.getItem(
+STORAGE_QUIMICOS
+);
+
+const l =
+localStorage.getItem(
+STORAGE_LANCAMENTOS
+);
+
+const p =
+localStorage.getItem(
+STORAGE_PECAS
+);
+
+
+quimicos =
+q
+?
+JSON.parse(q)
+:
+[];
+
+
+lancamentos =
+l
+?
+JSON.parse(l)
+:
+[];
+
+
+registrosPecas =
+p
+?
+JSON.parse(p)
+:
+[];
+
+
+if(!quimicos.length){
+
+quimicos =
+quimicosPadrao.map(
+(q,index)=>({
+
+id:'quimico-' + index,
+
+nome:q.nome,
+
+codigo:q.codigo,
+
+cor:q.cor,
+
+tipo:q.tipo,
+
+observacao:''
+
+})
+);
+
+salvarDados();
+
+}
+
+}
+
+
+/* ================================
+TEMA
+================================ */
+
+function toggleTheme(){
+
+document.body
+.classList
+.toggle('dark');
+
+localStorage.setItem(
+
+STORAGE_TEMA,
+
+document.body.classList.contains('dark')
+?
+'dark'
+:
+'light'
+
+);
+
+}
+
+
+/* ================================
+MENU
+================================ */
+
+function toggleMenu(){
+
+const sidebar =
+$('sidebar');
+
+
+if(window.innerWidth <= 900){
+
+sidebar
+.classList
+.toggle('open');
+
+}
+
+else{
+
+sidebar
+.classList
+.toggle('closed');
+
+$('main')
+.classList
+.toggle('expanded');
+
+}
+
+}
+
+
+/* ================================
+PÁGINAS
+================================ */
+
+function showPage(nome,botao){
+
+document
+.querySelectorAll('.page')
+.forEach(
+p =>
+p.classList
+.remove('active')
+);
+
+
+$('page-' + nome)
+.classList
+.add('active');
+
+
+document
+.querySelectorAll('.nav-btn')
+.forEach(
+b =>
+b.classList
+.remove('active')
+);
+
+
+botao.classList
+.add('active');
+
+
+if(window.innerWidth <= 900){
+
+$('sidebar')
+.classList
+.remove('open');
+
+}
+
+if(nome === 'historico'){
+
+renderHistorico();
+
+}
+
+if(nome === 'pecas'){
+
+renderPecas();
+
+}
+
+}
+
+
+/* ================================
+MÁQUINAS
+================================ */
+
+function preencherMaquinas(){
+
+const html =
+maquinas
+.map(
+m =>
+
+`<option value="${m}">
+${nomeMaquina(m)}
+</option>`
+
+)
+.join('');
+
+
+$('maquina').innerHTML =
+html;
+
+$('maquinaPeca').innerHTML =
+html;
+
+}
+
+
+/* ================================
+CADASTRO QUÍMICOS
+================================ */
+
+function salvarQuimico(){
+
+const nome =
+$('qNome')
+.value
+.trim();
+
+const codigo =
+$('qCodigo')
+.value
+.trim();
+
+
+if(!nome || !codigo){
+
+alert(
+'Informe o nome e o código do químico.'
+);
+
+return;
+
+}
+
+
+const quimico = {
+
+id:
+editandoQuimico ||
+gerarId(),
+
+nome:
+nome,
+
+codigo:
+codigo,
+
+cor:
+$('qCor')
+.value
+.trim(),
+
+tipo:
+$('qTipo')
+.value,
+
+observacao:
+$('qObs')
+.value
+.trim()
+
+};
+
+
+if(editandoQuimico){
+
+quimicos =
+quimicos.map(
+q =>
+q.id === editandoQuimico
+?
+quimico
+:
+q
+);
+
+}
+
+else{
+
+quimicos.push(
+quimico
+);
+
+}
+
+
+salvarDados();
+
+editandoQuimico =
+null;
+
+limparQuimico();
+
+renderQuimicos();
+
+preencherTodosSelectsQuimicos();
+
+alert(
+'Químico salvo com sucesso.'
+);
+
+}
+
+
+function limparQuimico(){
+
+editandoQuimico =
+null;
+
+$('qNome').value =
+'';
+
+$('qCodigo').value =
+'';
+
+$('qCor').value =
+'';
+
+$('qTipo').value =
+'Massa';
+
+$('qObs').value =
+'';
+
+}
+
+
+function renderQuimicos(){
+
+const busca =
+(
+$('buscaQ').value || ''
+)
+.toLowerCase();
+
+
+const lista =
+quimicos.filter(
+q =>
+
+(
+q.nome +
+' ' +
+q.codigo +
+' ' +
+q.cor +
+' ' +
+q.tipo +
+' ' +
+q.observacao
+)
+.toLowerCase()
+.includes(busca)
+
+);
+
+
+$('tabelaQ').innerHTML =
+
+lista.length
+
+?
+
+lista.map(
+q =>
+
+`<tr>
+
+<td>
+<b>
+${escapar(q.nome)}
+</b>
+</td>
+
+<td>
+${escapar(q.codigo)}
+</td>
+
+<td>
+${escapar(q.cor)}
+</td>
+
+<td>
+${escapar(q.tipo)}
+</td>
+
+<td>
+${escapar(q.observacao)}
+</td>
+
+<td>
+
+<button
+class="btn btn-secondary"
+onclick="editarQuimico('${q.id}')">
+Editar
+</button>
+
+<button
+class="btn btn-danger"
+onclick="excluirQuimico('${q.id}')">
+Excluir
+</button>
+
+</td>
+
+</tr>`
+
+).join('')
+
+:
+
+`<tr>
+
+<td
+colspan="6"
+class="empty">
+
+Nenhum químico encontrado.
+
+</td>
+
+</tr>`;
+
+}
+
+
+function editarQuimico(id){
+
+const q =
+quimicos.find(
+x =>
+x.id === id
+);
+
+if(!q)return;
+
+
+editandoQuimico =
+id;
+
+$('qNome').value =
+q.nome;
+
+$('qCodigo').value =
+q.codigo;
+
+$('qCor').value =
+q.cor || '';
+
+$('qTipo').value =
+q.tipo || 'Outro';
+
+$('qObs').value =
+q.observacao || '';
+
+
+showPage(
+'cadastro',
+document.querySelector(
+'.nav-btn'
+)
+);
+
+window.scrollTo({
+
+top:0,
+behavior:'smooth'
+
+});
+
+}
+
+
+function excluirQuimico(id){
+
+if(
+confirm(
+'Excluir este químico?'
+)
+){
+
+quimicos =
+quimicos.filter(
+q =>
+q.id !== id
+);
+
+salvarDados();
+
+renderQuimicos();
 
 preencherTodosSelectsQuimicos();
 
 }
 
-/* CONTROLE DAS 5 OPÇÕES */
-
-function alternarOpcao(
-numero
-){
-
-if(
-numero<1||
-numero>5
-)return;
-
-opcoesNaoUtilizadas[numero]=
-!opcoesNaoUtilizadas[numero];
-
-atualizarVisualOpcao(
-numero
-);
-
 }
 
-/* ATUALIZAR VISUAL DA OPÇÃO */
 
-function atualizarVisualOpcao(
-numero
-){
+/* ================================
+AVALIAÇÕES
+================================ */
 
-const desativada=
-opcoesNaoUtilizadas[numero];
+function criarAvaliacoes(){
 
-const item=
-document.getElementById(
-`medicaoItem${numero}`
-);
+let html =
+'';
 
-const select=
-document.getElementById(
-`quimicoLancamento${numero}`
-);
-
-const padrao=
-document.getElementById(
-`padraoLancamento${numero}`
-);
-
-const valor=
-document.getElementById(
-`valorLancamento${numero}`
-);
-
-const resultado=
-document.getElementById(
-`resultadoLancamento${numero}`
-);
-
-const status=
-document.getElementById(
-`statusMedicao${numero}`
-);
-
-const botao=
-document.getElementById(
-`btnOpcao${numero}`
-);
-
-if(desativada){
-
-if(select){
-
-select.value="";
-select.disabled=true;
-
-}
-
-if(padrao){
-
-padrao.value="";
-padrao.disabled=true;
-
-}
-
-if(valor){
-
-valor.value="";
-valor.disabled=true;
-
-}
-
-if(resultado){
-
-resultado.value=
-"NAO UTILIZADO";
-
-resultado.classList.remove(
-"resultado-dentro",
-"resultado-acima",
-"resultado-abaixo"
-);
-
-resultado.classList.add(
-"resultado-nao-utilizado"
-);
-
-}
-
-if(status){
-
-status.textContent=
-"✓ Opção não utilizada";
-
-}
-
-if(botao){
-
-botao.textContent=
-`Utilizar opção ${numero}`;
-
-botao.classList.add(
-"ativo"
-);
-
-}
-
-if(item){
-
-item.classList.add(
-"medicao-desativada"
-);
-
-}
-
-}else{
-
-if(select){
-
-select.disabled=false;
-
-}
-
-if(padrao){
-
-padrao.disabled=false;
-
-}
-
-if(valor){
-
-valor.disabled=false;
-
-}
-
-if(resultado){
-
-resultado.value=
-"DENTRO DO PADRÃO";
-
-resultado.classList.remove(
-"resultado-dentro",
-"resultado-acima",
-"resultado-abaixo",
-"resultado-nao-utilizado"
-);
-
-}
-
-if(status){
-
-status.textContent=
-"Aguardando preenchimento";
-
-}
-
-if(botao){
-
-botao.textContent=
-"Não utilizar";
-
-botao.classList.remove(
-"ativo"
-);
-
-}
-
-if(item){
-
-item.classList.remove(
-"medicao-desativada"
-);
-
-}
-
-calcularResultadoMedicao(
-numero
-);
-
-}
-
-}
-
-/* RESETAR TODAS AS OPÇÕES */
-
-function resetarTodasOpcoes(){
 
 for(
-let i=1;
-i<=5;
-i++
+let numero=1;
+numero<=5;
+numero++
 ){
 
-opcoesNaoUtilizadas[i]=false;
+html += `
 
-atualizarVisualOpcao(
-i
+<div
+class="eval"
+id="eval${numero}">
+
+<h3>
+${numero}.
+${categorias[numero].toUpperCase()}
+</h3>
+
+
+<div class="grid">
+
+
+<div class="field">
+
+<label>
+Químico
+</label>
+
+<select
+id="q${numero}"
+onchange="atualizarCodigo(${numero})">
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Código
+</label>
+
+<input
+id="c${numero}"
+class="readonly"
+readonly>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Padrão
+</label>
+
+<input
+id="p${numero}"
+type="number"
+step="any"
+oninput="calcularResultado(${numero})">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Valor medido / Gramatura feita
+</label>
+
+<input
+id="v${numero}"
+type="number"
+step="any"
+oninput="calcularResultado(${numero})">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Resultado
+</label>
+
+<div
+id="r${numero}"
+class="resultado neutral">
+
+Aguardando preenchimento
+
+</div>
+
+</div>
+
+
+<div
+class="field"
+style="display:flex;align-items:end">
+
+<button
+id="b${numero}"
+class="btn btn-warning"
+onclick="alternarNaoUtilizado(${numero})">
+
+Não utilizar
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+$('avaliacoes').innerHTML =
+html;
+
+
+preencherTodosSelectsQuimicos();
+
+}
+
+
+/* ================================
+QUÍMICOS NOS SELECTS
+================================ */
+
+function preencherTodosSelectsQuimicos(){
+
+for(
+let numero=1;
+numero<=5;
+numero++
+){
+
+const select =
+$('q'+numero);
+
+if(!select)continue;
+
+
+const categoria =
+categorias[numero];
+
+
+const lista =
+quimicos.filter(
+q =>
+normalizarTipo(q.tipo)
+===
+normalizarTipo(categoria)
+);
+
+
+select.innerHTML =
+
+`<option value="">
+Selecione o químico
+</option>`
+
++
+
+lista.map(
+q =>
+
+`<option value="${q.id}">
+${escapar(q.nome)}
+—
+${escapar(q.codigo)}
+</option>`
+
+).join('');
+
+}
+
+}
+
+
+/* ================================
+CÓDIGO
+================================ */
+
+function atualizarCodigo(numero){
+
+const q =
+quimicos.find(
+x =>
+x.id ===
+$('q'+numero).value
+);
+
+
+$('c'+numero).value =
+q
+?
+q.codigo
+:
+'';
+
+
+calcularResultado(numero);
+
+}
+
+
+/* ================================
+RESULTADO
+================================ */
+
+function mostrarResultado(
+numero,
+classe,
+mensagem
+){
+
+const resultado =
+$('r'+numero);
+
+resultado.className =
+'resultado ' + classe;
+
+resultado.textContent =
+mensagem;
+
+}
+
+
+function calcularResultado(numero){
+
+if(
+opcoesNaoUtilizadas[numero]
+){
+
+mostrarResultado(
+numero,
+'neutral',
+'NÃO UTILIZADO'
+);
+
+return 'NAO UTILIZADO';
+
+}
+
+
+const padrao =
+parseFloat(
+$('p'+numero).value
+);
+
+const valor =
+parseFloat(
+$('v'+numero).value
+);
+
+
+if(
+!Number.isFinite(padrao)
+||
+!Number.isFinite(valor)
+){
+
+mostrarResultado(
+numero,
+'neutral',
+'Aguardando preenchimento'
+);
+
+return '';
+
+}
+
+
+if(valor > padrao){
+
+mostrarResultado(
+numero,
+'red',
+'ACIMA DO PADRÃO'
+);
+
+return 'ACIMA DO PADRÃO';
+
+}
+
+
+if(valor < padrao){
+
+mostrarResultado(
+numero,
+'yellow',
+'ABAIXO DO PADRÃO'
+);
+
+return 'ABAIXO DO PADRÃO';
+
+}
+
+
+mostrarResultado(
+numero,
+'green',
+'DENTRO DO PADRÃO'
+);
+
+return 'DENTRO DO PADRÃO';
+
+}
+
+
+/* ================================
+NÃO UTILIZAR
+================================ */
+
+function alternarNaoUtilizado(numero){
+
+opcoesNaoUtilizadas[numero] =
+!opcoesNaoUtilizadas[numero];
+
+
+const ativo =
+opcoesNaoUtilizadas[numero];
+
+
+[
+'q',
+'p',
+'v',
+'c'
+]
+.forEach(
+prefixo =>
+
+$(prefixo+numero)
+.disabled =
+ativo
+
+);
+
+
+$('eval'+numero)
+.style.opacity =
+ativo
+?
+'.62'
+:
+'1';
+
+
+$('b'+numero)
+.textContent =
+ativo
+?
+'Reativar opção'
+:
+'Não utilizar';
+
+
+calcularResultado(numero);
+
+}
+
+
+/* ================================
+LIMPAR LANÇAMENTO
+================================ */
+
+function limparLancamento(){
+
+for(
+let numero=1;
+numero<=5;
+numero++
+){
+
+opcoesNaoUtilizadas[numero] =
+false;
+
+
+[
+'q',
+'p',
+'v',
+'c'
+]
+.forEach(
+prefixo =>
+
+$(prefixo+numero)
+.disabled =
+false
+
+);
+
+
+$('q'+numero).value =
+'';
+
+$('c'+numero).value =
+'';
+
+$('p'+numero).value =
+'';
+
+$('v'+numero).value =
+'';
+
+
+$('b'+numero)
+.textContent =
+'Não utilizar';
+
+
+$('eval'+numero)
+.style.opacity =
+'1';
+
+
+mostrarResultado(
+numero,
+'neutral',
+'Aguardando preenchimento'
 );
 
 }
 
-}
 
-/* COMPATIBILIDADE COM OPÇÃO 4 */
+$('responsavel').value =
+'';
 
-function alternarOpcao4(){
+$('obsLanc').value =
+'';
 
-alternarOpcao(4);
 
-}
-
-function resetarOpcao4(){
-
-opcoesNaoUtilizadas[4]=false;
-
-atualizarVisualOpcao(4);
+atualizarDataHora();
 
 }
 
-/* RESULTADO DAS MEDIÇÕES */
 
-function calcularResultadoMedicao(
-numero
+/* ================================
+SALVAR LANÇAMENTO
+================================ */
+
+function salvarLancamento(){
+
+const maquina =
+$('maquina').value;
+
+const responsavel =
+$('responsavel')
+.value
+.trim();
+
+
+if(!responsavel){
+
+alert(
+'Informe o responsável.'
+);
+
+return;
+
+}
+
+
+const timestamp =
+Date.now();
+
+const data =
+gerarDataHoraAtual();
+
+const observacao =
+$('obsLanc')
+.value
+.trim();
+
+let quantidade =
+0;
+
+
+for(
+let numero=1;
+numero<=5;
+numero++
 ){
 
 if(
 opcoesNaoUtilizadas[numero]
 ){
 
-return;
+continue;
 
 }
 
-const padraoCampo=
-document.getElementById(
-`padraoLancamento${numero}`
-);
 
-const valorCampo=
-document.getElementById(
-`valorLancamento${numero}`
-);
+const quimicoId =
+$('q'+numero).value;
 
-const resultado=
-document.getElementById(
-`resultadoLancamento${numero}`
-);
+const padrao =
+$('p'+numero).value;
 
-const status=
-document.getElementById(
-`statusMedicao${numero}`
-);
+const valor =
+$('v'+numero).value;
+
 
 if(
-!padraoCampo||
-!valorCampo||
-!resultado
-)return;
-
-const padraoTexto=
-padraoCampo.value.trim();
-
-const valorTexto=
-valorCampo.value.trim();
-
-resultado.classList.remove(
-"resultado-dentro",
-"resultado-acima",
-"resultado-abaixo",
-"resultado-nao-utilizado"
-);
-
-if(
-padraoTexto===""||
-valorTexto===""
+!quimicoId &&
+!padrao &&
+!valor
 ){
-
-resultado.value=
-"DENTRO DO PADRÃO";
-
-status.textContent=
-"Aguardando preenchimento";
-
-return;
-
-}
-
-const padrao=
-Number(
-padraoTexto.replace(
-",",
-"."
-)
-);
-
-const valor=
-Number(
-valorTexto.replace(
-",",
-"."
-)
-);
-
-if(
-!Number.isFinite(padrao)||
-!Number.isFinite(valor)
-){
-
-resultado.value=
-"DENTRO DO PADRÃO";
-
-status.textContent=
-"Valor inválido";
-
-return;
-
-}
-
-if(
-valor>padrao
-){
-
-resultado.value=
-"ACIMA DO PADRÃO";
-
-resultado.classList.add(
-"resultado-acima"
-);
-
-status.textContent=
-"⚠ Acima do padrão";
-
-}else if(
-valor<padrao
-){
-
-resultado.value=
-"ABAIXO DO PADRÃO";
-
-resultado.classList.add(
-"resultado-abaixo"
-);
-
-status.textContent=
-"✕ Abaixo do padrão";
-
-}else{
-
-resultado.value=
-"DENTRO DO PADRÃO";
-
-resultado.classList.add(
-"resultado-dentro"
-);
-
-status.textContent=
-"✓ Dentro do padrão";
-
-}
-
-}
-
-/* RESULTADO AUTOMÁTICO */
-
-function calcularResultadoAutomatico(){
-
-for(
-let i=1;
-i<=5;
-i++
-){
-
-if(
-!opcoesNaoUtilizadas[i]
-){
-
-calcularResultadoMedicao(
-i
-);
-
-}
-
-}
-
-}
-
-/* SALVAR LANÇAMENTOS */
-
-function salvarLancamento(
-event
-){
-
-event.preventDefault();
-
-calcularResultadoAutomatico();
-
-const idEdicao=
-document.getElementById(
-"idLancamento"
-).value;
-
-let medicoes=[];
-
-for(
-let i=1;
-i<=5;
-i++
-){
-
-if(
-opcoesNaoUtilizadas[i]
-){
-
-medicoes.push({
-
-numero:i,
-
-categoria:
-categoriasOpcoes[i],
-
-codigo:"",
-
-padrao:"",
-
-valor:"",
-
-resultado:
-"NAO UTILIZADO",
-
-naoUtilizada:true
-
-});
 
 continue;
 
 }
 
-const codigo=
-document.getElementById(
-`quimicoLancamento${i}`
-).value.trim();
-
-const padrao=
-document.getElementById(
-`padraoLancamento${i}`
-).value.trim();
-
-const valor=
-document.getElementById(
-`valorLancamento${i}`
-).value.trim();
-
-const resultado=
-document.getElementById(
-`resultadoLancamento${i}`
-).value;
 
 if(
-codigo!==""||
-padrao!==""||
-valor!==""
-){
-
-if(
-codigo===""||
-padrao===""||
-valor===""
+!quimicoId
+||
+padrao === ''
+||
+valor === ''
 ){
 
 alert(
-`Preencha Químico, Padrão e Valor Medido da Opção ${i} — ${categoriasOpcoes[i]}.`
+'Preencha completamente a opção ' +
+categorias[numero] +
+'.'
 );
 
 return;
 
 }
 
-medicoes.push({
 
-numero:i,
-
-categoria:
-categoriasOpcoes[i],
-
-codigo:codigo,
-
-padrao:padrao,
-
-valor:valor,
-
-resultado:resultado,
-
-naoUtilizada:false
-
-});
-
-}
-
-}
-
-/*
-IMPEDIR SALVAMENTO DE UM LANÇAMENTO
-COM TODAS AS OPÇÕES VAZIAS.
-*/
-
-if(
-medicoes.length===0
-){
-
-alert(
-"Preencha pelo menos uma das 5 opções de avaliação ou marque uma opção como 'Não utilizar'."
+const quimico =
+quimicos.find(
+q =>
+q.id === quimicoId
 );
 
-return;
-
-}
-
-const maquina=
-document.getElementById(
-"maquinaLancamento"
-).value;
-
-const responsavel=
-document.getElementById(
-"responsavelLancamento"
-).value.trim();
-
-const observacao=
-document.getElementById(
-"observacaoLancamento"
-).value.trim();
-
-const dataHora=
-formatoDataHora();
-
-const timestamp=
-Date.now();
-
-/* EDIÇÃO */
-
-if(idEdicao){
-
-let medicao=
-medicoes.find(
-m=>
-m.numero===4&&
-m.naoUtilizada
-);
-
-if(!medicao){
-
-medicao=medicoes[0];
-
-}
-
-if(!medicao){
-
-alert(
-"Nenhuma avaliação encontrada."
-);
-
-return;
-
-}
-
-const quimico=
-medicao.naoUtilizada
-?null
-:quimicos.find(
-q=>
-String(q.codigo||"").trim()===
-medicao.codigo
-);
-
-const index=
-lancamentos.findIndex(
-l=>
-String(l.id)===
-String(idEdicao)
-);
-
-if(index>=0){
-
-lancamentos[index]={
-
-...lancamentos[index],
-
-timestamp:timestamp,
-
-data:dataHora,
-
-maquina:maquina,
-
-responsavel:responsavel,
-
-categoria:
-medicao.categoria,
-
-quimico:
-medicao.naoUtilizada
-?"Não utilizado"
-:(quimico
-?quimico.nome
-:medicao.codigo),
-
-quimicoId:
-quimico
-?quimico.id
-:"",
-
-codigo:
-medicao.codigo,
-
-valor:
-medicao.valor,
-
-padrao:
-medicao.padrao,
-
-resultado:
-medicao.resultado,
-
-naoUtilizada:
-!!medicao.naoUtilizada,
-
-observacao:
-observacao,
-
-numeroOpcao:
-medicao.numero
-
-};
-
-}
-
-}else{
-
-/*
-NOVO LANÇAMENTO:
-CADA OPÇÃO PREENCHIDA É SALVA
-COMO UMA AVALIAÇÃO INDIVIDUAL.
-*/
-
-medicoes.forEach(
-medicao=>{
-
-const quimico=
-medicao.naoUtilizada
-?null
-:quimicos.find(
-q=>
-String(q.codigo||"").trim()===
-medicao.codigo
-);
 
 lancamentos.push({
 
-id:gerarID(),
+id:
+gerarId(),
 
-timestamp:timestamp,
+timestamp:
+timestamp,
 
-data:dataHora,
+data:
+data,
 
-maquina:maquina,
+maquina:
+maquina,
 
-responsavel:responsavel,
+responsavel:
+responsavel,
 
 categoria:
-medicao.categoria,
+categorias[numero],
+
+categoriaNumero:
+numero,
 
 quimico:
-medicao.naoUtilizada
-?"Não utilizado"
-:(quimico
-?quimico.nome
-:medicao.codigo),
-
-quimicoId:
 quimico
-?quimico.id
-:"",
+?
+quimico.nome
+:
+'',
 
 codigo:
-medicao.codigo,
+quimico
+?
+quimico.codigo
+:
+'',
 
-valor:
-medicao.valor,
+quimicoId:
+quimicoId,
 
 padrao:
-medicao.padrao,
++padrao,
+
+valor:
++valor,
 
 resultado:
-medicao.resultado,
+calcularResultado(numero),
 
 naoUtilizada:
-!!medicao.naoUtilizada,
+false,
 
 observacao:
-observacao,
-
-numeroOpcao:
-medicao.numero
+observacao
 
 });
 
-}
-);
+
+quantidade++;
 
 }
 
-localStorage.setItem(
-STORAGE_LANCAMENTOS,
-JSON.stringify(lancamentos)
-);
 
-limparFormularioLancamento();
-
-renderizarLancamentos();
-
-renderizarHistorico();
-
-renderizarMaquinas();
-
-atualizarDashboard();
-
-const quantidadeUtilizada=
-medicoes.filter(
-m=>!m.naoUtilizada
-).length;
-
-const quantidadeNaoUtilizada=
-medicoes.filter(
-m=>m.naoUtilizada
-).length;
+if(!quantidade){
 
 alert(
-idEdicao
-?"Lançamento atualizado com sucesso!"
-:
-`${quantidadeUtilizada} avaliação(ões) salva(s)`+
+'Preencha pelo menos um lançamento de químico.'
+);
+
+return;
+
+}
+
+
+salvarDados();
+
+alert(
+quantidade +
+' lançamento(s) salvo(s) com sucesso.'
+);
+
+limparLancamento();
+
+renderHistorico();
+
+}
+
+
+/* ================================
+BADGE
+================================ */
+
+function badgeResultado(resultado){
+
+let classe =
+'gray';
+
+
+if(
+resultado ===
+'DENTRO DO PADRÃO'
+){
+
+classe =
+'green';
+
+}
+
+else if(
+resultado ===
+'ACIMA DO PADRÃO'
+){
+
+classe =
+'red';
+
+}
+
+else if(
+resultado ===
+'ABAIXO DO PADRÃO'
+){
+
+classe =
+'yellow';
+
+}
+
+
+return `
+
+<span
+class="badge ${classe}">
+
+${escapar(resultado)}
+
+</span>
+
+`;
+
+}
+
+
+/* ================================
+HISTÓRICO
+================================ */
+
+function renderHistorico(){
+
+const busca =
 (
-quantidadeNaoUtilizada
-?` e ${quantidadeNaoUtilizada} opção(ões) não utilizada(s)!`
-:" com sucesso!"
+$('buscaHistorico').value || ''
 )
-);
+.toLowerCase();
 
-}
 
-/* LIMPAR LANÇAMENTO */
+const lista =
 
-function limparFormularioLancamento(){
+lancamentos
 
-document.getElementById(
-"formLancamento"
-).reset();
+.filter(
+x =>
+!x.naoUtilizada
+&&
+x.resultado !==
+'NAO UTILIZADO'
+)
 
-document.getElementById(
-"idLancamento"
-).value="";
+.filter(
+x =>
 
-resetarTodasOpcoes();
+(
+x.data +
+' ' +
+nomeMaquina(x.maquina) +
+' ' +
+x.responsavel +
+' ' +
+x.categoria +
+' ' +
+x.quimico +
+' ' +
+x.codigo +
+' ' +
+x.resultado +
+' ' +
+x.observacao
+)
 
-for(
-let i=1;
-i<=5;
-i++
-){
+.toLowerCase()
+.includes(busca)
 
-const resultado=
-document.getElementById(
-`resultadoLancamento${i}`
-);
+)
 
-const status=
-document.getElementById(
-`statusMedicao${i}`
-);
-
-if(resultado){
-
-resultado.value=
-"DENTRO DO PADRÃO";
-
-resultado.classList.remove(
-"resultado-dentro",
-"resultado-acima",
-"resultado-abaixo",
-"resultado-nao-utilizado"
-);
-
-}
-
-if(status){
-
-status.textContent=
-"Aguardando preenchimento";
-
-}
-
-}
-
-atualizarDataHoraTempoReal();
-
-}
-
-/* RENDER LANÇAMENTOS */
-
-function renderizarLancamentos(){
-
-const container=
-document.getElementById(
-"tabelaLancamentos"
-);
-
-if(!container)return;
-
-const lista=
-[...lancamentos]
 .sort(
-(a,b)=>
-Number(b.timestamp||0)-
-Number(a.timestamp||0)
-)
-.slice(0,50);
 
-if(lista.length===0){
+(a,b) => {
 
-container.innerHTML=
-`<div class="empty">Nenhum lançamento registrado.</div>`;
+if(
+b.timestamp !==
+a.timestamp
+){
+
+return b.timestamp -
+a.timestamp;
+
+}
+
+return (
+a.categoriaNumero || 0
+) -
+(
+b.categoriaNumero || 0
+);
+
+}
+
+);
+
+
+$('tabelaHistorico').innerHTML =
+
+lista.length
+
+?
+
+lista.map(
+
+(x,index) =>
+
+`<tr
+class="${
+index &&
+lista[index-1].timestamp ===
+x.timestamp
+?
+'same'
+:
+''
+}">
+
+<td>
+${escapar(x.data)}
+</td>
+
+<td>
+${escapar(
+nomeMaquina(x.maquina)
+)}
+</td>
+
+<td>
+${escapar(x.responsavel)}
+</td>
+
+<td>
+<b>
+${escapar(x.categoria)}
+</b>
+</td>
+
+<td>
+${escapar(x.quimico)}
+</td>
+
+<td>
+${escapar(x.codigo)}
+</td>
+
+<td>
+${x.padrao}
+</td>
+
+<td>
+${x.valor}
+</td>
+
+<td>
+${badgeResultado(x.resultado)}
+</td>
+
+<td>
+${escapar(x.observacao)}
+</td>
+
+</tr>`
+
+).join('')
+
+:
+
+`<tr>
+
+<td
+colspan="10"
+class="empty">
+
+Nenhum lançamento encontrado.
+
+</td>
+
+</tr>`;
+
+}
+
+
+/* ================================
+PEÇAS
+================================ */
+
+function calcularPeca(){
+
+const padrao =
+parseFloat(
+$('padPeca').value
+);
+
+const quantidade =
+parseFloat(
+$('valPeca').value
+);
+
+
+if(
+!Number.isFinite(padrao)
+||
+!Number.isFinite(quantidade)
+||
+$('padPeca').value === ''
+||
+$('valPeca').value === ''
+){
+
+$('resPeca')
+.className =
+'resultado neutral';
+
+$('resPeca')
+.textContent =
+'Aguardando preenchimento';
 
 return;
 
 }
 
-let html=`
-
-<table>
-
-<thead>
-
-<tr>
-<th>Data</th>
-<th>Máquina</th>
-<th>Químico</th>
-<th>Valor</th>
-<th>Padrão</th>
-<th>Resultado</th>
-<th>Ações</th>
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-lista.forEach(
-l=>{
-
-html+=`
-
-<tr>
-
-<td>
-${formatarData(l.data)}
-</td>
-
-<td>
-<strong>
-${esc(nomeMaquina(l.maquina))}
-</strong>
-</td>
-
-<td>
-
-${esc(l.quimico||"-")}
-
-<br>
-
-<small>
-${esc(l.codigo||"")}
-</small>
-
-</td>
-
-<td>
-${esc(l.valor||"-")}
-</td>
-
-<td>
-${esc(l.padrao||"-")}
-</td>
-
-<td>
-${badgeResultado(l.resultado)}
-</td>
-
-<td>
-
-<div class="actions">
-
-<button
-class="btn-small btn-edit"
-onclick="editarLancamento('${l.id}')">
-
-Editar
-
-</button>
-
-<button
-class="btn-small btn-delete"
-onclick="excluirLancamento('${l.id}')">
-
-Excluir
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-`;
-
-}
-);
-
-html+=`
-</tbody>
-</table>
-`;
-
-container.innerHTML=html;
-
-}
-
-/* EDITAR LANÇAMENTO */
-
-function editarLancamento(id){
-
-const l=
-lancamentos.find(
-item=>
-String(item.id)===
-String(id)
-);
-
-if(!l)return;
-
-limparFormularioLancamento();
-
-document.getElementById(
-"idLancamento"
-).value=l.id;
-
-document.getElementById(
-"maquinaLancamento"
-).value=l.maquina||"";
-
-document.getElementById(
-"responsavelLancamento"
-).value=l.responsavel||"";
-
-let numero=
-Number(l.numeroOpcao||1);
 
 if(
-numero<1||
-numero>5
+quantidade ===
+padrao
 ){
 
-numero=1;
+$('resPeca')
+.className =
+'resultado green';
+
+$('resPeca')
+.textContent =
+'DENTRO DO PADRÃO';
+
+return;
 
 }
+
 
 if(
-l.naoUtilizada===true||
-l.resultado==="NAO UTILIZADO"||
-l.resultado==="NÃO UTILIZADO"
+quantidade >
+padrao
 ){
 
-opcoesNaoUtilizadas[numero]=true;
+$('resPeca')
+.className =
+'resultado red';
 
-atualizarVisualOpcao(
-numero
-);
+$('resPeca')
+.textContent =
+'ACIMA DO PADRÃO';
 
-}else{
+return;
 
-const categoriaEsperada=
-categoriasOpcoes[numero];
+}
 
-const select=
-document.getElementById(
-`quimicoLancamento${numero}`
-);
 
-preencherTodosSelectsQuimicos();
+$('resPeca')
+.className =
+'resultado yellow';
 
-if(select){
+$('resPeca')
+.textContent =
+'ABAIXO DO PADRÃO';
 
-const quimicoAtual=
-quimicos.find(
-q=>
-String(q.codigo||"").trim()===
-String(l.codigo||"").trim()
-);
+}
+
+
+/* ================================
+SALVAR PEÇA
+================================ */
+
+function salvarPeca(){
+
+const padrao =
++$('padPeca').value;
+
+const quantidade =
++$('valPeca').value;
+
+const responsavel =
+$('respPeca')
+.value
+.trim();
+
+const comentario =
+$('comentarioPeca')
+.value
+.trim();
+
 
 if(
-quimicoAtual &&
-normalizarTipo(
-quimicoAtual.tipo
-)===
-normalizarTipo(
-categoriaEsperada
-)
+!responsavel
+||
+$('padPeca').value === ''
+||
+$('valPeca').value === ''
 ){
-
-select.value=
-l.codigo||"";
-
-}
-
-}
-
-document.getElementById(
-`valorLancamento${numero}`
-).value=
-l.valor||"";
-
-document.getElementById(
-`padraoLancamento${numero}`
-).value=
-l.padrao||"";
-
-calcularResultadoMedicao(
-numero
-);
-
-}
-
-document.getElementById(
-"observacaoLancamento"
-).value=
-l.observacao||"";
-
-mostrarPagina(
-"lancamento"
-);
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-/* EXCLUIR LANÇAMENTO */
-
-function excluirLancamento(id){
-
-const lancamento=
-lancamentos.find(
-l=>
-String(l.id)===
-String(id)
-);
-
-if(!lancamento){
 
 alert(
-"Lançamento não encontrado."
+'Preencha os campos da produção.'
 );
 
 return;
 
 }
 
-const confirmacao=
-confirm(
 
-"Deseja realmente excluir este lançamento?\n\n"+
-"Máquina: "+
-nomeMaquina(
-lancamento.maquina
-)+
-"\nQuímico: "+
-(lancamento.quimico||"-")+
-"\nData: "+
-(lancamento.data||"-")
+let resultado;
 
-);
-
-if(!confirmacao)return;
-
-lancamentos=
-lancamentos.filter(
-l=>
-String(l.id)!==
-String(id)
-);
-
-localStorage.setItem(
-STORAGE_LANCAMENTOS,
-JSON.stringify(lancamentos)
-);
-
-renderizarLancamentos();
-
-renderizarHistorico();
-
-renderizarMaquinas();
-
-atualizarDashboard();
-
-alert(
-"Lançamento excluído com sucesso!"
-);
-
-}
-
-/* RESULTADO PEÇAS */
-
-function atualizarResultadoPecas(){
-
-const campoPadrao=
-document.getElementById(
-"padraoPecas"
-);
-
-const campoQuantidade=
-document.getElementById(
-"quantidadePecas"
-);
-
-const resultado=
-document.getElementById(
-"resultadoPecas"
-);
 
 if(
-campoPadrao.value===""||
-campoQuantidade.value===""
+quantidade ===
+padrao
 ){
 
-resultado.value=
-"DENTRO DO PADRÃO";
-
-return;
+resultado =
+'DENTRO DO PADRÃO';
 
 }
 
-const padrao=
-Number(
-campoPadrao.value
-);
-
-const quantidade=
-Number(
-campoQuantidade.value
-);
-
-if(
-quantidade>padrao
+else if(
+quantidade >
+padrao
 ){
 
-resultado.value=
-"ACIMA DO PADRÃO";
-
-}else if(
-quantidade<padrao
-){
-
-resultado.value=
-"ABAIXO DO PADRÃO";
-
-}else{
-
-resultado.value=
-"DENTRO DO PADRÃO";
+resultado =
+'ACIMA DO PADRÃO';
 
 }
 
+else{
+
+resultado =
+'ABAIXO DO PADRÃO';
+
 }
 
-/* SALVAR PEÇAS */
 
-function salvarPecas(event){
+registrosPecas.push({
 
-event.preventDefault();
-
-atualizarResultadoPecas();
-
-const id=
-document.getElementById(
-"idPecas"
-).value;
-
-const objeto={
-
-id:id||gerarID(),
+id:
+gerarId(),
 
 timestamp:
 Date.now(),
 
 data:
-formatoDataHora(),
+$('dataPeca').value,
 
 maquina:
-document.getElementById(
-"maquinaPecas"
-).value,
+$('maquinaPeca').value,
 
 responsavel:
-document.getElementById(
-"responsavelPecas"
-).value.trim(),
+responsavel,
 
 padrao:
-Number(
-document.getElementById(
-"padraoPecas"
-).value
-),
+padrao,
 
-quantidade:
-Number(
-document.getElementById(
-"quantidadePecas"
-).value
-),
+valor:
+quantidade,
 
 resultado:
-document.getElementById(
-"resultadoPecas"
-).value,
+resultado,
 
-observacao:
-document.getElementById(
-"observacaoPecas"
-).value.trim()
+comentario:
+comentario
 
-};
-
-if(id){
-
-const index=
-registrosPecas.findIndex(
-r=>
-String(r.id)===
-String(id)
-);
-
-if(index>=0){
-
-registrosPecas[index]=
-objeto;
-
-}
-
-}else{
-
-registrosPecas.push(
-objeto
-);
-
-}
-
-localStorage.setItem(
-STORAGE_PECAS,
-JSON.stringify(registrosPecas)
-);
-
-limparFormularioPecas();
-
-renderizarPecas();
-
-atualizarResumoPecas();
-
-alert(
-"Registro de peças salvo com sucesso!"
-);
-
-}
-
-/* LIMPAR PEÇAS */
-
-function limparFormularioPecas(){
-
-document.getElementById(
-"formPecas"
-).reset();
-
-document.getElementById(
-"idPecas"
-).value="";
-
-document.getElementById(
-"resultadoPecas"
-).value=
-"DENTRO DO PADRÃO";
-
-atualizarDataHoraTempoReal();
-
-}
-
-/* RENDER PEÇAS */
-
-function renderizarPecas(){
-
-const container=
-document.getElementById(
-"tabelaPecas"
-);
-
-if(!container)return;
-
-const lista=
-[...registrosPecas]
-.sort(
-(a,b)=>
-Number(b.timestamp||0)-
-Number(a.timestamp||0)
-);
-
-if(lista.length===0){
-
-container.innerHTML=
-`<div class="empty">Nenhum registro de produção.</div>`;
-
-return;
-
-}
-
-let html=`
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Data</th>
-<th>Máquina</th>
-<th>Responsável</th>
-<th>Padrão</th>
-<th>Quantidade</th>
-<th>Resultado</th>
-<th>Ações</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-lista.forEach(
-r=>{
-
-html+=`
-
-<tr>
-
-<td>
-${formatarData(r.data)}
-</td>
-
-<td>
-<strong>
-${esc(nomeMaquina(r.maquina))}
-</strong>
-</td>
-
-<td>
-${esc(r.responsavel||"-")}
-</td>
-
-<td>
-${Number(
-r.padrao||0
-).toLocaleString("pt-BR")}
-</td>
-
-<td>
-
-<strong>
-${Number(
-r.quantidade||0
-).toLocaleString("pt-BR")}
-</strong>
-
-</td>
-
-<td>
-${badgeResultado(r.resultado)}
-</td>
-
-<td>
-
-<div class="actions">
-
-<button
-class="btn-small btn-edit"
-onclick="editarPecas('${r.id}')">
-
-Editar
-
-</button>
-
-<button
-class="btn-small btn-delete"
-onclick="excluirPecas('${r.id}')">
-
-Excluir
-
-</button>
-
-</div>
-
-</td>
-
-</tr>
-`;
-
-}
-);
-
-html+=`
-</tbody>
-</table>
-`;
-
-container.innerHTML=
-html;
-
-}
-
-/* EDITAR PEÇAS */
-
-function editarPecas(id){
-
-const registro=
-registrosPecas.find(
-r=>
-String(r.id)===
-String(id)
-);
-
-if(!registro)return;
-
-document.getElementById(
-"idPecas"
-).value=
-registro.id;
-
-document.getElementById(
-"maquinaPecas"
-).value=
-registro.maquina||"";
-
-document.getElementById(
-"responsavelPecas"
-).value=
-registro.responsavel||"";
-
-document.getElementById(
-"padraoPecas"
-).value=
-registro.padrao??"";
-
-document.getElementById(
-"quantidadePecas"
-).value=
-registro.quantidade??"";
-
-atualizarResultadoPecas();
-
-document.getElementById(
-"observacaoPecas"
-).value=
-registro.observacao||"";
-
-mostrarPagina(
-"pecas"
-);
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
 });
 
-}
 
-/* EXCLUIR PEÇAS */
+salvarDados();
 
-function excluirPecas(id){
-
-const registro=
-registrosPecas.find(
-r=>
-String(r.id)===
-String(id)
+alert(
+'Registro de produção salvo com sucesso.'
 );
 
-if(!registro)return;
+limparPeca();
 
-if(
-!confirm(
-"Deseja realmente excluir este registro?\n\n"+
-"Máquina: "+
-nomeMaquina(
-registro.maquina
-)+
-"\nQuantidade: "+
-registro.quantidade
+renderPecas();
+
+}
+
+
+/* ================================
+LIMPAR PEÇA
+================================ */
+
+function limparPeca(){
+
+$('respPeca').value =
+'';
+
+$('padPeca').value =
+'';
+
+$('valPeca').value =
+'';
+
+$('comentarioPeca').value =
+'';
+
+
+calcularPeca();
+
+atualizarDataHora();
+
+}
+
+
+/* ================================
+RENDER PEÇAS
+================================ */
+
+function renderPecas(){
+
+const busca =
+(
+$('buscaPeca').value || ''
 )
-)return;
+.toLowerCase();
 
-registrosPecas=
-registrosPecas.filter(
-r=>
-String(r.id)!==
-String(id)
-);
 
-localStorage.setItem(
-STORAGE_PECAS,
-JSON.stringify(registrosPecas)
-);
+const lista =
 
-renderizarPecas();
+registrosPecas
 
-atualizarResumoPecas();
-
-}
-
-/* RESUMO PEÇAS */
-
-function atualizarResumoPecas(){
-
-const total=
-registrosPecas.reduce(
-(soma,r)=>
-soma+
-Number(
-r.quantidade||0
-),
-0
-);
-
-const padrao=
-registrosPecas.reduce(
-(soma,r)=>
-soma+
-Number(
-r.padrao||0
-),
-0
-);
-
-const dentro=
-registrosPecas.filter(
-r=>
-r.resultado===
-"DENTRO DO PADRÃO"
-).length;
-
-const fora=
-registrosPecas.filter(
-r=>
-r.resultado!==
-"DENTRO DO PADRÃO"
-).length;
-
-document.getElementById(
-"totalPecas"
-).textContent=
-total.toLocaleString(
-"pt-BR"
-);
-
-document.getElementById(
-"totalPadraoPecas"
-).textContent=
-padrao.toLocaleString(
-"pt-BR"
-);
-
-document.getElementById(
-"pecasDentro"
-).textContent=
-dentro.toLocaleString(
-"pt-BR"
-);
-
-document.getElementById(
-"pecasFora"
-).textContent=
-fora.toLocaleString(
-"pt-BR"
-);
-
-}
-
-/* HISTÓRICO */
-
-function renderizarHistorico(){
-
-const container=
-document.getElementById(
-"tabelaHistorico"
-);
-
-if(!container)return;
-
-const busca=(
-document.getElementById(
-"buscaHistorico"
-)?.value||""
-).toLowerCase();
-
-const lista=
-[...lancamentos]
 .filter(
-l=>{
+x =>
 
-const texto=(
-
-String(
-l.quimico||""
-)+
-" "+
-String(
-l.codigo||""
-)+
-" "+
-String(
-l.categoria||""
-)+
-" "+
-String(
-l.maquina||""
-)+
-" "+
-nomeMaquina(
-l.maquina
-)+
-" "+
-String(
-l.responsavel||""
-)+
-" "+
-String(
-l.resultado||""
+(
+x.data +
+' ' +
+nomeMaquina(x.maquina) +
+' ' +
+x.responsavel +
+' ' +
+x.resultado +
+' ' +
+(x.comentario || '')
 )
 
-).toLowerCase();
+.toLowerCase()
+.includes(busca)
 
-return texto.includes(
-busca
-);
-
-}
 )
+
 .sort(
-(a,b)=>
-Number(b.timestamp||0)-
-Number(a.timestamp||0)
+(a,b) =>
+b.timestamp -
+a.timestamp
 );
 
-if(lista.length===0){
 
-container.innerHTML=
-`<div class="empty">Nenhum registro encontrado.</div>`;
+$('tabelaPecas').innerHTML =
 
-return;
+lista.length
 
-}
+?
 
-let html=`
+lista.map(
+x =>
 
-<table>
-
-<thead>
-
-<tr>
-
-<th>Data</th>
-<th>Máquina</th>
-<th>Responsável</th>
-<th>Categoria</th>
-<th>Químico</th>
-<th>Valor</th>
-<th>Padrão</th>
-<th>Resultado</th>
-<th>Ações</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-lista.forEach(
-l=>{
-
-html+=`
-
-<tr>
+`<tr>
 
 <td>
-${formatarData(l.data)}
+${escapar(x.data)}
 </td>
 
 <td>
-${esc(nomeMaquina(l.maquina))}
+${escapar(
+nomeMaquina(x.maquina)
+)}
 </td>
 
 <td>
-${esc(l.responsavel||"-")}
+${escapar(x.responsavel)}
 </td>
 
 <td>
-${esc(l.categoria||"-")}
+${x.padrao}
 </td>
 
 <td>
-
-${esc(l.quimico||"-")}
-
-<br>
-
-<small>
-${esc(l.codigo||"")}
-</small>
-
+${x.valor}
 </td>
 
 <td>
-${esc(l.valor||"-")}
+${badgeResultado(x.resultado)}
 </td>
 
 <td>
-${esc(l.padrao||"-")}
+${escapar(
+x.comentario || ''
+)}
 </td>
 
 <td>
-${badgeResultado(l.resultado)}
-</td>
-
-<td>
-
-<div class="actions">
 
 <button
-class="btn-small btn-edit"
-onclick="editarLancamento('${l.id}')">
-
-Editar
-
-</button>
-
-<button
-class="btn-small btn-delete"
-onclick="excluirLancamento('${l.id}')">
+class="btn btn-danger"
+onclick="excluirPeca('${x.id}')">
 
 Excluir
 
 </button>
 
-</div>
+</td>
+
+</tr>`
+
+).join('')
+
+:
+
+`<tr>
+
+<td
+colspan="8"
+class="empty">
+
+Nenhum registro encontrado.
 
 </td>
 
-</tr>
-`;
+</tr>`;
+
+
+const dentro =
+registrosPecas.filter(
+x =>
+x.resultado ===
+'DENTRO DO PADRÃO'
+).length;
+
+
+$('stTotal').textContent =
+registrosPecas.length;
+
+
+$('stOk').textContent =
+dentro;
+
+
+$('stBad').textContent =
+registrosPecas.length -
+dentro;
+
+
+$('stQtd').textContent =
+registrosPecas.reduce(
+(s,x) =>
+s +
+(+x.valor || 0),
+0
+);
 
 }
-);
 
-html+=`
-</tbody>
-</table>
-`;
 
-container.innerHTML=
-html;
+/* ================================
+EXCLUIR PEÇA
+================================ */
 
-}
-
-/* MÁQUINAS */
-
-function renderizarMaquinas(){
-
-const grid=
-document.getElementById(
-"gridMaquinas"
-);
-
-const tabela=
-document.getElementById(
-"tabelaMaquinas"
-);
+function excluirPeca(id){
 
 if(
-!grid||
-!tabela
-)return;
-
-let cards="";
-
-let rows="";
-
-maquinas.forEach(
-maquina=>{
-
-const registros=
-lancamentos.filter(
-l=>
-l.maquina===
-maquina
-);
-
-const total=
-registros.length;
-
-const dentro=
-registros.filter(
-r=>
-r.resultado===
-"DENTRO DO PADRÃO"
-).length;
-
-const conformidade=
-total
-?Math.round(
-(dentro/total)*100
+confirm(
+'Excluir este registro?'
 )
-:0;
-
-cards+=`
-
-<div class="machine-card">
-
-<div class="machine-name">
-
-${esc(
-nomeMaquina(maquina)
-)}
-
-</div>
-
-<div class="machine-value">
-
-${total}
-
-</div>
-
-<div class="machine-label">
-
-avaliações
-
-</div>
-
-<div style="margin-top:10px;">
-
-${badgeConformidade(
-conformidade
-)}
-
-</div>
-
-</div>
-`;
-
-rows+=`
-
-<tr>
-
-<td>
-
-<strong>
-${esc(
-nomeMaquina(maquina)
-)}
-</strong>
-
-</td>
-
-<td>
-${total}
-</td>
-
-<td>
-${dentro}
-</td>
-
-<td>
-${total-dentro}
-</td>
-
-<td>
-${conformidade}%
-</td>
-
-</tr>
-`;
-
-}
-);
-
-grid.innerHTML=
-cards;
-
-tabela.innerHTML=`
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Máquina</th>
-<th>Avaliações</th>
-<th>Dentro</th>
-<th>Fora</th>
-<th>Conformidade</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-${rows}
-
-</tbody>
-
-</table>
-`;
-
-}
-
-/* DASHBOARD */
-
-function filtrarPeriodo(
-periodo,
-elemento
 ){
 
-periodoAtual=
-periodo;
-
-document.querySelectorAll(
-".filter-btn"
-).forEach(
-btn=>{
-btn.classList.remove(
-"active"
-);
-}
+registrosPecas =
+registrosPecas.filter(
+x =>
+x.id !== id
 );
 
-if(elemento){
+salvarDados();
 
-elemento.classList.add(
-"active"
-);
+renderPecas();
 
 }
 
-atualizarDashboard();
-
 }
 
-function obterLancamentosFiltrados(){
+
+/* ================================
+DATA/HORA
+================================ */
+
+function atualizarDataHora(){
+
+const agora =
+gerarDataHoraAtual();
+
 
 if(
-periodoAtual===
-"todos"
+$('dataHoraLancamento')
 ){
 
-return [
-...lancamentos
-];
+$('dataHoraLancamento')
+.value =
+agora;
 
 }
 
-const agora=
-new Date();
-
-let inicio=
-new Date();
 
 if(
-periodoAtual===
-"hoje"
+$('dataPeca')
 ){
 
-inicio.setHours(
-0,0,0,0
-);
-
-}else{
-
-inicio.setDate(
-agora.getDate()-
-Number(periodoAtual)
-);
-
-}
-
-return lancamentos.filter(
-l=>{
-
-const data=
-l.timestamp
-?new Date(
-Number(l.timestamp)
-)
-:new Date(
-l.data
-);
-
-return data>=inicio;
-
-}
-);
-
-}
-
-function atualizarDashboard(){
-
-const dados=
-obterLancamentosFiltrados();
-
-const total=
-dados.length;
-
-const dentro=
-dados.filter(
-r=>
-r.resultado===
-"DENTRO DO PADRÃO"
-).length;
-
-const fora=
-dados.filter(
-r=>
-r.resultado!==
-"DENTRO DO PADRÃO"
-).length;
-
-const maquinasUsadas=
-new Set(
-dados
-.map(
-r=>r.maquina
-)
-.filter(Boolean)
-);
-
-const conformidade=
-total
-?Math.round(
-(dentro/total)*100
-)
-:0;
-
-document.getElementById(
-"kpiAvaliacoes"
-).textContent=
-total.toLocaleString(
-"pt-BR"
-);
-
-document.getElementById(
-"kpiConformidade"
-).textContent=
-conformidade+
-"%";
-
-document.getElementById(
-"kpiFora"
-).textContent=
-fora.toLocaleString(
-"pt-BR"
-);
-
-document.getElementById(
-"kpiMaquinas"
-).textContent=
-maquinasUsadas.size;
-
-atualizarGrafico();
-
-atualizarRanking(
-dados
-);
-
-atualizarAtividade(
-dados
-);
-
-}
-
-/* GRÁFICO */
-
-function atualizarGrafico(){
-
-const canvas=
-document.getElementById(
-"graficoResultados"
-);
-
-if(!canvas)return;
-
-const dados=
-obterLancamentosFiltrados();
-
-const dentro=
-dados.filter(
-r=>
-r.resultado===
-"DENTRO DO PADRÃO"
-).length;
-
-const acima=
-dados.filter(
-r=>
-r.resultado===
-"ACIMA DO PADRÃO"
-).length;
-
-const abaixo=
-dados.filter(
-r=>
-r.resultado===
-"ABAIXO DO PADRÃO"
-).length;
-
-if(graficoResultados){
-
-graficoResultados.destroy();
-
-}
-
-const corTexto=
-document.body.classList.contains(
-"dark"
-)
-?"#dbe4ea"
-:"#344054";
-
-graficoResultados=
-new Chart(
-canvas,
-{
-
-type:"doughnut",
-
-data:{
-
-labels:[
-
-"Dentro do padrão",
-
-"Acima do padrão",
-
-"Abaixo do padrão"
-
-],
-
-datasets:[{
-
-data:[
-
-dentro,
-
-acima,
-
-abaixo
-
-],
-
-backgroundColor:[
-
-"#159957",
-
-"#b7791f",
-
-"#d92d20"
-
-],
-
-borderWidth:0
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-maintainAspectRatio:false,
-
-plugins:{
-
-legend:{
-
-position:"bottom",
-
-labels:{
-
-color:corTexto
+$('dataPeca')
+.value =
+agora;
 
 }
 
 }
 
-}
 
-}
-
-}
-);
-
-}
-
-/* RANKING */
-
-function atualizarRanking(
-dados
-){
-
-const container=
-document.getElementById(
-"rankingMaquinas"
-);
-
-if(!container)return;
-
-const contagem={};
-
-dados.forEach(
-r=>{
-
-const maquina=
-r.maquina||
-"Não informado";
-
-contagem[maquina]=
-(
-contagem[maquina]||0
-)+1;
-
-}
-);
-
-const lista=
-Object.entries(
-contagem
-)
-.sort(
-(a,b)=>
-b[1]-a[1]
-);
-
-if(lista.length===0){
-
-container.innerHTML=
-`<div class="empty">Nenhum registro encontrado.</div>`;
-
-return;
-
-}
-
-let html="";
-
-lista.forEach(
-([maquina,total])=>{
-
-html+=`
-
-<div
-style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px 0;
-border-bottom:1px solid var(--borda);
-">
-
-<div>
-
-<strong>
-${esc(
-nomeMaquina(maquina)
-)}
-</strong>
-
-</div>
-
-<span class="badge badge-blue">
-
-${total}
-
-</span>
-
-</div>
-`;
-
-}
-);
-
-container.innerHTML=
-html;
-
-}
-
-/* ATIVIDADE */
-
-function atualizarAtividade(
-dados
-){
-
-const container=
-document.getElementById(
-"atividadeRecente"
-);
-
-if(!container)return;
-
-const lista=
-[...dados]
-.sort(
-(a,b)=>
-Number(b.timestamp||0)-
-Number(a.timestamp||0)
-)
-.slice(
-0,
-10
-);
-
-if(lista.length===0){
-
-container.innerHTML=
-`<div class="empty">Nenhuma atividade registrada.</div>`;
-
-return;
-
-}
-
-let html=`
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Data</th>
-<th>Máquina</th>
-<th>Químico</th>
-<th>Resultado</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-`;
-
-lista.forEach(
-r=>{
-
-html+=`
-
-<tr>
-
-<td>
-${formatarData(r.data)}
-</td>
-
-<td>
-${esc(
-nomeMaquina(r.maquina)
-)}
-</td>
-
-<td>
-${esc(
-r.quimico||"-"
-)}
-</td>
-
-<td>
-${badgeResultado(
-r.resultado
-)}
-</td>
-
-</tr>
-`;
-
-}
-);
-
-html+=`
-</tbody>
-</table>
-`;
-
-container.innerHTML=
-html;
-
-}
-
-/* EXPORTAR EXCEL */
+/* ================================
+EXCEL
+================================ */
 
 function exportarExcel(){
 
 if(
-typeof XLSX===
-"undefined"
+typeof XLSX ===
+'undefined'
 ){
 
 alert(
-"Biblioteca Excel não carregada."
+'A biblioteca Excel não foi carregada.'
 );
 
 return;
 
 }
 
-const wb=
-XLSX.utils.book_new();
 
-const dadosQuimicos=
-quimicos.map(
-q=>({
+const validos =
 
-"Nome":
-q.nome||"",
-
-"Código":
-q.codigo||"",
-
-"Cor":
-q.cor||"",
-
-"Tipo":
-q.tipo||"",
-
-"Observação":
-q.observacao||""
-
-})
-);
-
-const wsQuimicos=
-XLSX.utils.json_to_sheet(
-dadosQuimicos
-);
-
-XLSX.utils.book_append_sheet(
-wb,
-wsQuimicos,
-"Químicos"
-);
-
-const dadosLancamentos=
-lancamentos.map(
-l=>({
-
-"Data":
-formatarData(l.data),
-
-"Máquina":
-nomeMaquina(
-l.maquina
-),
-
-"Responsável":
-l.responsavel||"",
-
-"Opção":
-l.numeroOpcao||1,
-
-"Categoria":
-l.categoria||"",
-
-"Químico":
-l.quimico||"",
-
-"Código":
-l.codigo||"",
-
-"Valor":
-l.valor||"",
-
-"Padrão":
-l.padrao||"",
-
-"Resultado":
-l.resultado===
-"NAO UTILIZADO"
-?"NÃO UTILIZADO"
-:(l.resultado||""),
-
-"Não utilizada":
-l.naoUtilizada
-?"SIM"
-:"NÃO",
-
-"Observação":
-l.observacao||""
-
-})
-);
-
-const wsLancamentos=
-XLSX.utils.json_to_sheet(
-dadosLancamentos
-);
-
-XLSX.utils.book_append_sheet(
-wb,
-wsLancamentos,
-"Lançamentos"
-);
-
-const dadosPecas=
-registrosPecas.map(
-r=>({
-
-"Data":
-formatarData(r.data),
-
-"Máquina":
-nomeMaquina(
-r.maquina
-),
-
-"Responsável":
-r.responsavel||"",
-
-"Padrão":
-r.padrao||0,
-
-"Quantidade":
-r.quantidade||0,
-
-"Resultado":
-r.resultado||"",
-
-"Observação":
-r.observacao||""
-
-})
-);
-
-const wsPecas=
-XLSX.utils.json_to_sheet(
-dadosPecas
-);
-
-XLSX.utils.book_append_sheet(
-wb,
-wsPecas,
-"Peças em Produção"
-);
-
-const dadosMaquinas=
-maquinas.map(
-maquina=>{
-
-const registros=
 lancamentos.filter(
-l=>
-l.maquina===
-maquina
+
+x =>
+
+!x.naoUtilizada
+&&
+x.resultado !==
+'NAO UTILIZADO'
+&&
+x.quimico
+
 );
 
-const dentro=
-registros.filter(
-r=>
-r.resultado===
-"DENTRO DO PADRÃO"
-).length;
 
-return{
+const grupos = {};
 
-"Máquina":
-nomeMaquina(
-maquina
-),
 
-"Avaliações":
-registros.length,
+validos.forEach(
+x => {
 
-"Dentro do padrão":
-dentro,
+const chave =
 
-"Fora do padrão":
-registros.length-dentro,
+x.maquina +
+'|' +
+x.codigo +
+'|' +
+x.quimico;
 
-"Conformidade":
-registros.length
-?(
-(dentro/
-registros.length)*
-100
-).toFixed(1)+"%"
-:"0%"
+
+if(!grupos[chave]){
+
+grupos[chave] = {
+
+maquina:
+nomeMaquina(x.maquina),
+
+categoria:
+x.categoria,
+
+quimico:
+x.quimico,
+
+codigo:
+x.codigo,
+
+quantidade:
+0,
+
+soma:
+0
 
 };
 
 }
+
+
+grupos[chave]
+.quantidade++;
+
+grupos[chave]
+.soma +=
++x.valor || 0;
+
+}
 );
 
-const wsMaquinas=
-XLSX.utils.json_to_sheet(
-dadosMaquinas
+
+const mediaMaquinaQuimico =
+
+Object
+.values(grupos)
+.map(
+x => ({
+
+'Máquina':
+x.maquina,
+
+'Categoria':
+x.categoria,
+
+'Químico':
+x.quimico,
+
+'Código':
+x.codigo,
+
+'Quantidade de medições':
+x.quantidade,
+
+'Média':
+x.soma /
+x.quantidade
+
+})
 );
+
+
+const gramaturasFeitas =
+
+validos
+.slice()
+.sort(
+
+(a,b) =>
+
+a.timestamp -
+b.timestamp
+
+||
+
+(a.categoriaNumero || 0) -
+(b.categoriaNumero || 0)
+
+)
+.map(
+x => ({
+
+'Data':
+x.data,
+
+'Máquina':
+nomeMaquina(x.maquina),
+
+'Responsável':
+x.responsavel,
+
+'Categoria':
+x.categoria,
+
+'Químico':
+x.quimico,
+
+'Código':
+x.codigo,
+
+'Padrão':
+x.padrao,
+
+'Gramatura feita':
+x.valor,
+
+'Resultado':
+x.resultado,
+
+'Observação':
+x.observacao
+
+})
+);
+
+
+const workbook =
+XLSX.utils.book_new();
+
+
+const sheetMedia =
+XLSX.utils.json_to_sheet(
+mediaMaquinaQuimico
+);
+
+
+const sheetGramaturas =
+XLSX.utils.json_to_sheet(
+gramaturasFeitas
+);
+
+
+sheetMedia['!cols'] = [
+
+{wch:22},
+{wch:14},
+{wch:38},
+{wch:18},
+{wch:22},
+{wch:15}
+
+];
+
+
+sheetGramaturas['!cols'] = [
+
+{wch:20},
+{wch:18},
+{wch:20},
+{wch:20},
+{wch:38},
+{wch:18},
+{wch:12},
+{wch:18},
+{wch:22},
+{wch:35}
+
+];
+
 
 XLSX.utils.book_append_sheet(
-wb,
-wsMaquinas,
-"Máquinas"
+
+workbook,
+
+sheetMedia,
+
+'Média Máquina Químico'
+
 );
 
-const agora=
+
+XLSX.utils.book_append_sheet(
+
+workbook,
+
+sheetGramaturas,
+
+'Gramaturas Feitas'
+
+);
+
+
+const d =
 new Date();
 
-const nomeArquivo=
-"GraviUnit_MES_"+
-agora.getFullYear()+
-"-"+
-String(
-agora.getMonth()+1
-).padStart(
-2,
-"0"
-)+
-"-"+
-String(
-agora.getDate()
-).padStart(
-2,
-"0"
-)+
-".xlsx";
+
+const dois =
+numero =>
+String(numero)
+.padStart(2,'0');
+
+
+const nomeArquivo =
+
+`GraviUnit_Gramaturas_${
+d.getFullYear()
+}-${
+dois(d.getMonth()+1)
+}-${
+dois(d.getDate())
+}.xlsx`;
+
 
 XLSX.writeFile(
-wb,
+workbook,
 nomeArquivo
 );
 
 }
 
-/* ATUALIZAÇÃO AUTOMÁTICA */
 
-function atualizarSistemaAutomaticamente(){
+/* ================================
+INICIALIZAÇÃO
+================================ */
+
+document.addEventListener(
+'DOMContentLoaded',
+function(){
 
 carregarDados();
 
-renderizarQuimicos();
 
-preencherTodosSelectsQuimicos();
+// Tema
 
-renderizarLancamentos();
+if(
+localStorage.getItem(
+STORAGE_TEMA
+) === 'dark'
+){
 
-renderizarHistorico();
-
-renderizarMaquinas();
-
-renderizarPecas();
-
-atualizarResumoPecas();
-
-atualizarDashboard();
-
-atualizarDataHoraTempoReal();
+document.body
+.classList
+.add('dark');
 
 }
+
+
+// Máquinas
+
+preencherMaquinas();
+
+
+// Avaliações
+
+criarAvaliacoes();
+
+
+// Renderizações
+
+renderQuimicos();
+
+renderHistorico();
+
+renderPecas();
+
+
+// Data e hora
+
+atualizarDataHora();
+
+
+// Formulário inicial
+
+limparLancamento();
+
+}
+
+);
+
+
+/* ================================
+RELÓGIO
+================================ */
 
 setInterval(
-atualizarSistemaAutomaticamente,
-TEMPO_ATUALIZACAO
+atualizarDataHora,
+1000
 );
 
-/* FORMATAÇÃO DATA */
 
-function formatarData(
-valor
-){
+/* ================================
+ATUALIZAÇÃO
+================================ */
 
-if(!valor)return "-";
+setInterval(
+function(){
 
-let data=
-new Date(valor);
+renderQuimicos();
 
-if(
-Number.isNaN(
-data.getTime()
-)
-){
+renderHistorico();
 
-return valor;
+renderPecas();
 
-}
-
-return data.toLocaleString(
-"pt-BR"
+},
+50000
 );
-
-}
-
-/* BADGE RESULTADO */
-
-function badgeResultado(
-resultado
-){
-
-if(
-resultado===
-"DENTRO DO PADRÃO"
-){
-
-return `
-
-<span class="badge badge-green">
-
-✓ DENTRO DO PADRÃO
-
-</span>
-`;
-
-}
-
-if(
-resultado===
-"ACIMA DO PADRÃO"
-){
-
-return `
-
-<span class="badge badge-yellow">
-
-⚠ ACIMA DO PADRÃO
-
-</span>
-`;
-
-}
-
-if(
-resultado===
-"ABAIXO DO PADRÃO"
-){
-
-return `
-
-<span class="badge badge-red">
-
-✕ ABAIXO DO PADRÃO
-
-</span>
-`;
-
-}
-
-if(
-resultado===
-"NAO UTILIZADO"||
-resultado===
-"NÃO UTILIZADO"
-){
-
-return `
-
-<span class="badge badge-blue">
-
-— NÃO UTILIZADO
-
-</span>
-`;
-
-}
-
-return `
-
-<span class="badge badge-blue">
-
-${esc(resultado||"-")}
-
-</span>
-`;
-
-}
-
-/* BADGE CONFORMIDADE */
-
-function badgeConformidade(
-valor
-){
-
-if(
-valor>=90
-){
-
-return `
-
-<span class="badge badge-green">
-
-${valor}% conformidade
-
-</span>
-`;
-
-}
-
-if(
-valor>=70
-){
-
-return `
-
-<span class="badge badge-yellow">
-
-${valor}% conformidade
-
-</span>
-`;
-
-}
-
-return `
-
-<span class="badge badge-red">
-
-${valor}% conformidade
-
-</span>
-`;
-
-}
-
-/* SEGURANÇA HTML */
-
-function esc(
-valor
-){
-
-return String(
-valor??""
-)
-
-.replace(
-/&/g,
-"&amp;"
-)
-
-.replace(
-/</g,
-"&lt;"
-)
-
-.replace(
-/>/g,
-"&gt;"
-)
-
-.replace(
-/"/g,
-"&quot;"
-)
-
-.replace(
-/'/g,
-"&#039;"
-);
-
-}
 
 </script>
 
